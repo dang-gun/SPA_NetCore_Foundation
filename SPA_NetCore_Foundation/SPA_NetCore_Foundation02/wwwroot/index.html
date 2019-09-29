@@ -1,0 +1,67 @@
+﻿<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <!-- css  -->
+    <link rel="stylesheet" href="/Pages/Page.css">
+    <link rel="stylesheet" href="/Pages/TopInfo/TopInfo.css">
+
+    <!-- jquery 3.4.1 -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script>
+        var DivMain = null;
+
+        $(document).ready(function () {
+            //메인 객체
+            DivMain = $("#divMain");
+        });
+    </script>
+
+    <!-- sammyjs 0.7.6 -->
+    <script src="/Library/sammyjs/0.7.6/sammy.min.js"></script>
+    <!-- 유틸리티 -->
+    <script src="/Utility/AjaxAssist.js"></script>
+    <script src="/Library/DG_JsDataBind/DG_JsDataBind.js"></script>
+
+    <!-- 디버깅 관련 기능 -->
+    <script src="/Global/Debug.js"></script>
+    <!-- 고정 문자열 -->
+    <script src="/Global/FixString/FixString_Url.js"></script>
+    <script src="/Global/FixString/FixString_FileUrl.js"></script>
+    <script src="/Global/FixString/FixString_Api.js"></script>
+    <!-- 페이지 타입 -->
+    <script src="/Pages/PageType.js"></script>
+    <!-- 전역 데이터 -->
+    <script src="/Global/GlobalStatic.js"></script>
+    <script src="/Global/GlobalSign.js"></script>
+    <!-- 라우터 처리용 어플리케이션 -->
+    <script src="/app.js"></script>
+</head>
+
+<body>
+    <!-- UI 영역 -->
+    <div id="divMain">
+    </div>
+
+    <!-- 페이지 컨트롤러 -->
+    <script src="/Pages/Page.js"></script>
+    <script src="/Pages/TopInfo/TopInfo.js"></script>
+
+
+    <script src="/Pages/Home/Home.js"></script>
+    <script src="/Pages/SignIn/SignIn.js"></script>
+
+    <!-- 페이지 컨트롤러 - 테스트용 -->
+    <script src="/Pages/Test/Test01.js"></script>
+</body>
+
+</html>

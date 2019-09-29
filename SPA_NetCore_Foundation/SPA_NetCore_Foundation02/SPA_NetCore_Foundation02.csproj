@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\app.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\favicon.ico" />
+    <_ContentIncludedByDefault Remove="wwwroot\Global\Debug.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\Global\FixString\FixString_Api.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\Global\FixString\FixString_FileUrl.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\Global\FixString\FixString_Url.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\Global\GlobalSign.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\Global\GlobalStatic.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\index.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\Library\sammyjs\0.7.6\sammy.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\Library\sammyjs\0.7.6\sammy.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\Pages\Home\Home.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\Pages\Home\Home.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\Pages\Page.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\Pages\Page.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\Pages\Page.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\Pages\PageType.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\Pages\SignIn\SignIn.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\Pages\SignIn\SignIn.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\Pages\Test\Test01.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\Pages\Test\Test01.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\Pages\TopInfo\TopInfo.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\Pages\TopInfo\TopInfo.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\Pages\TopInfo\TopInfo.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\Pages\TopInfo\UserInfo_SignIn.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\Pages\TopInfo\UserInfo_SignOut.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\test.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+</Project>
