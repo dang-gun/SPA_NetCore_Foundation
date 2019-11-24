@@ -45,4 +45,15 @@
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\Pages\SignIn\SignIn.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\Pages\SignIn\SignIn.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

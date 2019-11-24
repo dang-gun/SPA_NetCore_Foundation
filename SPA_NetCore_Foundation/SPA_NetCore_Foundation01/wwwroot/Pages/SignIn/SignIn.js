@@ -71,16 +71,26 @@ SignIn.prototype.btnSignIn_onclick = function ()
             {
                 console.log(data);
 
-                if (data.complete == true)
-                {
-                    GlobalStatic.SignIn = true;
-                    GlobalStatic.SignIn_token = data.token;
-                    GlobalStatic.SignIn_ID = sEMail;
+                if ("0" === data.infoCode)
+                {//에러 없음
+                    if (data.complete == true)
+                    {
+                        GlobalStatic.SignIn = true;
+                        GlobalStatic.SignIn_token = data.token;
+                        GlobalStatic.SignIn_ID = sEMail;
 
-                    alert("사인 인 성공");
+                        alert("사인 인 성공");
 
-                    //홈으로 이동
-                    Page.Move_Home();
+                        //홈으로 이동
+                        Page.Move_Home();
+                    }
+                }
+                else
+                {//에러 있음
+                    //아웃풋 지우기
+                    objThis.divOutput.html("");
+                    alert("error code : " + data.infoCode + "\n"
+                        + "내용 : " + data.message);
                 }
                 
             },
@@ -88,10 +98,7 @@ SignIn.prototype.btnSignIn_onclick = function ()
             {
                 console.log(error);
 
-                if (error.responseJSON && error.responseJSON.infoCode) {
-                    alert("실패코드 : " + error.responseJSON.infoCode
-                        + "\n " + error.responseJSON.message);
-                }
+                alert("알수 없는 오류가 발생했습니다.");
                 
             }
         });

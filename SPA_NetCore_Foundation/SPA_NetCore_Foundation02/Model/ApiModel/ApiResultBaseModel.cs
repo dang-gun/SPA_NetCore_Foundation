@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SPA_NetCore_Foundation.ApiModel.Model
+namespace ProjsctThis.Model.ApiModel
 {
     /// <summary>
-    /// api 실패시 전달할 모델(자바스크립 전달용)
+    /// API 결과 공통 베이스.
+    /// 자바스크립트에도 전달해야 하므로 소문자로 시작한다.
     /// </summary>
-    public class ApiFailModel
+    public class ApiResultBaseModel
     {
         /// <summary>
-        /// 실패 코드
+        /// 실패시 전달한 코드
+        /// 0 : 성공.
+        /// 다른 값은 모두 실패
         /// </summary>
         public string infoCode { get; set; }
         /// <summary>
@@ -19,13 +22,13 @@ namespace SPA_NetCore_Foundation.ApiModel.Model
         /// </summary>
         public string message { get; set; }
 
-        public ApiFailModel()
+        public ApiResultBaseModel()
         {
             this.infoCode = "0";
             this.message = string.Empty;
         }
 
-        public ApiFailModel(string sInfoCode, string sMessage)
+        public ApiResultBaseModel(string sInfoCode, string sMessage)
         {
             this.infoCode = sInfoCode;
             this.message = sMessage;

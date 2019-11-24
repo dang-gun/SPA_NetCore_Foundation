@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29319.158
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SPA_NetCore_Foundation01", "SPA_NetCore_Foundation01\SPA_NetCore_Foundation01.csproj", "{D0372C73-6D54-412A-AE13-42BA7347A529}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPA_NetCore_Foundation02", "SPA_NetCore_Foundation02\SPA_NetCore_Foundation02.csproj", "{72C7E8C5-4C96-4C00-AC5A-7A5455717D47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SPA_NetCore_Foundation02", "SPA_NetCore_Foundation02\SPA_NetCore_Foundation02.csproj", "{72C7E8C5-4C96-4C00-AC5A-7A5455717D47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPA_NetCore_Foundation03", "SPA_NetCore_Foundation03\SPA_NetCore_Foundation03.csproj", "{17330FA1-2B8C-4296-A04B-1738E341A1F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{72C7E8C5-4C96-4C00-AC5A-7A5455717D47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72C7E8C5-4C96-4C00-AC5A-7A5455717D47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72C7E8C5-4C96-4C00-AC5A-7A5455717D47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17330FA1-2B8C-4296-A04B-1738E341A1F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17330FA1-2B8C-4296-A04B-1738E341A1F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17330FA1-2B8C-4296-A04B-1738E341A1F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17330FA1-2B8C-4296-A04B-1738E341A1F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
