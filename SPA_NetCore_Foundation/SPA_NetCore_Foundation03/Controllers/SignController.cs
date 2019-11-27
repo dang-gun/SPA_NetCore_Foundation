@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using ProjsctThis.Model.ApiModel;
+using SPA_NetCore_Foundation.Global;
 using SPA_NetCore_Foundation.Model;
+using SPA_NetCore_Foundation.Model.User;
+using WebApiAuth.Model.Sign;
 
 namespace SPA_NetCore_Foundation.Controllers
 {
@@ -20,57 +26,59 @@ namespace SPA_NetCore_Foundation.Controllers
         /// <summary>
         /// 사인인 시도
         /// </summary>
-        /// <param name="sID"></param>
+        /// <param name="sEmail"></param>
         /// <param name="sPW"></param>
         /// <returns></returns>
         [HttpPut]
         [Route("SignIn")]
-        public ActionResult<SignInModel> SignIn(
-            [FromForm]string sID
+        public ActionResult<SignInResultModel> SignIn(
+            [FromForm]string sEmail
             , [FromForm]string sPW)
         {
+            //결과용
             ApiResultReadyModel armResult = new ApiResultReadyModel(this);
-
             //로그인 처리용 모델
-            SignInModel smResult = new SignInModel();
+            SignInResultModel smResult = new SignInResultModel();
 
-            if(sID == "test" && sPW == "test")
+            //유저 검색
+            UserSignInfoModel user
+                = GlobalStatic.UserList
+                    .List.FirstOrDefault(m =>
+                        m.Email == sEmail
+                        && m.Password == sPW);
+
+
+            if (user != null)
             {
-                smResult.complete = true;
-                
-                //이 프로젝트에서는 사인인한 유저의 정보를 어디에도 저장하지 않는다.
-                //그래서 토큰으로 유저를 구분할 수 있게 만든다.
-                smResult.token 
-                    = string.Format("{0}▩{1}"
-                                    , sID
-                                    , Guid.NewGuid().ToString());
+                //에러가 없다.
+                smResult.message = user.Email;
             }
             else
             {
-                armResult.StatusCode = StatusCodes.Status403Forbidden;
+                armResult.infoCode = "1";
+                armResult.message = "아이디나 비밀번호가 틀렸습니다.";
 
-                armResult.infoCode = "-1";
-                armResult.message = "일치하는 정보가 없습니다.";
-
-                smResult.complete = false;
+                armResult.StatusCode = StatusCodes.Status401Unauthorized;
             }
 
             return armResult.ToResult(smResult);
         }
 
+        /// <summary>
+        /// 지정된 토큰을 찾아 지운다.
+        /// </summary>
+        /// <param name="sRefreshToken"></param>
+        /// <returns></returns>
+        [Authorize]//OAuth2 인증 설정
         [HttpPut]
         [Route("SignOut")]
         public ActionResult<string> SignOut(
-            [FromForm]string sToken)
+            [FromForm]string sRefreshToken)
         {
             ApiResultReadyModel armResult = new ApiResultReadyModel(this);
-
             ApiResultBaseModel arbm = new ApiResultBaseModel();
 
-            //토큰의 앞이 유저 정보다.
-            string[] sCutToken = sToken.Split("▩");
-            //정보를 넣어 준다.
-            armResult.message = sCutToken[0];
+            //사인아웃에 필요한 작업을 한다.
 
             //임시로 아이디를 넘긴다.
             return armResult.ToResult(arbm);

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProjsctThis.Model.ApiModel;
@@ -49,29 +51,6 @@ namespace SPA_NetCore_Foundation.Controllers
             return armResult.ToResult(tmResult);
         }
 
-        [HttpGet]
-        [Route("Test02")]
-        public ActionResult<TestModel02> Test02(int nData)
-        {
-            //리턴 보조
-            ApiResultReadyModel armResult = new ApiResultReadyModel(this);
-            //리턴용 모델
-            TestModel02 tmResult = new TestModel02();
 
-            if (0 <= nData)
-            {//양수다.
-                tmResult.nTest001 = nData;
-                tmResult.sTest002 = "성공 했습니다!";
-            }
-            else
-            {
-                armResult.StatusCode = StatusCodes.Status500InternalServerError;
-
-                armResult.infoCode = "1";
-                armResult.message = "'nData'에 음수가 입력되었습니다.";
-            }
-
-            return armResult.ToResult(tmResult);
-        }
     }
 }

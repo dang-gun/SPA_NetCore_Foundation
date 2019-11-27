@@ -20,43 +20,31 @@ function Test02()
 Test02.prototype.divOutput = null;
 
 /**
- * 데이터 바인드 테스트
+ * 데이터 호출 테스트
  * @param {int} nData 전달할 값
  */
 Test02.prototype.Test01 = function (nData)
 {
     var objThis = this;
+    AA.get(false
+        , {
+            url: FS_Api.Test_Test01
+            , data: { nData: nData, sData: "테스트 01" }
+            , success: function (data) {
+                console.log(data);
 
-    AA.get(FS_Api.Test_Test01
-        , { nData: nData, sData: "테스트 01" }
-        , function (data) {
-            console.log(data);
-
-            if ("0" === data.infoCode)
-            {//에러 없음
-                objThis.divOutput.html("nTest : " + data.nTest + " sTest : " + data.sTest );
+                if ("0" === data.infoCode) {//에러 없음
+                    objThis.divOutput.html("nTest : " + data.nTest + " sTest : " + data.sTest);
+                }
+                else {//에러 있음
+                    //아웃풋 지우기
+                    objThis.divOutput.html("");
+                    alert("error code : " + data.infoCode + "\n"
+                        + "내용 : " + data.message);
+                }
             }
-            else
-            {//에러 있음
-                //아웃풋 지우기
-                objThis.divOutput.html("");
-                alert("error code : " + data.infoCode + "\n"
-                    + "내용 : " + data.message);
+            , error: function (error) {
+                console.log(error);
             }
-        }
-        , function (error) {
-            console.log(error);
-
-            //예측가능한 에러를 200으로 처리하지 않았다면 아래와 같이 만들어야 한다.
-            //if (error.responseJSON && error.responseJSON.infoCode)
-            //{
-            //    alert("실패코드 : " + error.responseJSON.infoCode
-            //        + "\n " + error.responseJSON.message);
-            //}
-
         });
-};
-
-/** 데이터 바인드 테스트 */
-Test02.prototype.Test02 = function () {
 };
