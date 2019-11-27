@@ -1,0 +1,14 @@
+﻿/* 페이지 */
+#divPage div
+{
+    min-height:30px;
+    margin-bottom:10px;
+}
+
+
+#divPage #divMainMenu div
+{
+    float:left;
+
+    margin-right:10px;
+}
