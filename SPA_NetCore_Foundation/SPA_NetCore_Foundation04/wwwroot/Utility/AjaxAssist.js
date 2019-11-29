@@ -60,7 +60,11 @@ AA.delete = function (bToken, jsonOption) {
  * @param {bool} bToken 헤더에 토큰을 넣을지 여부
  * @param {json} jsonOption 처리할 옵션 객체
  */
-AA.call = function (bToken, jsonOption) {
+AA.call = function (bToken, jsonOption)
+{
+    //매개변수 백업
+    var bTokenTemp = bToken;
+
     //이 함수에서 기본값으로 추가할 옵션
     //기본이 비동기다.
     var jsonOpt = {
@@ -106,16 +110,88 @@ AA.call = function (bToken, jsonOption) {
     jsonOpt.error = function (jqXHR, textStatus, errorThrown) {
         //여기에 공통 작업내용을 넣는다.
 
-        if (funError)
+        if ((true === bTokenTemp)
+            && (401 === jqXHR.status))
+        {//엑세스 키 사용 일때
+            //401에러가 났다.
+
+            //이 상황은 엑세스 토큰이 없거나 만료된것이다.
+            AA.RefreshToAccess(function () {
+                //엑세스 토큰 갱신이 성공하면 다시 진행
+                $.ajax(jsonOpt);
+            });
+        }
+        else
         {
-            //성공하면 수행할 콜백
-            funError(jqXHR, textStatus, errorThrown);
+            if (funError) {
+                //성공하면 수행할 콜백
+                funError(jqXHR, textStatus, errorThrown);
+            }
         }
     };
 
 
     $.ajax(jsonOpt);
 
+};
+
+/**
+* 액세스 토큰 갱신
+* @param {function} callback 갱신이 성공하면 동작할 콜백
+*/
+AA.RefreshToAccess = function (callback)
+{
+    var refresh_token = GlobalSign.RefreshToken_Get();
+
+    if ("" == refresh_token)
+    {//리플레시 토큰이 없다.
+        //리플레시 토큰이 없으면 토큰을 갱신할 수 없으므로
+        //로그인이 필요하다.
+        GlobalSign.Move_SignIn_Remove(true, "로그인이 필요합니다.");
+    }
+    else
+    {//있다.
+
+        //갱신 시도
+        $.ajax({
+            type: AA.AjaxType.Put
+            , url: FS_Api.Sign_RefreshToAccess
+            , data: {
+                "sRefreshToken": refresh_token
+            }
+            , dataType: "json"
+            , success: function (jsonResult)
+            {
+                console.log(jsonResult);
+
+                if (jsonResult.infoCode === "0")
+                {//성공
+                    //받은 토큰 다시 저장
+                    GlobalSign.access_token = jsonResult.access_token;
+                    GlobalSign.RefreshToken_SetOption(jsonResult.refresh_token);
+
+                    //요청한 콜백 진행
+                    if (typeof (callback) === "function")
+                    {
+                        callback();
+                    }
+
+                }
+                else
+                {//실패
+                    //리플래시 토큰 요청이 실패하면 모든 토큰을 지워야 한다.
+                    GlobalSign.Move_SignIn_Remove(true, "로그인이 필요합니다.");
+                }
+            }
+            , error: function (jqXHR, textStatus, errorThrown)
+            {
+                console.log(jqXHR);
+
+                //리플래시 토큰 요청이 실패하면 모든 토큰을 지워야 한다.
+                GlobalSign.Move_SignIn_Remove(true, "로그인이 필요합니다.");
+            }
+        });
+    }//end if
 };
 
 

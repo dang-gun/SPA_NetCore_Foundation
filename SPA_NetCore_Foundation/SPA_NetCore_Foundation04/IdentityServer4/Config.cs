@@ -10,6 +10,18 @@ namespace IdentityServer4_Custom.IdentityServer4
     public class Config
     {
         /// <summary>
+        /// 신원 자원
+        /// </summary>
+        /// <returns></returns>
+        public static List<IdentityResource> GetIdentityResources()
+        {
+            return new List<IdentityResource>
+            {
+                new IdentityResources.OpenId()
+            };
+        }
+
+        /// <summary>
         /// API의 인증 범위를 정의한다.
         /// </summary>
         /// <returns></returns>
@@ -66,8 +78,10 @@ namespace IdentityServer4_Custom.IdentityServer4
                     , Enabled = true
                     , ClientSecrets =  new List<Secret> { new Secret("dataEventRecordsSecret".Sha256()) }
                     , AllowedScopes = {
-                        IdentityServerConstants.StandardScopes.OfflineAccess
-                        , "dataEventRecords"
+                        "dataEventRecords"
+                        , IdentityServerConstants.StandardScopes.OpenId
+                        , IdentityServerConstants.StandardScopes.OfflineAccess
+                        
                     }
                 }//end new Client
             };//end return

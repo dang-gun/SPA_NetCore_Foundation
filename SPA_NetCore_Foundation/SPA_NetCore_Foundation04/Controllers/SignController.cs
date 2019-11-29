@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using IdentityModel.Client;
+using IdentityServer4.UserServices;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -26,7 +27,7 @@ namespace SPA_NetCore_Foundation.Controllers
     {
         private readonly string ClientId = "resourceownerclient";
         private readonly string ClientSecret = "dataEventRecordsSecret";
-        private readonly string Scope = "dataEventRecords offline_access";
+        private readonly string Scope = "dataEventRecords offline_access openid";
 
 
         /// <summary>
@@ -70,6 +71,9 @@ namespace SPA_NetCore_Foundation.Controllers
                 {//에러가 없다.
                     smResult.access_token = tr.AccessToken;
                     smResult.refresh_token = tr.RefreshToken;
+
+                    //로그인 되어있는 유저정보 저장
+                    GlobalStatic.SignInList.SignInItemList_Add(user.ID, tr.RefreshToken);
                 }
             }
             else
@@ -99,7 +103,12 @@ namespace SPA_NetCore_Foundation.Controllers
 
             //사인아웃에 필요한 작업을 한다.
             //리플레시 토큰 제거
-            TokenRevocationResponse trr = RevocationTokenAsync(sRefreshToken).Result;
+            if ((null != sRefreshToken)
+                && (string.Empty != sRefreshToken))
+            {
+                TokenRevocationResponse trr = RevocationTokenAsync(sRefreshToken).Result;
+            }
+            
             //로컬 인증 쿠키 삭제 요청
             HttpContext.SignOutAsync();
 
@@ -116,11 +125,11 @@ namespace SPA_NetCore_Foundation.Controllers
         /// <summary>
         /// IdentityServer4로 구현된 서버 주소
         /// </summary>
-        private string sIdentityServer4_Url = GlobalStatic.sAuthUrl;
+        private string sIdentityServer4_Url = GlobalStatic.AuthUrl;
 
         
 
-        [HttpPost]
+        [HttpPut]
         [Route("RefreshToAccess")]
         public ActionResult<SignInResultModel> RefreshToAccess(
             [FromForm]string sRefreshToken)
@@ -144,6 +153,16 @@ namespace SPA_NetCore_Foundation.Controllers
             {//에러가 없다.
                 smResult.access_token = tr.AccessToken;
                 smResult.refresh_token = tr.RefreshToken;
+
+                //유저 정보를 받는다.
+                UserInfoResponse inrUser 
+                    = UserInfoAsync(smResult.access_token).Result;
+
+                //유저 정보 추출
+                ClaimModel cm = new ClaimModel(inrUser.Claims);
+
+                //로그인 되어있는 유저정보 저장
+                GlobalStatic.SignInList.SignInItemList_Add(cm.id_int, tr.RefreshToken);
             }
 
             return armResult.ToResult(smResult);
@@ -225,5 +244,26 @@ namespace SPA_NetCore_Foundation.Controllers
 
             return trRequestToken;
         }
+
+        /// <summary>
+        /// 엑세스토큰을 이용하여 유저 정보를 받는다.
+        /// </summary>
+        /// <param name="sAccessToken"></param>
+        /// <returns></returns>
+        private async Task<UserInfoResponse> UserInfoAsync(string sAccessToken)
+        {
+            UserInfoResponse uirUser
+                = await hcAuthClient
+                        .GetUserInfoAsync(new UserInfoRequest
+                        {
+                            Address = this.sIdentityServer4_Url + "connect/userinfo"
+
+                            , Token = sAccessToken,
+                        });
+
+            return uirUser;
+        }
+
+
     }
 }

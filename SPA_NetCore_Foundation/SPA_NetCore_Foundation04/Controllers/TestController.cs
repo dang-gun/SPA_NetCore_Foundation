@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using IdentityServer4.UserServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -51,37 +52,33 @@ namespace SPA_NetCore_Foundation.Controllers
             return armResult.ToResult(tmResult);
         }
 
-[Authorize]//OAuth2 인증 설정
-[HttpGet]
-[Route("Test02")]
-public ActionResult<TestModel02> Test02(int nData)
-{
-    //리턴 보조
-    ApiResultReadyModel armResult = new ApiResultReadyModel(this);
-    //리턴용 모델
-    TestModel02 tmResult = new TestModel02();
+        [Authorize]//OAuth2 인증 설정
+        [HttpGet]
+        [Route("Test02")]
+        public ActionResult<TestModel02> Test02(int nData)
+        {
+            //리턴 보조
+            ApiResultReadyModel armResult = new ApiResultReadyModel(this);
+            //리턴용 모델
+            TestModel02 tmResult = new TestModel02();
 
-    //유저 정보 추출
-    var identity = (ClaimsIdentity)User.Identity;
-    IEnumerable<Claim> claims = identity.Claims;
+            //유저 정보 추출
+            ClaimModel cm = new ClaimModel(((ClaimsIdentity)User.Identity).Claims);
 
-    //유저 네임 추출
-    Claim claim = claims.FirstOrDefault(m => m.Type == "username");
+            if (0 <= nData)
+            {//양수다.
+                tmResult.nTest001 = nData;
+                tmResult.sTest002 = "성공 했습니다! : " + cm.id;
+            }
+            else
+            {
+                armResult.StatusCode = StatusCodes.Status500InternalServerError;
 
-    if (0 <= nData)
-    {//양수다.
-        tmResult.nTest001 = nData;
-        tmResult.sTest002 = "성공 했습니다! : " + claim.Value.ToString();
-    }
-    else
-    {
-        armResult.StatusCode = StatusCodes.Status500InternalServerError;
+                armResult.infoCode = "1";
+                armResult.message = "'nData'에 음수가 입력되었습니다.";
+            }
 
-        armResult.infoCode = "1";
-        armResult.message = "'nData'에 음수가 입력되었습니다.";
-    }
-
-    return armResult.ToResult(tmResult);
-}
+            return armResult.ToResult(tmResult);
+        }
     }
 }
