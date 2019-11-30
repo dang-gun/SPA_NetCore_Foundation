@@ -48,12 +48,17 @@ namespace IdentityServer4.UserServices
             }
         }
 
+        public string email { get; set; }
+
         /// <summary>
         /// 초기화
         /// </summary>
         public ClaimModel()
         {
-
+            this.client_id = string.Empty;
+            this.auth_time = string.Empty;
+            this.id = string.Empty;
+            this.email = string.Empty;
         }
 
         /// <summary>
@@ -84,6 +89,9 @@ namespace IdentityServer4.UserServices
                         break;
                     case "id":
                         this.id = claimItem.Value;
+                        break;
+                    case "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress":
+                        this.email = claimItem.Value;
                         break;
 
 

@@ -12,6 +12,21 @@ namespace WebApiAuth.Model.Sign
     public class SignInResultModel : ApiResultBaseModel
     {
         /// <summary>
+        /// 유저의 고유 아이디
+        /// </summary>
+        public long id { get; set; }
+        /// <summary>
+        /// 이메일
+        /// </summary>
+        public string email { get; set; }
+
+        /// <summary>
+        /// 테스트용 레벨
+        /// </summary>
+        public int lv { get; set; }
+
+
+        /// <summary>
         /// 엑세스 토큰
         /// </summary>
         public string access_token { get; set; }
@@ -21,18 +36,18 @@ namespace WebApiAuth.Model.Sign
         /// </summary>
         public string refresh_token { get; set; }
 
-        /// <summary>
-        /// 테스트용 레벨
-        /// </summary>
-        public int Lv { get; set; }
+        
 
         public SignInResultModel()
             : base()
         {
+            this.id = 0;
+            this.email = string.Empty;
+
+            this.lv = 0;
+
             this.access_token = string.Empty;
             this.refresh_token = string.Empty;
-
-            this.Lv = 0;
         }
     }
 }

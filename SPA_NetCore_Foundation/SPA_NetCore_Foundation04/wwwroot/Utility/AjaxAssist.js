@@ -116,15 +116,17 @@ AA.call = function (bToken, jsonOption)
             //401에러가 났다.
 
             //이 상황은 엑세스 토큰이 없거나 만료된것이다.
-            AA.RefreshToAccess(function () {
+            AA.RefreshToAccess(function ()
+            {
                 //엑세스 토큰 갱신이 성공하면 다시 진행
                 $.ajax(jsonOpt);
             });
         }
         else
         {
-            if (funError) {
-                //성공하면 수행할 콜백
+            if (funError)
+            {
+                //에러 콜백이 있으면 호출
                 funError(jqXHR, textStatus, errorThrown);
             }
         }
@@ -157,7 +159,8 @@ AA.RefreshToAccess = function (callback)
             type: AA.AjaxType.Put
             , url: FS_Api.Sign_RefreshToAccess
             , data: {
-                "sRefreshToken": refresh_token
+                "nID": GlobalSign.SignIn_ID
+                , "sRefreshToken": refresh_token
             }
             , dataType: "json"
             , success: function (jsonResult)
@@ -166,7 +169,10 @@ AA.RefreshToAccess = function (callback)
 
                 if (jsonResult.infoCode === "0")
                 {//성공
-                    //받은 토큰 다시 저장
+                    //받은 정보 다시 저장
+                    GlobalSign.SignIn_ID = jsonData.id;
+                    GlobalSign.SignIn_Email = jsonData.email;
+
                     GlobalSign.access_token = jsonResult.access_token;
                     GlobalSign.RefreshToken_SetOption(jsonResult.refresh_token);
 

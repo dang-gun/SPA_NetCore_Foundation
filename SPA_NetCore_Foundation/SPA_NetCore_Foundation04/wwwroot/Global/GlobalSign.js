@@ -5,10 +5,10 @@ var GlobalSign = {};
 
 /** 사인인 여부 */
 GlobalSign.SignIn = false;
+/** 사인인 - 이메일 정보 */
+GlobalSign.SignIn_Email = "";
 /** 사인인 - 아이디 정보 */
-GlobalSign.SignIn_ID = "";
-/** 사인인 - 토큰 정보 */
-GlobalSign.SignIn_token = "";
+GlobalSign.SignIn_ID = 0;
 
 /** 이메일 저장 - 쿠키용 이름 */
 GlobalSign.EmailSave_CookieName = "spa_EmailSave";
@@ -124,7 +124,8 @@ GlobalSign.Move_SignOut = function ()
                 url: FS_Api.Sign_SignOut,
                 type: "PUT",
                 data: {
-                    sRefreshToken: GlobalSign.RefreshToken_Get()
+                    nID: GlobalSign.SignIn_ID
+                    , sRefreshToken: GlobalSign.RefreshToken_Get()
                 },
                 dataType: "text",
                 success: function (data) {

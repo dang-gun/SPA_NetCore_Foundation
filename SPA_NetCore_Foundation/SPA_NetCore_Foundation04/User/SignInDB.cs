@@ -30,7 +30,7 @@ namespace SPA_NetCore_Foundation.Global
         /// </summary>
         /// <param name="nID"></param>
         /// <param name="sRefreshToken"></param>
-        public void SignInItemList_Add(long nID, string sRefreshToken)
+        public void Add(long nID, string sRefreshToken)
         {
             //아이디나 리플레시 토큰 둘중하나만 같으면 추출한다.
             //메모리에는 없는데 리플레시토큰을 있을 수 있기 때문.
@@ -55,6 +55,23 @@ namespace SPA_NetCore_Foundation.Global
             }
 
         }//end SignInItemList_Add
+
+        public void Delete(long nID, string sRefreshToken)
+        {
+            //아이디나 리플레시 토큰 둘중하나만 같으면 추출한다.
+            //메모리에는 없는데 리플레시토큰을 있을 수 있기 때문.
+            SignInItemModel sim
+                = this.SignInItemList
+                    .Where(m => m.ID == nID
+                        || m.RefreshToken == sRefreshToken)
+                    .FirstOrDefault();
+
+            if (sim != null)
+            {//찾았다.
+                //지운다!
+                this.SignInItemList.Remove(sim);
+            }
+        }
 
 
     }//end class GlobalSign

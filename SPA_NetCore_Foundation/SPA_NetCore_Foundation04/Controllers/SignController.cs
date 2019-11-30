@@ -69,11 +69,16 @@ namespace SPA_NetCore_Foundation.Controllers
                 }
                 else
                 {//에러가 없다.
+                    //로그인 되어있는 유저정보 저장
+                    GlobalStatic.SignInList.Add(user.ID, tr.RefreshToken);
+
+                    smResult.id = user.ID;
+                    smResult.email = user.Email;
+
+                    smResult.lv = 0;
+
                     smResult.access_token = tr.AccessToken;
                     smResult.refresh_token = tr.RefreshToken;
-
-                    //로그인 되어있는 유저정보 저장
-                    GlobalStatic.SignInList.SignInItemList_Add(user.ID, tr.RefreshToken);
                 }
             }
             else
@@ -96,12 +101,16 @@ namespace SPA_NetCore_Foundation.Controllers
         [HttpPut]
         [Route("SignOut")]
         public ActionResult<string> SignOut(
-            [FromForm]string sRefreshToken)
+            [FromForm]int nID
+            , [FromForm]string sRefreshToken)
         {
             ApiResultReadyModel armResult = new ApiResultReadyModel(this);
             ApiResultBaseModel arbm = new ApiResultBaseModel();
 
             //사인아웃에 필요한 작업을 한다.
+            //사용자
+            GlobalStatic.SignInList.Delete(nID, sRefreshToken);
+
             //리플레시 토큰 제거
             if ((null != sRefreshToken)
                 && (string.Empty != sRefreshToken))
@@ -137,7 +146,7 @@ namespace SPA_NetCore_Foundation.Controllers
             //결과용
             ApiResultReadyModel armResult = new ApiResultReadyModel(this);
             //엑세스 토큰 갱신용 모델
-            RefreshToAccessModel smResult = new RefreshToAccessModel();
+            SignInResultModel smResult = new SignInResultModel();
 
             //토큰 갱신 요청
             TokenResponse tr = RefreshTokenAsync(sRefreshToken).Result;
@@ -151,9 +160,6 @@ namespace SPA_NetCore_Foundation.Controllers
             }
             else
             {//에러가 없다.
-                smResult.access_token = tr.AccessToken;
-                smResult.refresh_token = tr.RefreshToken;
-
                 //유저 정보를 받는다.
                 UserInfoResponse inrUser 
                     = UserInfoAsync(smResult.access_token).Result;
@@ -162,7 +168,15 @@ namespace SPA_NetCore_Foundation.Controllers
                 ClaimModel cm = new ClaimModel(inrUser.Claims);
 
                 //로그인 되어있는 유저정보 저장
-                GlobalStatic.SignInList.SignInItemList_Add(cm.id_int, tr.RefreshToken);
+                GlobalStatic.SignInList.Add(cm.id_int, tr.RefreshToken);
+
+
+                //모델에 입력
+                smResult.id = cm.id_int;
+                smResult.email = cm.email;
+
+                smResult.access_token = tr.AccessToken;
+                smResult.refresh_token = tr.RefreshToken;
             }
 
             return armResult.ToResult(smResult);

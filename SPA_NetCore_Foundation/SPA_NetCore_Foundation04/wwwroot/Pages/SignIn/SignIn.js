@@ -137,8 +137,10 @@ SignIn.prototype.btnSignIn_onclick = function ()
 
                     if ("0" === jsonData.infoCode) {//에러 없음
                         GlobalSign.SignIn = true;
-                        GlobalSign.SignIn_token = jsonData.token;
-                        GlobalSign.SignIn_ID = sEmail;
+
+                        GlobalSign.SignIn_ID = jsonData.id;
+                        GlobalSign.SignIn_Email = sEmail;
+                        
 
                         //엑세스 토큰 저장
                         GlobalSign.access_token = jsonData.access_token;
