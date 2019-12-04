@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 
 
-namespace SPA_NetCore_Foundation.ModelDB
+namespace ModelDB
 {
     public class SpaNetCoreFoundationContext : DbContext
     {

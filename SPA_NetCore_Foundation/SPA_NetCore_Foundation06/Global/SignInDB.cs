@@ -1,4 +1,4 @@
-﻿using SPA_NetCore_Foundation.ModelDB;
+﻿using ModelDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;

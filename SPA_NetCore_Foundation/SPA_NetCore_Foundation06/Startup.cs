@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SPA_NetCore_Foundation.Global;
-using SPA_NetCore_Foundation.ModelDB;
+using ModelDB;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace SPA_NetCore_Foundation

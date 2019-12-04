@@ -25,7 +25,7 @@ namespace SPA_NetCore_Foundation.Global
 
 
         /// <summary>
-        /// 테스트용 사인인 리스트
+        /// 사인인 리스트
         /// </summary>
         public static SignInDB SignInList = new SignInDB();
     }

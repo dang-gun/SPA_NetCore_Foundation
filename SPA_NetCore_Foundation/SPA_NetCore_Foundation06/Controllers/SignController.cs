@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 using ProjsctThis.Model.ApiModel;
 using SPA_NetCore_Foundation.Global;
 using SPA_NetCore_Foundation.Model;
-using SPA_NetCore_Foundation.ModelDB;
+using ModelDB;
 using WebApiAuth.Model.Sign;
 
 namespace SPA_NetCore_Foundation.Controllers

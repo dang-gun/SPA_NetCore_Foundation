@@ -1,4 +1,4 @@
-﻿using SPA_NetCore_Foundation.ModelDB;
+﻿using ModelDB;
 
 
 namespace IdentityServer4_Custom.UserServices

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SPA_NetCore_Foundation.ModelDB
+namespace ModelDB
 {
     /// <summary>
     /// 유저 사인인 정보.
