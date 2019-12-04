@@ -89,7 +89,7 @@ namespace SPA_NetCore_Foundation
                 c.AddSecurityDefinition("Bearer", new ApiKeyScheme
                 {
                     In = "header",
-                    Description = "로그인 후 전달받은 'ExternalKey'를 헤더의'MgrExternalKey' 담아 전달해야 합니다.",
+                    Description = "로그인 후 전달받은 '엑세스 토큰(access token)'을 헤더의'Authorization'에 'Bearer access token' 형태로 담아 전달해야 합니다.",
                     Name = "Authorization",
                     Type = "apiKey"
                 });
