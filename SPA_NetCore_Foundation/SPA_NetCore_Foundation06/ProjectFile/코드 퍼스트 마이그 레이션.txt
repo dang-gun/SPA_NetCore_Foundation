@@ -1,0 +1,20 @@
+﻿https://code-maze.com/net-core-web-api-ef-core-code-first/
+
+마이그레이션 코드 생성
+띄어쓰기 특수문자 안됨. 네임스페이스 생성 규칙과 같다.
+Add-Migration [마이그레이션 이름]
+
+
+마이그레이션 실행
+update-database
+
+특정 마이그레이션 실행
+update-database [마이그레이션 이름]
+
+마지막 마이그레이션 제거
+Remove-Migration
+
+
+DB 스크립트 생성
+Script-Migration
+
