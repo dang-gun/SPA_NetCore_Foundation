@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SPA_NetCore_Foundation.ModelDB;
+using ModelDB;
 
 namespace SPA_NetCore_Foundation06.Migrations
 {
