@@ -10,21 +10,26 @@ https://blog.danggun.net/7042<br />
 https://blog.danggun.net/7042<br />
 <br />
 <br />
-### [ASP.NET Core] .NET Core로 구현한 SPA(Single Page Applications)(2) - Ajax공통 기능, 데이터 바인드 처리<br />
+### SPA_NetCore_Foundation02
+[ASP.NET Core] .NET Core로 구현한 SPA(Single Page Applications)(2) - Ajax공통 기능, 데이터 바인드 처리<br />
 https://blog.danggun.net/7445<br />
 <br />
 <br />
-### [ASP.NET Core] .NET Core로 구현한 SPA(Single Page Applications)(3) - API 결과 공통 처리<br />
+### SPA_NetCore_Foundation03
+[ASP.NET Core] .NET Core로 구현한 SPA(Single Page Applications)(3) - API 결과 공통 처리<br />
 https://blog.danggun.net/7657<br />
 <br />
 <br />
-### [ASP.NET Core] .NET Core로 구현한 SPA(Single Page Applications)(4) - 인증 기능 추가<br />
+### SPA_NetCore_Foundation04
+[ASP.NET Core] .NET Core로 구현한 SPA(Single Page Applications)(4) - 인증 기능 추가<br />
 https://blog.danggun.net/7436<br />
 <br />
 <br />
-### [ASP.NET Core] .NET Core로 구현한 SPA(Single Page Applications)(5) - 스웨거(Swagger) 설정<br />
+### SPA_NetCore_Foundation05
+[ASP.NET Core] .NET Core로 구현한 SPA(Single Page Applications)(5) - 스웨거(Swagger) 설정<br />
 https://blog.danggun.net/7689<br />
 <br />
 <br />
-### [ASP.NET Core] .NET Core로 구현한 SPA(Single Page Applications)(6) - EF(Entity Framework)와 코드 퍼스트(Code First)<br />
+### SPA_NetCore_Foundation06
+[ASP.NET Core] .NET Core로 구현한 SPA(Single Page Applications)(6) - EF(Entity Framework)와 코드 퍼스트(Code First)<br />
 https://blog.danggun.net/7690<br />
