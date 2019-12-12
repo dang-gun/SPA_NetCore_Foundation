@@ -21,15 +21,17 @@ TopInfo.Load = function ()
  */
 TopInfo.UserInfo_Load = function ()
 {
-    if (true === GlobalSign.SignIn)
-    {//사인인 정보가 있음
-        TopInfo.DivTopInfo.load(FS_FUrl.TopInfo_UserInfo_SignOut
-            , function () {
-                $("#spanEMail").html(GlobalSign.SignIn_ID);
-            });
-    }
-    else
-    {//사인인 정보가 없음
-        TopInfo.DivTopInfo.load(FS_FUrl.TopInfo_UserInfo_SignIn);
+    //필요에 따라서 외부에서도 호출가능하므로 객체가 있는지 확인해야 한다.
+    if (TopInfo.DivTopInfo)
+    {
+        if (true === GlobalSign.SignIn) {//사인인 정보가 있음
+            TopInfo.DivTopInfo.load(FS_FUrl.TopInfo_UserInfo_SignOut
+                , function () {
+                    $("#spanEMail").html(GlobalSign.SignIn_ID);
+                });
+        }
+        else {//사인인 정보가 없음
+            TopInfo.DivTopInfo.load(FS_FUrl.TopInfo_UserInfo_SignIn);
+        }
     }
 };

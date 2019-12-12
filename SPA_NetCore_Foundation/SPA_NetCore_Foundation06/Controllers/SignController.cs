@@ -15,6 +15,7 @@ using SPA_NetCore_Foundation.Global;
 using SPA_NetCore_Foundation.Model;
 using ModelDB;
 using WebApiAuth.Model.Sign;
+using System.Security.Claims;
 
 namespace SPA_NetCore_Foundation.Controllers
 {
@@ -143,7 +144,11 @@ namespace SPA_NetCore_Foundation.Controllers
         private string sIdentityServer4_Url = GlobalStatic.AuthUrl;
 
         
-
+        /// <summary>
+        /// 리플레시 토큰을 이용하여 엑세스토큰을 갱신한다.
+        /// </summary>
+        /// <param name="sRefreshToken"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("RefreshToAccess")]
         public ActionResult<SignInResultModel> RefreshToAccess(
@@ -168,7 +173,7 @@ namespace SPA_NetCore_Foundation.Controllers
             {//에러가 없다.
                 //유저 정보를 받는다.
                 UserInfoResponse inrUser 
-                    = UserInfoAsync(smResult.access_token).Result;
+                    = UserInfoAsync(tr.AccessToken).Result;
 
                 //유저 정보 추출
                 ClaimModel cm = new ClaimModel(inrUser.Claims);
@@ -186,6 +191,49 @@ namespace SPA_NetCore_Foundation.Controllers
             }
 
             return armResult.ToResult(smResult);
+        }
+
+        /// <summary>
+        /// 엑세스토큰을 이용하여 유저 정보를 받는다.
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]//OAuth2 인증 설정
+        [HttpGet]
+        [Route("AccessToUserInfo")]
+        public ActionResult<SignInSimpleResultModel> AccessToUserInfo() 
+        {
+            //리턴 보조
+            ApiResultReadyModel armResult = new ApiResultReadyModel(this);
+            //리턴용 모델
+            SignInSimpleResultModel tmResult = new SignInSimpleResultModel();
+
+            //유저 정보 추출
+            ClaimModel cm = new ClaimModel(((ClaimsIdentity)User.Identity).Claims);
+
+            //검색된 유저
+            User user = null;
+
+            using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext(GlobalStatic.DBMgr.DbContext_Opt()))
+            {
+                //유저 검색
+                user
+                    = db1.User
+                        .FirstOrDefault(m =>
+                            m.idUser == cm.id_int);
+
+                if(null != user)
+                {//유저 정보가 있다.
+                    tmResult.id = user.idUser;
+                    tmResult.email = user.SignEmail;
+                }
+                else
+                {//유저 정보가 없다.
+                    armResult.infoCode = "1";
+                    armResult.message = "엑세스 토큰이 유효하지 않습니다.[로그인 필요]";
+                }
+            }
+
+            return armResult.ToResult(tmResult);
         }
 
 

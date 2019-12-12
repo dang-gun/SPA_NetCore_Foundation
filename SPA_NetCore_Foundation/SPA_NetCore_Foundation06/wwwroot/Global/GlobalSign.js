@@ -18,13 +18,31 @@ GlobalSign.EmailSaveIs_CookieName = "spa_EmailSaveIs";
 GlobalSign.AutoSignIn_CookieName = "spa_AutoSignIn";
 
 
+/** 엑세스 토큰 - 쿠키용 이름 */
+GlobalSign.AccessToken_CookieName = "spa_AccessToken";
 /** 리플레시 토큰 - 쿠키용 이름 */
 GlobalSign.RefreshToken_CookieName = "spa_RefreshToken";
 
+/**
+ * 엑세스 토큰 가지고오기
+ * @returns {string} 엑세스 토큰
+ */
+GlobalSign.AccessToken_Get = function ()
+{
+    return CA.Get(GlobalSign.AccessToken_CookieName);
+};
+/**
+ * 엑세스 토큰 저장하기
+ * @param {string} sAccessToken 저장할 엑세스 토큰
+ */
+GlobalSign.AccessToken_Set = function (sAccessToken)
+{
+    //토큰 저장 시도
+    CA.Set(GlobalSign.AccessToken_CookieName
+        , sAccessToken
+        , CA.SaveType.Default);
+};
 
-
-/** 발급된 엑세스 토큰 */
-GlobalSign.access_token = "";
 
 /** 
  * 리플레시 토큰 불러오기 
@@ -43,7 +61,7 @@ GlobalSign.RefreshToken_SetOption = function (sRefreshToken)
 
     var sAutoSignIn = CA.Get(GlobalSign.AutoSignIn_CookieName);
 
-    if ("true" === GlobalSign.AutoSignIn_CookieName)
+    if ("true" === sAutoSignIn)
     {//자동저장 활성화 되있음
         nSaveType = CA.SaveType.Month1;
     }
@@ -93,7 +111,7 @@ GlobalSign.Move_SignIn_Remove = function (bMessage, sMessage)
 {
     GlobalSign.SignIn = false;
 
-    GlobalSign.access_token = "";
+    GlobalSign.AccessToken_Set("");
     GlobalSign.RefreshToken_Set("", CA.SaveType.Default);
 
     if (true === bMessage)
@@ -130,7 +148,11 @@ GlobalSign.Move_SignOut = function ()
                 dataType: "text",
                 success: function (data) {
                     console.log(data);
+
+                    //사인아웃 표시 
                     GlobalSign.SignIn = false;
+                    //엑세스 토큰 제거
+                    GlobalSign.AccessToken_Set("");
 
                     alert("사인아웃 성공 : " + data);
 
@@ -174,10 +196,43 @@ GlobalSign.isAccessToken = function ()
 {
     var bReturn = false;
 
-    if ("" !== GlobalSign.access_token)
+    if ("" !== GlobalSign.AccessToken_Get())
     {//엑세스토큰이 있다.
-        bReturn = false;
+        bReturn = true;
     }
 
     return bReturn;
 };
+
+/** 엑세스토큰이 있으면 유저 정보를 갱신한다. */
+GlobalSign.AccessTokenToInfo = function ()
+{
+    if (true === GlobalSign.isAccessToken())
+    {//엑세스 토큰이 
+        AA.get(true
+            , {
+                url: FS_Api.Sign_AccessToUserInfo
+                , success: function (jsonData) {
+                    if ("0" === jsonData.infoCode)
+                    {//에러 없음
+                        //사인인 되어있다고 확인해줌
+                        GlobalSign.SignIn = true;
+
+                        GlobalSign.SignIn_ID = jsonData.id;
+                        GlobalSign.SignIn_Email = jsonData.email;
+
+                        if (TopInfo)
+                        {
+                            TopInfo.UserInfo_Load();
+                        }
+                    }
+                    else
+                    {//에러 있음
+                        
+                    }
+                }
+                , error: function (jqXHR, textStatus, errorThrown) { }
+            });
+
+    }
+}

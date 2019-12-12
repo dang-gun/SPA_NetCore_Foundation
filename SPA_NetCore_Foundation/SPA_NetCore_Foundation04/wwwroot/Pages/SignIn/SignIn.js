@@ -143,7 +143,7 @@ SignIn.prototype.btnSignIn_onclick = function ()
                         
 
                         //엑세스 토큰 저장
-                        GlobalSign.access_token = jsonData.access_token;
+                        GlobalSign.AccessToken_Set(jsonData.access_token);
 
 
                         //자동로그인 여부에 따른 리플레시 수명 지정

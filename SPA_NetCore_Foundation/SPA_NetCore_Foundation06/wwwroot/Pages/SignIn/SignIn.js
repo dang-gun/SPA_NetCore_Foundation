@@ -135,7 +135,8 @@ SignIn.prototype.btnSignIn_onclick = function ()
                 , success: function (jsonData) {
                     console.log(jsonData);
 
-                    if ("0" === jsonData.infoCode) {//에러 없음
+                    if ("0" === jsonData.infoCode)
+                    {//에러 없음
                         GlobalSign.SignIn = true;
 
                         GlobalSign.SignIn_ID = jsonData.id;
@@ -143,7 +144,7 @@ SignIn.prototype.btnSignIn_onclick = function ()
                         
 
                         //엑세스 토큰 저장
-                        GlobalSign.access_token = jsonData.access_token;
+                        GlobalSign.AccessToken_Set(jsonData.access_token);
 
 
                         //자동로그인 여부에 따른 리플레시 수명 지정
@@ -164,14 +165,15 @@ SignIn.prototype.btnSignIn_onclick = function ()
                         //홈으로 이동
                         Page.Move_Home();
                     }
-                    else {//에러 있음
+                    else
+                    {//에러 있음
                         alert("error code : " + jsonData.infoCode + "\n"
                             + "내용 : " + jsonData.message);
                     }
 
                 }
-                , error: function (error) {
-                    console.log(error);
+                , error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
 
                     alert("알수 없는 오류가 발생했습니다.");
                 }

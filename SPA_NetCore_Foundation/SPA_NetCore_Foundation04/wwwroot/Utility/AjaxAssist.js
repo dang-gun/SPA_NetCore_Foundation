@@ -86,7 +86,8 @@ AA.call = function (bToken, jsonOption)
         if (!jsonOption.headers["authorization"])
         {
             //엑세스 토큰의 변수를 프로젝트에 맞게 수정한다.
-            jsonOption.headers["authorization"] = "Bearer " + GlobalSign.access_token;
+            jsonOption.headers["authorization"]
+                = "Bearer " + GlobalSign.AccessToken_Get();
         }
     }
 
@@ -173,7 +174,7 @@ AA.RefreshToAccess = function (callback)
                     GlobalSign.SignIn_ID = jsonData.id;
                     GlobalSign.SignIn_Email = jsonData.email;
 
-                    GlobalSign.access_token = jsonResult.access_token;
+                    GlobalSign.AccessToken_Set(jsonResult.access_token);
                     GlobalSign.RefreshToken_SetOption(jsonResult.refresh_token);
 
                     //요청한 콜백 진행

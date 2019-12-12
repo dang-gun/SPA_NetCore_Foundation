@@ -60,7 +60,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Model\User\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
