@@ -195,8 +195,38 @@ GlobalSign.isAccessToken = function ()
 
     if ("" !== GlobalSign.AccessToken_Get())
     {//엑세스토큰이 있다.
-        bReturn = false;
+        bReturn = true;
     }
 
     return bReturn;
+};
+
+
+
+/** 엑세스토큰이 있으면 유저 정보를 갱신한다. */
+GlobalSign.AccessTokenToInfo = function () {
+    if (true === GlobalSign.isAccessToken()) {//엑세스 토큰이 
+        AA.get(true
+            , {
+                url: FS_Api.Sign_AccessToUserInfo
+                , success: function (jsonData) {
+                    if ("0" === jsonData.infoCode) {//에러 없음
+                        //사인인 되어있다고 확인해줌
+                        GlobalSign.SignIn = true;
+
+                        GlobalSign.SignIn_ID = jsonData.id;
+                        GlobalSign.SignIn_Email = jsonData.email;
+
+                        if (TopInfo) {
+                            TopInfo.UserInfo_Load();
+                        }
+                    }
+                    else {//에러 있음
+
+                    }
+                }
+                , error: function (jqXHR, textStatus, errorThrown) { }
+            });
+
+    }
 };

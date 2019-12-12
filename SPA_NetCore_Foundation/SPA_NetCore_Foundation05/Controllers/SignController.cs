@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using IdentityModel.Client;
 using IdentityServer4.UserServices;
@@ -182,6 +183,44 @@ namespace SPA_NetCore_Foundation.Controllers
             return armResult.ToResult(smResult);
         }
 
+
+
+        /// <summary>
+        /// 엑세스토큰을 이용하여 유저 정보를 받는다.
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]//OAuth2 인증 설정
+        [HttpGet]
+        [Route("AccessToUserInfo")]
+        public ActionResult<SignInSimpleResultModel> AccessToUserInfo()
+        {
+            //리턴 보조
+            ApiResultReadyModel armResult = new ApiResultReadyModel(this);
+            //리턴용 모델
+            SignInSimpleResultModel tmResult = new SignInSimpleResultModel();
+
+            //유저 정보 추출
+            ClaimModel cm = new ClaimModel(((ClaimsIdentity)User.Identity).Claims);
+
+            //검색된 유저
+            UserSignInfoModel user
+                    = GlobalStatic.UserList.List
+                        .FirstOrDefault(m =>
+                            m.ID == cm.id_int);
+
+            if (null != user)
+            {//유저 정보가 있다.
+                tmResult.id = user.ID;
+                tmResult.email = user.Email;
+            }
+            else
+            {//유저 정보가 없다.
+                armResult.infoCode = "1";
+                armResult.message = "엑세스 토큰이 유효하지 않습니다.[로그인 필요]";
+            }
+
+            return armResult.ToResult(tmResult);
+        }
 
 
         /// <summary>
