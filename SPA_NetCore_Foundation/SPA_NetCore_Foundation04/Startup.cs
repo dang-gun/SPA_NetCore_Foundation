@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Serialization;
 using SPA_NetCore_Foundation.Global;
 
 namespace SPA_NetCore_Foundation
@@ -38,6 +39,9 @@ namespace SPA_NetCore_Foundation
                 .AddCustomUserStore();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            //API모델을 파스칼 케이스 유지하기
+            services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
             //클라이언트 인증 요청 정보
             services.AddAuthentication(options =>
