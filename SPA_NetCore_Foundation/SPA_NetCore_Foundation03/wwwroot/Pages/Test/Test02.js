@@ -33,13 +33,13 @@ Test02.prototype.Test01 = function (nData)
             , success: function (data) {
                 console.log(data);
 
-                if ("0" === data.infoCode) {//에러 없음
+                if ("0" === data.InfoCode) {//에러 없음
                     objThis.divOutput.html("nTest : " + data.nTest + " sTest : " + data.sTest);
                 }
                 else {//에러 있음
                     //아웃풋 지우기
                     objThis.divOutput.html("");
-                    alert("error code : " + data.infoCode + "\n"
+                    alert("error code : " + data.InfoCode + "\n"
                         + "내용 : " + data.message);
                 }
             }

@@ -24,7 +24,7 @@ namespace SPA_NetCore_Foundation.Controllers
             ApiResultReadyModel armResult = new ApiResultReadyModel(this);
             //리턴용 모델
             ApiResultBaseModel tmResult = new ApiResultBaseModel();
-            armResult.message = "성공";
+            armResult.Message = "성공";
 
             return armResult.ToResult(tmResult);
         }
@@ -47,8 +47,8 @@ namespace SPA_NetCore_Foundation.Controllers
             {
                 armResult.StatusCode = StatusCodes.Status500InternalServerError;
 
-                armResult.infoCode = "1";
-                armResult.message = "'nData'에 음수가 입력되었습니다.";
+                armResult.InfoCode = "1";
+                armResult.Message = "'nData'에 음수가 입력되었습니다.";
             }
 
             return armResult.ToResult(tmResult);
@@ -76,8 +76,8 @@ namespace SPA_NetCore_Foundation.Controllers
             {
                 armResult.StatusCode = StatusCodes.Status500InternalServerError;
 
-                armResult.infoCode = "1";
-                armResult.message = "'nData'에 음수가 입력되었습니다.";
+                armResult.InfoCode = "1";
+                armResult.Message = "'nData'에 음수가 입력되었습니다.";
             }
 
             return armResult.ToResult(tmResult);

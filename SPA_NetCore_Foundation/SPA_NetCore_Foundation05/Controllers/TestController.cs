@@ -45,8 +45,8 @@ namespace SPA_NetCore_Foundation.Controllers
             {
                 armResult.StatusCode = StatusCodes.Status500InternalServerError;
 
-                armResult.infoCode = "1";
-                armResult.message = "'nData'에 음수가 입력되었습니다.";
+                armResult.InfoCode = "1";
+                armResult.Message = "'nData'에 음수가 입력되었습니다.";
             }
 
             return armResult.ToResult(tmResult);
@@ -74,8 +74,8 @@ namespace SPA_NetCore_Foundation.Controllers
             {
                 armResult.StatusCode = StatusCodes.Status500InternalServerError;
 
-                armResult.infoCode = "1";
-                armResult.message = "'nData'에 음수가 입력되었습니다.";
+                armResult.InfoCode = "1";
+                armResult.Message = "'nData'에 음수가 입력되었습니다.";
             }
 
             return armResult.ToResult(tmResult);

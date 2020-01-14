@@ -69,8 +69,8 @@ namespace SPA_NetCore_Foundation.Controllers
 
                 if (true == tr.IsError)
                 {//에러가 있다.
-                    armResult.infoCode = "1";
-                    armResult.message = "아이디나 비밀번호가 틀렸습니다.";
+                    armResult.InfoCode = "1";
+                    armResult.Message = "아이디나 비밀번호가 틀렸습니다.";
 
                     armResult.StatusCode = StatusCodes.Status401Unauthorized;
                 }
@@ -90,8 +90,8 @@ namespace SPA_NetCore_Foundation.Controllers
             }
             else
             {
-                armResult.infoCode = "1";
-                armResult.message = "아이디나 비밀번호가 틀렸습니다.";
+                armResult.InfoCode = "1";
+                armResult.Message = "아이디나 비밀번호가 틀렸습니다.";
 
                 armResult.StatusCode = StatusCodes.Status401Unauthorized;
             }
@@ -164,8 +164,8 @@ namespace SPA_NetCore_Foundation.Controllers
 
             if (true == tr.IsError)
             {//에러가 있다.
-                armResult.infoCode = "1";
-                armResult.message = "토큰 갱신에 실패하였습니다.";
+                armResult.InfoCode = "1";
+                armResult.Message = "토큰 갱신에 실패하였습니다.";
 
                 armResult.StatusCode = StatusCodes.Status401Unauthorized;
             }
@@ -228,8 +228,8 @@ namespace SPA_NetCore_Foundation.Controllers
                 }
                 else
                 {//유저 정보가 없다.
-                    armResult.infoCode = "1";
-                    armResult.message = "엑세스 토큰이 유효하지 않습니다.[로그인 필요]";
+                    armResult.InfoCode = "1";
+                    armResult.Message = "엑세스 토큰이 유효하지 않습니다.[로그인 필요]";
                 }
             }
 

@@ -4,7 +4,7 @@ function SignIn()
 {
     GlobalStatic.PageType_Now = PageType.SignIn;
 
-    if (true === GlobalSign.SignIn)
+    if (true === dgIsObject.IsBoolValue(GlobalStatic.SignIn))
     {//이미 사인인이 되어있다.
         //홈으로 이동
         Page.Move_Home();
@@ -47,15 +47,15 @@ SignIn.prototype.btnSignIn_onclick = function ()
 
     GlobalSign.SignIn = false;
 
-    if (true === GlobalSign.SignIn)
+    if (true === dgIsObject.IsBoolValue(GlobalStatic.SignIn))
     {
         alert("이미 사인인이 되어 있습니다.");
     }
-    else if ("" === sEmail)
+    else if (false === dgIsObject.IsStringNotEmpty(sEmail))
     {
         alert("이메일을 입력하지 않았습니다.");
     }
-    else if ("" === sPW)
+    else if (false === dgIsObject.IsStringNotEmpty(sPW))
     {
         alert("비밀번호를 입력하지 않았습니다.");
     }
@@ -68,7 +68,7 @@ SignIn.prototype.btnSignIn_onclick = function ()
                 , success: function (jsonData) {
                     console.log(jsonData);
 
-                    if ("0" === jsonData.infoCode) {//에러 없음
+                    if ("0" === jsonData.InfoCode) {//에러 없음
                         GlobalSign.SignIn = true;
                         GlobalSign.SignIn_token = jsonData.token;
                         GlobalSign.SignIn_ID = sEmail;
@@ -79,8 +79,8 @@ SignIn.prototype.btnSignIn_onclick = function ()
                         Page.Move_Home();
                     }
                     else {//에러 있음
-                        alert("error code : " + jsonData.infoCode + "\n"
-                            + "내용 : " + jsonData.message);
+                        alert("error code : " + jsonData.InfoCode + "\n"
+                            + "내용 : " + jsonData.Message);
                     }
 
                 }

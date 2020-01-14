@@ -15,4 +15,8 @@
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\Utility\DG_IsObject\DG_IsObject.js" />
+  </ItemGroup>
+
 </Project>

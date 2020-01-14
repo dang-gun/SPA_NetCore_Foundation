@@ -23,7 +23,8 @@ TopInfo.UserInfo_Load = function ()
 {
     //필요에 따라서 외부에서도 호출가능하므로 객체가 있는지 확인해야 한다.
     if (TopInfo.DivTopInfo) {
-        if (true === GlobalSign.SignIn) {//사인인 정보가 있음
+        if (true === dgIsObject.IsBoolValue(GlobalSign.SignIn))
+        {//사인인 정보가 있음
             TopInfo.DivTopInfo.load(FS_FUrl.TopInfo_UserInfo_SignOut
                 , function () {
                     $("#spanEMail").html(GlobalSign.SignIn_ID);

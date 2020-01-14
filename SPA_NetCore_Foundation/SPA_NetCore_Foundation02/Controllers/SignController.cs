@@ -49,8 +49,8 @@ namespace SPA_NetCore_Foundation.Controllers
             {
                 armResult.StatusCode = StatusCodes.Status403Forbidden;
 
-                armResult.infoCode = "-1";
-                armResult.message = "일치하는 정보가 없습니다.";
+                armResult.InfoCode = "-1";
+                armResult.Message = "일치하는 정보가 없습니다.";
 
                 smResult.complete = false;
             }
@@ -70,7 +70,7 @@ namespace SPA_NetCore_Foundation.Controllers
             //토큰의 앞이 유저 정보다.
             string[] sCutToken = sToken.Split("▩");
             //정보를 넣어 준다.
-            armResult.message = sCutToken[0];
+            armResult.Message = sCutToken[0];
 
             //임시로 아이디를 넘긴다.
             return armResult.ToResult(arbm);

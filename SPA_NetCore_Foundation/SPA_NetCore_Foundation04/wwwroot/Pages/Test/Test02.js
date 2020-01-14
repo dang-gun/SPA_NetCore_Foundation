@@ -33,13 +33,13 @@ Test02.prototype.Test01 = function (nData)
             , success: function (data) {
                 console.log(data);
 
-                if ("0" === data.infoCode) {//에러 없음
+                if ("0" === data.InfoCode) {//에러 없음
                     objThis.divOutput.html("nTest : " + data.nTest + " sTest : " + data.sTest);
                 }
                 else {//에러 있음
                     //아웃풋 지우기
                     objThis.divOutput.html("");
-                    alert("error code : " + data.infoCode + "\n"
+                    alert("error code : " + data.InfoCode + "\n"
                         + "내용 : " + data.message);
                 }
             }
@@ -54,7 +54,7 @@ Test02.prototype.Test02 = function ()
 {
     var objThis = this;
 
-    if (true === GlobalSign.SignIn)
+    if (true === dgIsObject.IsBoolValue(GlobalStatic.SignIn))
     {//사인인이 되어 있다.
 
         AA.get(true
@@ -64,13 +64,13 @@ Test02.prototype.Test02 = function ()
                 , success: function (data) {
                     console.log(data);
 
-                    if ("0" === data.infoCode) {//에러 없음
+                    if ("0" === data.InfoCode) {//에러 없음
                         objThis.divOutput.html("nTest001 : " + data.nTest001 + " sTest002 : " + data.sTest002);
                     }
                     else {//에러 있음
                         //아웃풋 지우기
                         objThis.divOutput.html("");
-                        alert("error code : " + data.infoCode + "\n"
+                        alert("error code : " + data.InfoCode + "\n"
                             + "내용 : " + data.message);
                     }
                 }

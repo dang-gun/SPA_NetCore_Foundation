@@ -21,7 +21,7 @@ TopInfo.Load = function ()
  */
 TopInfo.UserInfo_Load = function ()
 {
-    if (true === GlobalSign.SignIn)
+    if (true === dgIsObject.IsBoolValue(GlobalSign.SignIn))
     {//사인인 정보가 있음
         TopInfo.DivTopInfo.load(FS_FUrl.TopInfo_UserInfo_SignOut
             , function () {

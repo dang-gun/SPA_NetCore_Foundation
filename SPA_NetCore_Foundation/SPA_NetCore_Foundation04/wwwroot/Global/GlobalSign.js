@@ -129,7 +129,7 @@ GlobalSign.Move_SignOut = function ()
     //사인아웃 시도
     //location.href = FS_Url.SignIn;
     
-    if (false === GlobalSign.SignIn)
+    if (false === dgIsObject.IsBoolValue(GlobalSign.SignIn))
     {//사인 아웃이 되어 있음
         alert("사인아웃이 되어 있습니다.");
     }
@@ -173,8 +173,8 @@ GlobalSign.Move_SignOut = function ()
                     console.log(error);
 
                     if (error.responseJSON
-                            && error.responseJSON.infoCode) {
-                        alert("실패코드 : " + error.responseJSON.infoCode
+                            && error.responseJSON.InfoCode) {
+                        alert("실패코드 : " + error.responseJSON.InfoCode
                             + "\n " + error.responseJSON.message);
                     }
                 }
@@ -210,7 +210,7 @@ GlobalSign.AccessTokenToInfo = function () {
             , {
                 url: FS_Api.Sign_AccessToUserInfo
                 , success: function (jsonData) {
-                    if ("0" === jsonData.infoCode) {//에러 없음
+                    if ("0" === jsonData.InfoCode) {//에러 없음
                         //사인인 되어있다고 확인해줌
                         GlobalSign.SignIn = true;
 

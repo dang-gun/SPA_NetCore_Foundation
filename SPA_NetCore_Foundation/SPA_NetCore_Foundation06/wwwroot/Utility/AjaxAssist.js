@@ -168,7 +168,7 @@ AA.RefreshToAccess = function (callback)
             {
                 console.log(jsonResult);
 
-                if (jsonResult.infoCode === "0")
+                if (jsonResult.InfoCode === "0")
                 {//성공
                     //받은 정보 다시 저장
                     GlobalSign.SignIn_ID = jsonData.id;

@@ -44,15 +44,15 @@ SignIn.prototype.btnSignIn_onclick = function ()
 
     GlobalStatic.SignIn = false;
 
-    if (true === GlobalStatic.SignIn)
+    if (true === dgIsObject.IsBoolValue(GlobalStatic.SignIn))
     {
         alert("이미 사인인이 되어 있습니다.");
     }
-    else if ("" === sEMail)
+    else if (false === dgIsObject.IsStringNotEmpty(sEMail))
     {
         alert("이메일을 입력하지 않았습니다.");
     }
-    else if ("" === sPW)
+    else if (false === dgIsObject.IsStringNotEmpty(sPW))
     {
         alert("비밀번호를 입력하지 않았습니다.");
     }
@@ -64,7 +64,8 @@ SignIn.prototype.btnSignIn_onclick = function ()
             , success: function (data) {
                 console.log(data);
 
-                if ("0" === data.infoCode) {//에러 없음
+                if ("0" === data.InfoCode)
+                {//에러 없음
                     if (data.complete === true) {
                         GlobalStatic.SignIn = true;
                         GlobalStatic.SignIn_token = data.token;
@@ -77,9 +78,7 @@ SignIn.prototype.btnSignIn_onclick = function ()
                     }
                 }
                 else {//에러 있음
-                    //아웃풋 지우기
-                    objThis.divOutput.html("");
-                    alert("error code : " + data.infoCode + "\n"
+                    alert("error code : " + data.InfoCode + "\n"
                         + "내용 : " + data.message);
                 }
             }

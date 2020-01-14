@@ -51,12 +51,15 @@ namespace SPA_NetCore_Foundation.Controllers
             if (user != null)
             {
                 //에러가 없다.
-                smResult.message = user.Email;
+                armResult.Message = user.Email;
+
+                smResult.access_token = "dasdflcc090fkkc";
+                smResult.refresh_token = "das54340fl8fd";
             }
             else
             {
-                armResult.infoCode = "1";
-                armResult.message = "아이디나 비밀번호가 틀렸습니다.";
+                armResult.InfoCode = "1";
+                armResult.Message = "아이디나 비밀번호가 틀렸습니다.";
 
                 armResult.StatusCode = StatusCodes.Status401Unauthorized;
             }
@@ -69,7 +72,6 @@ namespace SPA_NetCore_Foundation.Controllers
         /// </summary>
         /// <param name="sRefreshToken"></param>
         /// <returns></returns>
-        [Authorize]//OAuth2 인증 설정
         [HttpPut]
         [Route("SignOut")]
         public ActionResult<string> SignOut(

@@ -48,15 +48,15 @@ namespace ProjsctThis.Model.ApiModel
             if (StatusCode == StatusCodes.Status200OK)
             {//성공
                 //결과에 있는 코드와 메시지를 결과용 모델에 저장한다.
-                ((ApiResultBaseModel)objResultData).infoCode = base.infoCode;
-                ((ApiResultBaseModel)objResultData).message = base.message;
+                ((ApiResultBaseModel)objResultData).InfoCode = base.InfoCode;
+                ((ApiResultBaseModel)objResultData).Message = base.Message;
                 //성공은 전달받은 오브젝트를 준다,
                 orReturn = this.ThisCB.StatusCode(this.StatusCode, objResultData);
             }
             else
             {//실패
                 //실패는 500 에러를 기본으로 전달해야 한다.
-                ApiResultFailModel afm = new ApiResultFailModel(base.infoCode, base.message);
+                ApiResultFailModel afm = new ApiResultFailModel(base.InfoCode, base.Message);
 
                 //여기에 들어왔다는건 예측 가능한 오류가 났다는 의미다.
                 //예측가능한 오류는 200으로 바꿔준다.
