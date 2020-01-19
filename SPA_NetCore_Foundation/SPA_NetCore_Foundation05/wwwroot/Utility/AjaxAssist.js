@@ -209,18 +209,11 @@ AA.RefreshToAccess = function (callback)
  * @param {function} jsonOption 추가 옵션
  */
 AA.HtmlFileLoad = function (sFileUrl, funSuccess, jsonOption) {
-
-    var bAsync = false;
-    if (jsonOption && jsonOption.async) {
-        bAsync = jsonOption.async;
-    }
-
-    AA.get(sFileUrl
-        , {}
-        , funSuccess
-        , function () { }
+    AA.get(false
         , {
-            async: bAsync,
-            dataType: "html"
+            url: sFileUrl
+            , dataType: "html"
+            , success: funSuccess
+            , error: function (error) { console.log(error); }
         });
 };
