@@ -117,9 +117,15 @@ AA.call = function (bToken, jsonOption)
             //401에러가 났다.
 
             //이 상황은 엑세스 토큰이 없거나 만료된것이다.
-            AA.RefreshToAccess(function ()
-            {
+            //갱신 요청
+            AA.RefreshToAccess(function () {
                 //엑세스 토큰 갱신이 성공하면 다시 진행
+                //진행전에 엑세스토큰 갱신을 안하게 하도록 에러를 복구한다.
+                jsonOpt.error = funError;
+                //엑세스 토큰을 다시 입력한다.
+                jsonOpt.headers["authorization"]
+                    = "Bearer " + GlobalSign.AccessToken_Get();
+                //여기서는 독자 호출한다.
                 $.ajax(jsonOpt);
             });
         }
@@ -146,7 +152,7 @@ AA.RefreshToAccess = function (callback)
 {
     var refresh_token = GlobalSign.RefreshToken_Get();
 
-    if ("" == refresh_token)
+    if (null === refresh_token || "" === refresh_token)
     {//리플레시 토큰이 없다.
         //리플레시 토큰이 없으면 토큰을 갱신할 수 없으므로
         //로그인이 필요하다.

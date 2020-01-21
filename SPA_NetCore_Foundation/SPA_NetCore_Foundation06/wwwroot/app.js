@@ -1,7 +1,7 @@
 ﻿// 라우트 어플리케이션 생성
 var app = Sammy(function ()
 {
-    if (false === dgIsObject.IsBoolValue(GlobalStatic.SignIn))
+    if (false === dgIsObject.IsBoolValue(GlobalSign.SignIn))
     {//사인인 정보가 없다.
         //엑세스토큰 확인
         GlobalSign.AccessTokenToInfo();

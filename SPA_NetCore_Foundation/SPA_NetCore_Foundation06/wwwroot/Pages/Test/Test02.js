@@ -54,7 +54,7 @@ Test02.prototype.Test02 = function ()
 {
     var objThis = this;
 
-    if (true === dgIsObject.IsBoolValue(GlobalStatic.SignIn))
+    if (true === dgIsObject.IsBoolValue(GlobalSign.SignIn))
     {//사인인이 되어 있다.
 
         AA.get(true

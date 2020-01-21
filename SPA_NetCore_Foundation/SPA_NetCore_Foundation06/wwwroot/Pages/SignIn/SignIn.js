@@ -4,7 +4,7 @@ function SignIn()
 {
     GlobalStatic.PageType_Now = PageType.SignIn;
 
-    if (true === dgIsObject.IsBoolValue(GlobalStatic.SignIn))
+    if (true === dgIsObject.IsBoolValue(GlobalSign.SignIn))
     {//이미 사인인이 되어있다.
         //홈으로 이동
         Page.Move_Home();
@@ -114,7 +114,7 @@ SignIn.prototype.btnSignIn_onclick = function ()
     }
 
 
-    if (true === dgIsObject.IsBoolValue(GlobalStatic.SignIn))
+    if (true === dgIsObject.IsBoolValue(GlobalSign.SignIn))
     {
         alert("이미 사인인이 되어 있습니다.");
     }
