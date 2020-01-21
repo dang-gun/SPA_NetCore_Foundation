@@ -163,7 +163,7 @@ namespace SPA_NetCore_Foundation.Controllers
             {//에러가 없다.
                 //유저 정보를 받는다.
                 UserInfoResponse inrUser 
-                    = UserInfoAsync(smResult.access_token).Result;
+                    = UserInfoAsync(tr.AccessToken).Result;
 
                 //유저 정보 추출
                 ClaimModel cm = new ClaimModel(inrUser.Claims);
