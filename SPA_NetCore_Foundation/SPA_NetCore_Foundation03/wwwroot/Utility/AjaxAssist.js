@@ -98,7 +98,6 @@ AA.call = function (bToken, jsonOption) {
 
 
     $.ajax(jsonOpt);
-
 };
 
 

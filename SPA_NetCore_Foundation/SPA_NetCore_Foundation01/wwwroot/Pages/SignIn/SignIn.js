@@ -77,7 +77,7 @@ SignIn.prototype.btnSignIn_onclick = function ()
                     {
                         GlobalStatic.SignIn = true;
                         GlobalStatic.SignIn_token = data.token;
-                        GlobalStatic.SignIn_ID = sEMail;
+                        GlobalStatic.SignIn_ID = sEmail;
 
                         alert("사인 인 성공");
 

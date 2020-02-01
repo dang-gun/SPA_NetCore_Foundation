@@ -69,29 +69,13 @@ AA.call = function (bToken, jsonOption) {
         dataType: "json"
     };
 
-    //헤더에 토큰을 넣기 처리
-    if (true === bToken)
-    {//헤더 넣기
-        //모든 옵션은 무조건 입력이 우선이다.
-        //그러니 토큰을 전달할 'authorization'가 있는지 확인한다.
-        if (!jsonOption.headers)
-        {
-            //헤더 옵션 만들기
-            jsonOption.headers = {};
-        }
-        if (!jsonOption.headers["authorization"])
-        {
-            //엑세스 토큰의 변수를 프로젝트에 맞게 수정한다.
-            jsonOption.headers["authorization"] = "Bearer " + access_token;
-        }
-    }
-
     //들어온 옵션을 합친다.(들어온 값 우선)
     jsonOpt = $.extend(jsonOpt, jsonOption);
 
     //success함수를 빼오고
     var funSuccess = jsonOpt.success;
-    jsonOpt.success = function (data) {
+    jsonOpt.success = function (data)
+    {
         //여기에 공통 작업내용을 넣는다.
 
         if (funSuccess)
@@ -103,7 +87,8 @@ AA.call = function (bToken, jsonOption) {
 
     //error함수를 빼오고
     var funError = jsonOpt.error;
-    jsonOpt.error = function (jqXHR, textStatus, errorThrown) {
+    jsonOpt.error = function (jqXHR, textStatus, errorThrown)
+    {
         //여기에 공통 작업내용을 넣는다.
 
         if (funError)
@@ -113,9 +98,7 @@ AA.call = function (bToken, jsonOption) {
         }
     };
 
-
     $.ajax(jsonOpt);
-
 };
 
 

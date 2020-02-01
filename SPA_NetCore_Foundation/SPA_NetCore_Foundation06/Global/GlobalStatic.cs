@@ -23,10 +23,5 @@ namespace SPA_NetCore_Foundation.Global
         public static DbContext_SpaNetCoreFoundation DBMgr 
             = new DbContext_SpaNetCoreFoundation();
 
-
-        /// <summary>
-        /// 사인인 리스트
-        /// </summary>
-        public static SignInDB SignInList = new SignInDB();
     }
 }

@@ -119,7 +119,16 @@ GlobalSign.Move_SignIn_Remove = function (bMessage, sMessage)
         alert(sMessage);
     }
     
-    GlobalSign.Move_SignIn();
+    switch (GlobalStatic.SiteType)
+    {
+        case 0://일반타입
+            break;
+        case 1://관리자타입
+        default:
+            //사인인 페이지로 이동
+            GlobalSign.Move_SignIn();
+            break;
+    }
 };
 
 /**

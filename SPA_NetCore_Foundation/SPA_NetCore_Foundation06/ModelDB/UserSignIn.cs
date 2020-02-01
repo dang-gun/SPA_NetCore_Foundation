@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModelDB
@@ -25,5 +26,14 @@ namespace ModelDB
         /// 리플레시 토큰
         /// </summary>
         public string RefreshToken { get; set; }
+
+        /// <summary>
+        /// 직접 로그인한 시간
+        /// </summary>
+        public DateTime SignInDate { get; set; }
+        /// <summary>
+        /// 토큰 갱신 시간
+        /// </summary>
+        public DateTime RefreshDate { get; set; }
     }
 }

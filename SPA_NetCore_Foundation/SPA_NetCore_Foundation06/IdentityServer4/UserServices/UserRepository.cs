@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApiAuth.Model.Sign;
 
 namespace IdentityServer4_Custom.UserServices
 {
@@ -21,13 +22,22 @@ namespace IdentityServer4_Custom.UserServices
         /// <returns></returns>
         public bool ValidateCredentials(string sEmail, string sPassword)
         {
-            var user = FindByEmail(sEmail);
-            if (user != null)
+            bool bReturn = false;
+
+            using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext(GlobalStatic.DBMgr.DbContext_Opt()))
             {
-                return user.Password.Equals(sPassword);
+                User mgrItem
+                    = db1.User
+                        .FirstOrDefault(x => x.SignEmail == sEmail
+                                        && x.Password == sPassword);
+
+                if (mgrItem != null)
+                {
+                    bReturn = true;
+                }
             }
 
-            return false;
+            return bReturn;
         }
 
         /// <summary>
@@ -35,15 +45,17 @@ namespace IdentityServer4_Custom.UserServices
         /// </summary>
         /// <param name="nID"></param>
         /// <returns></returns>
-        public User FindById(int nID)
+        public UserAuthModel FindById(int nID)
         {
-            User userReturn = new User();
-            
+            UserAuthModel userReturn = new UserAuthModel();
+
             using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext(GlobalStatic.DBMgr.DbContext_Opt()))
             {
-                userReturn 
+                User mgrItem
                     = db1.User
                         .FirstOrDefault(x => x.idUser == nID);
+
+                userReturn.ManagerAuth_Set(mgrItem);
             }
 
             return userReturn;
@@ -54,20 +66,24 @@ namespace IdentityServer4_Custom.UserServices
         /// </summary>
         /// <param name="sEmail"></param>
         /// <returns></returns>
-        public User FindByEmail(string sEmail)
+        public UserAuthModel FindByEmail(string sEmail)
         {
 
-            User userReturn = new User();
+            UserAuthModel userAuth = null;
 
             using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext(GlobalStatic.DBMgr.DbContext_Opt()))
             {
-                userReturn
+                User mgrItem
                     = db1.User
-                        .FirstOrDefault(x =>
-                            x.SignEmail.Equals(sEmail, StringComparison.OrdinalIgnoreCase));
+                        .FirstOrDefault(x => x.SignEmail == sEmail);
+
+                if (mgrItem != null)
+                {
+                    userAuth = new UserAuthModel(mgrItem);
+                }
             }
 
-            return userReturn;
+            return userAuth;
         }
     }
 }

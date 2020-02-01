@@ -48,6 +48,10 @@ namespace SPA_NetCore_Foundation.Controllers
             //로그인 처리용 모델
             SignInResultModel smResult = new SignInResultModel();
 
+            //API 호출 시간
+            DateTime dtNow = DateTime.Now;
+
+
             //검색된 유저
             User user = null;
 
@@ -76,9 +80,35 @@ namespace SPA_NetCore_Foundation.Controllers
                 }
                 else
                 {//에러가 없다.
-                    //로그인 되어있는 유저정보 저장
-                    GlobalStatic.SignInList.Add(user.idUser, tr.RefreshToken);
+                    using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext(GlobalStatic.DBMgr.DbContext_Opt()))
+                    {
+                        //기존 로그인한 유저 검색
+                        UserSignIn[] arrSL
+                            = db1.UserSignIn
+                                .Where(m => m.idUser == user.idUser)
+                                .ToArray();
 
+                        //기존 로그인한 유저 정보 제거
+                        db1.UserSignIn.RemoveRange(arrSL);
+                        //db 적용
+                        db1.SaveChanges();
+
+
+                        //로그인 되어있는 유저정보 저장
+                        UserSignIn slItem = new UserSignIn();
+                        slItem.idUser = user.idUser;
+                        slItem.RefreshToken = tr.RefreshToken;
+                        slItem.SignInDate = dtNow;
+                        slItem.RefreshDate = dtNow;
+
+                        //기존 로그인한 유저 정보 제거
+                        db1.UserSignIn.Add(slItem);
+                        //db 적용
+                        db1.SaveChanges();
+                    }
+
+
+                    //로그인한 유저에게 전달할 정보
                     smResult.id = user.idUser;
                     smResult.email = user.SignEmail;
 
@@ -86,6 +116,7 @@ namespace SPA_NetCore_Foundation.Controllers
 
                     smResult.access_token = tr.AccessToken;
                     smResult.refresh_token = tr.RefreshToken;
+
                 }
             }
             else
@@ -108,15 +139,32 @@ namespace SPA_NetCore_Foundation.Controllers
         [HttpPut]
         [Route("SignOut")]
         public ActionResult<string> SignOut(
-            [FromForm]int nID
-            , [FromForm]string sRefreshToken)
+            [FromForm]string sRefreshToken)
         {
             ApiResultReadyModel armResult = new ApiResultReadyModel(this);
             ApiResultBaseModel arbm = new ApiResultBaseModel();
 
-            //사인아웃에 필요한 작업을 한다.
-            //사용자
-            GlobalStatic.SignInList.Delete(nID, sRefreshToken);
+            //API 호출 시간
+            DateTime dtNow = DateTime.Now;
+
+            //인증 정보에서 유저 정보 추출
+            var identity = (ClaimsIdentity)User.Identity;
+            ClaimModel cm = new ClaimModel(identity.Claims);
+
+            using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext(GlobalStatic.DBMgr.DbContext_Opt()))
+            {
+                //기존 로그인한 유저 검색
+                UserSignIn[] arrSL
+                    = db1.UserSignIn
+                        .Where(m => m.idUser == cm.id_int)
+                        .ToArray();
+
+                //기존 로그인한 유저 정보 제거
+                db1.UserSignIn.RemoveRange(arrSL);
+                //db 적용
+                db1.SaveChanges();
+            }
+
 
             //리플레시 토큰 제거
             if ((null != sRefreshToken)
@@ -159,6 +207,9 @@ namespace SPA_NetCore_Foundation.Controllers
             //엑세스 토큰 갱신용 모델
             SignInResultModel smResult = new SignInResultModel();
 
+            //API 호출 시간
+            DateTime dtNow = DateTime.Now;
+
             //토큰 갱신 요청
             TokenResponse tr = RefreshTokenAsync(sRefreshToken).Result;
 
@@ -178,16 +229,40 @@ namespace SPA_NetCore_Foundation.Controllers
                 //유저 정보 추출
                 ClaimModel cm = new ClaimModel(inrUser.Claims);
 
-                //로그인 되어있는 유저정보 저장
-                GlobalStatic.SignInList.Add(cm.id_int, tr.RefreshToken);
+                using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext(GlobalStatic.DBMgr.DbContext_Opt()))
+                {
+                    //기존 로그인한 유저 검색
+                    UserSignIn itemUSI
+                        = db1.UserSignIn
+                            .Where(m => m.idUser == cm.id_int)
+                            .FirstOrDefault();
+
+                    if (null == itemUSI)
+                    {//기존 로그인 정보가 없다,
+                        //이러면 강제로 토큰이 상실된 것일 수 있다.
+                        armResult.InfoCode = "1";
+                        armResult.Message = "토큰 갱신에 실패하였습니다.";
+
+                        armResult.StatusCode = StatusCodes.Status401Unauthorized;
+                    }
+                    else
+                    {
+                        //로그인 되어있는 유저정보 수정
+                        itemUSI.RefreshToken = tr.RefreshToken;
+                        itemUSI.RefreshDate = dtNow;
+
+                        //db 적용
+                        db1.SaveChanges();
 
 
-                //모델에 입력
-                smResult.id = cm.id_int;
-                smResult.email = cm.email;
+                        //유저에게 전달할 정보 만들기
+                        smResult.id = cm.id_int;
+                        smResult.email = cm.email;
 
-                smResult.access_token = tr.AccessToken;
-                smResult.refresh_token = tr.RefreshToken;
+                        smResult.access_token = tr.AccessToken;
+                        smResult.refresh_token = tr.RefreshToken;
+                    }
+                }   
             }
 
             return armResult.ToResult(smResult);

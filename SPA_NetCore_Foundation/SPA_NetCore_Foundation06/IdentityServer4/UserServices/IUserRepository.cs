@@ -1,5 +1,5 @@
 ﻿using ModelDB;
-
+using WebApiAuth.Model.Sign;
 
 namespace IdentityServer4_Custom.UserServices
 {
@@ -11,8 +11,8 @@ namespace IdentityServer4_Custom.UserServices
     {
         bool ValidateCredentials(string username, string password);
 
-        User FindById(int nID);
+        UserAuthModel FindById(int nID);
 
-        User FindByEmail(string username);
+        UserAuthModel FindByEmail(string username);
     }
 }

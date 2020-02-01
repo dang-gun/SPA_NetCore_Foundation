@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ModelDB;
 
 namespace SPA_NetCore_Foundation06.Migrations
 {
     [DbContext(typeof(SpaNetCoreFoundationContext))]
-    partial class SpaNetCoreFoundationContextModelSnapshot : ModelSnapshot
+    [Migration("20200201085728_SignInList추가")]
+    partial class SignInList추가
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
