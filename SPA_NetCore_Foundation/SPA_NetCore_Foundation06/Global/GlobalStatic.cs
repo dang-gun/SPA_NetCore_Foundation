@@ -14,14 +14,13 @@ namespace SPA_NetCore_Foundation.Global
         public static string AuthUrl = "http://localhost:10845/";
 
         /// <summary>
+        /// DB 타입
+        /// </summary>
+        public static string DBType = "";
+        /// <summary>
         /// DB 컨낵션 스트링 저장
         /// </summary>
         public static string DBString = "";
-        /// <summary>
-        /// DB 컨택스트
-        /// </summary>
-        public static DbContext_SpaNetCoreFoundation DBMgr 
-            = new DbContext_SpaNetCoreFoundation();
 
     }
 }

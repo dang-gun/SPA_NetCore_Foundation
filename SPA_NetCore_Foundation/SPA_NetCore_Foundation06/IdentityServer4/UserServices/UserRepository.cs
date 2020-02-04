@@ -24,7 +24,7 @@ namespace IdentityServer4_Custom.UserServices
         {
             bool bReturn = false;
 
-            using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext(GlobalStatic.DBMgr.DbContext_Opt()))
+            using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext())
             {
                 User mgrItem
                     = db1.User
@@ -49,7 +49,7 @@ namespace IdentityServer4_Custom.UserServices
         {
             UserAuthModel userReturn = new UserAuthModel();
 
-            using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext(GlobalStatic.DBMgr.DbContext_Opt()))
+            using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext())
             {
                 User mgrItem
                     = db1.User
@@ -71,7 +71,7 @@ namespace IdentityServer4_Custom.UserServices
 
             UserAuthModel userAuth = null;
 
-            using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext(GlobalStatic.DBMgr.DbContext_Opt()))
+            using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext())
             {
                 User mgrItem
                     = db1.User

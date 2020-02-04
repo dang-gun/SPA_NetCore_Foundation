@@ -26,7 +26,9 @@ namespace SPA_NetCore_Foundation
             Configuration = configuration;
 
             //DB 커낵션 스트링 받아오기
-            GlobalStatic.DBString = Configuration["ConnectionString:MSSQL_SpaNetCoreFoundation"];
+            string sConnectStringSelect = "SpaNetCoreFoundation_sqlite";
+            GlobalStatic.DBType = Configuration[sConnectStringSelect + ":DBType"];
+            GlobalStatic.DBString = Configuration[sConnectStringSelect + ":ConnectionString"];
         }
 
         public IConfiguration Configuration { get; }
@@ -104,8 +106,9 @@ namespace SPA_NetCore_Foundation
                 });
             });
 
-            services.AddDbContext<SpaNetCoreFoundationContext>(opts =>
-                opts.UseSqlServer(GlobalStatic.DBString));
+            
+            services.AddDbContext<SpaNetCoreFoundationContext>();
+
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

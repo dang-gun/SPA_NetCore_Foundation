@@ -30,7 +30,7 @@ namespace SPA_NetCore_Foundation.Global
             //메모리에는 없는데 리플레시토큰을 있을 수 있기 때문.
             UserSignIn usi = null;
 
-            using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext(GlobalStatic.DBMgr.DbContext_Opt()))
+            using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext())
             {
                 //사인인 리스트 검색
                 usi
@@ -69,7 +69,7 @@ namespace SPA_NetCore_Foundation.Global
         /// <param name="sRefreshToken"></param>
         public void Delete(long nID, string sRefreshToken)
         {
-            using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext(GlobalStatic.DBMgr.DbContext_Opt()))
+            using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext())
             {
                 //아이디나 리플레시 토큰 둘중하나만 같으면 추출한다.
                 //메모리에는 없는데 리플레시토큰을 있을 수 있기 때문.

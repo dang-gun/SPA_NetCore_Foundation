@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ModelDB;
@@ -10,22 +9,19 @@ using ModelDB;
 namespace SPA_NetCore_Foundation06.Migrations
 {
     [DbContext(typeof(SpaNetCoreFoundationContext))]
-    [Migration("20191204183329_UserSignIn수정3")]
-    partial class UserSignIn수정3
+    [Migration("20200204162838_Initialize")]
+    partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
-            modelBuilder.Entity("SPA_NetCore_Foundation.ModelDB.User", b =>
+            modelBuilder.Entity("ModelDB.User", b =>
                 {
                     b.Property<long>("idUser")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Password");
 
@@ -50,28 +46,22 @@ namespace SPA_NetCore_Foundation06.Migrations
                         });
                 });
 
-            modelBuilder.Entity("SPA_NetCore_Foundation.ModelDB.UserSignIn", b =>
+            modelBuilder.Entity("ModelDB.UserSignIn", b =>
                 {
                     b.Property<long>("idUserSignIn")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("RefreshDate");
 
                     b.Property<string>("RefreshToken");
 
-                    b.Property<long?>("idUser");
+                    b.Property<DateTime>("SignInDate");
+
+                    b.Property<long>("idUser");
 
                     b.HasKey("idUserSignIn");
 
-                    b.HasIndex("idUser");
-
                     b.ToTable("UserSignIn");
-                });
-
-            modelBuilder.Entity("SPA_NetCore_Foundation.ModelDB.UserSignIn", b =>
-                {
-                    b.HasOne("SPA_NetCore_Foundation.ModelDB.User", "User")
-                        .WithMany()
-                        .HasForeignKey("idUser");
                 });
 #pragma warning restore 612, 618
         }

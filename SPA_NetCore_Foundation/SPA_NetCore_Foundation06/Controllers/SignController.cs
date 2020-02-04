@@ -55,7 +55,7 @@ namespace SPA_NetCore_Foundation.Controllers
             //검색된 유저
             User user = null;
 
-            using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext(GlobalStatic.DBMgr.DbContext_Opt()))
+            using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext())
             {
                 //유저 검색
                 user
@@ -80,7 +80,7 @@ namespace SPA_NetCore_Foundation.Controllers
                 }
                 else
                 {//에러가 없다.
-                    using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext(GlobalStatic.DBMgr.DbContext_Opt()))
+                    using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext())
                     {
                         //기존 로그인한 유저 검색
                         UserSignIn[] arrSL
@@ -151,7 +151,7 @@ namespace SPA_NetCore_Foundation.Controllers
             var identity = (ClaimsIdentity)User.Identity;
             ClaimModel cm = new ClaimModel(identity.Claims);
 
-            using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext(GlobalStatic.DBMgr.DbContext_Opt()))
+            using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext())
             {
                 //기존 로그인한 유저 검색
                 UserSignIn[] arrSL
@@ -229,7 +229,7 @@ namespace SPA_NetCore_Foundation.Controllers
                 //유저 정보 추출
                 ClaimModel cm = new ClaimModel(inrUser.Claims);
 
-                using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext(GlobalStatic.DBMgr.DbContext_Opt()))
+                using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext())
                 {
                     //기존 로그인한 유저 검색
                     UserSignIn itemUSI
@@ -288,7 +288,7 @@ namespace SPA_NetCore_Foundation.Controllers
             //검색된 유저
             User user = null;
 
-            using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext(GlobalStatic.DBMgr.DbContext_Opt()))
+            using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext())
             {
                 //유저 검색
                 user

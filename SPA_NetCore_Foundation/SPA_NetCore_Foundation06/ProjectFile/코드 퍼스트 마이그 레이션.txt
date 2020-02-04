@@ -24,7 +24,7 @@ Script-Migration
 Add-Migration Initialize
 
 마이그레이션 오류 찾기*************************
-add-migration initial -verbose
+Add-Migration Initialize -verbose
 
 
 DB 초기화 방법********************************
@@ -32,3 +32,11 @@ DB 초기화 방법********************************
 모든 데이터가 날아간다.
 테이블도 날아간다.
 Update-Database -Migration 0
+
+마이그레이션 재작성
+Enable-Migrations
+
+마이그레이션 첫 생성
+Add-Migration Initialize
+
+마이그레이션 첫 생성에서 

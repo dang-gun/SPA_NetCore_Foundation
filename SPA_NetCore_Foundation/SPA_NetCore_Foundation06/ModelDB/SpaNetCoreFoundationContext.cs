@@ -1,14 +1,29 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
-
+using SPA_NetCore_Foundation.Global;
 
 namespace ModelDB
 {
     public class SpaNetCoreFoundationContext : DbContext
     {
-        public SpaNetCoreFoundationContext(DbContextOptions options)
-            : base(options)
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
+            
+
+            switch (GlobalStatic.DBType)
+            {
+                case "sqlite":
+                    options.UseSqlite(GlobalStatic.DBString);
+                    break;
+                case "mysql":
+                    //options.UseSqlite(GlobalStatic.DBString);
+                    break;
+
+                case "mssql":
+                default:
+                    options.UseSqlServer(GlobalStatic.DBString);
+                    break;
+            }
         }
 
         public DbSet<User> User { get; set; }
