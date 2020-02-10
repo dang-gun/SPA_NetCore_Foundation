@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 using SPA_NetCore_Foundation;
 
-namespace SPA_NetCore_Foundation06
+namespace SPA_NetCore_Foundation07
 {
     public class Program
     {

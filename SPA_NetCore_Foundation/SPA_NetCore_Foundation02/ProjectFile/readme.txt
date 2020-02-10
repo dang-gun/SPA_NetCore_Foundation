@@ -1,5 +1,11 @@
-﻿[공개 프로그램] .NET Core 2.2로 구현한 SPA(Sigle Page Applications) 기초 
-https://blog.danggun.net/7042
+﻿[ASP.NET Core] .NET Core로 구현한 SPA(Single Page Applications)(2) - Ajax공통 기능, 데이터 바인드 처리
+https://blog.danggun.net/7445
+
+프로젝트 구성 정보
+Visual Studio 2019 Preview(16.1.0 Preview 3.0)
+.NET Core 2.2
+js router : Sammy.js (http://sammyjs.org/ , https://github.com/quirkey/sammy)
+
 
 
 /***********************/
