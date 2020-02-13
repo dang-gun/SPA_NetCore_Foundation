@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProjsctThis.Model.ApiModel
+namespace SPA_NetCore_Foundation.Model.ApiModel
 {
     /// <summary>
     /// api요청을 처리할때 요청결과를 임시로 저장해두고

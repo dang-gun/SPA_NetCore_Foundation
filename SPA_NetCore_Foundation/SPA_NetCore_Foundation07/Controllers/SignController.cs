@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using ProjsctThis.Model.ApiModel;
+using SPA_NetCore_Foundation.Model.ApiModel;
 using SPA_NetCore_Foundation.Global;
 using SPA_NetCore_Foundation.Model;
 using ModelDB;
@@ -105,19 +105,25 @@ namespace SPA_NetCore_Foundation.Controllers
                         db1.UserSignIn.Add(slItem);
                         //db 적용
                         db1.SaveChanges();
-                    }
 
 
-                    //로그인한 유저에게 전달할 정보
-                    smResult.id = user.idUser;
-                    smResult.email = user.SignEmail;
 
-                    smResult.lv = 0;
+                        //연결된 유저 정보 검색
+                        UserInfo uiToss
+                            = db1.UserInfo
+                                .Where(m => m.idUser == user.idUser)
+                                .FirstOrDefault();
 
-                    smResult.access_token = tr.AccessToken;
-                    smResult.refresh_token = tr.RefreshToken;
+                        //로그인한 유저에게 전달할 정보
+                        smResult.idUser = user.idUser;
+                        smResult.Email = user.SignEmail;
 
-                }
+                        smResult.ViewName = uiToss.ViewName;
+
+                        smResult.access_token = tr.AccessToken;
+                        smResult.refresh_token = tr.RefreshToken;
+                    }//end using db1
+                }//end if tr.IsError
             }
             else
             {
@@ -256,8 +262,8 @@ namespace SPA_NetCore_Foundation.Controllers
 
 
                         //유저에게 전달할 정보 만들기
-                        smResult.id = cm.id_int;
-                        smResult.email = cm.email;
+                        smResult.idUser = cm.id_int;
+                        smResult.Email = cm.email;
 
                         smResult.access_token = tr.AccessToken;
                         smResult.refresh_token = tr.RefreshToken;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ProjsctThis.Model.ApiModel;
+using SPA_NetCore_Foundation.Model.ApiModel;
 using SPA_NetCore_Foundation.Model;
 
 namespace SPA_NetCore_Foundation.Controllers

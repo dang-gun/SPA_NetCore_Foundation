@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProjsctThis.Model.ApiModel
+namespace SPA_NetCore_Foundation.Model.ApiModel
 {
     /// <summary>
     /// API 결과 공통 베이스.

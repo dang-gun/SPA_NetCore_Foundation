@@ -28,7 +28,7 @@ TopInfo.UserInfo_Load = function ()
         {//사인인 정보가 있음
             TopInfo.DivTopInfo.load(FS_FUrl.TopInfo_UserInfo_SignOut
                 , function () {
-                    $("#spanEMail").html(GlobalSign.SignIn_ID);
+                    $("#spanViewName").html(GlobalSign.SignIn_ViewName);
                 });
         }
         else {//사인인 정보가 없음

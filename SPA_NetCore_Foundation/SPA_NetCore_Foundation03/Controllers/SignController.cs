@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using ProjsctThis.Model.ApiModel;
+using SPA_NetCore_Foundation.Model.ApiModel;
 using SPA_NetCore_Foundation.Global;
 using SPA_NetCore_Foundation.Model;
 using SPA_NetCore_Foundation.Model.User;

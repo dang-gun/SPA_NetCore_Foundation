@@ -2,6 +2,8 @@
 var PageType = {};
 
 PageType.Home = "Home";
+PageType.MyPage = "MyPage";
+
 PageType.SignIn = "SignIn";
 
 

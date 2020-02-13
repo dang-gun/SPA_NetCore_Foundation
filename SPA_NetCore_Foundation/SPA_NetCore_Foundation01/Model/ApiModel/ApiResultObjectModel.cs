@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProjsctThis.Model.ApiModel
+namespace SPA_NetCore_Foundation.Model.ApiModel
 {
     /// <summary>
     /// 스웨거에 노출시키지 않고 모델을 리턴할때 사용한다.

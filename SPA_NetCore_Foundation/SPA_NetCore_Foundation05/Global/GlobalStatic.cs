@@ -10,8 +10,7 @@ namespace SPA_NetCore_Foundation.Global
         /// <summary>
         /// 인증 서버 주소
         /// </summary>
-        //public static string sAuthUrl = "https://localhost:44335/";
-        public static string AuthUrl = "http://localhost:2476/";
+        public static string AuthUrl = "http://localhost:12005/";
 
 
         /// <summary>

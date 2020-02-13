@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using ProjsctThis.Model.ApiModel;
+using SPA_NetCore_Foundation.Model.ApiModel;
 using SPA_NetCore_Foundation.Model;
 
 namespace SPA_NetCore_Foundation.Controllers
@@ -34,7 +34,7 @@ namespace SPA_NetCore_Foundation.Controllers
             //로그인 처리용 모델
             SignInModel smResult = new SignInModel();
 
-            if(sID == "test" && sPW == "test")
+            if (sID == "test01@email.net" && sPW == "1111")
             {
                 smResult.complete = true;
                 

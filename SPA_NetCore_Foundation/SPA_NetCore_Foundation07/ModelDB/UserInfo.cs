@@ -26,5 +26,10 @@ namespace ModelDB
         /// </summary>
         [MaxLength(16)]
         public string ViewName { get; set; }
+
+        /// <summary>
+        /// 관리 권한
+        /// </summary>
+        public ManagerPermissionType ManagerPermission { get; set; }
     }
 }

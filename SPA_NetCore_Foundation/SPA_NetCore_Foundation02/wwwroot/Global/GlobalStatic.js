@@ -13,12 +13,6 @@ GlobalStatic.Debug = false;
  */
 GlobalStatic.SiteType = 0;
 
-/** 사인인 여부 */
-GlobalStatic.SignIn = false;
-/** 사인인 - 아이디 정보 */
-GlobalStatic.SignIn_ID = "";
-/** 사인인 - 토큰 정보 */
-GlobalStatic.SignIn_token = "";
 
 //현재 보고있는 페이지의 인스턴스
 GlobalStatic.Page_Now = null;

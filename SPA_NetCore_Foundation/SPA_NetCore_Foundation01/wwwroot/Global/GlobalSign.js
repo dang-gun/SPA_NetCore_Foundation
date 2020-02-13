@@ -3,6 +3,13 @@
  */
 var GlobalSign = {};
 
+/** 사인인 여부 */
+GlobalSign.SignIn = false;
+/** 사인인 - 아이디 정보 */
+GlobalSign.SignIn_ID = "";
+/** 사인인 - 토큰 정보 */
+GlobalSign.SignIn_token = "";
+
 /**
  * 사인인 페이지로 이동
  */
@@ -19,7 +26,7 @@ GlobalSign.Move_SignOut = function ()
     //사인아웃 시도
     //location.href = FS_Url.SignIn;
     
-    if (false === dgIsObject.IsBoolValue(GlobalStatic.SignIn))
+    if (false === dgIsObject.IsBoolValue(GlobalSign.SignIn))
     {//사인 아웃이 되어 있음
         alert("사인아웃이 되어 있습니다.");
     }
@@ -30,12 +37,12 @@ GlobalSign.Move_SignOut = function ()
             url: FS_Api.Sign_SignOut,
             type: "PUT",
             data: {
-                sToken: GlobalStatic.SignIn_token
+                sToken: GlobalSign.SignIn_token
             },
             dataType: "text",
             success: function (data) {
                 console.log(data);
-                GlobalStatic.SignIn = false;
+                GlobalSign.SignIn = false;
 
                 alert("사인아웃 성공 : " + data);
 

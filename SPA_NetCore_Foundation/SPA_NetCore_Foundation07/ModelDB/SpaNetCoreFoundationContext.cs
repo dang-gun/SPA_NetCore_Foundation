@@ -27,12 +27,15 @@ namespace ModelDB
         }
 
         public DbSet<User> User { get; set; }
+        public DbSet<UserInfo> UserInfo { get; set; }
         public DbSet<UserSignIn> UserSignIn { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasData(new User
+            //유저************************************
+            modelBuilder.Entity<User>().HasData(
+            new User
             { 
                 idUser = 1
                 , SignEmail = "test01@email.net"
@@ -41,9 +44,51 @@ namespace ModelDB
             , new User
             { 
                 idUser = 2
-                ,
-                SignEmail = "test02@email.net"
+                , SignEmail = "test02@email.net"
                 , Password = "1111"
+            }
+            , new User
+            { 
+                idUser = 3
+                , SignEmail = "testuser@email.net"
+                , Password = "1111"
+            }
+            , new User
+            { 
+                idUser = 4
+                , SignEmail = "user@email.net"
+                , Password = "1111"
+            });
+
+            //유저 정보************************************
+            modelBuilder.Entity<UserInfo>().HasData(
+            new UserInfo
+            {
+                idUserInfo = 1
+                , idUser = 1
+                , ViewName = "root"
+                , ManagerPermission = ManagerPermissionType.All
+            }
+            , new UserInfo
+            {
+                idUserInfo = 2
+                , idUser = 2
+                , ViewName = "admin"
+                , ManagerPermission = ManagerPermissionType.Admin
+            }
+            , new UserInfo
+            {
+                idUserInfo = 3
+                , idUser = 3
+                , ViewName = "test User"
+                , ManagerPermission = ManagerPermissionType.TestUser
+            }
+            , new UserInfo
+            {
+                idUserInfo = 4
+                , idUser = 4
+                , ViewName = "User"
+                , ManagerPermission = ManagerPermissionType.None
             });
         }
     }

@@ -1,4 +1,5 @@
-﻿using ProjsctThis.Model.ApiModel;
+﻿using ModelDB;
+using SPA_NetCore_Foundation.Model.ApiModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +15,15 @@ namespace WebApiAuth.Model.Sign
         /// <summary>
         /// 유저의 고유 아이디
         /// </summary>
-        public long id { get; set; }
+        public long idUser { get; set; }
         /// <summary>
         /// 이메일
         /// </summary>
-        public string email { get; set; }
-
+        public string Email { get; set; }
         /// <summary>
-        /// 테스트용 레벨
+        /// 표시 이름
         /// </summary>
-        public int lv { get; set; }
-
+        public string ViewName { get; set; }
 
         /// <summary>
         /// 엑세스 토큰
@@ -41,10 +40,10 @@ namespace WebApiAuth.Model.Sign
         public SignInResultModel()
             : base()
         {
-            this.id = 0;
-            this.email = string.Empty;
+            this.idUser = 0;
+            this.Email = string.Empty;
 
-            this.lv = 0;
+            this.ViewName = string.Empty;
 
             this.access_token = string.Empty;
             this.refresh_token = string.Empty;

@@ -4,7 +4,7 @@ function SignIn()
 {
     GlobalStatic.PageType_Now = PageType.SignIn;
 
-    if (true === dgIsObject.IsBoolValue(GlobalStatic.SignIn))
+    if (true === dgIsObject.IsBoolValue(GlobalSign.SignIn))
     {//이미 사인인이 되어있다.
         //홈으로 이동
         Page.Move_Home();
@@ -42,9 +42,9 @@ SignIn.prototype.btnSignIn_onclick = function ()
     var sEmail = this.txtEMail.val();
     var sPW = this.pwPassword.val();
 
-    GlobalStatic.SignIn = false;
+    GlobalSign.SignIn = false;
 
-    if (true === dgIsObject.IsBoolValue(GlobalStatic.SignIn))
+    if (true === dgIsObject.IsBoolValue(GlobalSign.SignIn))
     {
         alert("이미 사인인이 되어 있습니다.");
     }
@@ -75,9 +75,9 @@ SignIn.prototype.btnSignIn_onclick = function ()
                 {//에러 없음
                     if (true === dgIsObject.IsBoolValue(data.complete))
                     {
-                        GlobalStatic.SignIn = true;
-                        GlobalStatic.SignIn_token = data.token;
-                        GlobalStatic.SignIn_ID = sEmail;
+                        GlobalSign.SignIn = true;
+                        GlobalSign.SignIn_token = data.token;
+                        GlobalSign.SignIn_ID = sEmail;
 
                         alert("사인 인 성공");
 

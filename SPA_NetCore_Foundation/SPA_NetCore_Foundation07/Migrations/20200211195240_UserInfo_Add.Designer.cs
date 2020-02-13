@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ModelDB;
 
 namespace SPA_NetCore_Foundation06.Migrations
 {
     [DbContext(typeof(SpaNetCoreFoundationContext))]
-    partial class SpaNetCoreFoundationContextModelSnapshot : ModelSnapshot
+    [Migration("20200211195240_UserInfo_Add")]
+    partial class UserInfo_Add
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

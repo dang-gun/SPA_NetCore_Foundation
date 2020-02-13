@@ -24,15 +24,15 @@ namespace SPA_NetCore_Foundation.Global
 
             List.Add(new UserSignInfoModel {
                 ID = 1,
+                Email = "test01@email.net",
                 Password = "1111",
-                Email = "test01@email.net"
             });
 
             List.Add(new UserSignInfoModel
             {
                 ID = 2,
+                Email = "test02@email.net",
                 Password = "1111",
-                Email = "test02@email.net"
             });
         }
     }
