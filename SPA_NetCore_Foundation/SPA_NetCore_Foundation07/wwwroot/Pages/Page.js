@@ -84,6 +84,10 @@ Page.Move_Page = function (bSignIn, sUrl)
     }
 };
 
+Page.Move_Admin = function ()
+{
+    location.href = FS_Url.Admin;
+};
 
 Page.Move_Home = function ()
 {
@@ -92,14 +96,7 @@ Page.Move_Home = function ()
 
 Page.Move_MyPage = function ()
 {
-    if (true === GlobalSign.SignIn)
-    {
-        location.href = FS_Url.MyPage;
-    }
-    else
-    {//사인인이 안되있음
-        alert("사인인이 필요합니다.");
-    }
+    location.href = FS_Url.MyPage;
 };
 
 

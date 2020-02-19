@@ -1,0 +1,62 @@
+﻿<style>
+    #divDataBind > .SettingItem 
+    {
+        min-height: 10px;
+        margin-bottom: 5px;
+    }
+    #divDataBind > .SettingItem > div
+    {
+        float:left;
+        margin: 0 5px;
+    }
+
+    #divDataBind > .SettingItem > .SettingItem_Number {
+        width: 35px;
+    }
+        #divDataBind > .SettingItem > .SettingItem_Number > input {
+            width: 35px;
+        }
+
+    #divDataBind > .SettingItem > .SettingItem_Name {
+        width: 100px;
+    }
+        #divDataBind > .SettingItem > .SettingItem_Name > input {
+            width: 100px;
+        }
+
+    #divDataBind > .SettingItem > .SettingItem_ValueData {
+        width: 150px;
+    }
+        #divDataBind > .SettingItem > .SettingItem_ValueData > input {
+            width: 150px;
+        }
+
+    #divDataBind > .SettingItem > .SettingItem_Description {
+        width: 300px;
+    }
+        #divDataBind > .SettingItem > .SettingItem_Description > input {
+            width: 300px;
+        }
+
+    #divDataBind > .SettingItem > .SettingItem_Edit {
+        width: 50px;
+    }
+        #divDataBind > .SettingItem > .SettingItem_Edit > button {
+            width: 50px;
+        }
+</style>
+
+<h3>관리자 페이지</h3><br />
+<div>
+    <ul>
+        <li><button onclick="GlobalStatic.Page_Now.UserListGet()">유저 리스트</button></li>
+        <li><button onclick="GlobalStatic.Page_Now.SettingListGet()">세팅 내용</button></li>
+    </ul>
+</div>
+<br />
+<br />
+<div id="divDataBind">
+
+</div>
+<br />
+<br />

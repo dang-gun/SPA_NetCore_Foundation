@@ -9,6 +9,8 @@ GlobalSign.SignIn = false;
 GlobalSign.SignIn_Email = "";
 /** 사인인 - 아이디 정보 */
 GlobalSign.SignIn_ID = 0;
+/** 사인인 - 표시 이름 */
+GlobalSign.SignIn_ViewName = "";
 
 /** 이메일 저장 - 쿠키용 이름 */
 GlobalSign.EmailSave_CookieName = "spa_EmailSave";
@@ -223,8 +225,9 @@ GlobalSign.AccessTokenToInfo = function () {
                         //사인인 되어있다고 확인해줌
                         GlobalSign.SignIn = true;
 
-                        GlobalSign.SignIn_ID = jsonData.id;
-                        GlobalSign.SignIn_Email = jsonData.email;
+                        GlobalSign.SignIn_ID = jsonData.idUser;
+                        GlobalSign.SignIn_Email = jsonData.Email;
+                        GlobalSign.SignIn_ViewName = jsonData.ViewName;
 
                         if (TopInfo) {
                             TopInfo.UserInfo_Load();

@@ -56,22 +56,6 @@ GlobalSign.RefreshToken_Get = function ()
 };
 
 
-GlobalSign.RefreshToken_SetOption = function (sRefreshToken)
-{
-    //타입 저장
-    var nSaveType = CA.SaveType.Default;
-
-    var sAutoSignIn = CA.Get(GlobalSign.AutoSignIn_CookieName);
-
-    if ("true" === sAutoSignIn)
-    {//자동저장 활성화 되있음
-        nSaveType = CA.SaveType.Month1;
-    }
-
-    //토큰 저장 시도
-    GlobalSign.RefreshToken_Set(sRefreshToken, nSaveType);
-};
-
 /**
  * 리플레시 토큰 저장하기
  * @param {string} sRefreshToken 저장할 리플레시 토큰
@@ -92,8 +76,26 @@ GlobalSign.RefreshToken_Set = function (sRefreshToken, bMonth1)
     CA.Set(GlobalSign.RefreshToken_CookieName
         , sRefreshToken
         , nSaveType);
-    
+
 };
+
+
+GlobalSign.RefreshToken_SetOption = function (sRefreshToken)
+{
+    //타입 저장
+    var nSaveType = CA.SaveType.Default;
+
+    var sAutoSignIn = CA.Get(GlobalSign.AutoSignIn_CookieName);
+
+    if ("true" === sAutoSignIn)
+    {//자동저장 활성화 되있음
+        nSaveType = CA.SaveType.Month1;
+    }
+
+    //토큰 저장 시도
+    GlobalSign.RefreshToken_Set(sRefreshToken, nSaveType);
+};
+
 
 /**
  * 사인인 페이지로 이동
@@ -214,30 +216,53 @@ GlobalSign.isAccessToken = function ()
     return bReturn;
 };
 
-/** 엑세스토큰이 있으면 유저 정보를 갱신한다. */
-GlobalSign.AccessTokenToInfo = function () {
-    if (true === GlobalSign.isAccessToken()) {//엑세스 토큰이 
+/**
+ * 엑세스토큰이 있으면 유저 정보를 갱신한다.
+ * @param {function} callback 갱신에 성공하면 할 동작
+ */
+GlobalSign.AccessTokenToInfo = function (callback) 
+{
+    if (true === GlobalSign.isAccessToken()) 
+    {//엑세스 토큰이 있다
         AA.get(true
             , {
                 url: FS_Api.Sign_AccessToUserInfo
-                , success: function (jsonData) {
-                    if ("0" === jsonData.InfoCode) {//에러 없음
+                , success: function (jsonData)
+                {
+                    if ("0" === jsonData.InfoCode) 
+                    {//에러 없음
                         //사인인 되어있다고 확인해줌
                         GlobalSign.SignIn = true;
 
-                        GlobalSign.SignIn_ID = jsonData.id;
-                        GlobalSign.SignIn_Email = jsonData.email;
+                        GlobalSign.SignIn_ID = jsonData.idUser;
+                        GlobalSign.SignIn_Email = jsonData.Email;
 
-                        if (TopInfo) {
+                        GlobalSign.SignIn_ViewName = jsonData.ViewName;
+
+                        if (TopInfo)
+                        {
                             TopInfo.UserInfo_Load();
                         }
+
+                        if (typeof callback === "function")
+                        {
+                            callback();
+                        }
                     }
-                    else {//에러 있음
+                    else 
+                    {//에러 있음
 
                     }
                 }
                 , error: function (jqXHR, textStatus, errorThrown) { }
             });
 
+    }
+    else
+    {
+        if (typeof callback === "function")
+        {
+            callback();
+        }
     }
 };

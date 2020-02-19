@@ -180,8 +180,9 @@ AA.RefreshToAccess = function (callback)
                 {//성공
 
                     //받은 정보 다시 저장
-                    GlobalSign.SignIn_ID = jsonResult.id;
-                    GlobalSign.SignIn_Email = jsonResult.email;
+                    GlobalSign.SignIn_ID = jsonResult.idUser;
+                    GlobalSign.SignIn_Email = jsonResult.Email;
+                    GlobalSign.SignIn_ViewName = jsonResult.ViewName;
 
                     GlobalSign.AccessToken_Set(jsonResult.access_token);
                     GlobalSign.RefreshToken_SetOption(jsonResult.refresh_token);

@@ -11,7 +11,7 @@ GlobalStatic.Debug = false;
  * 0 : 일반적인 홈페이지(로그인없이 탐색 가능)
  * 1 : 어드민 타입(로그인없이 탐색 불가능)
  */
-GlobalStatic.SiteType = 1;
+GlobalStatic.SiteType = 0;
 
 //현재 보고있는 페이지의 인스턴스
 GlobalStatic.Page_Now = null;

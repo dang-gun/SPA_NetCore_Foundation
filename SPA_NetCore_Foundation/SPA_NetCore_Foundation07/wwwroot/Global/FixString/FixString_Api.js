@@ -13,6 +13,14 @@ FS_Api.Sign_SignOut = FS_Api.Sign + "SignOut/";
 FS_Api.Sign_RefreshToAccess = FS_Api.Sign + "RefreshToAccess/";
 FS_Api.Sign_AccessToUserInfo = FS_Api.Sign + "AccessToUserInfo/";
 
+FS_Api.Admin = FS_Api.Api + "Admin/";
+FS_Api.Admin_SettingList = FS_Api.Admin + "SettingList/";
+FS_Api.Admin_SettingSet = FS_Api.Admin + "SettingSet/";
+
+FS_Api.Admin_UserList = FS_Api.Admin + "UserList/";
+
+
+
 FS_Api.MyPage = FS_Api.Api + "MyPage/";
 FS_Api.MyPage_MyPageInfo = FS_Api.MyPage + "MyPageInfo/";
 

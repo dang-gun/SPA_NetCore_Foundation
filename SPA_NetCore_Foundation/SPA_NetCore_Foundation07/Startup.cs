@@ -30,6 +30,9 @@ namespace SPA_NetCore_Foundation
             string sConnectStringSelect = "SpaNetCoreFoundation_sqlite";
             GlobalStatic.DBType = Configuration[sConnectStringSelect + ":DBType"];
             GlobalStatic.DBString = Configuration[sConnectStringSelect + ":ConnectionString"];
+
+            //세팅 로드
+            GlobalStatic.Setting_Load();
         }
 
         public IConfiguration Configuration { get; }

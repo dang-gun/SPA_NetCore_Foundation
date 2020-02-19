@@ -1,6 +1,8 @@
 ﻿
 var PageType = {};
 
+PageType.Admin = "Admin";
+
 PageType.Home = "Home";
 PageType.MyPage = "MyPage";
 

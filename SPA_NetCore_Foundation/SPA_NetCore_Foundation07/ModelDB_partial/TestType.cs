@@ -9,7 +9,7 @@ namespace ModelDB
     /// 메니저 권한 리스트
     /// </summary>
     [Flags]
-    public enum ManagerPermissionType
+    public enum TestType
     {
         /// <summary>
         /// 권한 없음.
@@ -18,15 +18,15 @@ namespace ModelDB
         None = 0,
 
         /// <summary>
-        /// 관리자
+        /// 테스트 0
         /// </summary>
-        Admin = 1 << 0,
+        Test00 = 1 << 0,
 
 
-        /// <summary>
-        /// 테스트 유저
-        /// </summary>
-        TestUser = 1 << 40000,
+        Test01 = 1 << 1,
+        Test02 = 1 << 2,
+        Test03 = 1 << 3,
+        Test10 = 1 << 10,
 
         /// <summary>
         /// 모든 권한

@@ -6,9 +6,9 @@
  * test : https://dang-gun.github.io/DG_JsDataBind/test/index.html
  */
 
-/** 데이터 바인드에 사용할 매치 방법  */
+/** 데이터 바인드에 사용할 검사 방법  */
 var DG_JsDataBind_MatchType = {
-    //지정된 모든 매치패턴 리스트 검사
+    //지정된 모든 리스트 검사
     Select: 1,
     //처음 1개가 매치되면 검사를 끝냄
     First: 2
@@ -59,7 +59,7 @@ DG_JsDataBind.prototype.MatchPatternListAdd = function (
 };
 
 /**
- * 지정한 타입에 
+ * 지정한 기본 호출 
  * @param {string} sOriData 변경에 사용할 데이터
  * @param {string[]} arrMatchPatternName 사용할 매치패턴 이름 리스트
  * @param {json} jsonValue 변환에 사용할 데이터(찾을 값, 변환할 값)
@@ -268,4 +268,35 @@ DG_JsDataBind.prototype.DataBind_SelectType = function (
     jsonReturn.Match = bMatch;
 
     return jsonReturn;
+};
+
+
+/**
+ * 모든 패턴을 사용하여 'DG_JsDataBind_MatchType.Select' 검사를 한다.
+ * @param {string} sOriData 변경에 사용할 데이터
+ * @param {json} jsonValue 변환에 사용할 데이터(찾을 값, 변환할 값)
+ * @returns {josn} 완성된 결과. Match=하나라도 매치에 성공했는지 여부. ResultString=완성된 문자열
+ */
+DG_JsDataBind.prototype.DataBind_All = function (
+    sOriData
+    , jsonValue
+)
+{
+    //패턴 이름 리스트
+    var arrMatchPatternNames = [];
+
+    //패턴 이름 리스트 찾기
+    for (var sKey in this.MatchPatternList)
+    {
+        arrMatchPatternNames.push(sKey);
+    }
+
+
+    return this.DataBind(
+        sOriData
+        , arrMatchPatternNames
+        , jsonValue
+        , DG_JsDataBind_MatchType.Select
+    );
+    
 };

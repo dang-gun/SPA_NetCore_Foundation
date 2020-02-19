@@ -105,17 +105,18 @@ namespace SPA_NetCore_Foundation.Controllers
                         db1.UserSignIn.Add(slItem);
                         //db 적용
                         db1.SaveChanges();
+
+                        //로그인한 유저에게 전달할 정보
+                        smResult.idUser = user.idUser;
+                        smResult.Email = user.SignEmail;
+                        smResult.ViewName = smResult.Email;
+
+                        smResult.access_token = tr.AccessToken;
+                        smResult.refresh_token = tr.RefreshToken;
                     }
 
 
-                    //로그인한 유저에게 전달할 정보
-                    smResult.id = user.idUser;
-                    smResult.email = user.SignEmail;
-
-                    smResult.lv = 0;
-
-                    smResult.access_token = tr.AccessToken;
-                    smResult.refresh_token = tr.RefreshToken;
+                    
 
                 }
             }
@@ -256,8 +257,9 @@ namespace SPA_NetCore_Foundation.Controllers
 
 
                         //유저에게 전달할 정보 만들기
-                        smResult.id = cm.id_int;
-                        smResult.email = cm.email;
+                        smResult.idUser = cm.id_int;
+                        smResult.Email = cm.email;
+                        smResult.ViewName = smResult.Email;
 
                         smResult.access_token = tr.AccessToken;
                         smResult.refresh_token = tr.RefreshToken;
@@ -298,8 +300,9 @@ namespace SPA_NetCore_Foundation.Controllers
 
                 if(null != user)
                 {//유저 정보가 있다.
-                    tmResult.id = user.idUser;
-                    tmResult.email = user.SignEmail;
+                    tmResult.idUser = user.idUser;
+                    tmResult.Email = user.SignEmail;
+                    tmResult.ViewName = tmResult.Email;
                 }
                 else
                 {//유저 정보가 없다.

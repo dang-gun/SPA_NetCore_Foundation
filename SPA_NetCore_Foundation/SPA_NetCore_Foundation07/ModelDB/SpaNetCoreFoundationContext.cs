@@ -9,7 +9,6 @@ namespace ModelDB
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             
-
             switch (GlobalStatic.DBType)
             {
                 case "sqlite":
@@ -26,6 +25,7 @@ namespace ModelDB
             }
         }
 
+        public DbSet<Setting_Data> Setting_Data { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<UserInfo> UserInfo { get; set; }
         public DbSet<UserSignIn> UserSignIn { get; set; }
@@ -33,6 +33,33 @@ namespace ModelDB
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //서버 기본 세팅 정보************************************
+            modelBuilder.Entity<Setting_Data>().HasData(
+                new Setting_Data
+                { 
+                    idSetting_Data = 1
+                    , Number = 1
+                    , Name = "Title"
+                    , ValueData = "ASP.NET Core SPA Foundation"
+                    , Description = "프로그램 전체에 표시될 이름"
+                }
+                , new Setting_Data
+                {
+                    idSetting_Data = 2
+                    , Number = 2
+                    , Name = "ConnectionAllow"
+                    , ValueData = "true"
+                    , Description = "접속 허용 여부"
+                }
+                , new Setting_Data
+                {
+                    idSetting_Data = 3
+                    , Number = 3
+                    , Name = "TestType"
+                    , ValueData = "0"
+                    , Description = "테스트용 타입. TestType 사용"
+                });
+
             //유저************************************
             modelBuilder.Entity<User>().HasData(
             new User

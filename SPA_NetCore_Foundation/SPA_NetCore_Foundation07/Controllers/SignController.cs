@@ -261,9 +261,15 @@ namespace SPA_NetCore_Foundation.Controllers
                         db1.SaveChanges();
 
 
+                        //유저 정보 검색
+                        UserInfo uiFind
+                            = db1.UserInfo
+                                .Where(m => m.idUser == cm.id_int)
+                                .FirstOrDefault();
                         //유저에게 전달할 정보 만들기
                         smResult.idUser = cm.id_int;
                         smResult.Email = cm.email;
+                        smResult.ViewName = uiFind.ViewName;
 
                         smResult.access_token = tr.AccessToken;
                         smResult.refresh_token = tr.RefreshToken;
@@ -291,21 +297,28 @@ namespace SPA_NetCore_Foundation.Controllers
             //유저 정보 추출
             ClaimModel cm = new ClaimModel(((ClaimsIdentity)User.Identity).Claims);
 
-            //검색된 유저
-            User user = null;
 
             using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext())
             {
+
                 //유저 검색
-                user
+                User user
                     = db1.User
                         .FirstOrDefault(m =>
                             m.idUser == cm.id_int);
 
-                if(null != user)
+                UserInfo userinfo
+                    = db1.UserInfo
+                        .FirstOrDefault(m =>
+                            m.idUser == user.idUser);
+
+
+                if (null != user)
                 {//유저 정보가 있다.
-                    tmResult.id = user.idUser;
-                    tmResult.email = user.SignEmail;
+                    tmResult.idUser = user.idUser;
+                    tmResult.Email = user.SignEmail;
+
+                    tmResult.ViewName = userinfo.ViewName;
                 }
                 else
                 {//유저 정보가 없다.
