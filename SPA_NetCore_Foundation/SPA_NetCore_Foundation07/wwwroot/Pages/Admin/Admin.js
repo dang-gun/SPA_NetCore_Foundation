@@ -49,6 +49,36 @@ Admin.prototype.Admin_Setting_ListTitleHtml = "";
 Admin.prototype.Admin_User_ListItemHtml = "";
 
 
+Admin.prototype.SettingLoad = function ()
+{
+    var objThis = this;
+
+    AA.put(true
+        , {
+            url: FS_Api.Admin_SettingLoad
+            , success: function (jsonData)
+            {
+                console.log(jsonData);
+
+                if ("0" === jsonData.InfoCode)
+                {//에러 없음
+                    alert("불러오기 완료");
+                }
+                else
+                {//에러 있음
+                    //아웃풋 지우기
+                    objThis.divDataBind.html("");
+                    alert("error code : " + data.InfoCode + "\n"
+                        + "내용 : " + data.message);
+                }
+            }
+            , error: function (error)
+            {
+                console.log(error);
+            }
+        });
+};
+
 Admin.prototype.SettingListGet = function ()
 {
     var objThis = this;
@@ -108,6 +138,70 @@ Admin.prototype.SettingListBind = function (arrData)
 
     this.divDataBind.html(sHtmlTemp);
 };
+
+
+
+Admin.prototype.SettingApplyGet = function ()
+{
+    var objThis = this;
+
+    AA.get(true
+        , {
+            url: FS_Api.Admin_SettingApply
+            , success: function (jsonData)
+            {
+                console.log(jsonData);
+
+                if ("0" === jsonData.InfoCode)
+                {//에러 없음
+                    objThis.SettingApplyBind(jsonData.SettingList);
+                }
+                else
+                {//에러 있음
+                    //아웃풋 지우기
+                    objThis.divDataBind.html("");
+                    alert("error code : " + data.InfoCode + "\n"
+                        + "내용 : " + data.message);
+                }
+            }
+            , error: function (error)
+            {
+                console.log(error);
+            }
+        });
+};
+
+
+Admin.prototype.SettingApplyBind = function (arrData)
+{
+    //리스트 html을 임시 저장
+    var sHtmlTemp = "";
+
+    sHtmlTemp
+        += GlobalStatic.DataBind.DataBind_All(
+            this.Admin_Setting_ListTitleHtml
+            , {
+                idSetting_Data: -1
+                , Number: "순서"
+                , Name: "이름"
+                , ValueData: "값"
+                , Description: "설명"
+            })
+            .ResultString;
+
+    for (var i = 0; i < arrData.length; ++i)
+    {
+        var jsonItemData = arrData[i];
+        sHtmlTemp
+            += GlobalStatic.DataBind.DataBind_All(
+                this.Admin_Setting_ListTitleHtml
+                , jsonItemData)
+                .ResultString;
+    }
+
+    this.divDataBind.html(sHtmlTemp);
+};
+
 
 /**
  * 

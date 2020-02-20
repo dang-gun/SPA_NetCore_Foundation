@@ -19,7 +19,44 @@ namespace SPA_NetCore_Foundation07.Controllers
     [Authorize]//OAuth2 인증 설정
     public class AdminController : ControllerBase
     {
+        /// <summary>
+        /// DB에 있는 세팅정보를 메모리로 읽어들인다.
+        /// </summary>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("SettingLoad")]
+        public ActionResult<ApiResultObjectModel> SettingLoad()
+        {
+            ApiResultReadyModel armResult = new ApiResultReadyModel(this);
+            ApiResultObjectModel slrmReturn = new ApiResultObjectModel();
 
+
+            //유저 정보 추출
+            ClaimModel cm = new ClaimModel(((ClaimsIdentity)User.Identity).Claims);
+
+            //이 유저가 어드민 권한이 있는지 확인한다.
+            PermissionCheckType typePC
+                = GlobalPermission.Permission_Check(cm.id_int
+                    , ManagerPermissionType.Admin);
+
+            if (typePC == PermissionCheckType.Ok)
+            {
+                //세팅 로드
+                GlobalStatic.Setting_Load();
+            }
+            else
+            {
+                //에러
+                armResult.InfoCode = PermissionCheckType.NoUser.ToString();
+            }
+
+            return armResult.ToResult(slrmReturn);
+        }
+
+        /// <summary>
+        /// DB에 있는 세팅 내용을 확인한다.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("SettingList")]
         public ActionResult<SettingListResultModel> SettingList()
@@ -46,6 +83,41 @@ namespace SPA_NetCore_Foundation07.Controllers
                             .ToArray();
 
                 }//end using db1
+            }
+            else
+            {
+                //에러
+                armResult.InfoCode = PermissionCheckType.NoUser.ToString();
+            }
+
+            return armResult.ToResult(slrmReturn);
+        }
+
+        /// <summary>
+        /// 메모리에 로드되어 있는 설정 정보를 확인한다.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("SettingApply")]
+        public ActionResult<SettingListResultModel> SettingApply()
+        {
+            ApiResultReadyModel armResult = new ApiResultReadyModel(this);
+            SettingListResultModel slrmReturn = new SettingListResultModel();
+
+            //유저 정보 추출
+            ClaimModel cm = new ClaimModel(((ClaimsIdentity)User.Identity).Claims);
+
+            //이 유저가 어드민 권한이 있는지 확인한다.
+            PermissionCheckType typePC
+                = GlobalPermission.Permission_Check(cm.id_int
+                    , ManagerPermissionType.Admin);
+
+            if (typePC == PermissionCheckType.Ok)
+            {
+                //적용동 세팅 리스트
+                slrmReturn.SettingList
+                    = GlobalStatic.Setting_Data.ToArray();
+                
             }
             else
             {

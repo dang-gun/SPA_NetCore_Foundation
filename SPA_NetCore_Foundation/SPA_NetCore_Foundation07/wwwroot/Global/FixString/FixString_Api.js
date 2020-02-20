@@ -14,7 +14,10 @@ FS_Api.Sign_RefreshToAccess = FS_Api.Sign + "RefreshToAccess/";
 FS_Api.Sign_AccessToUserInfo = FS_Api.Sign + "AccessToUserInfo/";
 
 FS_Api.Admin = FS_Api.Api + "Admin/";
+
+FS_Api.Admin_SettingLoad = FS_Api.Admin + "SettingLoad/";
 FS_Api.Admin_SettingList = FS_Api.Admin + "SettingList/";
+FS_Api.Admin_SettingApply = FS_Api.Admin + "SettingApply/";
 FS_Api.Admin_SettingSet = FS_Api.Admin + "SettingSet/";
 
 FS_Api.Admin_UserList = FS_Api.Admin + "UserList/";
