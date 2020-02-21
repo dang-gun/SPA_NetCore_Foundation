@@ -26,10 +26,6 @@ namespace SPA_NetCore_Foundation.Controllers
     [ApiController]
     public class SignController : ControllerBase
     {
-        private readonly string ClientId = "resourceownerclient";
-        private readonly string ClientSecret = "dataEventRecordsSecret";
-        private readonly string Scope = "dataEventRecords offline_access openid";
-
 
         /// <summary>
         /// 사인인 시도
@@ -69,7 +65,7 @@ namespace SPA_NetCore_Foundation.Controllers
             if (user != null)
             {
                 //토큰 요청
-                TokenResponse tr = RequestTokenAsync(sEmail, sPW).Result;
+                TokenResponse tr = GlobalStatic.TokenPro.RequestTokenAsync(sEmail, sPW).Result;
 
                 if (true == tr.IsError)
                 {//에러가 있다.
@@ -171,7 +167,7 @@ namespace SPA_NetCore_Foundation.Controllers
             if ((null != sRefreshToken)
                 && (string.Empty != sRefreshToken))
             {
-                TokenRevocationResponse trr = RevocationTokenAsync(sRefreshToken).Result;
+                TokenRevocationResponse trr = GlobalStatic.TokenPro.RevocationTokenAsync(sRefreshToken).Result;
             }
             
             //로컬 인증 쿠키 삭제 요청
@@ -181,16 +177,6 @@ namespace SPA_NetCore_Foundation.Controllers
             return armResult.ToResult(arbm);
         }
 
-
-
-        /// <summary>
-        /// 인증에 사용할  http클라이언트
-        /// </summary>
-        private HttpClient hcAuthClient = new HttpClient();
-        /// <summary>
-        /// IdentityServer4로 구현된 서버 주소
-        /// </summary>
-        private string sIdentityServer4_Url = GlobalStatic.AuthUrl;
 
         
         /// <summary>
@@ -212,7 +198,7 @@ namespace SPA_NetCore_Foundation.Controllers
             DateTime dtNow = DateTime.Now;
 
             //토큰 갱신 요청
-            TokenResponse tr = RefreshTokenAsync(sRefreshToken).Result;
+            TokenResponse tr = GlobalStatic.TokenPro.RefreshTokenAsync(sRefreshToken).Result;
 
             if (true == tr.IsError)
             {//에러가 있다.
@@ -225,7 +211,7 @@ namespace SPA_NetCore_Foundation.Controllers
             {//에러가 없다.
                 //유저 정보를 받는다.
                 UserInfoResponse inrUser 
-                    = UserInfoAsync(tr.AccessToken).Result;
+                    = GlobalStatic.TokenPro.UserInfoAsync(tr.AccessToken).Result;
 
                 //유저 정보 추출
                 ClaimModel cm = new ClaimModel(inrUser.Claims);
@@ -314,101 +300,6 @@ namespace SPA_NetCore_Foundation.Controllers
             return armResult.ToResult(tmResult);
         }
 
-
-
-        /// <summary>
-        /// 인증서버에 인증을 요청한다.
-        /// </summary>
-        /// <param name="sID"></param>
-        /// <param name="sPassword"></param>
-        /// <returns></returns>
-        private async Task<TokenResponse> RequestTokenAsync(string sID, string sPassword)
-        {
-            TokenResponse trRequestToken
-                = await hcAuthClient
-                        .RequestPasswordTokenAsync(new PasswordTokenRequest
-                        {
-                            Address = this.sIdentityServer4_Url + "connect/token",
-
-                            ClientId = this.ClientId,
-                            ClientSecret = this.ClientSecret,
-                            Scope = this.Scope,
-
-                            //유저 인증정보 : 아이디
-                            UserName = sID,
-                            //유저 인증정보 : 비밀번호
-                            Password = sPassword
-                        });
-
-            return trRequestToken;
-        }
-
-        /// <summary>
-        /// 액세스 토큰 갱신
-        /// </summary>
-        /// <param name="sRefreshToken">리플레시토큰</param>
-        /// <returns></returns>
-        private async Task<TokenResponse> RefreshTokenAsync(string sRefreshToken)
-        {
-            TokenResponse trRequestToken
-                = await hcAuthClient
-                        .RequestRefreshTokenAsync(new RefreshTokenRequest
-                        {
-                            Address = this.sIdentityServer4_Url + "connect/token",
-
-                            ClientId = this.ClientId,
-                            ClientSecret = this.ClientSecret,
-                            Scope = this.Scope,
-
-                            RefreshToken = sRefreshToken
-                        });
-
-            return trRequestToken;
-        }
-
-
-        /// <summary>
-        /// 지정된 토큰 제거
-        /// </summary>
-        /// <param name="sRefreshToken"></param>
-        /// <returns></returns>
-        private async Task<TokenRevocationResponse> RevocationTokenAsync(string sRefreshToken)
-        {
-            //엑세스 토큰도 제거가 가능하지만
-            //이 시나리오에서는 리플레시 토큰만 제거하면 된다.
-            TokenRevocationResponse trRequestToken
-                = await hcAuthClient
-                        .RevokeTokenAsync(new TokenRevocationRequest
-                        {
-                            Address = this.sIdentityServer4_Url + "connect/revocation",
-                            ClientId = this.ClientId,
-                            ClientSecret = this.ClientSecret,
-
-                            Token = sRefreshToken,
-                            TokenTypeHint = "refresh_token"
-                        });
-
-            return trRequestToken;
-        }
-
-        /// <summary>
-        /// 엑세스토큰을 이용하여 유저 정보를 받는다.
-        /// </summary>
-        /// <param name="sAccessToken"></param>
-        /// <returns></returns>
-        private async Task<UserInfoResponse> UserInfoAsync(string sAccessToken)
-        {
-            UserInfoResponse uirUser
-                = await hcAuthClient
-                        .GetUserInfoAsync(new UserInfoRequest
-                        {
-                            Address = this.sIdentityServer4_Url + "connect/userinfo"
-
-                            , Token = sAccessToken,
-                        });
-
-            return uirUser;
-        }
 
 
     }

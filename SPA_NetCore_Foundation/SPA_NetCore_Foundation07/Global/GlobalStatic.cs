@@ -1,4 +1,5 @@
-﻿using ModelDB;
+﻿using IdentityServer4_Custom.IdentityServer4;
+using ModelDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,11 @@ namespace SPA_NetCore_Foundation.Global
         /// 인증 서버 주소
         /// </summary>
         public static string AuthUrl = "http://localhost:12007/";
+
+        /// <summary>
+        /// 토큰 처리관련
+        /// </summary>
+        public static TokenProcess TokenPro = new TokenProcess();
 
         /// <summary>
         /// DB 타입
