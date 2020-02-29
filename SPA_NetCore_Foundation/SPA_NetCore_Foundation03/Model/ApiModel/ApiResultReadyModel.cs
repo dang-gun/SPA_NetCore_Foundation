@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 namespace SPA_NetCore_Foundation.Model.ApiModel
 {
     /// <summary>
-    /// api요청을 처리할때 요청결과를 임시로 저장해두고
-    /// 결과용 
+    /// api요청을 처리할때 요청결과처리를 공통화 하는 클래스.
+    /// ApiResultFailModel를 공통으로 리턴하기 위해 베이스를 가지고 있다.
+    /// 결과 출력용으로 데이터는 
     /// </summary>
     public class ApiResultReadyModel: ApiResultBaseModel
     {
@@ -38,12 +39,19 @@ namespace SPA_NetCore_Foundation.Model.ApiModel
 
         /// <summary>
         /// API끝에서 호출하여 'ObjectResult'를 생성하여 리턴해 준다.
+        /// 만들어지는 결과의 ApiResultBaseModel데이터는 this 기준이다.
         /// </summary>
         /// <param name="objResultData">전달할 모델</param>
         /// <returns></returns>
         public ObjectResult ToResult(object objResultData)
         {
             ObjectResult orReturn = null;
+
+            if (null == objResultData)
+            {//오브젝트가 없다.
+                //없으면 ApiResultBaseModel로 초기화 해준다.
+                objResultData = new ApiResultBaseModel();
+            }
 
             if (StatusCode == StatusCodes.Status200OK)
             {//성공

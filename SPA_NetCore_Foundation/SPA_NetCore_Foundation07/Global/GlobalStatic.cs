@@ -28,6 +28,9 @@ namespace SPA_NetCore_Foundation.Global
         /// </summary>
         public static string DBString = "";
 
+        /// <summary>
+        /// 메모리에 올라온 세팅정보
+        /// </summary>
         public static List<Setting_Data> Setting_Data;
 
         /// <summary>

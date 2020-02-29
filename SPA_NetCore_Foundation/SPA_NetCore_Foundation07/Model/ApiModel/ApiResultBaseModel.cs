@@ -7,7 +7,6 @@ namespace SPA_NetCore_Foundation.Model.ApiModel
 {
     /// <summary>
     /// API 결과 공통 베이스.
-    /// 자바스크립트에도 전달해야 하므로 소문자로 시작한다.
     /// </summary>
     public class ApiResultBaseModel
     {
