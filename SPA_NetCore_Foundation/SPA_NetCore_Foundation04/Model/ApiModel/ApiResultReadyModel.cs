@@ -30,7 +30,7 @@ namespace SPA_NetCore_Foundation.Model.ApiModel
         /// <param name="cbThis">컨트롤러 기능을 사용하기위한 인스턴스</param>
 
         public ApiResultReadyModel(ControllerBase cbThis)
-            : base()
+            : base(null, null)
         {
             this.ThisCB = cbThis;
 
@@ -55,9 +55,18 @@ namespace SPA_NetCore_Foundation.Model.ApiModel
 
             if (StatusCode == StatusCodes.Status200OK)
             {//성공
-                //결과에 있는 코드와 메시지를 결과용 모델에 저장한다.
-                ((ApiResultBaseModel)objResultData).InfoCode = base.InfoCode;
-                ((ApiResultBaseModel)objResultData).Message = base.Message;
+                if(null != base.InfoCode)
+                {//베이스에 데이터가 있다.
+                 //베이스에 있는 데이터를 사용한다.
+                 //결과에 있는 코드와 메시지를 결과용 모델에 저장한다.
+                    ((ApiResultBaseModel)objResultData).InfoCode = base.InfoCode;
+                    ((ApiResultBaseModel)objResultData).Message = base.Message;
+                }
+                else
+                {//베이스에 데이터가 없으면 들어온 데이터를 그대로 사용한다.
+                }
+
+                
                 //성공은 전달받은 오브젝트를 준다,
                 orReturn = this.ThisCB.StatusCode(this.StatusCode, objResultData);
             }
