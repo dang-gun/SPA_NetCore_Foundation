@@ -82,10 +82,34 @@ var app = Sammy(function ()
     //});
 
     //404
-    this.notFound = function (verb, path) {
-        //인덱스 페이지
-        //$("#divMain").load("/Pages/index.html");
-        DivMain.html("404, 페이지 못찾음");
+    this.notFound = function (verb, path) 
+    {
+        switch (GlobalStatic.SiteType)
+        {
+            case 0://일반
+                //일반일때는 무조건 컨탠츠 영역에 출력한다.
+                if (null !== Page.DivContents)
+                {//
+                    Page.DivContents.html("404, 페이지 못찾음");
+                }
+                else
+                {
+                    DivMain.html("404, 페이지 못찾음");
+                }
+                break;
+            case 1://어드민 타입
+                //어드민 타입일때는 사인인이 되어 있을때만 컨탠츠 영역에 출력한다.
+                if (true === GlobalSign.SignIn
+                    && null !== Page.DivContents)
+                {
+                    Page.DivContents.html("404, 페이지 못찾음");
+                }
+                else
+                {
+                    DivMain.html("404, 페이지 못찾음");
+                }
+                break;
+        }
     };
 });
 
