@@ -6,7 +6,11 @@ Visual Studio 2019 Preview(16.1.0 Preview 3.0)
 .NET Core 2.2
 js router : Sammy.js (http://sammyjs.org/ , https://github.com/quirkey/sammy)
 
-
+/***********************/
+요약
+인증 기능 추가
+IdentityServer4를 추가하여 표준 OAuth 인증 구현
+인증서버는 따로 두지 않고 한 프로젝트에서 구현됩니다.
 
 /***********************/
 GlobalStatic.js - GlobalStatic.SiteType = 0;

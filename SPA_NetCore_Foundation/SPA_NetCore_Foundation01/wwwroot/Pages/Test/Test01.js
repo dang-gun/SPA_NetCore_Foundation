@@ -7,6 +7,6 @@ function Test01()
     Page.Load(function ()
     {
         //홈 인터페이스
-        Page.DivContents.load("/Pages/Test/Test01.html");
+        Page.divContents.load("/Pages/Test/Test01.html");
     });
 }

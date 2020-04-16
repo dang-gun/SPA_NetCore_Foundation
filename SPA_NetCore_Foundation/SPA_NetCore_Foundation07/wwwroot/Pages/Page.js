@@ -5,11 +5,11 @@
 var Page = {};
 
 /** 메인 메뉴 영역 */
-Page.DivMainMenu = null;
+Page.divMainMenu = null;
 /** 사용자 정보 영역 */
-Page.DivTopInfo = null;
+Page.divTopInfo = null;
 /** 컨탠츠 영역 */
-Page.DivContents = null;
+Page.divContents = null;
 
 /**
  * 페이지를 쓰려면 로드를 해야 한다.
@@ -19,18 +19,19 @@ Page.Load = function (callbackFun)
 {
     var callbackFun_Backup = callbackFun;
 
-    if (Page.DivMainMenu === null) {//페이지가 로드 되지 않았다.
+    if (Page.divMainMenu === null) 
+    {//페이지가 로드 되지 않았다.
 
         //페이지 html 로드
         DivMain.load(FS_FUrl.Page
             , function () {
                 //영역 찾기
-                Page.DivMainMenu = DivMain.find("#divMainMenu");
-                Page.DivTopInfo = DivMain.find("#divTopInfo");
-                Page.DivContents = DivMain.find("#divContents");
+                Page.divMainMenu = DivMain.find("#divMainMenu");
+                Page.divTopInfo = DivMain.find("#divTopInfo");
+                Page.divContents = DivMain.find("#divContents");
 
                 //최상단 정보 출력
-                Page.DivTopInfo.load(FS_FUrl.TopInfo_TopInfo
+                Page.divTopInfo.load(FS_FUrl.TopInfo_TopInfo
                     , function () {
                         TopInfo.Load();
                     });
@@ -53,9 +54,9 @@ Page.Remove = function ()
 {
     DivMain.html("");
 
-    Page.DivMainMenu = null;
-    Page.DivTopInfo = null;
-    Page.DivContents = null;
+    Page.divMainMenu = null;
+    Page.divTopInfo = null;
+    Page.divContents = null;
 };
 
 
@@ -75,7 +76,7 @@ Page.Move_Page = function (bSignIn, sUrl)
         }
         else
         {//사인인이 안되있음
-            alert("사인인이 필요합니다.");
+            GlobalStatic.MessageBox_Info("사인인이 필요합니다.");
         }
     }
     else

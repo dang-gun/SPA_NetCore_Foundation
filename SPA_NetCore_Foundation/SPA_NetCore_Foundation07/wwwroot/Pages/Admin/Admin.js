@@ -9,7 +9,7 @@ function Admin()
     Page.Load(function ()
     {
         //화면 인터페이스
-        Page.DivContents.load(FS_FUrl.Admin_Home
+        Page.divContents.load(FS_FUrl.Admin_Home
             , function () 
             {
                 //데이터 바인드 영역
@@ -62,14 +62,16 @@ Admin.prototype.SettingLoad = function ()
 
                 if ("0" === jsonData.InfoCode)
                 {//에러 없음
-                    alert("불러오기 완료");
+                    //alert("불러오기 완료");
+                    GlobalStatic.MessageBox_Info("불러오기 완료");
                 }
                 else
                 {//에러 있음
                     //아웃풋 지우기
                     objThis.divDataBind.html("");
-                    alert("error code : " + data.InfoCode + "\n"
-                        + "내용 : " + data.message);
+                    GlobalStatic.MessageBox_Error(
+                        "error code : " + data.InfoCode + "<br />"
+                        + "내용 : " + data.Message);
                 }
             }
             , error: function (error)
@@ -98,8 +100,9 @@ Admin.prototype.SettingListGet = function ()
                 {//에러 있음
                     //아웃풋 지우기
                     objThis.divDataBind.html("");
-                    alert("error code : " + data.InfoCode + "\n"
-                        + "내용 : " + data.message);
+                    GlobalStatic.MessageBox_Error(
+                        "error code : " + data.InfoCode + "<br />"
+                        + "내용 : " + data.Message);
                 }
             }
             , error: function (error)
@@ -160,8 +163,9 @@ Admin.prototype.SettingApplyGet = function ()
                 {//에러 있음
                     //아웃풋 지우기
                     objThis.divDataBind.html("");
-                    alert("error code : " + data.InfoCode + "\n"
-                        + "내용 : " + data.message);
+                    GlobalStatic.MessageBox_Error(
+                        "error code : " + data.InfoCode + "<br />"
+                        + "내용 : " + data.Message);
                 }
             }
             , error: function (error)
@@ -232,12 +236,13 @@ Admin.prototype.SettingSet = function (nidSetting_Data)
             {
                 if ("0" === jsonData.InfoCode)
                 {//에러 없음
-                    alert("수정 완료");
+                    GlobalStatic.MessageBox_Info("수정 완료");
                 }
                 else
                 {//에러 있음
-                    alert("error code : " + data.InfoCode + "\n"
-                        + "내용 : " + data.message);
+                    GlobalStatic.MessageBox_Error(
+                        "error code : " + data.InfoCode + "<br />"
+                        + "내용 : " + data.Message);
                 }
             }
             , error: function (error)
@@ -268,8 +273,9 @@ Admin.prototype.UserListGet = function ()
                 {//에러 있음
                     //아웃풋 지우기
                     objThis.divDataBind.html("");
-                    alert("error code : " + data.InfoCode + "\n"
-                        + "내용 : " + data.message);
+                    GlobalStatic.MessageBox_Error(
+                        "error code : " + data.InfoCode + "<br />"
+                        + "내용 : " + data.Message);
                 }
             }
             , error: function (error)

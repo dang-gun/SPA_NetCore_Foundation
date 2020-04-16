@@ -6,6 +6,10 @@ Visual Studio 2019 Preview(16.1.0 Preview 3.0)
 .NET Core 2.2
 js router : Sammy.js (http://sammyjs.org/ , https://github.com/quirkey/sammy)
 
+/***********************/
+요약
+js 라우터 세팅
+api를 호출하여 로그인 기능
 
 
 /***********************/

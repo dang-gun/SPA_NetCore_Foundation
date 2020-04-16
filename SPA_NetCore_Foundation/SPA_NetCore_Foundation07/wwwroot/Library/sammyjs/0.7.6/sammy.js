@@ -1370,12 +1370,12 @@
         // user.
         error: function (message, original_error) {
             if (!original_error) { original_error = new Error(); }
-            original_error.message = [message, original_error.message].join(' ');
-            this.trigger('error', { message: original_error.message, error: original_error });
+            original_error.Message = [message, original_error.Message].join(' ');
+            this.trigger('error', { message: original_error.Message, error: original_error });
             if (this.raise_errors) {
                 throw (original_error);
             } else {
-                this.log(original_error.message, original_error);
+                this.log(original_error.Message, original_error);
             }
         },
 

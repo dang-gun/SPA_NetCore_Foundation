@@ -6,7 +6,10 @@ Visual Studio 2019 Preview(16.1.0 Preview 3.0)
 .NET Core 2.2
 js router : Sammy.js (http://sammyjs.org/ , https://github.com/quirkey/sammy)
 
-
+/***********************/
+요약
+API 결과 공통 처리
+API를 처리할때 결과를 같은 모양으로 출력하고 스웨거 연결시 문서가 잘 생성되도록 구현.
 
 /***********************/
 GlobalStatic.js - GlobalStatic.SiteType = 0;

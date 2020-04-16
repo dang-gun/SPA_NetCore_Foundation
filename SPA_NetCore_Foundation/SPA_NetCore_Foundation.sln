@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SPA_NetCore_Foundation05", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SPA_NetCore_Foundation06", "SPA_NetCore_Foundation06\SPA_NetCore_Foundation06.csproj", "{30894FCB-BC73-4609-9F3A-95E5EF4ECBF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPA_NetCore_Foundation07", "SPA_NetCore_Foundation07\SPA_NetCore_Foundation07.csproj", "{2C961A32-9424-438F-8885-84E31925384D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SPA_NetCore_Foundation07", "SPA_NetCore_Foundation07\SPA_NetCore_Foundation07.csproj", "{2C961A32-9424-438F-8885-84E31925384D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPA_NetCore_Foundation07_Home", "SPA_NetCore_Foundation07_Home\SPA_NetCore_Foundation07_Home.csproj", "{E150B32A-83B2-47F9-A542-76F54BD307C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{2C961A32-9424-438F-8885-84E31925384D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C961A32-9424-438F-8885-84E31925384D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C961A32-9424-438F-8885-84E31925384D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E150B32A-83B2-47F9-A542-76F54BD307C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E150B32A-83B2-47F9-A542-76F54BD307C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E150B32A-83B2-47F9-A542-76F54BD307C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E150B32A-83B2-47F9-A542-76F54BD307C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

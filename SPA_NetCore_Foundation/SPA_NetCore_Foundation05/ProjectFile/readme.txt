@@ -6,7 +6,10 @@ Visual Studio 2019 Preview(16.1.0 Preview 3.0)
 .NET Core 2.2
 js router : Sammy.js (http://sammyjs.org/ , https://github.com/quirkey/sammy)
 
-
+/***********************/
+요약
+스웨거(Swagger) 설정
+스웨거를 설정하고 사용한다.
 
 /***********************/
 GlobalStatic.js - GlobalStatic.SiteType = 0;

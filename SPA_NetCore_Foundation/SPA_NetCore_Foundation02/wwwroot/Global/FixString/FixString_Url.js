@@ -4,6 +4,7 @@
  */
 
 var FS_Url = {};
+FS_Url.Error = "#/Error";
 
 FS_Url.Home = "#/Home";
 FS_Url.SignIn = "#/SignIn";

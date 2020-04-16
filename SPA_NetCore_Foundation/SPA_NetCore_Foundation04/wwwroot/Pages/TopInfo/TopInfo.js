@@ -9,8 +9,8 @@ TopInfo.DivTopInfo = null;
 
 TopInfo.Load = function ()
 {
-    TopInfo.DivTopLeft = Page.DivTopInfo.find("#divTopLeft");
-    TopInfo.DivTopInfo = Page.DivTopInfo.find("#divTopInfo");
+    TopInfo.DivTopLeft = Page.divTopInfo.find("#divTopLeft");
+    TopInfo.DivTopInfo = Page.divTopInfo.find("#divTopInfo");
 
     //유저 정보 요청
     TopInfo.UserInfo_Load();

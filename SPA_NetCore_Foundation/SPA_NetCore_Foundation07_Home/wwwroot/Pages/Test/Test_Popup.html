@@ -1,0 +1,35 @@
+﻿<style>
+
+    /** 기본 css */
+    .DG_PopupContentCss {
+        border-radius: 3px;
+    }
+
+    /** 사용자 정의 css 추가 */
+    .DG_PopupContentCssAdd {
+        font-size: 20px;
+    }
+
+    /** 사용자가 만든 html에서 사용하는 타이틀 */
+    .divTitle {
+        background: #b6ff00;
+        padding: 3px;
+        margin: 3px;
+        border-radius: 3px;
+    }
+    /** 사용자가 만든 html에서 사용하는 컨탠츠 */
+    .divContents {
+        padding: 3px;
+        margin: 3px;
+    }
+</style>
+
+<h3>팝업 테스트</h3>
+
+<br />
+<button class="btn btn-primary" onclick="GlobalStatic.Page_Now.ShowMsg()">메시지 박스 테스트</button>
+<button class="btn btn-primary" onclick="GlobalStatic.Page_Now.ShowPopup()">팝업 테스트</button>
+
+<div id="divDataBindTest">
+
+</div>

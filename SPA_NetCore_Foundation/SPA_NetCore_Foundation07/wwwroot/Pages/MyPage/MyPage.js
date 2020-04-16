@@ -15,7 +15,7 @@ function MyPage()
                     Page.Load(function ()
                     {
                         //홈 인터페이스
-                        Page.DivContents.load(FS_FUrl.MyPage_MyPage
+                        Page.divContents.load(FS_FUrl.MyPage_MyPage
                             , function ()
                             {
                                 if (false === jsonData.AdminPer)
@@ -33,9 +33,7 @@ function MyPage()
             }
             , error: function (jqXHR, textStatus, errorThrown)
             {
-                console.log(jqXHR);
-
-                alert("알수 없는 오류가 발생했습니다.");
+                GlobalStatic.MessageBox_Error("알수 없는 오류가 발생했습니다.");
 
                 //뒤로
                 history.back();

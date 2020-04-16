@@ -12,3 +12,12 @@
 
     margin-right:10px;
 }
+
+#divTopInfo 
+{
+    border-bottom: 1px solid #b6b6b6;
+}
+
+#divMainMenu {
+    border-bottom: 1px solid #b6b6b6;
+}

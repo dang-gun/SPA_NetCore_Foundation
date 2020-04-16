@@ -6,6 +6,9 @@ Visual Studio 2019 Preview(16.1.0 Preview 3.0)
 .NET Core 2.2
 js router : Sammy.js (http://sammyjs.org/ , https://github.com/quirkey/sammy)
 
+/***********************/
+요약
+ajax 공통기능, 데이터 바인드 처리기 추가
 
 
 /***********************/

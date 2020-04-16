@@ -1,5 +1,6 @@
 ﻿
 var PageType = {};
+PageType.Error = "Error";
 
 PageType.Home = "Home";
 PageType.SignIn = "SignIn";

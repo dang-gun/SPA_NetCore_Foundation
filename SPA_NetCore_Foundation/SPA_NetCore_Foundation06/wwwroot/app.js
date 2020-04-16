@@ -23,6 +23,19 @@ var app = Sammy(function ()
         });
     });
 
+    this.get(FS_Url.Error + "/:code", function ()
+    {
+        //파라미터 받기
+        var nCode = this.params["code"];
+
+        
+        app.RouteCheck(function ()
+        {
+            //객체 생성
+            GlobalStatic.Page_Now = new Error(nCode);
+        });
+    });
+
     this.get(FS_Url.SignIn, function ()
     {
         if (true === GlobalSign.SignIn)
@@ -82,32 +95,39 @@ var app = Sammy(function ()
     //    $("#divMain").html("넘어온 파라미터 id : " + nID);
     //});
 
+    //에러 처리용
+    this.ErrorFun = function (sCode)
+    {
+        var sCodeTemp = sCode;
+
+        //사인인 필수 페이지
+        app_Assist.RouteCheck(false
+            , function ()
+            {
+                //객체 생성
+                GlobalStatic.Page_Now = new Error(sCodeTemp);
+            });
+    };
+
     //404
     this.notFound = function (verb, path) 
     {
         switch (GlobalStatic.SiteType)
         {
             case 0://일반
-                //일반일때는 무조건 컨탠츠 영역에 출력한다.
-                if (null !== Page.DivContents)
-                {//
-                    Page.DivContents.html("404, 페이지 못찾음");
-                }
-                else
-                {
-                    DivMain.html("404, 페이지 못찾음");
-                }
+                Page.Move_Page(false, FS_Url.Error + "/" + "404");
                 break;
             case 1://어드민 타입
-                //어드민 타입일때는 사인인이 되어 있을때만 컨탠츠 영역에 출력한다.
-                if (true === GlobalSign.SignIn
-                    && null !== Page.DivContents)
+                //사인인이 되어 있을때 -> 컨탠츠 영역에 출력한다.
+                //사인인이 되어 있지 않을때 -> 사인인 페이지, 메시지 출력
+                if (true === GlobalSign.SignIn)
                 {
-                    Page.DivContents.html("404, 페이지 못찾음");
+                    Page.Move_Page(false, FS_Url.Error + "/" + "404");
                 }
                 else
                 {
-                    DivMain.html("404, 페이지 못찾음");
+                    alert("404, 페이지를 찾지 못했습니다.");
+                    Page.Move_Page(false, FS_Url.SignIn);
                 }
                 break;
         }

@@ -6,6 +6,12 @@ Visual Studio 2019 Preview(16.1.0 Preview 3.0)
 .NET Core 2.2
 js router : Sammy.js (http://sammyjs.org/ , https://github.com/quirkey/sammy)
 
+/***********************/
+요약
+EF(Entity Framework)와 코드 퍼스트(Code First)
+EF를 설치하고 코드퍼스트 방식으로 DB를 생성한다.
+셈플용 DB는 SQLite로 설정함.
+로그인 정보를 DB로 옮김
 
 
 /***********************/

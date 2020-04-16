@@ -12,7 +12,7 @@ namespace SPA_NetCore_Foundation.Global
         /// <summary>
         /// 인증 서버 주소
         /// </summary>
-        public static string AuthUrl = "http://localhost:12007/";
+        public static string AuthUrl = "http://localhost:12070/";
 
         /// <summary>
         /// 토큰 처리관련

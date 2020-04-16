@@ -11,21 +11,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" href="/favicon.ico">
 
-    <!-- css  -->
-    <link rel="stylesheet" href="/Pages/Page.css">
-    <link rel="stylesheet" href="/Pages/TopInfo/TopInfo.css">
-
     <!-- jquery 3.4.1 -->
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" integrity="sha256-1A78rJEdiWTzco6qdn3igTBv9VupN3Q1ozZNTR4WE/Y=" crossorigin="anonymous"></script> -->
     <!-- jquery cookie 1.4.1 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js" integrity="sha256-uEFhyfv3UgzRTnAZ+SEgvYepKKB0FW6RqZLrqfyUNug=" crossorigin="anonymous"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" integrity="sha256-1A78rJEdiWTzco6qdn3igTBv9VupN3Q1ozZNTR4WE/Y=" crossorigin="anonymous"></script> -->
-
+    
+    <!-- UI 영역 객체 : jquery뒤에 다른 스크립트 앞에 선언함   -->
     <script>
         var DivMain = null;
 
-        $(document).ready(function () {
+        $(document).ready(function ()
+        {
             //메인 객체
             DivMain = $("#divMain");
         });
@@ -38,6 +36,9 @@
     <script src="/Utility/AjaxAssist.js"></script>
     <script src="/Utility/CookieAssist.js"></script>
     <script src="/Library/DG_JsDataBind/DG_JsDataBind.js"></script>
+    <script src="/Utility/DG_Popup/DG_Popup.js"></script>
+    <link rel="stylesheet" href="/Utility/DG_MessageBox/DG_MessageBox.css">
+    <script src="/Utility/DG_MessageBox/DG_MessageBox.js"></script>
 
     <!-- 디버깅 관련 기능 -->
     <script src="/Global/Debug.js"></script>
@@ -52,6 +53,10 @@
     <script src="/Global/GlobalSign.js"></script>
     <!-- 라우터 처리용 어플리케이션 -->
     <script src="/app.js"></script>
+
+    <!-- Page css : 다른 css보다 뒤에 선언해야 한다. -->
+    <link rel="stylesheet" href="/Pages/Page.css">
+    <link rel="stylesheet" href="/Pages/TopInfo/TopInfo.css">
 </head>
 
 <body>
@@ -59,9 +64,12 @@
     <div id="divMain">
     </div>
 
+    
+
     <!-- 페이지 컨트롤러 -->
     <script src="/Pages/Page.js"></script>
     <script src="/Pages/TopInfo/TopInfo.js"></script>
+    <script src="/Pages/Error/Error.js"></script>
 
 
     <script src="/Pages/Admin/Admin.js"></script>

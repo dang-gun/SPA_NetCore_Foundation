@@ -9,7 +9,7 @@ function Test02()
     Page.Load(function ()
     {
         //화면 인터페이스
-        Page.DivContents.load("/Pages/Test/Test02.html"
+        Page.divContents.load("/Pages/Test/Test02.html"
             , function () {
                 objThis.divOutput = $("#divOutput");
             });

@@ -66,7 +66,8 @@ app_Assist.RouteCheck = function (bSignIn, callback)
             {//엑세스토큰이 죽어 있다.
                 //죽어있을때만 안내를 해준다.
                 //어차피 엑세스토큰이 갱신됐을때 메시지가 출력되므로.
-                alert("사인인이 필요합니다.");
+                //alert("사인인이 필요합니다.");
+                GlobalStatic.MessageBox_Error("사인인이 필요합니다.");
             }
 
             switch (GlobalStatic.SiteType)
@@ -140,6 +141,23 @@ var app = Sammy(function ()
                 location.href = FS_Url.Home;
             });
     });
+
+    //에러 페이지로 이동시키고 싶을때
+    this.get(FS_Url.Error + "/:code", function ()
+    {
+        //파라미터 받기
+        var nCode = this.params["code"];
+
+        //사인인 필수 페이지
+        app_Assist.RouteCheck(false
+            , function ()
+            {
+                //객체 생성
+                GlobalStatic.Page_Now = new Error(nCode);
+            });
+    });
+
+
 
     this.get(FS_Url.Admin, function ()
     {
@@ -228,12 +246,19 @@ var app = Sammy(function ()
     //    DivMain.html("홈");
     //});
 
-    //this.get("#/param/:id", function () {
-    //    //파라미터 받기
-    //    var nID = this.params['id'];
+    //에러 처리용
+    this.ErrorFun = function (sCode)
+    {
+        var sCodeTemp = sCode;
 
-    //    $("#divMain").html("넘어온 파라미터 id : " + nID);
-    //});
+        //사인인 필수 페이지
+        app_Assist.RouteCheck(false
+            , function ()
+            {
+                //객체 생성
+                GlobalStatic.Page_Now = new Error(sCodeTemp);
+            });
+    };
 
     //404
     this.notFound = function (verb, path) 
@@ -241,26 +266,21 @@ var app = Sammy(function ()
         switch (GlobalStatic.SiteType)
         {
             case 0://일반
-                //일반일때는 무조건 컨탠츠 영역에 출력한다.
-                if (null !== Page.DivContents)
-                {//
-                    Page.DivContents.html("404, 페이지 못찾음");
-                }
-                else
-                {
-                    DivMain.html("404, 페이지 못찾음");
-                }
+                //Page.Move_Page(false, FS_Url.Error + "/" + "404");
+                this.ErrorFun("404");
                 break;
             case 1://어드민 타입
-                //어드민 타입일때는 사인인이 되어 있을때만 컨탠츠 영역에 출력한다.
-                if (true === GlobalSign.SignIn
-                    && null !== Page.DivContents)
+                //사인인이 되어 있을때 -> 컨탠츠 영역에 출력한다.
+                //사인인이 되어 있지 않을때 -> 사인인 페이지, 메시지 출력
+                if (true === GlobalSign.SignIn)
                 {
-                    Page.DivContents.html("404, 페이지 못찾음");
+                    this.ErrorFun("404");
                 }
                 else
                 {
-                    DivMain.html("404, 페이지 못찾음");
+                    //alert("404, 페이지를 찾지 못했습니다.");
+                    Page.Move_Page(false, FS_Url.SignIn);
+                    GlobalStatic.MessageBox_Error("404<br />페이지를 찾을 수 없습니다.");
                 }
                 break;
         }
@@ -269,6 +289,13 @@ var app = Sammy(function ()
 
 
 //어플리케이션 시작
-$(function () {
+$(function ()
+{
     app.run();
+
+    //공통 메시지 박스 초기화
+    DG_MessageBox.Initialize({
+        /** 크기 고정 */
+        SizeFixed: true
+    });
 });

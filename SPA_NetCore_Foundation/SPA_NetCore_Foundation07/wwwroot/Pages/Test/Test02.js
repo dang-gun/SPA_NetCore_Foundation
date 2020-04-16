@@ -9,7 +9,7 @@ function Test02()
     Page.Load(function ()
     {
         //화면 인터페이스
-        Page.DivContents.load("/Pages/Test/Test02.html"
+        Page.divContents.load("/Pages/Test/Test02.html"
             , function () {
                 objThis.divOutput = $("#divOutput");
             });
@@ -39,8 +39,9 @@ Test02.prototype.Test01 = function (nData)
                 else {//에러 있음
                     //아웃풋 지우기
                     objThis.divOutput.html("");
-                    alert("error code : " + data.InfoCode + "\n"
-                        + "내용 : " + data.message);
+                    GlobalStatic.MessageBox_Error(
+                        "error code : " + data.InfoCode + "<br />"
+                        + "내용 : " + data.Message);
                 }
             }
             , error: function (error) {
@@ -70,8 +71,9 @@ Test02.prototype.Test02 = function ()
                     else {//에러 있음
                         //아웃풋 지우기
                         objThis.divOutput.html("");
-                        alert("error code : " + data.InfoCode + "\n"
-                            + "내용 : " + data.message);
+                        GlobalStatic.MessageBox_Error(
+                            "error code : " + data.InfoCode + "<br />"
+                            + "내용 : " + data.Message);
                     }
                 }
                 , error: function (error) {
@@ -81,6 +83,6 @@ Test02.prototype.Test02 = function ()
     }
     else
     {
-        alert("사인을 해야 사용할 수 있습니다.");
+        GlobalStatic.MessageBox_Error("사인을 해야 사용할 수 있습니다.");
     }
 };

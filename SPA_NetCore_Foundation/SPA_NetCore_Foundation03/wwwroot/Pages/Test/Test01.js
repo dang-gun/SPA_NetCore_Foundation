@@ -9,7 +9,7 @@ function Test01()
     Page.Load(function ()
     {
         //화면 인터페이스
-        Page.DivContents.load("/Pages/Test/Test01.html"
+        Page.divContents.load("/Pages/Test/Test01.html"
             , function () {
                 //데이터 바인드 테스트용 div 찾기
                 objThis.DivDataBindTest = $("#divDataBindTest");
