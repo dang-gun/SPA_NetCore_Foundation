@@ -65,7 +65,7 @@ namespace SPA_NetCore_Foundation.Controllers
             if (user != null)
             {
                 //토큰 요청
-                TokenResponse tr = GlobalStatic.TokenPro.RequestTokenAsync(sEmail, sPW).Result;
+                TokenResponse tr = GlobalStatic.TokenProc.RequestTokenAsync(sEmail, sPW).Result;
 
                 if (true == tr.IsError)
                 {//에러가 있다.
@@ -167,7 +167,7 @@ namespace SPA_NetCore_Foundation.Controllers
             if ((null != sRefreshToken)
                 && (string.Empty != sRefreshToken))
             {
-                TokenRevocationResponse trr = GlobalStatic.TokenPro.RevocationTokenAsync(sRefreshToken).Result;
+                TokenRevocationResponse trr = GlobalStatic.TokenProc.RevocationTokenAsync(sRefreshToken).Result;
             }
             
             //로컬 인증 쿠키 삭제 요청
@@ -198,7 +198,7 @@ namespace SPA_NetCore_Foundation.Controllers
             DateTime dtNow = DateTime.Now;
 
             //토큰 갱신 요청
-            TokenResponse tr = GlobalStatic.TokenPro.RefreshTokenAsync(sRefreshToken).Result;
+            TokenResponse tr = GlobalStatic.TokenProc.RefreshTokenAsync(sRefreshToken).Result;
 
             if (true == tr.IsError)
             {//에러가 있다.
@@ -211,7 +211,7 @@ namespace SPA_NetCore_Foundation.Controllers
             {//에러가 없다.
                 //유저 정보를 받는다.
                 UserInfoResponse inrUser 
-                    = GlobalStatic.TokenPro.UserInfoAsync(tr.AccessToken).Result;
+                    = GlobalStatic.TokenProc.UserInfoAsync(tr.AccessToken).Result;
 
                 //유저 정보 추출
                 ClaimModel cm = new ClaimModel(inrUser.Claims);

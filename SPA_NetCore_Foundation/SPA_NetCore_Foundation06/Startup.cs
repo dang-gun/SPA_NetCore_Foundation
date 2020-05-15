@@ -21,14 +21,24 @@ namespace SPA_NetCore_Foundation
 {
     public class Startup
     {
+        /// <summary>
+        /// 인증서버 주소
+        /// </summary>
+        private string AuthUrl = "";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
 
+            
             //DB 커낵션 스트링 받아오기
             string sConnectStringSelect = "SpaNetCoreFoundation_sqlite";
             GlobalStatic.DBType = Configuration[sConnectStringSelect + ":DBType"];
             GlobalStatic.DBString = Configuration[sConnectStringSelect + ":ConnectionString"];
+
+            //인증 정보
+            this.AuthUrl = Configuration["AuthServer:Url"];
+            GlobalStatic.TokenProc = new TokenProcess(this.AuthUrl);
         }
 
         public IConfiguration Configuration { get; }
@@ -62,7 +72,7 @@ namespace SPA_NetCore_Foundation
                 o.Audience = "apiApp";
 
                 //인증서버의 주소
-                o.Authority = GlobalStatic.AuthUrl;
+                o.Authority = AuthUrl;
                 o.RequireHttpsMetadata = false;
                 //인증서버에서 선언한 권한
                 o.Audience = "dataEventRecords";

@@ -283,7 +283,7 @@ GlobalSign.AccessTokenToInfo = function (callback)
 
                         GlobalSign.SignIn_ViewName = jsonData.ViewName;
 
-                        if (TopInfo)
+                        if (typeof TopInfo === "undefined")
                         {
                             TopInfo.UserInfo_Load();
                         }

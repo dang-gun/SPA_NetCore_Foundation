@@ -21,8 +21,12 @@ namespace IdentityServer4_Custom.IdentityServer4
         /// <summary>
         /// IdentityServer4로 구현된 서버 주소
         /// </summary>
-        private string sIdentityServer4_Url = GlobalStatic.AuthUrl;
+        private string sIdentityServer4_Url = string.Empty;
 
+        public TokenProcess(string sAuthUrl)
+        {
+            this.sIdentityServer4_Url = sAuthUrl;
+        }
 
         /// <summary>
         /// 인증서버에 인증을 요청한다.

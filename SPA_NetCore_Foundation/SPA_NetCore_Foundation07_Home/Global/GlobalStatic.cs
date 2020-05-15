@@ -10,14 +10,9 @@ namespace SPA_NetCore_Foundation.Global
     public static class GlobalStatic
     {
         /// <summary>
-        /// 인증 서버 주소
-        /// </summary>
-        public static string AuthUrl = "http://localhost:12071/";
-
-        /// <summary>
         /// 토큰 처리관련
         /// </summary>
-        public static TokenProcess TokenPro = new TokenProcess();
+        public static TokenProcess TokenProc = null;
 
         /// <summary>
         /// DB 타입
