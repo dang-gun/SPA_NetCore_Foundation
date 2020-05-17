@@ -19,6 +19,54 @@ GlobalStatic.Page_Now = null;
 GlobalStatic.PageType_Now = "";
 
 
+GlobalStatic.Title = "NetCore Foundation 07";
+
+//전역 함수 ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+
+/**
+ * 단순 메시지 박스 - 에러
+ * @param {string} sMsg 출력할 메시지
+ */
+GlobalStatic.MessageBox_Error = function (sMsg)
+{
+    DG_MessageBox.Show({
+        Title: GlobalStatic.Title,
+        Content: sMsg,
+
+        top: 200,
+        left: 200,
+
+        ButtonShowType: DG_MessageBox.ButtonShowType.Ok,
+        BigIconType: DG_MessageBox.BigIconType.Error,
+        ButtonEvent: function (btnType)
+        {
+            DG_Popup.Close();
+        }
+    });
+};
+
+/**
+ * 단순 메시지 박스 - 인포
+ * @param {string} sMsg 출력할 메시지
+ */
+GlobalStatic.MessageBox_Info = function (sMsg)
+{
+    DG_MessageBox.Show({
+        Title: GlobalStatic.Title,
+        Content: sMsg,
+
+        top: 200,
+        left: 200,
+
+        ButtonShowType: DG_MessageBox.ButtonShowType.Ok,
+        BigIconType: DG_MessageBox.BigIconType.Info,
+        ButtonEvent: function (btnType)
+        {
+            DG_Popup.Close();
+        }
+    });
+};
+
 //전역 유틸 ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
 
 /** 데이터 바인드 */

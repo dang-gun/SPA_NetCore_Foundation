@@ -2,7 +2,7 @@
 /** 사인인 클래스 */
 function SignIn()
 {
-    GlobalStatic.PageType_Now = PageType.SignIn;
+    GlobalStatic.PageType_Now = this.constructor.name;
 
     if (true === GlobalSign.SignIn)
     {//이미 사인인이 되어있다.
@@ -58,36 +58,41 @@ SignIn.prototype.btnSignIn_onclick = function ()
     }
     else
     {//성공
-        AA.put(false, {
-            url: FS_Api.Sign_SignIn
-            , data: { sID: sEMail, sPW: sPW }
-            , success: function (data) {
-                console.log(data);
+        AA.put(AA.TokenRelayType.None
+            , {
+                url: FS_Api.Sign_SignIn
+                , data: { sID: sEMail, sPW: sPW }
+                , success: function (data)
+                {
+                    console.log(data);
 
-                if ("0" === data.InfoCode)
-                {//에러 없음
-                    if (data.complete === true) {
-                        GlobalSign.SignIn = true;
-                        GlobalSign.SignIn_token = data.token;
-                        GlobalSign.SignIn_ID = sEMail;
+                    if ("0" === data.InfoCode)
+                    {//에러 없음
+                        if (data.complete === true)
+                        {
+                            GlobalSign.SignIn = true;
+                            GlobalSign.SignIn_token = data.token;
+                            GlobalSign.SignIn_ID = sEMail;
 
-                        alert("사인 인 성공");
+                            alert("사인 인 성공");
 
-                        //홈으로 이동
-                        Page.Move_Home();
+                            //홈으로 이동
+                            Page.Move_Home();
+                        }
+                    }
+                    else
+                    {//에러 있음
+                        alert("error code : " + data.InfoCode + "\n"
+                            + "내용 : " + data.message);
                     }
                 }
-                else {//에러 있음
-                    alert("error code : " + data.InfoCode + "\n"
-                        + "내용 : " + data.message);
-                }
-            }
-            , error: function (error) {
-                console.log(error);
+                , error: function (error)
+                {
+                    console.log(error);
 
-                alert("알수 없는 오류가 발생했습니다.");
-            }
-        });
+                    alert("알수 없는 오류가 발생했습니다.");
+                }
+            });
     }
 
     

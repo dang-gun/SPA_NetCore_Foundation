@@ -1,7 +1,7 @@
 ﻿
 function About()
 {
-    GlobalStatic.PageType_Now = PageType.About;
+    GlobalStatic.PageType_Now = this.constructor.name;
 
     var objThis = this;
 

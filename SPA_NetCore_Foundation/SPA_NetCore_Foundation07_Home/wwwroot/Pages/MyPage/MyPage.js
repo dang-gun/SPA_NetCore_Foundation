@@ -1,10 +1,10 @@
 ﻿
 function MyPage()
 {
-    GlobalStatic.PageType_Now = PageType.MyPage;
+    GlobalStatic.PageType_Now = this.constructor.name;
 
     //
-    AA.get(true
+    AA.get(AA.TokenRelayType.HeadAdd
         , {
             url: FS_Api.MyPage_MyPageInfo
             , success: function (jsonData)

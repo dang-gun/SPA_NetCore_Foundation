@@ -24,7 +24,6 @@
     <_ContentIncludedByDefault Remove="wwwroot\Pages\Page.css" />
     <_ContentIncludedByDefault Remove="wwwroot\Pages\Page.html" />
     <_ContentIncludedByDefault Remove="wwwroot\Pages\Page.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\Pages\PageType.js" />
     <_ContentIncludedByDefault Remove="wwwroot\Pages\SignIn\SignIn.html" />
     <_ContentIncludedByDefault Remove="wwwroot\Pages\SignIn\SignIn.js" />
     <_ContentIncludedByDefault Remove="wwwroot\Pages\Test\Test01.html" />

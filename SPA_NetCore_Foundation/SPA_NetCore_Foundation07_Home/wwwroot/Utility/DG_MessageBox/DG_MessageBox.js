@@ -36,9 +36,9 @@ DG_MessageBox.BigIconType = {
 /** 창열기 기본 옵션 */
 DG_MessageBox.ShowOptionDefault = {
     /** 시작위치 - Y */
-    top: 0,
+    top: 50,
     /** 시작위치 - X */
-    left: 0,
+    left: "center",
 
     /** 팝업이 완성되면 크기를 고정할지 여부 
         이 옵션이 없으면 창이동시 크기가 변경될수 있다.
@@ -244,6 +244,8 @@ DG_MessageBox.ShowBox = function (jsonOption)
         top: jsonOpt.top,
         /** 시작위치 - X */
         left: jsonOpt.left,
+        /** 보고 있는 위치 기준 창띄우기 */
+        StartViewWeight: true,
 
         /** 팝업이 완성되면 크기를 고정할지 여부
             이 옵션이 없으면 창이동시 크기가 변경될수 있다.
@@ -299,10 +301,11 @@ DG_MessageBox.ShowBox = function (jsonOption)
         //추가할버튼
         var btn01 = $("<button></button>");
         btn01.addClass(itemBtn.ButtonCss);
+        btn01.attr("buttonType", itemBtn.ButtonType);
         btn01.html(itemBtn.ButtonText);
-        btn01.click(function ()
+        btn01.click(function (event)
         {
-            jsonOpt.ButtonEvent(itemBtn.ButtonType);
+            jsonOpt.ButtonEvent(Number($(event.target).attr("buttonType")));
         });
 
         divFooter.append(btn01);

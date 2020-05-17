@@ -113,20 +113,44 @@ GlobalSign.Move_SignIn_Remove = function (bMessage, sMessage)
     GlobalSign.AccessToken_Set("");
     GlobalSign.RefreshToken_Set("", CA.SaveType.Default);
 
+
+    var funSiteMove = function ()
+    {
+        switch (GlobalStatic.SiteType)
+        {
+            case 0://일반타입
+                //주소를 보고 동작을 결정한다.
+                if ("" === location.hash)
+                {//주소가 없다.
+                    //홈으로 이동
+                    //location.href = FS_Url.Home;
+                    setTimeout(function () { location.href = "/"; }, 0);
+                }
+                else
+                {//주소가 있다.
+                    if (typeof TopInfo === "undefined")
+                    {//탑인포가 없으면 새로고침
+                        location.reload();
+                    }
+                }
+                break;
+            case 1://관리자타입
+            default:
+                //사인인 페이지로 이동
+                GlobalSign.Move_SignIn();
+                break;
+        }
+    }
+
+
     if (true === bMessage)
     {
         alert(sMessage);
+        funSiteMove();
     }
-
-    switch (GlobalStatic.SiteType)
+    else
     {
-        case 0://일반타입
-            break;
-        case 1://관리자타입
-        default:
-            //사인인 페이지로 이동
-            GlobalSign.Move_SignIn();
-            break;
+        funSiteMove();
     }
 };
 
@@ -145,7 +169,7 @@ GlobalSign.Move_SignOut = function ()
     else
     {
         //사인 아웃 시도
-        AA.put(true
+        AA.put(AA.TokenRelayType.HeadAdd
             , {
                 url: FS_Api.Sign_SignOut,
                 type: "PUT",
@@ -212,30 +236,53 @@ GlobalSign.isAccessToken = function ()
 
 
 
-/** 엑세스토큰이 있으면 유저 정보를 갱신한다. */
-GlobalSign.AccessTokenToInfo = function () {
-    if (true === GlobalSign.isAccessToken()) {//엑세스 토큰이 
-        AA.get(true
+/**
+ * 엑세스토큰이 있으면 유저 정보를 갱신한다.
+ * @param {function} callback 갱신에 성공하면 할 동작
+ */
+GlobalSign.AccessTokenToInfo = function (callback) 
+{
+    if (true === GlobalSign.isAccessToken()) 
+    {//엑세스 토큰이 있다
+        AA.get(AA.TokenRelayType.HeadAdd
             , {
                 url: FS_Api.Sign_AccessToUserInfo
-                , success: function (jsonData) {
-                    if ("0" === jsonData.InfoCode) {//에러 없음
+                , success: function (jsonData)
+                {
+                    if ("0" === jsonData.InfoCode) 
+                    {//에러 없음
                         //사인인 되어있다고 확인해줌
                         GlobalSign.SignIn = true;
 
-                        GlobalSign.SignIn_ID = jsonData.id;
-                        GlobalSign.SignIn_Email = jsonData.email;
+                        GlobalSign.SignIn_ID = jsonData.idUser;
+                        GlobalSign.SignIn_Email = jsonData.Email;
 
-                        if (TopInfo) {
+                        GlobalSign.SignIn_ViewName = jsonData.ViewName;
+
+                        if (typeof TopInfo !== "undefined")
+                        {
                             TopInfo.UserInfo_Load();
                         }
+
+                        if (typeof callback === "function")
+                        {
+                            callback();
+                        }
                     }
-                    else {//에러 있음
+                    else 
+                    {//에러 있음
 
                     }
                 }
                 , error: function (jqXHR, textStatus, errorThrown) { }
             });
 
+    }
+    else
+    {
+        if (typeof callback === "function")
+        {
+            callback();
+        }
     }
 };

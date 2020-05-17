@@ -1,7 +1,7 @@
 ﻿
 function Test_Popup()
 {
-    GlobalStatic.PageType_Now = PageType.Test_Popup;
+    GlobalStatic.PageType_Now = this.constructor.name;
 
     var objThis = this;
 

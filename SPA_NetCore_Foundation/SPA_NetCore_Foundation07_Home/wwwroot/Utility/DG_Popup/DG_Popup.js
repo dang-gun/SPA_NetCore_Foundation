@@ -41,6 +41,8 @@ DG_Popup.ShowOptionDefault = {
     width: "auto",
     /** 세로 크기 */
     height: "auto",
+    /** 페이지 시작시 보고 있는 위치(예>스크롤로 위치가 바뀌는 경우)를 기준으로 표시할지 여부  */
+    StartViewWeight: false,
 
     /** 부모에 적용할 css */
     ParentCss: "",
@@ -167,8 +169,29 @@ DG_Popup.Show = function (jsonOption)
     divContent.css("position", "absolute");
     divContent.css("background", jsonOpt.ContentBackground);
 
-    divContent.css("top", jsonOpt.top + "px");
-    divContent.css("left", jsonOpt.left + "px");
+    var nTop = jsonOpt.top;
+    var nLeft = jsonOpt.left;
+
+    //센터 여부
+    if ("center" === jsonOpt.top)
+    {//센터이다.
+        //일단 0으로 초기화 한다.
+        nTop = 0;
+    }
+    if ("center" === jsonOpt.left)
+    {//센터이다.
+        //일단 0으로 초기화 한다.
+        nLeft = 0;
+    }
+
+    if (true === jsonOpt.StartViewWeight)
+    {//보고 있는 위치를 기준으로 표시
+        nTop += window.scrollY;
+        nLeft += window.scrollX;
+    }
+
+    divContent.css("top", nTop + "px");
+    divContent.css("left", nLeft + "px");
     divContent.css("width", jsonOpt.width);
     divContent.css("height", jsonOpt.height);
 
@@ -202,6 +225,27 @@ DG_Popup.Show = function (jsonOption)
         var nSize = divPopup_New.width();
         //완성된 크기를 고정값으로 지정
         divPopup_New.width(nSize);
+    }
+
+
+    //센터 여부
+    if ("center" === jsonOpt.top)
+    {//센터이다.
+        //중앙값을 계산한다.
+        var nTopCenter
+            = ($(window).height() / 2)
+                - (divPopup_New.height() / 2)
+                + divPopup_New.position().top;
+        divPopup_New.css("top", nTopCenter + "px");
+    }
+    if ("center" === jsonOpt.left)
+    {//센터이다.
+        //중앙값을 계산한다.
+        var nLeftCenter
+            = ($(window).width() / 2)
+                - (divPopup_New.width() / 2)
+                + divPopup_New.position().left;
+        divPopup_New.css("left", nLeftCenter + "px");
     }
     
 

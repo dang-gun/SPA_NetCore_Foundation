@@ -11,56 +11,88 @@ AA.AjaxType = {
     Get: "GET",
     Post: "POST",
     Put: "PUT",
+    Patch: "PATCH",
     Delete: "DELETE"
 };
 
+/** 아작스 요청시 토큰을 어떻게 처리할지 여부 */
+AA.TokenRelayType = {
+    /** 전달하지 않음 */
+    None: 0,
+
+    /** 무조건 전달 */
+    HeadAdd: 1,
+
+    /** 
+     *  기존 토큰 없으면 없는 데로 전달.
+     *  기존 토큰이 죽어 있으면 갱신후 전달.
+     * */
+    CaseByCase: 2,
+};
+
+
 /**
  * get로 아작스 요청을 한다.
- * @param {bool} bToken 헤더에 토큰을 넣을지 여부
+ * @param {TokenRelayType} typeToken 헤더에 토큰을 넣을지 여부
  * @param {json} jsonOption 아작스 요청에 사용할 옵션 데이터. 지정하지 않은 옵션은기본 옵션을 사용한다.
  */
-AA.get = function (bToken, jsonOption) {
+AA.get = function (typeToken, jsonOption)
+{
     jsonOption.type = AA.AjaxType.Get;
-    AA.call(bToken, jsonOption);
+    AA.call(typeToken, jsonOption);
 };
 
 /**
  * post로 아작스 요청을 한다.
- * @param {bool} bToken 헤더에 토큰을 넣을지 여부
+ * @param {TokenRelayType} typeToken 헤더에 토큰을 넣을지 여부
  * @param {json} jsonOption 아작스 요청에 사용할 옵션 데이터. 지정하지 않은 옵션은기본 옵션을 사용한다.
  */
-AA.post = function (bToken, jsonOption) {
+AA.post = function (typeToken, jsonOption)
+{
     jsonOption.type = AA.AjaxType.Post;
-    AA.call(bToken, jsonOption);
+    AA.call(typeToken, jsonOption);
 };
 
 /**
  * put로 아작스 요청을 한다.
- * @param {bool} bToken 헤더에 토큰을 넣을지 여부
+ * @param {TokenRelayType} typeToken 헤더에 토큰을 넣을지 여부
  * @param {json} jsonOption 아작스 요청에 사용할 옵션 데이터. 지정하지 않은 옵션은기본 옵션을 사용한다.
  */
-AA.put = function (bToken, jsonOption) {
+AA.put = function (typeToken, jsonOption)
+{
     jsonOption.type = AA.AjaxType.Put;
-    AA.call(bToken, jsonOption);
+    AA.call(typeToken, jsonOption);
+};
+
+/**
+ * patch로 아작스 요청을 한다.
+ * @param {TokenRelayType} typeToken 헤더에 토큰을 넣을지 여부
+ * @param {json} jsonOption 아작스 요청에 사용할 옵션 데이터. 지정하지 않은 옵션은기본 옵션을 사용한다.
+ */
+AA.patch = function (typeToken, jsonOption)
+{
+    jsonOption.type = AA.AjaxType.Patch;
+    AA.call(typeToken, jsonOption);
 };
 
 /**
  * delete로 아작스 요청을 한다.
- * @param {bool} bToken 헤더에 토큰을 넣을지 여부
+ * @param {TokenRelayType} typeToken 헤더에 토큰을 넣을지 여부
  * @param {json} jsonOption 아작스 요청에 사용할 옵션 데이터. 지정하지 않은 옵션은기본 옵션을 사용한다.
  */
-AA.delete = function (bToken, jsonOption) {
+AA.delete = function (typeToken, jsonOption)
+{
     jsonOption.type = AA.AjaxType.Delete;
-    AA.call(bToken, jsonOption);
+    AA.call(typeToken, jsonOption);
 };
 
 
 /**
  * jquery를 이용하여 요청을 처리합니다.
- * @param {bool} bToken 헤더에 토큰을 넣을지 여부
+ * @param {TokenRelayType} typeToken 헤더에 토큰을 넣을지 여부
  * @param {json} jsonOption 처리할 옵션 객체
  */
-AA.call = function (bToken, jsonOption) {
+AA.call = function (typeToken, jsonOption) {
     //이 함수에서 기본값으로 추가할 옵션
     //기본이 비동기다.
     var jsonOpt = {
@@ -109,7 +141,7 @@ AA.call = function (bToken, jsonOption) {
  * @param {function} jsonOption 추가 옵션
  */
 AA.HtmlFileLoad = function (sFileUrl, funSuccess, jsonOption) {
-    AA.get(false
+    AA.get(AA.TokenRelayType.None
         , {
             url: sFileUrl
             , dataType: "html"

@@ -1,7 +1,7 @@
 ﻿
 function Admin()
 {
-    GlobalStatic.PageType_Now = PageType.Test01;
+    GlobalStatic.PageType_Now = this.constructor.name;
 
     var objThis = this;
 
@@ -53,7 +53,7 @@ Admin.prototype.SettingLoad = function ()
 {
     var objThis = this;
 
-    AA.put(true
+    AA.put(AA.TokenRelayType.HeadAdd
         , {
             url: FS_Api.Admin_SettingLoad
             , success: function (jsonData)
@@ -83,7 +83,7 @@ Admin.prototype.SettingListGet = function ()
 {
     var objThis = this;
 
-    AA.get(true
+    AA.get(AA.TokenRelayType.HeadAdd
         , {
             url: FS_Api.Admin_SettingList
             , success: function (jsonData)
@@ -145,7 +145,7 @@ Admin.prototype.SettingApplyGet = function ()
 {
     var objThis = this;
 
-    AA.get(true
+    AA.get(AA.TokenRelayType.HeadAdd
         , {
             url: FS_Api.Admin_SettingApply
             , success: function (jsonData)
@@ -218,7 +218,7 @@ Admin.prototype.SettingSet = function (nidSetting_Data)
     var sValueData = divMe.find(".SettingItem_ValueData > input").val();
     var sDescription = divMe.find(".SettingItem_Description > input").val();
 
-    AA.post(true
+    AA.post(AA.TokenRelayType.HeadAdd
         , {
             url: FS_Api.Admin_SettingSet
             , data: {
@@ -253,7 +253,7 @@ Admin.prototype.UserListGet = function ()
 {
     var objThis = this;
 
-    AA.get(true
+    AA.get(AA.TokenRelayType.HeadAdd
         , {
             url: FS_Api.Admin_UserList
             , success: function (jsonData)

@@ -113,26 +113,69 @@ GlobalSign.Move_SignIn = function ()
  */
 GlobalSign.Move_SignIn_Remove = function (bMessage, sMessage)
 {
+    var sMsg = sMessage;
+
     GlobalSign.SignIn = false;
 
     GlobalSign.AccessToken_Set("");
     GlobalSign.RefreshToken_Set("", CA.SaveType.Default);
 
+    var funSiteMove = function ()
+    {
+        switch (GlobalStatic.SiteType)
+        {
+            case 0://일반타입
+                //주소를 보고 동작을 결정한다.
+                if ("" === location.hash)
+                {//주소가 없다.
+                    //홈으로 이동
+                    //location.href = FS_Url.Home;
+                    setTimeout(function () { location.href = "/"; }, 0);
+                }
+                else
+                {//주소가 있다.
+                    if (typeof TopInfo === "undefined")
+                    {//탑인포가 없으면 새로고침
+                        location.reload();
+                    }
+                }
+                break;
+            case 1://관리자타입
+            default:
+                //사인인 페이지로 이동
+                GlobalSign.Move_SignIn();
+                break;
+        }
+    }
+
+
+
     if (true === bMessage)
     {
-        alert(sMessage);
+        //alert(sMessage);
+        //funSiteMove();
+
+        DG_MessageBox.Show({
+            Title: GlobalStatic.Title,
+            Content: sMsg,
+
+            top: 200,
+            left: 200,
+
+            ButtonShowType: DG_MessageBox.ButtonShowType.Ok,
+            BigIconType: DG_MessageBox.BigIconType.Error,
+            ButtonEvent: function (btnType)
+            {
+                DG_Popup.Close();
+                funSiteMove();
+            }
+        });
     }
-    
-    switch (GlobalStatic.SiteType)
+    else
     {
-        case 0://일반타입
-            break;
-        case 1://관리자타입
-        default:
-            //사인인 페이지로 이동
-            GlobalSign.Move_SignIn();
-            break;
+        funSiteMove();
     }
+
 };
 
 /**
@@ -145,12 +188,26 @@ GlobalSign.Move_SignOut = function ()
     
     if (false === dgIsObject.IsBoolValue(GlobalSign.SignIn))
     {//사인 아웃이 되어 있음
-        alert("사인아웃이 되어 있습니다.");
+        //alert("사인아웃이 되어 있습니다.");
+        DG_MessageBox.Show({
+            Title: GlobalStatic.Title,
+            Content: "사인아웃이 되어 있습니다.",
+
+            top: 200,
+            left: 200,
+
+            ButtonShowType: DG_MessageBox.ButtonShowType.Ok,
+            BigIconType: DG_MessageBox.BigIconType.Error,
+            ButtonEvent: function (btnType)
+            {
+                DG_Popup.Close();
+            }
+        });
     }
     else
     {
         //사인 아웃 시도
-        AA.put(true
+        AA.put(AA.TokenRelayType.HeadAdd
             , {
                 url: FS_Api.Sign_SignOut,
                 type: "PUT",
@@ -167,7 +224,21 @@ GlobalSign.Move_SignOut = function ()
                     //엑세스 토큰 제거
                     GlobalSign.AccessToken_Set("");
 
-                    alert("사인아웃 성공 : " + data);
+                    //alert("사인아웃 성공 : " + data);
+                    DG_MessageBox.Show({
+                        Title: GlobalStatic.Title,
+                        Content: "사인아웃 성공<br />" + data,
+
+                        top: 200,
+                        left: 200,
+
+                        ButtonShowType: DG_MessageBox.ButtonShowType.Ok,
+                        BigIconType: DG_MessageBox.BigIconType.Success,
+                        ButtonEvent: function (btnType)
+                        {
+                            DG_Popup.Close();
+                        }
+                    });
 
                 
                     switch (GlobalStatic.SiteType)
@@ -188,9 +259,11 @@ GlobalSign.Move_SignOut = function ()
                     console.log(error);
 
                     if (error.responseJSON
-                            && error.responseJSON.InfoCode) {
-                        alert("실패코드 : " + error.responseJSON.InfoCode
-                            + "\n " + error.responseJSON.message);
+                        && error.responseJSON.InfoCode) 
+                    {
+                        GlobalStatic.MessageBox_Error(
+                            "실패코드 : " + error.responseJSON.InfoCode + "<br /> "
+                            + error.responseJSON.Message);
                     }
                 }
             }
@@ -224,7 +297,7 @@ GlobalSign.AccessTokenToInfo = function (callback)
 {
     if (true === GlobalSign.isAccessToken()) 
     {//엑세스 토큰이 있다
-        AA.get(true
+        AA.get(AA.TokenRelayType.HeadAdd
             , {
                 url: FS_Api.Sign_AccessToUserInfo
                 , success: function (jsonData)
@@ -239,7 +312,7 @@ GlobalSign.AccessTokenToInfo = function (callback)
 
                         GlobalSign.SignIn_ViewName = jsonData.ViewName;
 
-                        if (TopInfo)
+                        if (typeof TopInfo === "undefined")
                         {
                             TopInfo.UserInfo_Load();
                         }

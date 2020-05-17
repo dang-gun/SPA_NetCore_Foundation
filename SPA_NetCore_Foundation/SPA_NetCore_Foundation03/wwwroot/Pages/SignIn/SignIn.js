@@ -2,7 +2,7 @@
 /** 사인인 클래스 */
 function SignIn()
 {
-    GlobalStatic.PageType_Now = PageType.SignIn;
+    GlobalStatic.PageType_Now = this.constructor.name;
 
     if (true === dgIsObject.IsBoolValue(GlobalStatic.SignIn))
     {//이미 사인인이 되어있다.
@@ -61,7 +61,7 @@ SignIn.prototype.btnSignIn_onclick = function ()
     }
     else
     {//성공
-        AA.put(false
+        AA.put(AA.TokenRelayType.None
             , {
                 url: FS_Api.Sign_SignIn
                 , data: { sEmail: sEmail, sPW: sPW }

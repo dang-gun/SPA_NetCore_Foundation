@@ -58,7 +58,7 @@ GlobalSign.RefreshToken_SetOption = function (sRefreshToken)
 
     var sAutoSignIn = CA.Get(GlobalSign.AutoSignIn_CookieName);
 
-    if ("true" === GlobalSign.AutoSignIn_CookieName)
+    if ("true" === sAutoSignIn)
     {//자동저장 활성화 되있음
         nSaveType = CA.SaveType.Month1;
     }
@@ -143,7 +143,7 @@ GlobalSign.Move_SignOut = function ()
     else
     {
         //사인 아웃 시도
-        AA.put(true
+        AA.put(AA.TokenRelayType.HeadAdd
             , {
                 url: FS_Api.Sign_SignOut,
                 type: "PUT",
@@ -210,8 +210,9 @@ GlobalSign.isAccessToken = function ()
 
 /** 엑세스토큰이 있으면 유저 정보를 갱신한다. */
 GlobalSign.AccessTokenToInfo = function () {
-    if (true === GlobalSign.isAccessToken()) {//엑세스 토큰이 
-        AA.get(true
+    if (true === GlobalSign.isAccessToken())
+    {//엑세스 토큰이 
+        AA.get(AA.TokenRelayType.HeadAdd
             , {
                 url: FS_Api.Sign_AccessToUserInfo
                 , success: function (jsonData) {

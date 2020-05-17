@@ -2,7 +2,7 @@
 /** 사인인 클래스 */
 function SignIn()
 {
-    GlobalStatic.PageType_Now = PageType.SignIn;
+    GlobalStatic.PageType_Now = this.constructor.name;
 
     if (true === dgIsObject.IsBoolValue(GlobalSign.SignIn))
     {//이미 사인인이 되어있다.
@@ -116,19 +116,19 @@ SignIn.prototype.btnSignIn_onclick = function ()
 
     if (true === dgIsObject.IsBoolValue(GlobalSign.SignIn))
     {
-        alert("이미 사인인이 되어 있습니다.");
+        GlobalStatic.MessageBox_Error("이미 사인인이 되어 있습니다.");
     }
     else if (false === dgIsObject.IsStringNotEmpty(sEmail))
     {
-        alert("이메일을 입력하지 않았습니다.");
+        GlobalStatic.MessageBox_Error("이메일을 입력하지 않았습니다.");
     }
     else if (false === dgIsObject.IsStringNotEmpty(sPW))
     {
-        alert("비밀번호를 입력하지 않았습니다.");
+        GlobalStatic.MessageBox_Error("비밀번호를 입력하지 않았습니다.");
     }
     else
     {//성공
-        AA.put(false
+        AA.put(AA.TokenRelayType.None
             , {
                 url: FS_Api.Sign_SignIn
                 , data: { sEmail: sEmail, sPW: sPW }
@@ -172,15 +172,16 @@ SignIn.prototype.btnSignIn_onclick = function ()
                     }
                     else
                     {//에러 있음
-                        alert("error code : " + jsonData.InfoCode + "\n"
-                            + "내용 : " + jsonData.Message);
+                        GlobalStatic.MessageBox_Error(
+                            "error code : " + jsonData.InfoCode + "\n"
+                                + "내용 : " + jsonData.Message);
                     }
 
                 }
                 , error: function (jqXHR, textStatus, errorThrown) {
                     console.log(jqXHR);
 
-                    alert("알수 없는 오류가 발생했습니다.");
+                    GlobalStatic.MessageBox_Error("알수 없는 오류가 발생했습니다.");
                 }
             });
     }//end if  

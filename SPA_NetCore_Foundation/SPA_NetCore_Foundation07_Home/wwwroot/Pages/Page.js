@@ -76,7 +76,7 @@ Page.Move_Page = function (bSignIn, sUrl)
         }
         else
         {//사인인이 안되있음
-            alert("사인인이 필요합니다.");
+            GlobalStatic.MessageBox_Info("사인인이 필요합니다.");
         }
     }
     else

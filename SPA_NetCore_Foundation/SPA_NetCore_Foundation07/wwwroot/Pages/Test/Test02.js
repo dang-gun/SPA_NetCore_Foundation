@@ -1,7 +1,7 @@
 ﻿
 function Test02()
 {
-    GlobalStatic.PageType_Now = PageType.Test01;
+    GlobalStatic.PageType_Now = this.constructor.name;
 
     var objThis = this;
 
@@ -26,7 +26,7 @@ Test02.prototype.divOutput = null;
 Test02.prototype.Test01 = function (nData)
 {
     var objThis = this;
-    AA.get(false
+    AA.get(AA.TokenRelayType.None
         , {
             url: FS_Api.Test_Test01
             , data: { nData: nData, sData: "테스트 01" }
@@ -58,7 +58,7 @@ Test02.prototype.Test02 = function ()
     if (true === dgIsObject.IsBoolValue(GlobalSign.SignIn))
     {//사인인이 되어 있다.
 
-        AA.get(true
+        AA.get(AA.TokenRelayType.HeadAdd
             , {
                 url: FS_Api.Test_Test02
                 , data: { nData: 100, sData: "테스트 02" }

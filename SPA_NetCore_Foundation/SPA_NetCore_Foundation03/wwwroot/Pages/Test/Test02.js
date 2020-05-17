@@ -1,7 +1,7 @@
 ﻿
 function Test02()
 {
-    GlobalStatic.PageType_Now = PageType.Test01;
+    GlobalStatic.PageType_Now = this.constructor.name;
 
     var objThis = this;
 
@@ -26,24 +26,28 @@ Test02.prototype.divOutput = null;
 Test02.prototype.Test01 = function (nData)
 {
     var objThis = this;
-    AA.get(false
+    AA.get(AA.TokenRelayType.None
         , {
             url: FS_Api.Test_Test01
             , data: { nData: nData, sData: "테스트 01" }
-            , success: function (data) {
+            , success: function (data)
+            {
                 console.log(data);
 
-                if ("0" === data.InfoCode) {//에러 없음
+                if ("0" === data.InfoCode)
+                {//에러 없음
                     objThis.divOutput.html("nTest : " + data.nTest + " sTest : " + data.sTest);
                 }
-                else {//에러 있음
+                else
+                {//에러 있음
                     //아웃풋 지우기
                     objThis.divOutput.html("");
                     alert("error code : " + data.InfoCode + "\n"
                         + "내용 : " + data.message);
                 }
             }
-            , error: function (error) {
+            , error: function (error)
+            {
                 console.log(error);
             }
         });

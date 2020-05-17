@@ -31,7 +31,6 @@
     <_ContentIncludedByDefault Remove="wwwroot\Pages\Page.css" />
     <_ContentIncludedByDefault Remove="wwwroot\Pages\Page.html" />
     <_ContentIncludedByDefault Remove="wwwroot\Pages\Page.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\Pages\PageType.js" />
     <_ContentIncludedByDefault Remove="wwwroot\Pages\SignIn\SignIn.html" />
     <_ContentIncludedByDefault Remove="wwwroot\Pages\SignIn\SignIn.js" />
     <_ContentIncludedByDefault Remove="wwwroot\Pages\Test\Test01.html" />
@@ -47,6 +46,12 @@
     <_ContentIncludedByDefault Remove="wwwroot\Utility\AjaxAssist.js" />
     <_ContentIncludedByDefault Remove="wwwroot\Utility\CookieAssist.js" />
     <_ContentIncludedByDefault Remove="wwwroot\Utility\DG_IsObject\DG_IsObject.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Utility\DG_MessageBox\DG_MessageBox.js" />
+    <None Include="wwwroot\Utility\DG_Popup\DG_Popup.js" />
+    <None Include="wwwroot\Utility\DG_Popup\README.md" />
   </ItemGroup>
 
   <ItemGroup>
@@ -76,7 +81,15 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Content Update="wwwroot\Global\GlobalSign.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Update="wwwroot\Pages\Error\404.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\Utility\AjaxAssist.js">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>

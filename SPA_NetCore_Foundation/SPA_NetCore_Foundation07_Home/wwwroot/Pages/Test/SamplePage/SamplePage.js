@@ -1,7 +1,7 @@
 ﻿
 function SamplePage()
 {
-    GlobalStatic.PageType_Now = PageType.SamplePage;
+    GlobalStatic.PageType_Now = this.constructor.name;
 
     var objThis = this;
 

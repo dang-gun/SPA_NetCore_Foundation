@@ -2,7 +2,7 @@
 /** 사인인 클래스 */
 function SignIn()
 {
-    GlobalStatic.PageType_Now = PageType.SignIn;
+    GlobalStatic.PageType_Now = this.constructor.name;
 
     if (true === dgIsObject.IsBoolValue(GlobalSign.SignIn))
     {//이미 사인인이 되어있다.
