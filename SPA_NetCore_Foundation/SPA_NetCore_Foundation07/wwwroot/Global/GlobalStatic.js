@@ -25,16 +25,21 @@ GlobalStatic.Title = "NetCore Foundation 07";
 
 /**
  * 단순 메시지 박스 - 에러
+ * @param {string} sTitle 출력할 메시지
  * @param {string} sMsg 출력할 메시지
  */
-GlobalStatic.MessageBox_Error = function (sMsg)
+GlobalStatic.MessageBox_Error = function (sTitle, sMsg)
 {
-    DG_MessageBox.Show({
-        Title: GlobalStatic.Title,
-        Content: sMsg,
+    var sTitleTemp = sTitle;
 
-        top: 200,
-        left: 200,
+    if ("" === sTitleTemp)
+    {
+        sTitleTemp = GlobalStatic.Title;
+    }
+
+    DG_MessageBox.Show({
+        Title: sTitleTemp,
+        Content: sMsg,
 
         ButtonShowType: DG_MessageBox.ButtonShowType.Ok,
         BigIconType: DG_MessageBox.BigIconType.Error,
@@ -47,16 +52,21 @@ GlobalStatic.MessageBox_Error = function (sMsg)
 
 /**
  * 단순 메시지 박스 - 인포
+ * @param {string} sTitle 출력할 메시지
  * @param {string} sMsg 출력할 메시지
  */
-GlobalStatic.MessageBox_Info = function (sMsg)
+GlobalStatic.MessageBox_Info = function (sTitle, sMsg)
 {
-    DG_MessageBox.Show({
-        Title: GlobalStatic.Title,
-        Content: sMsg,
+    var sTitleTemp = sTitle;
 
-        top: 200,
-        left: 200,
+    if ("" === sTitleTemp)
+    {
+        sTitleTemp = GlobalStatic.Title;
+    }
+
+    DG_MessageBox.Show({
+        Title: sTitleTemp,
+        Content: sMsg,
 
         ButtonShowType: DG_MessageBox.ButtonShowType.Ok,
         BigIconType: DG_MessageBox.BigIconType.Info,

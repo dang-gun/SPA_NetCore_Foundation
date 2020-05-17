@@ -70,7 +70,7 @@ app_Assist.RouteCheck = function (bSignIn, callback)
                 //죽어있을때만 안내를 해준다.
                 //어차피 엑세스토큰이 갱신됐을때 메시지가 출력되므로.
                 //alert("사인인이 필요합니다.");
-                GlobalStatic.MessageBox_Error("사인인이 필요합니다.");
+                GlobalStatic.MessageBox_Error("", "사인인이 필요합니다.");
             }
 
             switch (GlobalStatic.SiteType)
@@ -166,7 +166,7 @@ app_Assist.RouteCheck = function (bSignIn, callback)
             {//엑세스토큰이 죽어 있다.
                 //죽어있을때만 안내를 해준다.
                 //어차피 엑세스토큰이 갱신됐을때 메시지가 출력되므로.
-                GlobalStatic.MessageBox_Error("사인인이 필요합니다.");
+                GlobalStatic.MessageBox_Error("","사인인이 필요합니다.");
             }
 
             switch (GlobalStatic.SiteType)

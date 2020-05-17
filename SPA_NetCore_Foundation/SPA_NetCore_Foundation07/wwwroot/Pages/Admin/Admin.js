@@ -63,13 +63,13 @@ Admin.prototype.SettingLoad = function ()
                 if ("0" === jsonData.InfoCode)
                 {//에러 없음
                     //alert("불러오기 완료");
-                    GlobalStatic.MessageBox_Info("불러오기 완료");
+                    GlobalStatic.MessageBox_Info("", "불러오기 완료");
                 }
                 else
                 {//에러 있음
                     //아웃풋 지우기
                     objThis.divDataBind.html("");
-                    GlobalStatic.MessageBox_Error(
+                    GlobalStatic.MessageBox_Error("", 
                         "error code : " + data.InfoCode + "<br />"
                         + "내용 : " + data.Message);
                 }
@@ -100,7 +100,7 @@ Admin.prototype.SettingListGet = function ()
                 {//에러 있음
                     //아웃풋 지우기
                     objThis.divDataBind.html("");
-                    GlobalStatic.MessageBox_Error(
+                    GlobalStatic.MessageBox_Error("", 
                         "error code : " + data.InfoCode + "<br />"
                         + "내용 : " + data.Message);
                 }
@@ -163,7 +163,7 @@ Admin.prototype.SettingApplyGet = function ()
                 {//에러 있음
                     //아웃풋 지우기
                     objThis.divDataBind.html("");
-                    GlobalStatic.MessageBox_Error(
+                    GlobalStatic.MessageBox_Error("", 
                         "error code : " + data.InfoCode + "<br />"
                         + "내용 : " + data.Message);
                 }
@@ -236,11 +236,11 @@ Admin.prototype.SettingSet = function (nidSetting_Data)
             {
                 if ("0" === jsonData.InfoCode)
                 {//에러 없음
-                    GlobalStatic.MessageBox_Info("수정 완료");
+                    GlobalStatic.MessageBox_Info("", "수정 완료");
                 }
                 else
                 {//에러 있음
-                    GlobalStatic.MessageBox_Error(
+                    GlobalStatic.MessageBox_Error("", 
                         "error code : " + data.InfoCode + "<br />"
                         + "내용 : " + data.Message);
                 }
@@ -273,7 +273,7 @@ Admin.prototype.UserListGet = function ()
                 {//에러 있음
                     //아웃풋 지우기
                     objThis.divDataBind.html("");
-                    GlobalStatic.MessageBox_Error(
+                    GlobalStatic.MessageBox_Error("", 
                         "error code : " + data.InfoCode + "<br />"
                         + "내용 : " + data.Message);
                 }

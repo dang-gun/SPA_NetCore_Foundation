@@ -39,7 +39,7 @@ Test02.prototype.Test01 = function (nData)
                 else {//에러 있음
                     //아웃풋 지우기
                     objThis.divOutput.html("");
-                    GlobalStatic.MessageBox_Error(
+                    GlobalStatic.MessageBox_Error("", 
                         "error code : " + data.InfoCode + "<br />"
                         + "내용 : " + data.Message);
                 }
@@ -71,7 +71,7 @@ Test02.prototype.Test02 = function ()
                     else {//에러 있음
                         //아웃풋 지우기
                         objThis.divOutput.html("");
-                        GlobalStatic.MessageBox_Error(
+                        GlobalStatic.MessageBox_Error("", 
                             "error code : " + data.InfoCode + "<br />"
                             + "내용 : " + data.Message);
                     }
@@ -83,6 +83,6 @@ Test02.prototype.Test02 = function ()
     }
     else
     {
-        GlobalStatic.MessageBox_Error("사인을 해야 사용할 수 있습니다.");
+        GlobalStatic.MessageBox_Error("", "사인을 해야 사용할 수 있습니다.");
     }
 };

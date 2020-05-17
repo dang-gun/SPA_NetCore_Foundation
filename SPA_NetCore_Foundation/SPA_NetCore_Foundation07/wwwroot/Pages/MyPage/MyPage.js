@@ -33,7 +33,7 @@ function MyPage()
             }
             , error: function (jqXHR, textStatus, errorThrown)
             {
-                GlobalStatic.MessageBox_Error("알수 없는 오류가 발생했습니다.");
+                GlobalStatic.MessageBox_Error("", "알수 없는 오류가 발생했습니다.");
 
                 //뒤로
                 history.back();

@@ -261,7 +261,7 @@ GlobalSign.Move_SignOut = function ()
                     if (error.responseJSON
                         && error.responseJSON.InfoCode) 
                     {
-                        GlobalStatic.MessageBox_Error(
+                        GlobalStatic.MessageBox_Error("", 
                             "실패코드 : " + error.responseJSON.InfoCode + "<br /> "
                             + error.responseJSON.Message);
                     }

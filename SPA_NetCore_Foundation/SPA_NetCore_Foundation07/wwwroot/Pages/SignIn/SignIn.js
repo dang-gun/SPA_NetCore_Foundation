@@ -116,15 +116,15 @@ SignIn.prototype.btnSignIn_onclick = function ()
 
     if (true === dgIsObject.IsBoolValue(GlobalSign.SignIn))
     {
-        GlobalStatic.MessageBox_Error("이미 사인인이 되어 있습니다.");
+        GlobalStatic.MessageBox_Error("", "이미 사인인이 되어 있습니다.");
     }
     else if (false === dgIsObject.IsStringNotEmpty(sEmail))
     {
-        GlobalStatic.MessageBox_Error("이메일을 입력하지 않았습니다.");
+        GlobalStatic.MessageBox_Error("", "이메일을 입력하지 않았습니다.");
     }
     else if (false === dgIsObject.IsStringNotEmpty(sPW))
     {
-        GlobalStatic.MessageBox_Error("비밀번호를 입력하지 않았습니다.");
+        GlobalStatic.MessageBox_Error("", "비밀번호를 입력하지 않았습니다.");
     }
     else
     {//성공
@@ -172,14 +172,14 @@ SignIn.prototype.btnSignIn_onclick = function ()
                     }
                     else
                     {//에러 있음
-                        GlobalStatic.MessageBox_Error(
+                        GlobalStatic.MessageBox_Error("", 
                             "실패코드 : " + jsonData.InfoCode + "<br /> "
                             + jsonData.Message);
                     }
 
                 }
                 , error: function (jqXHR, textStatus, errorThrown) {
-                    GlobalStatic.MessageBox_Error("알수 없는 오류가 발생했습니다.");
+                    GlobalStatic.MessageBox_Error("", "알수 없는 오류가 발생했습니다.");
                 }
             });
     }//end if  
