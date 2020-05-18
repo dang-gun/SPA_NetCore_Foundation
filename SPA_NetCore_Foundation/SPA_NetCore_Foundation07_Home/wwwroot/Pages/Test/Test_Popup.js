@@ -6,7 +6,7 @@ function Test_Popup()
     var objThis = this;
 
     //페이지 공통기능 로드
-    Page.Load(function ()
+    Page.Load({}, function ()
     {
         //화면 인터페이스
         Page.divContents.load("/Pages/Test/Test_Popup.html"

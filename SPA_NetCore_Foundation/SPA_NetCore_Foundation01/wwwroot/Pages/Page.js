@@ -13,9 +13,10 @@ Page.divContents = null;
 
 /**
  * 페이지를 쓰려면 로드를 해야 한다.
+ * @param {json} jsonOption 넘겨줘야할 데이터가 있을때 넘길 옵션값
  * @param {function} callbackFun 로드가 완료되면 호출될 함수
  */
-Page.Load = function (callbackFun)
+Page.Load = function (jsonOption, callbackFun)
 {
     var callbackFun_Backup = callbackFun;
 
