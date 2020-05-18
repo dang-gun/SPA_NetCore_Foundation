@@ -21,13 +21,12 @@ Test_Popup.prototype.ShowMsg = function ()
 {
     var nCount = ++this.Count;
 
+    var sMsg = "<pre>" + $("#txtMsg").val() + "</pre>"
+        + "<br /> count : " + nCount;
 
     DG_MessageBox.Show({
         Title: "테스트 메시지 박스 " + nCount,
-        Content: "여기는 메시지 박스 출력입니다. ㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄹ<br /> asdfasdfasdfdd아찿타토처ㅏ차ㅣ치쳐챠ㅕ처ㅓ어ㅓㅇdjdjdjdjd " + nCount,
-
-        top: 200,
-        left: 200,
+        Content: sMsg,
 
         ButtonShowType: Number($("#selectButtonShowType").val()),
         BigIconType: Number($("#selectBigIconType").val()),

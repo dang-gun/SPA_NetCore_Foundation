@@ -25,7 +25,27 @@
 </style>
 
 <h3>팝업 테스트</h3>
-
+<br />
+<select id="selectButtonShowType">
+    <option value="1">Ok</option>
+    <option value="2">OkCancel</option>
+    <option value="3">Cancel</option>
+    <option value="4">YesNo</option>
+</select>
+<select id="selectBigIconType">
+    <option value="0">None</option>
+    <option value="1">Info</option>
+    <option value="2">Warning</option>
+    <option value="3">Error</option>
+    <option value="4">Question</option>
+    <option value="5">Success</option>
+    <option value="6">Help</option>
+</select>
+<br />
+<textarea id="txtMsg" style="width:500px;height:300px;">
+테스트용 메시지입니다.
+이것은 테스트입니다!
+</textarea>
 <br />
 <button class="btn btn-primary" onclick="GlobalStatic.Page_Now.ShowMsg()">메시지 박스 테스트</button>
 <button class="btn btn-primary" onclick="GlobalStatic.Page_Now.ShowPopup()">팝업 테스트</button>

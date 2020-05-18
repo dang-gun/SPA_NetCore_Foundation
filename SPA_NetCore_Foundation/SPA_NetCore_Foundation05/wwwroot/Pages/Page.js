@@ -85,15 +85,6 @@ Page.Move_Page = function (bSignIn, sUrl)
 
 Page.Move_Home = function ()
 {
-    location.href = FS_Url.Home;
+    Page.Move_Page(false, FS_Url.Home);
 };
 
-
-Page.Move_Test01 = function ()
-{
-    location.href = FS_Url.Test01;
-};
-
-Page.Move_Test02 = function () {
-    location.href = FS_Url.Test02;
-};

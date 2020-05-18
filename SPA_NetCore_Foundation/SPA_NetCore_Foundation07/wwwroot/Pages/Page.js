@@ -85,27 +85,7 @@ Page.Move_Page = function (bSignIn, sUrl)
     }
 };
 
-Page.Move_Admin = function ()
-{
-    location.href = FS_Url.Admin;
-};
-
 Page.Move_Home = function ()
 {
-    location.href = FS_Url.Home;
-};
-
-Page.Move_MyPage = function ()
-{
-    location.href = FS_Url.MyPage;
-};
-
-
-Page.Move_Test01 = function ()
-{
-    location.href = FS_Url.Test01;
-};
-
-Page.Move_Test02 = function () {
-    location.href = FS_Url.Test02;
+    Page.Move_Page(false, FS_Url.Home);
 };

@@ -10,6 +10,8 @@ Page.divMainMenu = null;
 Page.divTopInfo = null;
 /** 컨탠츠 영역 */
 Page.divContents = null;
+/** 네비게이션 바 */
+Page.navbarResponsive = null;
 
 /**
  * 페이지를 쓰려면 로드를 해야 한다.
@@ -29,11 +31,13 @@ Page.Load = function (callbackFun)
                 Page.divMainMenu = DivMain.find("#divMainMenu");
                 Page.divTopInfo = DivMain.find("#divTopInfo");
                 Page.divContents = DivMain.find("#divContents");
+                
 
                 //최상단 정보 출력
                 Page.divTopInfo.load(FS_FUrl.TopInfo_TopInfo
                     , function () {
                         TopInfo.Load();
+                        Page.navbarResponsive = DivMain.find("#navbarResponsive");
                     });
 
                 callbackFun_Backup();
@@ -68,10 +72,14 @@ Page.Remove = function ()
  */
 Page.Move_Page = function (bSignIn, sUrl)
 {
+    //네비바를 닫을지 여부
+    var bnavbarResponsive = false;
+
     if (true === bSignIn)
     {//사인인이 필요하다.
         if (true === GlobalSign.SignIn)
         {
+            bnavbarResponsive = true;
             location.href = sUrl;
         }
         else
@@ -81,31 +89,22 @@ Page.Move_Page = function (bSignIn, sUrl)
     }
     else
     {//사인인이 필요없다.
+        bnavbarResponsive = true;
         location.href = sUrl;
     }
-};
 
-Page.Move_Admin = function ()
-{
-    location.href = FS_Url.Admin;
+    if (true === bnavbarResponsive)
+    {
+        if (true === Page.navbarResponsive.hasClass("show"))
+        {
+            $("button.navbar-toggler.navbar-toggler-right").click();
+        }
+        //Page.navbarResponsive.removeClass("show");
+    }
+
 };
 
 Page.Move_Home = function ()
 {
-    location.href = FS_Url.Home;
-};
-
-Page.Move_MyPage = function ()
-{
-    location.href = FS_Url.MyPage;
-};
-
-
-Page.Move_Test01 = function ()
-{
-    location.href = FS_Url.Test01;
-};
-
-Page.Move_Test02 = function () {
-    location.href = FS_Url.Test02;
+    Page.Move_Page(false, FS_Url.Home);
 };
