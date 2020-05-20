@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using SPA_NetCore_Foundation.Global;
 using Newtonsoft.Json.Serialization;
 
@@ -21,15 +21,13 @@ namespace SPA_NetCore_Foundation
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
             //API모델을 파스칼 케이스 유지하기
-            services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+            services.AddControllers().AddNewtonsoftJson(options => { options.SerializerSettings.ContractResolver = new DefaultContractResolver(); });
         }
 
         // This method gets called by the runtime.
         //Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -41,6 +39,9 @@ namespace SPA_NetCore_Foundation
                 //You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            //3.0 api 라우트
+            app.UseRouting();
 
             //8. 프로젝트 미들웨어 기능 설정
             //웹사이트 기본파일 읽기 설정
@@ -57,7 +58,12 @@ namespace SPA_NetCore_Foundation
             //에러가 났을때 Http 상태코드를 전달하기위한 설정
             app.UseStatusCodePages();
 
-            app.UseMvc();
+            
+            //3.0 api 라우트 끝점
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }

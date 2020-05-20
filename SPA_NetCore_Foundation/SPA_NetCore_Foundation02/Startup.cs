@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
+using Microsoft.Extensions.Hosting;
 
 namespace SPA_NetCore_Foundation
 {
@@ -17,19 +18,21 @@ namespace SPA_NetCore_Foundation
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
             //API모델을 파스칼 케이스 유지하기
-            services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+            services.AddControllers().AddNewtonsoftJson(options => { options.SerializerSettings.ContractResolver = new DefaultContractResolver(); });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            //3.0 api 라우트
+            app.UseRouting();
+
 
             //app.Run(async (context) =>
             //{
@@ -39,7 +42,12 @@ namespace SPA_NetCore_Foundation
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
-            app.UseMvc();
+            
+            //3.0 api 라우트 끝점
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }

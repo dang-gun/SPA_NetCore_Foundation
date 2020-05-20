@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SPA_NetCore_Foundation06", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SPA_NetCore_Foundation07", "SPA_NetCore_Foundation07\SPA_NetCore_Foundation07.csproj", "{2C961A32-9424-438F-8885-84E31925384D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPA_NetCore_Foundation07_Home", "SPA_NetCore_Foundation07_Home\SPA_NetCore_Foundation07_Home.csproj", "{E150B32A-83B2-47F9-A542-76F54BD307C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SPA_NetCore_Foundation07_Home", "SPA_NetCore_Foundation07_Home\SPA_NetCore_Foundation07_Home.csproj", "{E150B32A-83B2-47F9-A542-76F54BD307C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

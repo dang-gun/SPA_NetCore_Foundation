@@ -2,18 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using IdentityServer4_Custom.IdentityServer4;
-using IdentityServer4_Custom.IdentityServer4.AuthRequest;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
+using Microsoft.OpenApi.Models;
+
 using Newtonsoft.Json.Serialization;
+
+using IdentityServer4_Custom.IdentityServer4;
+using IdentityServer4_Custom.IdentityServer4.AuthRequest;
+
 using SPA_NetCore_Foundation.Global;
-using Swashbuckle.AspNetCore.Swagger;
+
 
 namespace SPA_NetCore_Foundation
 {
@@ -47,10 +55,9 @@ namespace SPA_NetCore_Foundation
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddCustomUserStore();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             //API모델을 파스칼 케이스 유지하기
-            services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+            services.AddControllers().AddNewtonsoftJson(options => { options.SerializerSettings.ContractResolver = new DefaultContractResolver(); });
 
             //클라이언트 인증 요청 정보
             services.AddAuthentication(options =>
@@ -73,44 +80,40 @@ namespace SPA_NetCore_Foundation
             //스웨거 문서정보를 생성 한다.
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1"
-                    , new Info 
+                c.SwaggerDoc("v1",
+                    new OpenApiInfo
                     { 
-                        Title = "SPA NetCore Foundation API"
-                        , Description = "[ASP.NET Core] .NET Core로 구현한 SPA(Single Page Applications)(5) - 스웨거(Swagger) 설정 <br /> https://blog.danggun.net/7689"
-                        , Version = "v1"
-                        , Contact = new Contact
+                        Title = "SPA NetCore Foundation API",
+                        Description = "[ASP.NET Core] .NET Core로 구현한 SPA(Single Page Applications)(5) - 스웨거(Swagger) 설정 <br /> https://blog.danggun.net/7689",
+                        Version = "v1",
+                        Contact = new OpenApiContact
                         {
                             Name = "Dang-Gun Roleeyas",
                             Email = string.Empty,
-                            Url = "https://blog.danggun.net/"
-                        }
-                        , License = new License
+                            Url = new Uri("https://blog.danggun.net/")
+                        },
+                        License = new OpenApiLicense
                         {
                             Name = "MIT",
-                            Url = "https://opensource.org/licenses/MIT"
+                            Url = new Uri("https://opensource.org/licenses/MIT")
                         }
                     });
 
                 //인증UI **************************************
-                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                c.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
                 {
-                    In = "header",
-                    Description = "로그인 후 전달받은 'ExternalKey'를 헤더의'MgrExternalKey' 담아 전달해야 합니다.",
+                    In = ParameterLocation.Header,
+                    Description = "로그인 후 전달받은 '엑세스 토큰(access token)'을 헤더의'Authorization'에 'Bearer access token' 형태로 담아 전달해야 합니다.",
                     Name = "Authorization",
-                    Type = "apiKey"
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "bearer"
                 });
-
-                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
-                {
-                    { "Bearer", new string[] { } }
-                });
-
-
+                c.OperationFilter<AuthenticationRequirementsOperationFilter>();
             });
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -121,6 +124,9 @@ namespace SPA_NetCore_Foundation
                 app.UseHsts();
             }
 
+            //3.0 api 라우트
+            app.UseRouting();
+
             //09. OAuth2 미들웨어(IdentityServer) CROS 접근 권한 문제
             //app.UseCors(options =>
             //{
@@ -129,6 +135,8 @@ namespace SPA_NetCore_Foundation
             //});
             //OAuth2 미들웨어(IdentityServer) 설정
             app.UseIdentityServer();
+            //인증서버 사용 설정
+            app.UseAuthorization();
 
             //8. 프로젝트 미들웨어 기능 설정
             //웹사이트 기본파일 읽기 설정
@@ -156,7 +164,12 @@ namespace SPA_NetCore_Foundation
                 //c.RoutePrefix = string.Empty;
             });
 
-            app.UseMvc();
+
+            //3.0 api 라우트 끝점
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }

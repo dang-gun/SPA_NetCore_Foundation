@@ -98,8 +98,8 @@ namespace SPA_NetCore_Foundation.Controllers
         /// </summary>
         /// <param name="sRefreshToken"></param>
         /// <returns></returns>
-        [Authorize]//OAuth2 인증 설정
         [HttpPut]
+        [Authorize]//OAuth2 인증 설정
         [Route("SignOut")]
         public ActionResult<string> SignOut(
             [FromForm]int nID
