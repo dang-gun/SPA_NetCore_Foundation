@@ -4,13 +4,13 @@
  */
 var TopInfo = {};
 
-TopInfo.DivTopLeft = null;
-TopInfo.DivTopInfo = null;
+TopInfo.divTopLeft = null;
+TopInfo.divTopInfo = null;
 
 TopInfo.Load = function ()
 {
-    TopInfo.DivTopLeft = Page.divTopInfo.find("#divTopLeft");
-    TopInfo.DivTopInfo = Page.divTopInfo.find("#divTopInfo");
+    TopInfo.divTopLeft = Page.divInfo.find("#divTopLeft");
+    TopInfo.divTopInfo = Page.divInfo.find("#divTopInfo");
 
     //유저 정보 요청
     TopInfo.UserInfo_Load();
@@ -23,13 +23,13 @@ TopInfo.UserInfo_Load = function ()
 {
     if (true === GlobalSign.SignIn)
     {//사인인 정보가 있음
-        TopInfo.DivTopInfo.load(FS_FUrl.TopInfo_UserInfo_SignOut
+        TopInfo.divTopInfo.load(FS_FUrl.TopInfo_UserInfo_SignOut
             , function () {
                 $("#spanEMail").html(GlobalSign.SignIn_ID);
             });
     }
     else
     {//사인인 정보가 없음
-        TopInfo.DivTopInfo.load(FS_FUrl.TopInfo_UserInfo_SignIn);
+        TopInfo.divTopInfo.load(FS_FUrl.TopInfo_UserInfo_SignIn);
     }
 };

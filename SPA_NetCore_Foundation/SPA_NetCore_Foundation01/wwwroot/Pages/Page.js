@@ -4,10 +4,13 @@
  */
 var Page = {};
 
+/** 페이지 영역  */
+Page.divPage = null;
+
 /** 메인 메뉴 영역 */
 Page.divMainMenu = null;
 /** 사용자 정보 영역 */
-Page.divTopInfo = null;
+Page.divTop = null;
 /** 컨탠츠 영역 */
 Page.divContents = null;
 
@@ -23,18 +26,16 @@ Page.Load = function (jsonOption, callbackFun)
     if (Page.divMainMenu === null) {//페이지가 로드 되지 않았다.
 
         //페이지 html 로드
-        DivMain.load(FS_FUrl.Page
+        divMain.load(FS_FUrl.Page
             , function () {
                 //영역 찾기
-                Page.divMainMenu = DivMain.find("#divMainMenu");
-                Page.divTopInfo = DivMain.find("#divTopInfo");
-                Page.divContents = DivMain.find("#divContents");
+                Page.divPage = divMain.find("#divPage");
+                Page.divTop = divMain.find("#divTop");
+                Page.divMainMenu = divMain.find("#divMainMenu");
+                Page.divContents = divMain.find("#divContents");
 
-                //최상단 정보 출력
-                Page.divTopInfo.load(FS_FUrl.TopInfo_TopInfo
-                    , function () {
-                        TopInfo.Load();
-                    });
+                //사인인 정보 로드
+                SignInInfo.Load();
 
                 callbackFun_Backup();
             });
@@ -52,10 +53,10 @@ Page.Load = function (jsonOption, callbackFun)
  */
 Page.Remove = function ()
 {
-    DivMain.html("");
+    divMain.html("");
 
     Page.divMainMenu = null;
-    Page.divTopInfo = null;
+    Page.divTop = null;
     Page.divContents = null;
 };
 

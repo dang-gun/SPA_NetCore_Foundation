@@ -34,8 +34,8 @@ namespace SPA_NetCore_Foundation.Controllers
         /// <summary>
         /// 사인인 시도
         /// </summary>
-        /// <param name="sEmail"></param>
-        /// <param name="sPW"></param>
+        /// <param name="sEmail">로그인에 사용할 이메일</param>
+        /// <param name="sPW">비밀번호</param>
         /// <returns></returns>
         [HttpPut]
         [Route("SignIn")]

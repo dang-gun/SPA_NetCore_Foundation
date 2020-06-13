@@ -115,7 +115,10 @@ namespace SPA_NetCore_Foundation
                     BearerFormat = "JWT",
                     Scheme = "bearer"
                 });
+                //인증 필터
                 c.OperationFilter<AuthenticationRequirementsOperationFilter>();
+                //주석 표시기능
+                c.IncludeXmlComments(string.Format(@"{0}\SPA_NetCore_Foundation06.xml", System.AppDomain.CurrentDomain.BaseDirectory));
             });
 
             

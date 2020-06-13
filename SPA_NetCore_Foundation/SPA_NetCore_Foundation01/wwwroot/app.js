@@ -70,7 +70,7 @@ var app = Sammy(function () {
     //this.get("#/", function () {
     //    //인덱스 페이지
     //    //$("#divMain").load("/Pages/index.html");
-    //    DivMain.html("홈");
+    //    divMain.html("홈");
     //});
 
     //this.get("#/param/:id", function () {

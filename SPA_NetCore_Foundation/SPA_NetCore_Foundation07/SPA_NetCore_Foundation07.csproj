@@ -5,6 +5,10 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>\SPA_NetCore_Foundation07.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\app.js" />
     <_ContentIncludedByDefault Remove="wwwroot\favicon.ico" />
