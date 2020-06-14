@@ -33,9 +33,21 @@ namespace IdentityServer4.UserServices
         [15]: {http://schemas.microsoft.com/claims/authnmethodsreferences: pwd}
          */
 
+        /// <summary>
+        /// 클라이언트 아이디
+        /// </summary>
         public string client_id { get; set; }
+        /// <summary>
+        /// 권한 유효 시간
+        /// </summary>
         public string auth_time { get; set; }
+        /// <summary>
+        /// 아이디
+        /// </summary>
         public string id { get; set; }
+        /// <summary>
+        /// 아이디 - long 타입
+        /// </summary>
         public long id_int
         {
             get
@@ -48,10 +60,15 @@ namespace IdentityServer4.UserServices
             }
         }
 
+        /// <summary>
+        /// 이메일.
+        /// 인증에 사용한 이메일 정보.
+        /// 이메일이 아닌경우 고유문자열
+        /// </summary>
         public string email { get; set; }
 
         /// <summary>
-        /// 초기화
+        /// 기본값으로 생성
         /// </summary>
         public ClaimModel()
         {
@@ -62,14 +79,18 @@ namespace IdentityServer4.UserServices
         }
 
         /// <summary>
-        /// 
+        /// 인증 서버에서 넘어온 정보로 생성
         /// </summary>
-        /// <param name="claim"></param>
-        public ClaimModel(IEnumerable<Claim> claims )
+        /// <param name="claims"></param>
+        public ClaimModel(IEnumerable<Claim> claims)
         {
             this.Set(claims);
         }
 
+        /// <summary>
+        /// 인증 서버에서 넘어온 정보로 초기화
+        /// </summary>
+        /// <param name="claims"></param>
         public void Set(IEnumerable<Claim> claims)
         {
             //리스트 숫자
@@ -79,7 +100,7 @@ namespace IdentityServer4.UserServices
             {
                 Claim claimItem = arrClaims[i];
 
-                switch(claimItem.Type)
+                switch (claimItem.Type)
                 {
                     case "iclient_id":
                         this.client_id = claimItem.Value;
@@ -99,9 +120,9 @@ namespace IdentityServer4.UserServices
                         break;
                 }
 
-                
+
             }
-            
+
         }
 
     }

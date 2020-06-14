@@ -11,6 +11,9 @@ namespace IdentityServer4_Custom.IdentityServer4.AuthRequest
     /// </summary>
     public class MyExtensionGrantValidator : IExtensionGrantValidator
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string GrantType 
         { 
             get
@@ -25,6 +28,11 @@ namespace IdentityServer4_Custom.IdentityServer4.AuthRequest
 
         private string GrantTypeOri = string.Empty;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public Task ValidateAsync(ExtensionGrantValidationContext context)
         {
             throw new NotImplementedException();

@@ -25,6 +25,9 @@ using SPA_NetCore_Foundation.Global;
 
 namespace SPA_NetCore_Foundation
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Startup
     {
         /// <summary>
@@ -32,6 +35,10 @@ namespace SPA_NetCore_Foundation
         /// </summary>
         private string AuthUrl = "";
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="configuration"></param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -40,8 +47,15 @@ namespace SPA_NetCore_Foundation
             GlobalStatic.AuthUrl = this.AuthUrl;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IConfiguration Configuration { get; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
             //7. OAuth2 미들웨어(IdentityServer) 설정
@@ -116,6 +130,11 @@ namespace SPA_NetCore_Foundation
             });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

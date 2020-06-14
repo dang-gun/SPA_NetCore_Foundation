@@ -15,11 +15,20 @@ namespace IdentityServer4_Custom.UserServices
     {
         private readonly IUserRepository _userRepository;
 
+        /// <summary>
+        /// 생성
+        /// </summary>
+        /// <param name="userRepository"></param>
         public CustomResourceOwnerPasswordValidator(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
 
+        /// <summary>
+        /// 유효성 검사
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
         {
             if (_userRepository.ValidateCredentials(context.UserName, context.Password))

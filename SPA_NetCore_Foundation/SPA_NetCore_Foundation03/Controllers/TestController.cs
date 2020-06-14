@@ -11,7 +11,7 @@ using SPA_NetCore_Foundation.Model;
 
 namespace SPA_NetCore_Foundation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class TestController : ControllerBase
     {
@@ -27,7 +27,6 @@ namespace SPA_NetCore_Foundation.Controllers
         }
 
         [HttpGet]
-        [Route("Test01")]
         public ActionResult<TestModel01> Test01(int nData, string sData)
         {
             //리턴 보조

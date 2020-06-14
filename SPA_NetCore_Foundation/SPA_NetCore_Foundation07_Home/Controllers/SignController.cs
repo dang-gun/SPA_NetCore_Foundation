@@ -22,7 +22,7 @@ namespace SPA_NetCore_Foundation.Controllers
     /// <summary>
     /// 사인 관련(인,아웃,조인)
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class SignController : ControllerBase
     {
@@ -34,7 +34,6 @@ namespace SPA_NetCore_Foundation.Controllers
         /// <param name="sPW"></param>
         /// <returns></returns>
         [HttpPut]
-        [Route("SignIn")]
         public ActionResult<SignInResultModel> SignIn(
             [FromForm]string sEmail
             , [FromForm]string sPW)
@@ -137,9 +136,8 @@ namespace SPA_NetCore_Foundation.Controllers
         /// </summary>
         /// <param name="sRefreshToken"></param>
         /// <returns></returns>
-        [Authorize]//OAuth2 인증 설정
         [HttpPut]
-        [Route("SignOut")]
+        [Authorize]//OAuth2 인증 설정
         public ActionResult<string> SignOut(
             [FromForm]string sRefreshToken)
         {
@@ -189,7 +187,6 @@ namespace SPA_NetCore_Foundation.Controllers
         /// <param name="sRefreshToken"></param>
         /// <returns></returns>
         [HttpPut]
-        [Route("RefreshToAccess")]
         public ActionResult<SignInResultModel> RefreshToAccess(
             [FromForm]string sRefreshToken)
         {
@@ -269,9 +266,8 @@ namespace SPA_NetCore_Foundation.Controllers
         /// 엑세스토큰을 이용하여 유저 정보를 받는다.
         /// </summary>
         /// <returns></returns>
-        [Authorize]//OAuth2 인증 설정
         [HttpGet]
-        [Route("AccessToUserInfo")]
+        [Authorize]//OAuth2 인증 설정
         public ActionResult<SignInSimpleResultModel> AccessToUserInfo() 
         {
             //리턴 보조

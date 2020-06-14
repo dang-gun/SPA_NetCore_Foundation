@@ -25,7 +25,9 @@ namespace WebApiAuth.Model.Sign
         /// </summary>
         public int lv { get; set; }
         
-
+        /// <summary>
+        /// 
+        /// </summary>
         public SignInSimpleResultModel()
             : base()
         {

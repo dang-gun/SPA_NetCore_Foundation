@@ -22,10 +22,21 @@ namespace ModelDB
         /// </summary>
         Test00 = 1 << 0,
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         Test01 = 1 << 1,
+        /// <summary>
+        /// 
+        /// </summary>
         Test02 = 1 << 2,
+        /// <summary>
+        /// 
+        /// </summary>
         Test03 = 1 << 3,
+        /// <summary>
+        /// 
+        /// </summary>
         Test10 = 1 << 10,
 
         /// <summary>

@@ -16,13 +16,16 @@ namespace SPA_NetCore_Foundation.Controllers
     /// <summary>
     /// 마이 페이지
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     [Authorize]//OAuth2 인증 설정
     public class MyPageController : ControllerBase
     {
+        /// <summary>
+        /// 마이 페이이지 정보 조회한다.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        [Route("MyPageInfo")]
         public ActionResult<MyPageResultModel> MyPageInfo() 
         {
             ApiResultReadyModel armResult = new ApiResultReadyModel(this);

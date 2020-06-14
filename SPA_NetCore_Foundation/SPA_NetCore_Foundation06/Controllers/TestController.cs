@@ -12,12 +12,18 @@ using SPA_NetCore_Foundation.Model;
 
 namespace SPA_NetCore_Foundation.Controllers
 {
-    [Route("api/[controller]")]
+    /// <summary>
+    /// 
+    /// </summary>
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class TestController : ControllerBase
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        [Route("Call")]
         public ActionResult<ApiResultBaseModel> Call()
         {
             //리턴 보조
@@ -29,8 +35,13 @@ namespace SPA_NetCore_Foundation.Controllers
             return armResult.ToResult(tmResult);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nData"></param>
+        /// <param name="sData"></param>
+        /// <returns></returns>
         [HttpGet]
-        [Route("Test01")]
         public ActionResult<TestModel01> Test01(int nData, string sData)
         {
             //리턴 보조
@@ -54,9 +65,13 @@ namespace SPA_NetCore_Foundation.Controllers
             return armResult.ToResult(tmResult);
         }
 
-        [Authorize]//OAuth2 인증 설정
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nData"></param>
+        /// <returns></returns>
         [HttpGet]
-        [Route("Test02")]
+        [Authorize]//OAuth2 인증 설정
         public ActionResult<TestModel02> Test02(int nData)
         {
             //리턴 보조

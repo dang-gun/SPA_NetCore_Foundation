@@ -13,7 +13,7 @@ namespace SPA_NetCore_Foundation.Controllers
     /// <summary>
     /// 사인 관련(인,아웃,조인)
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class SignController : ControllerBase
     {
@@ -24,7 +24,6 @@ namespace SPA_NetCore_Foundation.Controllers
         /// <param name="sPW"></param>
         /// <returns></returns>
         [HttpPut]
-        [Route("SignIn")]
         public ActionResult<SignInModel> SignIn(
             [FromForm]string sID
             , [FromForm]string sPW)
@@ -59,7 +58,6 @@ namespace SPA_NetCore_Foundation.Controllers
         }
 
         [HttpPut]
-        [Route("SignOut")]
         public ActionResult<string> SignOut(
             [FromForm]string sToken)
         {

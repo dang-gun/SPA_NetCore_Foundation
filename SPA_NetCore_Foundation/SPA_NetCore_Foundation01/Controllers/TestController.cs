@@ -7,12 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SPA_NetCore_Foundation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class TestController : ControllerBase
     {
         [HttpGet]
-        [Route("Call")]
         public ActionResult Call()
         {
             ObjectResult apiresult = new ObjectResult(200);

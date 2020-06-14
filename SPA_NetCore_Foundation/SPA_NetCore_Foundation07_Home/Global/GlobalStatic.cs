@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace SPA_NetCore_Foundation.Global
 {
+    /// <summary>
+    /// 전역변수 모음
+    /// </summary>
     public static class GlobalStatic
     {
         /// <summary>

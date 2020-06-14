@@ -11,6 +11,9 @@ namespace SPA_NetCore_Foundation.Global
     /// </summary>
     public enum PermissionCheckType
     {
+        /// <summary>
+        /// 기본
+        /// </summary>
         
         None = 0,
 
@@ -34,6 +37,12 @@ namespace SPA_NetCore_Foundation.Global
     /// </summary>
     public static class GlobalPermission
     {
+        /// <summary>
+        /// 권한 체크
+        /// </summary>
+        /// <param name="nUserId"></param>
+        /// <param name="typeManagerPermission"></param>
+        /// <returns></returns>
         public static PermissionCheckType Permission_Check(
             long nUserId
             , ManagerPermissionType typeManagerPermission)

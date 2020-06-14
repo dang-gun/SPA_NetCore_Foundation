@@ -2,8 +2,15 @@
 
 namespace SPA_NetCore_Foundation06.Migrations
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class Setting_Data_추가 : Migration
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -38,6 +45,10 @@ namespace SPA_NetCore_Foundation06.Migrations
                 values: new object[] { 3L, "테스트용 타입. TestType 사용", "TestType", 3, "0" });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

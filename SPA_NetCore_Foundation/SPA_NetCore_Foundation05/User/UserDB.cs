@@ -17,6 +17,9 @@ namespace SPA_NetCore_Foundation.Global
         /// </summary>
         public List<UserSignInfoModel> List { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public UserDB()
         {
             this.List = new List<UserSignInfoModel>();

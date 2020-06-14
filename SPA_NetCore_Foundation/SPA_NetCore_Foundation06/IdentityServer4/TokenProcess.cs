@@ -8,6 +8,9 @@ using SPA_NetCore_Foundation.Global;
 
 namespace IdentityServer4_Custom.IdentityServer4
 {
+    /// <summary>
+    /// 토큰 처리 관련 기능들
+    /// </summary>
     public class TokenProcess
     {
         private readonly string ClientId = "resourceownerclient";
@@ -23,6 +26,10 @@ namespace IdentityServer4_Custom.IdentityServer4
         /// </summary>
         private string sIdentityServer4_Url = string.Empty;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sAuthUrl"></param>
         public TokenProcess(string sAuthUrl)
         {
             this.sIdentityServer4_Url = sAuthUrl;

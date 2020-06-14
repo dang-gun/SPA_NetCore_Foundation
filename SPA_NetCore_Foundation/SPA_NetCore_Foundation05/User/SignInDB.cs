@@ -17,6 +17,9 @@ namespace SPA_NetCore_Foundation.Global
         /// </summary>
         public List<SignInItemModel> SignInItemList { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public SignInDB()
         {
             this.SignInItemList = new List<SignInItemModel>();
@@ -56,6 +59,11 @@ namespace SPA_NetCore_Foundation.Global
 
         }//end SignInItemList_Add
 
+        /// <summary>
+        /// 사인인 리스트에서 유저를 제거한다.
+        /// </summary>
+        /// <param name="nID"></param>
+        /// <param name="sRefreshToken"></param>
         public void Delete(long nID, string sRefreshToken)
         {
             //아이디나 리플레시 토큰 둘중하나만 같으면 추출한다.

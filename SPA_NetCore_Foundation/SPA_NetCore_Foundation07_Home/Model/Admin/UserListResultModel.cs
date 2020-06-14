@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace SPA_NetCore_Foundation.Model.Admin
 {
+    /// <summary>
+    /// 유저 리스트 아이템 정보
+    /// </summary>
     public class UserListItem
     {
         /// <summary>
@@ -24,6 +27,9 @@ namespace SPA_NetCore_Foundation.Model.Admin
         public string ViewName { get; set; }
     }
 
+    /// <summary>
+    /// 유저 리스트 아이템 리스트
+    /// </summary>
     public class UserListResultModel : ApiResultBaseModel
     {
         /// <summary>

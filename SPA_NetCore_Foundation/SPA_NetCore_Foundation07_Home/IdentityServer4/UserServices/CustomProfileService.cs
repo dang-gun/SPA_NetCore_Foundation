@@ -29,6 +29,11 @@ namespace IdentityServer4_Custom.UserServices
         /// </summary>
         protected readonly IUserRepository _userRepository;
 
+        /// <summary>
+        /// 커스텀 프로필 서비스 생성
+        /// </summary>
+        /// <param name="userRepository"></param>
+        /// <param name="logger"></param>
         public CustomProfileService(IUserRepository userRepository, ILogger<CustomProfileService> logger)
         {
             _userRepository = userRepository;

@@ -2,8 +2,15 @@
 
 namespace SPA_NetCore_Foundation06.Migrations
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class UserInfo_Add : Migration
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -52,6 +59,10 @@ namespace SPA_NetCore_Foundation06.Migrations
                 values: new object[] { 4L, 0, "User", 4L });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

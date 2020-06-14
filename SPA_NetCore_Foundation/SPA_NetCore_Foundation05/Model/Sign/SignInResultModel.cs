@@ -37,7 +37,9 @@ namespace WebApiAuth.Model.Sign
         public string refresh_token { get; set; }
 
         
-
+        /// <summary>
+        /// 
+        /// </summary>
         public SignInResultModel()
             : base()
         {

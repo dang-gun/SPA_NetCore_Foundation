@@ -13,8 +13,15 @@ namespace SPA_NetCore_Foundation.Model.ApiModel
     /// </summary>
     public class ApiResultObjectModel : ApiResultBaseModel
     {
+        /// <summary>
+        /// 전달할 오브젝트
+        /// </summary>
         public object ResultObject { get; set; }
 
+        
+        /// <summary>
+        /// 기본 생성
+        /// </summary>
         public ApiResultObjectModel()
             : base()
         {
@@ -22,7 +29,7 @@ namespace SPA_NetCore_Foundation.Model.ApiModel
         }
 
         /// <summary>
-        /// 리턴할 모델 지정
+        /// 리턴할 모델 지정하여 생성
         /// </summary>
         /// <param name="objResult"></param>
         public ApiResultObjectModel(object objResult)
@@ -31,6 +38,11 @@ namespace SPA_NetCore_Foundation.Model.ApiModel
             this.ResultObject = objResult;
         }
 
+        /// <summary>
+        /// 인포코드와 메시지를 넣고 생성
+        /// </summary>
+        /// <param name="sInfoCode"></param>
+        /// <param name="sMessage"></param>
         public ApiResultObjectModel(string sInfoCode, string sMessage)
             : base(sInfoCode, sMessage)
         {

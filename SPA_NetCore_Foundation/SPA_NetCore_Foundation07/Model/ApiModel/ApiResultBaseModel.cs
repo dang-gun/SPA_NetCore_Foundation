@@ -21,12 +21,21 @@ namespace SPA_NetCore_Foundation.Model.ApiModel
         /// </summary>
         public string Message { get; set; }
 
+        /// <summary>
+        /// 기본 생성.
+        /// InfoCode가 "0"로 초기화됨
+        /// </summary>
         public ApiResultBaseModel()
         {
             this.InfoCode = "0";
             this.Message = string.Empty;
         }
 
+        /// <summary>
+        /// 인포코드와 메시지를 넣고 생성
+        /// </summary>
+        /// <param name="sInfoCode"></param>
+        /// <param name="sMessage"></param>
         public ApiResultBaseModel(string sInfoCode, string sMessage)
         {
             this.InfoCode = sInfoCode;

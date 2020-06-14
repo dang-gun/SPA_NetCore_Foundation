@@ -10,7 +10,8 @@ namespace SPA_NetCore_Foundation.Model.ApiModel
     /// <summary>
     /// api요청을 처리할때 요청결과처리를 공통화 하는 클래스.
     /// ApiResultFailModel를 공통으로 리턴하기 위해 베이스를 가지고 있다.
-    /// 결과 출력용으로 데이터는 
+    /// 결과 출력용으로 데이터는 외부로 부터 받아야 한다.
+    /// 외부에서는 ToResult를 이용하여 API 전달용 개체를 받는다.
     /// </summary>
     public class ApiResultReadyModel: ApiResultBaseModel
     {

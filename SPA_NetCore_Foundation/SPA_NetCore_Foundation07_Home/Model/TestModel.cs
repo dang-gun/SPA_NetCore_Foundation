@@ -11,9 +11,18 @@ namespace SPA_NetCore_Foundation.Model
     /// </summary>
     public class TestModel01 : ApiResultBaseModel
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public int nTest { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string sTest { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public TestModel01() : base()
         {
             this.nTest = 0;
@@ -26,9 +35,17 @@ namespace SPA_NetCore_Foundation.Model
     /// </summary>
     public class TestModel02 : ApiResultBaseModel
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public int nTest001 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string sTest002 { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public TestModel02() : base()
         {
             this.nTest001 = 0;

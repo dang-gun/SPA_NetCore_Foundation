@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace SPA_NetCore_Foundation.Model.User
 {
+    /// <summary>
+    /// 사인인 아이템
+    /// </summary>
     public class SignInItemModel
     {
         /// <summary>

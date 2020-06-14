@@ -14,7 +14,10 @@ using SPA_NetCore_Foundation.Model.ApiModel;
 
 namespace SPA_NetCore_Foundation07.Controllers
 {
-    [Route("api/[controller]")]
+    /// <summary>
+    /// 관리자 기능
+    /// </summary>
+    [Route("api/[controller]/[action]")]
     [ApiController]
     [Authorize]//OAuth2 인증 설정
     public class AdminController : ControllerBase
@@ -24,7 +27,6 @@ namespace SPA_NetCore_Foundation07.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPut]
-        [Route("SettingLoad")]
         public ActionResult<ApiResultObjectModel> SettingLoad()
         {
             ApiResultReadyModel armResult = new ApiResultReadyModel(this);
@@ -58,7 +60,6 @@ namespace SPA_NetCore_Foundation07.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("SettingList")]
         public ActionResult<SettingListResultModel> SettingList()
         {
             ApiResultReadyModel armResult = new ApiResultReadyModel(this);
@@ -98,7 +99,6 @@ namespace SPA_NetCore_Foundation07.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("SettingApply")]
         public ActionResult<SettingListResultModel> SettingApply()
         {
             ApiResultReadyModel armResult = new ApiResultReadyModel(this);
@@ -128,8 +128,12 @@ namespace SPA_NetCore_Foundation07.Controllers
             return armResult.ToResult(slrmReturn);
         }
 
+        /// <summary>
+        /// 세팅 정보를 db를 저장한다.
+        /// </summary>
+        /// <param name="s_dTossData"></param>
+        /// <returns></returns>
         [HttpPost]
-        [Route("SettingSet")]
         public ActionResult<ApiResultObjectModel> SettingSet(
             [FromForm]Setting_Data s_dTossData)
         {
@@ -184,8 +188,11 @@ namespace SPA_NetCore_Foundation07.Controllers
         }
 
 
+        /// <summary>
+        /// 유저 리스트
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        [Route("UserList")]
         public ActionResult<UserListResultModel> UserList()
         {
             ApiResultReadyModel armResult = new ApiResultReadyModel(this);

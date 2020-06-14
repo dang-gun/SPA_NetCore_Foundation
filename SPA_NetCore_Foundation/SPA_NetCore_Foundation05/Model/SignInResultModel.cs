@@ -20,6 +20,9 @@ namespace SPA_NetCore_Foundation.Model
         /// </summary>
         public string token { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public SignInModel()
             : base()
         {

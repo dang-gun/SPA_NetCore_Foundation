@@ -3,8 +3,15 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SPA_NetCore_Foundation06.Migrations
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class Initialize : Migration
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -48,6 +55,10 @@ namespace SPA_NetCore_Foundation06.Migrations
                 values: new object[] { 2L, "1111", "test02@email.net" });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

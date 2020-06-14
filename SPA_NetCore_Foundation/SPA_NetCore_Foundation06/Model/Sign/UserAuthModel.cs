@@ -20,17 +20,27 @@ namespace WebApiAuth.Model.Sign
         /// </summary>
         public string SignEmail { get; set; }
 
+        /// <summary>
+        /// 기본 값으로 생성
+        /// </summary>
         public UserAuthModel()
         {
 
         }
 
+        /// <summary>
+        /// 유저 정보를 이용하여 생성
+        /// </summary>
+        /// <param name="user"></param>
         public UserAuthModel(ModelDB.User user)
         {
             this.ManagerAuth_Set(user);
         }
 
-
+        /// <summary>
+        /// 유저 정보 저장
+        /// </summary>
+        /// <param name="user"></param>
         public void ManagerAuth_Set(ModelDB.User user)
         {
             this.idUser = user.idUser;

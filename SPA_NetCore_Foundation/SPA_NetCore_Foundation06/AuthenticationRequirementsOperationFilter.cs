@@ -12,6 +12,11 @@ namespace SPA_NetCore_Foundation
 	/// </summary>
 	public class AuthenticationRequirementsOperationFilter : IOperationFilter
 	{
+		/// <summary>
+		/// 스웨거용 bearer 체크 필터
+		/// </summary>
+		/// <param name="operation"></param>
+		/// <param name="context"></param>
 		public void Apply(OpenApiOperation operation, OperationFilterContext context)
 		{
 			if (operation.Security == null)
