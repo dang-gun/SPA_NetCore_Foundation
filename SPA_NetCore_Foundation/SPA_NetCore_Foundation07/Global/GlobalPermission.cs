@@ -12,7 +12,7 @@ namespace SPA_NetCore_Foundation.Global
     public enum PermissionCheckType
     {
         /// <summary>
-        /// 기본
+        /// 없음
         /// </summary>
         
         None = 0,

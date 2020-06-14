@@ -21,7 +21,7 @@ using IdentityServer4_Custom.IdentityServer4;
 using IdentityServer4_Custom.IdentityServer4.AuthRequest;
 
 using SPA_NetCore_Foundation.Global;
-
+using SwaggerAssist;
 
 namespace SPA_NetCore_Foundation
 {

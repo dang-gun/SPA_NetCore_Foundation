@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SPA_NetCore_Foundation
+namespace SwaggerAssist
 {
 	/// <summary>
 	/// https://github.com/domaindrivendev/Swashbuckle.AspNetCore
