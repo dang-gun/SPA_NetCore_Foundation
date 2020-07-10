@@ -26,7 +26,7 @@ namespace SPA_NetCore_Foundation.Controllers
     [ApiController]
     public class SignController : ControllerBase
     {
-        
+
         /// <summary>
         /// 사인인 시도
         /// </summary>
@@ -101,24 +101,19 @@ namespace SPA_NetCore_Foundation.Controllers
                         //db 적용
                         db1.SaveChanges();
 
-
-
-                        //연결된 유저 정보 검색
-                        UserInfo uiToss
-                            = db1.UserInfo
-                                .Where(m => m.idUser == user.idUser)
-                                .FirstOrDefault();
-
                         //로그인한 유저에게 전달할 정보
                         smResult.idUser = user.idUser;
                         smResult.Email = user.SignEmail;
-
-                        smResult.ViewName = uiToss.ViewName;
+                        smResult.ViewName = smResult.Email;
 
                         smResult.access_token = tr.AccessToken;
                         smResult.refresh_token = tr.RefreshToken;
-                    }//end using db1
-                }//end if tr.IsError
+                    }
+
+
+                    
+
+                }
             }
             else
             {
@@ -181,6 +176,7 @@ namespace SPA_NetCore_Foundation.Controllers
         }
 
 
+        
         /// <summary>
         /// 리플레시 토큰을 이용하여 엑세스토큰을 갱신한다.
         /// </summary>
@@ -243,15 +239,10 @@ namespace SPA_NetCore_Foundation.Controllers
                         db1.SaveChanges();
 
 
-                        //유저 정보 검색
-                        UserInfo uiFind
-                            = db1.UserInfo
-                                .Where(m => m.idUser == cm.id_int)
-                                .FirstOrDefault();
                         //유저에게 전달할 정보 만들기
                         smResult.idUser = cm.id_int;
                         smResult.Email = cm.email;
-                        smResult.ViewName = uiFind.ViewName;
+                        smResult.ViewName = smResult.Email;
 
                         smResult.access_token = tr.AccessToken;
                         smResult.refresh_token = tr.RefreshToken;
@@ -266,6 +257,7 @@ namespace SPA_NetCore_Foundation.Controllers
         /// 엑세스토큰을 이용하여 유저 정보를 받는다.
         /// </summary>
         /// <returns></returns>
+        
         [HttpGet]
         [Authorize]//OAuth2 인증 설정
         public ActionResult<SignInSimpleResultModel> AccessToUserInfo() 
@@ -278,28 +270,22 @@ namespace SPA_NetCore_Foundation.Controllers
             //유저 정보 추출
             ClaimModel cm = new ClaimModel(((ClaimsIdentity)User.Identity).Claims);
 
+            //검색된 유저
+            User user = null;
 
             using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext())
             {
-
                 //유저 검색
-                User user
+                user
                     = db1.User
                         .FirstOrDefault(m =>
                             m.idUser == cm.id_int);
 
-                UserInfo userinfo
-                    = db1.UserInfo
-                        .FirstOrDefault(m =>
-                            m.idUser == user.idUser);
-
-
-                if (null != user)
+                if(null != user)
                 {//유저 정보가 있다.
                     tmResult.idUser = user.idUser;
                     tmResult.Email = user.SignEmail;
-
-                    tmResult.ViewName = userinfo.ViewName;
+                    tmResult.ViewName = tmResult.Email;
                 }
                 else
                 {//유저 정보가 없다.
@@ -310,7 +296,6 @@ namespace SPA_NetCore_Foundation.Controllers
 
             return armResult.ToResult(tmResult);
         }
-
 
 
 

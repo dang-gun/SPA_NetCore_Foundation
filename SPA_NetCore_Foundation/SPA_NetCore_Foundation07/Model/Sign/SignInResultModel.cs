@@ -1,5 +1,4 @@
-﻿using ModelDB;
-using SPA_NetCore_Foundation.Model.ApiModel;
+﻿using SPA_NetCore_Foundation.Model.ApiModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +23,7 @@ namespace WebApiAuth.Model.Sign
         /// 표시 이름
         /// </summary>
         public string ViewName { get; set; }
+
 
         /// <summary>
         /// 엑세스 토큰

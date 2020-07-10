@@ -20,8 +20,7 @@ Page.Load = function (jsonOption, callbackFun)
 {
     var callbackFun_Backup = callbackFun;
 
-    if (Page.divMainMenu === null) 
-    {//페이지가 로드 되지 않았다.
+    if (Page.divMainMenu === null) {//페이지가 로드 되지 않았다.
 
         //페이지 html 로드
         DivMain.load(FS_FUrl.Page
@@ -60,8 +59,6 @@ Page.Remove = function ()
     Page.divContents = null;
 };
 
-
-
 /**
  * 페이지 이동
  * @param {boolean } bSignIn 사인인 확인
@@ -77,7 +74,7 @@ Page.Move_Page = function (bSignIn, sUrl)
         }
         else
         {//사인인이 안되있음
-            GlobalStatic.MessageBox_Info("사인인이 필요합니다.");
+            alert("사인인이 필요합니다.");
         }
     }
     else
@@ -85,6 +82,8 @@ Page.Move_Page = function (bSignIn, sUrl)
         location.href = sUrl;
     }
 };
+
+
 
 Page.Move_Home = function ()
 {

@@ -1,0 +1,5 @@
+﻿접속 주소
+https://[주소]/swagger
+
+예>
+https://localhost:44302/swagger

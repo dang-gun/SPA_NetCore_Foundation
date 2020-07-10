@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SPA_NetCore_Foundation.Model.ApiModel
+namespace ApiModel
 {
     /// <summary>
     /// API 결과 공통 베이스.
@@ -27,8 +27,7 @@ namespace SPA_NetCore_Foundation.Model.ApiModel
         /// </summary>
         public ApiResultBaseModel()
         {
-            this.InfoCode = "0";
-            this.Message = string.Empty;
+            this.Reset();
         }
 
         /// <summary>
@@ -40,6 +39,15 @@ namespace SPA_NetCore_Foundation.Model.ApiModel
         {
             this.InfoCode = sInfoCode;
             this.Message = sMessage;
+        }
+
+        /// <summary>
+        /// 성공으로 초기화한다.
+        /// </summary>
+        public void Reset()
+        {
+            this.InfoCode = ApiResultType.None.GetHashCode().ToString();
+            this.Message = string.Empty;
         }
     }
 }

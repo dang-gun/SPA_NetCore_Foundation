@@ -56,6 +56,22 @@ GlobalSign.RefreshToken_Get = function ()
 };
 
 
+GlobalSign.RefreshToken_SetOption = function (sRefreshToken)
+{
+    //타입 저장
+    var nSaveType = CA.SaveType.Default;
+
+    var sAutoSignIn = CA.Get(GlobalSign.AutoSignIn_CookieName);
+
+    if ("true" === sAutoSignIn)
+    {//자동저장 활성화 되있음
+        nSaveType = CA.SaveType.Month1;
+    }
+
+    //토큰 저장 시도
+    GlobalSign.RefreshToken_Set(sRefreshToken, nSaveType);
+};
+
 /**
  * 리플레시 토큰 저장하기
  * @param {string} sRefreshToken 저장할 리플레시 토큰
@@ -76,26 +92,8 @@ GlobalSign.RefreshToken_Set = function (sRefreshToken, bMonth1)
     CA.Set(GlobalSign.RefreshToken_CookieName
         , sRefreshToken
         , nSaveType);
-
+    
 };
-
-
-GlobalSign.RefreshToken_SetOption = function (sRefreshToken)
-{
-    //타입 저장
-    var nSaveType = CA.SaveType.Default;
-
-    var sAutoSignIn = CA.Get(GlobalSign.AutoSignIn_CookieName);
-
-    if ("true" === sAutoSignIn)
-    {//자동저장 활성화 되있음
-        nSaveType = CA.SaveType.Month1;
-    }
-
-    //토큰 저장 시도
-    GlobalSign.RefreshToken_Set(sRefreshToken, nSaveType);
-};
-
 
 /**
  * 사인인 페이지로 이동
@@ -113,8 +111,6 @@ GlobalSign.Move_SignIn = function ()
  */
 GlobalSign.Move_SignIn_Remove = function (bMessage, sMessage)
 {
-    var sMsg = sMessage;
-
     GlobalSign.SignIn = false;
 
     GlobalSign.AccessToken_Set("");
@@ -153,8 +149,6 @@ GlobalSign.Move_SignIn_Remove = function (bMessage, sMessage)
     if (true === bMessage)
     {
         //alert(sMessage);
-        //funSiteMove();
-
         DG_MessageBox.Show({
             Title: GlobalStatic.Title,
             Content: sMsg,
@@ -175,7 +169,6 @@ GlobalSign.Move_SignIn_Remove = function (bMessage, sMessage)
     {
         funSiteMove();
     }
-
 };
 
 /**
@@ -188,21 +181,7 @@ GlobalSign.Move_SignOut = function ()
     
     if (false === dgIsObject.IsBoolValue(GlobalSign.SignIn))
     {//사인 아웃이 되어 있음
-        //alert("사인아웃이 되어 있습니다.");
-        DG_MessageBox.Show({
-            Title: GlobalStatic.Title,
-            Content: "사인아웃이 되어 있습니다.",
-
-            top: 200,
-            left: 200,
-
-            ButtonShowType: DG_MessageBox.ButtonShowType.Ok,
-            BigIconType: DG_MessageBox.BigIconType.Error,
-            ButtonEvent: function (btnType)
-            {
-                DG_Popup.Close();
-            }
-        });
+        alert("사인아웃이 되어 있습니다.");
     }
     else
     {
@@ -224,21 +203,7 @@ GlobalSign.Move_SignOut = function ()
                     //엑세스 토큰 제거
                     GlobalSign.AccessToken_Set("");
 
-                    //alert("사인아웃 성공 : " + data);
-                    DG_MessageBox.Show({
-                        Title: GlobalStatic.Title,
-                        Content: "사인아웃 성공<br />" + data,
-
-                        top: 200,
-                        left: 200,
-
-                        ButtonShowType: DG_MessageBox.ButtonShowType.Ok,
-                        BigIconType: DG_MessageBox.BigIconType.Success,
-                        ButtonEvent: function (btnType)
-                        {
-                            DG_Popup.Close();
-                        }
-                    });
+                    alert("사인아웃 성공 : " + data);
 
                 
                     switch (GlobalStatic.SiteType)
@@ -259,11 +224,9 @@ GlobalSign.Move_SignOut = function ()
                     console.log(error);
 
                     if (error.responseJSON
-                        && error.responseJSON.InfoCode) 
-                    {
-                        GlobalStatic.MessageBox_Error("", 
-                            "실패코드 : " + error.responseJSON.InfoCode + "<br /> "
-                            + error.responseJSON.Message);
+                            && error.responseJSON.InfoCode) {
+                        alert("실패코드 : " + error.responseJSON.InfoCode
+                            + "\n " + error.responseJSON.message);
                     }
                 }
             }
@@ -312,7 +275,7 @@ GlobalSign.AccessTokenToInfo = function (callback)
 
                         GlobalSign.SignIn_ViewName = jsonData.ViewName;
 
-                        if (typeof TopInfo === "undefined")
+                        if (typeof TopInfo !== "undefined")
                         {
                             TopInfo.UserInfo_Load();
                         }

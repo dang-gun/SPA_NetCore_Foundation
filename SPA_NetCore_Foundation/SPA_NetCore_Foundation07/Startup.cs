@@ -44,19 +44,15 @@ namespace SPA_NetCore_Foundation
         {
             Configuration = configuration;
 
+            
             //DB 커낵션 스트링 받아오기
             string sConnectStringSelect = "SpaNetCoreFoundation_sqlite";
             GlobalStatic.DBType = Configuration[sConnectStringSelect + ":DBType"];
             GlobalStatic.DBString = Configuration[sConnectStringSelect + ":ConnectionString"];
 
-
             //인증 정보
             this.AuthUrl = Configuration["AuthServer:Url"];
             GlobalStatic.TokenProc = new TokenProcess(this.AuthUrl);
-
-
-            //세팅 로드
-            GlobalStatic.Setting_Load();
         }
 
         /// <summary>
@@ -95,7 +91,7 @@ namespace SPA_NetCore_Foundation
                 o.Audience = "apiApp";
 
                 //인증서버의 주소
-                o.Authority = this.AuthUrl;
+                o.Authority = AuthUrl;
                 o.RequireHttpsMetadata = false;
                 //인증서버에서 선언한 권한
                 o.Audience = "dataEventRecords";
@@ -105,11 +101,11 @@ namespace SPA_NetCore_Foundation
             //스웨거 문서정보를 생성 한다.
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1"
-                    , new OpenApiInfo
-                    { 
-                        Title = "SPA NetCore Foundation API", 
-                        Description = "[ASP.NET Core] .NET Core로 구현한 SPA(Single Page Applications)(5) - 스웨거(Swagger) 설정 <br /> https://blog.danggun.net/7689",
+                c.SwaggerDoc("v1",
+                    new OpenApiInfo
+                    {
+                        Title = "SPA NetCore Foundation API",
+                        Description = "[ASP.NET Core] .NET Core로 구현한 SPA(Single Page Applications)(5) - 스웨거(Swagger) 설정 <br /> https://blog.danggun.net/https://blog.danggun.net/7690",
                         Version = "v1",
                         Contact = new OpenApiContact
                         {
@@ -164,7 +160,6 @@ namespace SPA_NetCore_Foundation
             //3.0 api 라우트
             app.UseRouting();
 
-
             //09. OAuth2 미들웨어(IdentityServer) CROS 접근 권한 문제
             //app.UseCors(options =>
             //{
@@ -201,6 +196,7 @@ namespace SPA_NetCore_Foundation
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
                 //c.RoutePrefix = string.Empty;
             });
+
 
             //3.0 api 라우트 끝점
             app.UseEndpoints(endpoints =>

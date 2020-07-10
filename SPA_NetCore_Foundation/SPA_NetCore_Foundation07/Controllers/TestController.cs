@@ -19,7 +19,6 @@ namespace SPA_NetCore_Foundation.Controllers
     [ApiController]
     public class TestController : ControllerBase
     {
-
         /// <summary>
         /// 
         /// </summary>
@@ -29,11 +28,11 @@ namespace SPA_NetCore_Foundation.Controllers
         {
             //리턴 보조
             ApiResultReadyModel armResult = new ApiResultReadyModel(this);
-            armResult.InfoCode = "0";
-
+            //리턴용 모델
+            ApiResultBaseModel tmResult = new ApiResultBaseModel();
             armResult.Message = "성공";
 
-            return armResult.ToResult(null);
+            return armResult.ToResult(tmResult);
         }
 
         /// <summary>
@@ -50,7 +49,7 @@ namespace SPA_NetCore_Foundation.Controllers
             //리턴용 모델
             TestModel01 tmResult = new TestModel01();
 
-            if (0 <= nData)
+            if(0 <= nData)
             {//양수다.
                 tmResult.nTest = nData;
                 tmResult.sTest = sData;
@@ -87,41 +86,6 @@ namespace SPA_NetCore_Foundation.Controllers
             {//양수다.
                 tmResult.nTest001 = nData;
                 tmResult.sTest002 = "성공 했습니다! : " + cm.id;
-            }
-            else
-            {
-                armResult.StatusCode = StatusCodes.Status500InternalServerError;
-
-                armResult.InfoCode = "1";
-                armResult.Message = "'nData'에 음수가 입력되었습니다.";
-            }
-
-            return armResult.ToResult(tmResult);
-        }
-
-        /// <summary>
-        /// 오브젝트 리절트 테스트
-        /// </summary>
-        /// <param name="nData"></param>
-        /// <param name="sData"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult<ApiResultObjectModel> Test03(int nData, string sData)
-        {
-            //리턴 보조
-            ApiResultReadyModel armResult = new ApiResultReadyModel(this);
-            //리턴용 모델
-            ApiResultObjectModel tmResult = new ApiResultObjectModel();
-
-            List<string> listReturn = new List<string>();
-
-
-            if (0 <= nData)
-            {//양수다.
-                listReturn.Add(nData.ToString());
-                listReturn.Add(sData);
-
-                tmResult.ResultObject = listReturn;
             }
             else
             {

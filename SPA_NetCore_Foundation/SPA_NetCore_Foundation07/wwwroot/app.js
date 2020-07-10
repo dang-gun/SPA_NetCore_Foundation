@@ -70,102 +70,7 @@ app_Assist.RouteCheck = function (bSignIn, callback)
                 //죽어있을때만 안내를 해준다.
                 //어차피 엑세스토큰이 갱신됐을때 메시지가 출력되므로.
                 //alert("사인인이 필요합니다.");
-                GlobalStatic.MessageBox_Error("", "사인인이 필요합니다.");
-            }
-
-            switch (GlobalStatic.SiteType)
-            {
-                case 1://어드민 타입
-                    //어드민타입은 사인인으로 보냅니다.
-                    GlobalSign.Move_SignIn();
-                    break;
-
-                case 0://기본 타입
-                default:
-                    history.back();
-                    break;
-            }
-        }
-    };
-
-    //첫 토큰 확인이 끝났는지 확인
-    if (true === GlobalSign.SignIn
-        || true === app_Assist.bFirstAccessCheck)
-    {//로그인이 되어 있거나
-        //첫 토큰 확인이 끝났다.
-
-        //바로 체크함수 동작
-        funCallback();
-    }
-    else
-    {//첫 토큰 체크가 되지 않았다.
-
-        //첫 토큰 체크가 끝나면 'app_Assist.RouteCallback'를 호출하게 되어 있으므로
-        //임시로 저장해 둔다.
-        app_Assist.RouteCallback = funCallback;
-    }
-};
-
-
-/**
-* 라우트 체크.
-* 불허에 따른 작업은 이곳에서 한다.
-* @param {boolean} bSignIn 사인인이 필수 인지 여부
-* @param {function} callback 허가가 났으면 동작시킬 콜백
-*/
-app_Assist.RouteCheck = function (bSignIn, callback)
-{
-    var bSignInTemp = bSignIn;
-    var callbackTemp = callback;
-
-    //라우트 판단 코드를 콜백으로 만들어 둔다.
-    var funCallback = function ()
-    {
-        var bReturn = true;
-
-        if (true === bSignInTemp)
-        {//사인인이 필수다.
-            if (false === GlobalSign.SignIn)
-            {//로그인 안되있음
-                //실패 알림
-                bReturn = false;
-            }
-        }
-        else
-        {//사인이이 필수가 아니다.
-            switch (GlobalStatic.SiteType)
-            {
-                case 1://어드민 타입
-                    //어드민 타입은 로그인 필수다.
-                    if (false === GlobalSign.SignIn)
-                    {//로그인 안되있음
-                        //실패 알림
-                        bReturn = false;
-                    }
-                    break;
-
-                case 0://기본 타입
-                default:
-                    //기본 타입은 사인인이 필수가 아니면 그냥 동작한다.
-                    bReturn = true;
-                    break;
-            }
-        }
-
-        if (true === bReturn)
-        {//허가가 났다.
-            //콜백 호출
-            callbackTemp();
-        }
-        else
-        {//실패 했다.
-
-            if (false === GlobalSign.isAccessToken())
-            {//엑세스토큰이 죽어 있다.
-                //죽어있을때만 안내를 해준다.
-                //어차피 엑세스토큰이 갱신됐을때 메시지가 출력되므로.
-                //alert("사인인이 필요합니다.");
-                GlobalStatic.MessageBox_Error("", "사인인이 필요합니다.");
+                GlobalStatic.MessageBox_Error("사인인이 필요합니다.");
             }
 
             switch (GlobalStatic.SiteType)
@@ -203,11 +108,7 @@ app_Assist.RouteCheck = function (bSignIn, callback)
 
 
 
-
-
-
-
-/** 라우트 어플리케이션 생성 */
+// 라우트 어플리케이션 생성
 var app = Sammy(function ()
 {
     if (false === dgIsObject.IsBoolValue(GlobalSign.SignIn))
@@ -231,51 +132,25 @@ var app = Sammy(function ()
 
     this.get("/", function ()
     {
-        app_Assist.RouteCheck(false
-            , function ()
-            {
-                //this.RouteCheck에서 로그인 체크를 해준다.
-                //그러니 여기서는 홈으로만 이동하면 된다.
-                location.href = FS_Url.Home;
-            });
+        app.RouteCheck(function ()
+        {
+            //this.RouteCheck에서 로그인 체크를 해준다.
+            //그러니 여기서는 홈으로만 이동하면 된다.
+            location.href = FS_Url.Home;
+        });
     });
 
-    //에러 페이지로 이동시키고 싶을때
     this.get(FS_Url.Error + "/:code", function ()
     {
         //파라미터 받기
         var nCode = this.params["code"];
 
-        //사인인 필수 페이지
-        app_Assist.RouteCheck(false
-            , function ()
-            {
-                //객체 생성
-                GlobalStatic.Page_Now = new Error(nCode);
-            });
-    });
-
-
-
-    this.get(FS_Url.Admin, function ()
-    {
-        //사인인 필수 페이지
-        app_Assist.RouteCheck(true
-            , function ()
-            {
-                //객체 생성
-                GlobalStatic.Page_Now = new Admin();
-            });
-    });
-
-    this.get(FS_Url.Home, function ()
-    {
-        app_Assist.RouteCheck(false
-            , function ()
-            {
-                //객체 생성
-                GlobalStatic.Page_Now = new Home();
-            });
+        
+        app.RouteCheck(function ()
+        {
+            //객체 생성
+            GlobalStatic.Page_Now = new Error(nCode);
+        });
     });
 
     this.get(FS_Url.SignIn, function ()
@@ -296,52 +171,45 @@ var app = Sammy(function ()
 
     this.get(FS_Url.Home, function ()
     {
-        app_Assist.RouteCheck(false
-            , function ()
-            {
-                //객체 생성
-                GlobalStatic.Page_Now = new Home();
-            });
+        app.RouteCheck(function ()
+        {
+            //객체 생성
+            GlobalStatic.Page_Now = new Home();
+        });
     });
 
-
-    this.get(FS_Url.MyPage, function ()
-    {
-        //사인인 필수 페이지
-        app_Assist.RouteCheck(true
-            , function ()
-            {
-                //객체 생성
-                GlobalStatic.Page_Now = new MyPage();
-            });
-    });
 
 
 
     this.get(FS_Url.Test01, function () 
     {
-        app_Assist.RouteCheck(false
-            , function ()
-            {
-                //객체 생성
-                GlobalStatic.Page_Now = new Test01();
-            });
+        app.RouteCheck(function ()
+        {
+            //객체 생성
+            GlobalStatic.Page_Now = new Test01();
+        });
     });
 
     this.get(FS_Url.Test02, function () 
     {
-        app_Assist.RouteCheck(false
-            , function ()
-            {
-                //객체 생성
-                GlobalStatic.Page_Now = new Test02();
-            });
+        app.RouteCheck(function ()
+        {
+            //객체 생성
+            GlobalStatic.Page_Now = new Test02();
+        });
     });
 
     //this.get("#/", function () {
     //    //인덱스 페이지
     //    //$("#divMain").load("/Pages/index.html");
     //    DivMain.html("홈");
+    //});
+
+    //this.get("#/param/:id", function () {
+    //    //파라미터 받기
+    //    var nID = this.params['id'];
+
+    //    $("#divMain").html("넘어온 파라미터 id : " + nID);
     //});
 
     //에러 처리용
@@ -364,21 +232,19 @@ var app = Sammy(function ()
         switch (GlobalStatic.SiteType)
         {
             case 0://일반
-                //Page.Move_Page(false, FS_Url.Error + "/" + "404");
-                this.ErrorFun("404");
+                Page.Move_Page(false, FS_Url.Error + "/" + "404");
                 break;
             case 1://어드민 타입
                 //사인인이 되어 있을때 -> 컨탠츠 영역에 출력한다.
                 //사인인이 되어 있지 않을때 -> 사인인 페이지, 메시지 출력
                 if (true === GlobalSign.SignIn)
                 {
-                    this.ErrorFun("404");
+                    Page.Move_Page(false, FS_Url.Error + "/" + "404");
                 }
                 else
                 {
-                    //alert("404, 페이지를 찾지 못했습니다.");
+                    alert("404, 페이지를 찾지 못했습니다.");
                     Page.Move_Page(false, FS_Url.SignIn);
-                    GlobalStatic.MessageBox_Error("", "404<br />페이지를 찾을 수 없습니다.");
                 }
                 break;
         }
@@ -386,14 +252,43 @@ var app = Sammy(function ()
 });
 
 
-//어플리케이션 시작
-$(function ()
+/**
+* 라우트 체크.
+* 불허에 따른 작업은 이곳에서 한다.
+* @param {function} callback 허가가 났으면 동작시킬 콜백
+*/
+app.RouteCheck = function (callback)
 {
-    app.run();
+    var bReturn = true;
 
-    //공통 메시지 박스 초기화
-    DG_MessageBox.Initialize({
-        /** 크기 고정 */
-        SizeFixed: true
-    });
+    switch (GlobalStatic.SiteType)
+    {
+        case 1://어드민 타입
+            if (false === GlobalSign.SignIn)
+            {//로그인 안되있음
+
+                //실패 알림
+                bReturn = false;
+                //로그인 페이지로 이동
+                GlobalSign.Move_SignIn();
+            }
+            break;
+
+        case 0://기본 타입
+        default:
+            bReturn = true;
+            break;
+    }
+
+    if (true === bReturn)
+    {//허가가 났다.
+        //콜백 호출
+        callback();
+    }
+};
+
+
+//어플리케이션 시작
+$(function () {
+    app.run();
 });

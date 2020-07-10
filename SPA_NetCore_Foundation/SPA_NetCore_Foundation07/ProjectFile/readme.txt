@@ -1,5 +1,5 @@
-﻿[ASP.NET Core] .NET Core로 구현한 SPA(Sigle Page Applications)(7)- 부트스트랩, 무료 템플릿 추가
-https://blog.danggun.net/7437
+﻿[ASP.NET Core] .NET Core로 구현한 SPA(Single Page Applications)(6) - EF(Entity Framework)와 코드 퍼스트(Code First)
+https://blog.danggun.net/7690
 
 프로젝트 구성 정보
 Visual Studio 2019 Preview(16.1.0 Preview 3.0)
@@ -8,15 +8,10 @@ js router : Sammy.js (http://sammyjs.org/ , https://github.com/quirkey/sammy)
 
 /***********************/
 요약
-
-기능 추가용 프로젝트
-이제부터 추가가능은 이 프로젝에 추가된다.
-
-관리자 필수기능 추가
-마이페이지 기능 추가
-공통 유틸리티 추가
-- 팝업 유틸
-- 메시지 박스 유틸
+EF(Entity Framework)와 코드 퍼스트(Code First)
+EF를 설치하고 코드퍼스트 방식으로 DB를 생성한다.
+셈플용 DB는 SQLite로 설정함.
+로그인 정보를 DB로 옮김
 
 
 /***********************/

@@ -86,7 +86,6 @@ AA.delete = function (typeToken, jsonOption)
 };
 
 
-
 /**
  * jquery를 이용하여 요청을 처리합니다.
  * @param {TokenRelayType} typeToken 헤더에 토큰을 넣을지 여부
@@ -94,6 +93,7 @@ AA.delete = function (typeToken, jsonOption)
  */
 AA.call = function (typeToken, jsonOption)
 {
+
     //매개변수 백업
     var typeTokenTemp = typeToken;
 
@@ -280,8 +280,7 @@ AA.RefreshToAccess = function (callback)
  * @param {function} funSuccess 성공시 콜백
  * @param {function} jsonOption 추가 옵션
  */
-AA.HtmlFileLoad = function (sFileUrl, funSuccess, jsonOption)
-{
+AA.HtmlFileLoad = function (sFileUrl, funSuccess, jsonOption) {
     AA.get(AA.TokenRelayType.None
         , {
             url: sFileUrl

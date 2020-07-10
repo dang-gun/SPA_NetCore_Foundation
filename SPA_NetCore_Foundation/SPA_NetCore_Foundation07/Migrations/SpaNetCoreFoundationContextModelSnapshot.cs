@@ -16,50 +16,6 @@ namespace SPA_NetCore_Foundation06.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
-            modelBuilder.Entity("ModelDB.Setting_Data", b =>
-                {
-                    b.Property<long>("idSetting_Data")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("Name");
-
-                    b.Property<int>("Number");
-
-                    b.Property<string>("ValueData");
-
-                    b.HasKey("idSetting_Data");
-
-                    b.ToTable("Setting_Data");
-
-                    b.HasData(
-                        new
-                        {
-                            idSetting_Data = 1L,
-                            Description = "프로그램 전체에 표시될 이름",
-                            Name = "Title",
-                            Number = 1,
-                            ValueData = "ASP.NET Core SPA Foundation"
-                        },
-                        new
-                        {
-                            idSetting_Data = 2L,
-                            Description = "접속 허용 여부",
-                            Name = "ConnectionAllow",
-                            Number = 2,
-                            ValueData = "true"
-                        },
-                        new
-                        {
-                            idSetting_Data = 3L,
-                            Description = "테스트용 타입. TestType 사용",
-                            Name = "TestType",
-                            Number = 3,
-                            ValueData = "0"
-                        });
-                });
-
             modelBuilder.Entity("ModelDB.User", b =>
                 {
                     b.Property<long>("idUser")
@@ -85,65 +41,6 @@ namespace SPA_NetCore_Foundation06.Migrations
                             idUser = 2L,
                             Password = "1111",
                             SignEmail = "test02@email.net"
-                        },
-                        new
-                        {
-                            idUser = 3L,
-                            Password = "1111",
-                            SignEmail = "testuser@email.net"
-                        },
-                        new
-                        {
-                            idUser = 4L,
-                            Password = "1111",
-                            SignEmail = "user@email.net"
-                        });
-                });
-
-            modelBuilder.Entity("ModelDB.UserInfo", b =>
-                {
-                    b.Property<long>("idUserInfo")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("ManagerPermission");
-
-                    b.Property<string>("ViewName")
-                        .HasMaxLength(16);
-
-                    b.Property<long>("idUser");
-
-                    b.HasKey("idUserInfo");
-
-                    b.ToTable("UserInfo");
-
-                    b.HasData(
-                        new
-                        {
-                            idUserInfo = 1L,
-                            ManagerPermission = 2147483647,
-                            ViewName = "root",
-                            idUser = 1L
-                        },
-                        new
-                        {
-                            idUserInfo = 2L,
-                            ManagerPermission = 1,
-                            ViewName = "admin",
-                            idUser = 2L
-                        },
-                        new
-                        {
-                            idUserInfo = 3L,
-                            ManagerPermission = 1,
-                            ViewName = "test User",
-                            idUser = 3L
-                        },
-                        new
-                        {
-                            idUserInfo = 4L,
-                            ManagerPermission = 0,
-                            ViewName = "User",
-                            idUser = 4L
                         });
                 });
 

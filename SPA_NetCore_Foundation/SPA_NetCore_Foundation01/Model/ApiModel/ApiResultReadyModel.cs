@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SPA_NetCore_Foundation.Model.ApiModel
+namespace ApiModel
 {
     /// <summary>
     /// api요청을 처리할때 요청결과처리를 공통화 하는 클래스.

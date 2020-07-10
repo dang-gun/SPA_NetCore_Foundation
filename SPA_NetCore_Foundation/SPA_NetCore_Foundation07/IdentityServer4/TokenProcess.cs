@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using IdentityModel.Client;
+using SPA_NetCore_Foundation.Global;
 
 namespace IdentityServer4_Custom.IdentityServer4
 {
