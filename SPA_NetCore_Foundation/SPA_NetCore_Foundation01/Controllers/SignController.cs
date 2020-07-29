@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using SPA_NetCore_Foundation.Model.ApiModel;
+using ApiModel;
 using SPA_NetCore_Foundation.Model;
 
 namespace SPA_NetCore_Foundation.Controllers

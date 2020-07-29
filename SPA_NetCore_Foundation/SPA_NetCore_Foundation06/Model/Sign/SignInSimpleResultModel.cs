@@ -1,4 +1,4 @@
-﻿using SPA_NetCore_Foundation.Model.ApiModel;
+﻿using ApiModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
