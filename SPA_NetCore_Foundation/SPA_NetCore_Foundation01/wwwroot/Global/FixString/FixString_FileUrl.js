@@ -8,8 +8,8 @@ FS_FUrl.Pages = "/Pages/";
 FS_FUrl.Page = FS_FUrl.Pages + "Page.html";
 
 FS_FUrl.SignInInfo = FS_FUrl.Pages + "SignInInfo/";
-FS_FUrl.SignInInfo_SignIn = FS_FUrl.SignInInfo + "SignInInfo_SignIn.html";
-FS_FUrl.SignInInfo_SignOut = FS_FUrl.SignInInfo + "SignInInfo_SignOut.html";
+FS_FUrl.SignInInfo_SignInHtml = FS_FUrl.SignInInfo + "SignInInfo_SignIn.html";
+FS_FUrl.SignInInfo_SignOutHtml = FS_FUrl.SignInInfo + "SignInInfo_SignOut.html";
 
 
 

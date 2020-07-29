@@ -8,7 +8,7 @@ GlobalSign.SignIn = false;
 /** 사인인 - 아이디 정보 */
 GlobalSign.SignIn_ID = "";
 /** 사인인 - 토큰 정보 */
-GlobalSign.SignIn_token = "";
+GlobalSign.SignIn_Token = "";
 
 /**
  * 사인인 페이지로 이동
@@ -37,7 +37,7 @@ GlobalSign.Move_SignOut = function ()
             url: FS_Api.Sign_SignOut,
             type: "PUT",
             data: {
-                sToken: GlobalSign.SignIn_token
+                sToken: GlobalSign.SignIn_Token
             },
             dataType: "text",
             success: function (data) {

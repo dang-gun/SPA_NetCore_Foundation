@@ -14,17 +14,17 @@ namespace SPA_NetCore_Foundation.Model
         /// <summary>
         /// 성공여부
         /// </summary>
-        public bool complete { get; set; }
+        public bool Complete { get; set; }
         /// <summary>
         /// 토큰
         /// </summary>
-        public string token { get; set; }
+        public string Token { get; set; }
 
         public SignInModel()
             : base()
         {
-            this.complete = false;
-            this.token = string.Empty;
+            this.Complete = false;
+            this.Token = string.Empty;
         }
     }
 }
