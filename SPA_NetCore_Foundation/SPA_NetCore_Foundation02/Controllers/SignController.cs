@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using SPA_NetCore_Foundation.Model.ApiModel;
+using ApiModel;
 using SPA_NetCore_Foundation.Model;
 
 namespace SPA_NetCore_Foundation.Controllers
@@ -32,29 +32,28 @@ namespace SPA_NetCore_Foundation.Controllers
 
             //로그인 처리용 모델
             SignInModel smResult = new SignInModel();
+            armResult.ResultObject = smResult;
 
             if (sID == "test01@email.net" && sPW == "1111")
             {
-                smResult.complete = true;
+                smResult.Complete = true;
                 
                 //이 프로젝트에서는 사인인한 유저의 정보를 어디에도 저장하지 않는다.
                 //그래서 토큰으로 유저를 구분할 수 있게 만든다.
-                smResult.token 
+                smResult.Token 
                     = string.Format("{0}▩{1}"
                                     , sID
                                     , Guid.NewGuid().ToString());
             }
             else
             {
-                armResult.StatusCode = StatusCodes.Status403Forbidden;
-
                 armResult.InfoCode = "-1";
                 armResult.Message = "일치하는 정보가 없습니다.";
 
-                smResult.complete = false;
+                smResult.Complete = false;
             }
 
-            return armResult.ToResult(smResult);
+            return armResult.ToResult();
         }
 
         [HttpPut]

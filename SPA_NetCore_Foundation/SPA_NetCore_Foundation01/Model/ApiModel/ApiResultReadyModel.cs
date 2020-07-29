@@ -26,7 +26,9 @@ namespace ApiModel
         public ApiResultBaseModel ResultObject { get; set; }
 
         /// <summary>
-        /// 성공 여부
+        /// 성공 여부.
+        /// 알수 없는 에러가 났을때 처리하기위한 용도.
+        /// 알수 있는 에러는 이값을을 true로 해둔다.
         /// </summary>
         public bool Success { get; set; }
 

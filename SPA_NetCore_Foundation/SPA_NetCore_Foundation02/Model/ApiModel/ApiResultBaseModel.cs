@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SPA_NetCore_Foundation.Model.ApiModel
+﻿
+namespace ApiModel
 {
     /// <summary>
     /// API 결과 공통 베이스.
@@ -22,13 +18,19 @@ namespace SPA_NetCore_Foundation.Model.ApiModel
         public string Message { get; set; }
 
         /// <summary>
+        /// 성공했을때 문자
+        /// </summary>
+        private string SuccessString;
+
+        /// <summary>
         /// 기본 생성.
         /// InfoCode가 "0"로 초기화됨
         /// </summary>
         public ApiResultBaseModel()
         {
-            this.InfoCode = "0";
-            this.Message = string.Empty;
+            this.SuccessString = ApiResultType.None.GetHashCode().ToString();
+
+            this.Reset();
         }
 
         /// <summary>
@@ -38,8 +40,45 @@ namespace SPA_NetCore_Foundation.Model.ApiModel
         /// <param name="sMessage"></param>
         public ApiResultBaseModel(string sInfoCode, string sMessage)
         {
+            this.SuccessString = ApiResultType.None.GetHashCode().ToString();
+
             this.InfoCode = sInfoCode;
             this.Message = sMessage;
+        }
+
+        /// <summary>
+        /// 성공으로 초기화한다.
+        /// </summary>
+        public void Reset()
+        {
+            this.InfoCode = this.SuccessString;
+            this.Message = string.Empty;
+        }
+
+        /// <summary>
+        /// 타입 세팅
+        /// </summary>
+        /// <param name="typeApiResult"></param>
+        public void TypeSet(ApiResultType typeApiResult)
+        {
+            this.InfoCode = typeApiResult.GetHashCode().ToString();
+        }
+
+        /// <summary>
+        /// InfoCode값이 성공값인지 여부
+        /// </summary>
+        /// <returns></returns>
+        public bool IsSuccess()
+        {
+            bool bReturn = false;
+
+            if(this.InfoCode == this.SuccessString)
+            {//성공문자열이다.
+                bReturn = true;
+            }
+
+            return bReturn;
+
         }
     }
 }

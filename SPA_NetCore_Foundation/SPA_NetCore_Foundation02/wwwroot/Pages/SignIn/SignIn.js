@@ -68,10 +68,10 @@ SignIn.prototype.btnSignIn_onclick = function ()
 
                     if ("0" === data.InfoCode)
                     {//에러 없음
-                        if (data.complete === true)
+                        if (data.Complete === true)
                         {
                             GlobalSign.SignIn = true;
-                            GlobalSign.SignIn_token = data.token;
+                            GlobalSign.SignIn_Token = data.Token;
                             GlobalSign.SignIn_ID = sEMail;
 
                             alert("사인 인 성공");
