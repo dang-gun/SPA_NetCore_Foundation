@@ -2,37 +2,37 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ModelDB;
 
 namespace SPA_NetCore_Foundation06.Migrations
 {
-    /// <summary>
-    /// 
-    /// </summary>
     [DbContext(typeof(SpaNetCoreFoundationContext))]
-    [Migration("20200204162838_Initialize")]
+    [Migration("20200730164704_Initialize")]
     partial class Initialize
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="modelBuilder"></param>
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
+                .HasAnnotation("ProductVersion", "3.1.4")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("ModelDB.User", b =>
                 {
                     b.Property<long>("idUser")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Password");
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SignEmail");
+                    b.Property<string>("SignEmail")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("idUser");
 
@@ -56,15 +56,21 @@ namespace SPA_NetCore_Foundation06.Migrations
             modelBuilder.Entity("ModelDB.UserSignIn", b =>
                 {
                     b.Property<long>("idUserSignIn")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("RefreshDate");
+                    b.Property<DateTime>("RefreshDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("RefreshToken");
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("SignInDate");
+                    b.Property<DateTime>("SignInDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<long>("idUser");
+                    b.Property<long>("idUser")
+                        .HasColumnType("bigint");
 
                     b.HasKey("idUserSignIn");
 

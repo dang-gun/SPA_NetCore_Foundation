@@ -148,22 +148,7 @@ GlobalSign.Move_SignIn_Remove = function (bMessage, sMessage)
 
     if (true === bMessage)
     {
-        //alert(sMessage);
-        DG_MessageBox.Show({
-            Title: GlobalStatic.Title,
-            Content: sMsg,
-
-            top: 200,
-            left: 200,
-
-            ButtonShowType: DG_MessageBox.ButtonShowType.Ok,
-            BigIconType: DG_MessageBox.BigIconType.Error,
-            ButtonEvent: function (btnType)
-            {
-                DG_Popup.Close();
-                funSiteMove();
-            }
-        });
+        alert(sMessage);
     }
     else
     {
@@ -226,7 +211,7 @@ GlobalSign.Move_SignOut = function ()
                     if (error.responseJSON
                             && error.responseJSON.InfoCode) {
                         alert("실패코드 : " + error.responseJSON.InfoCode
-                            + "\n " + error.responseJSON.message);
+                            + "\n " + error.responseJSON.Message);
                     }
                 }
             }

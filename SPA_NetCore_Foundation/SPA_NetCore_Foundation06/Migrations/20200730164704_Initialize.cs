@@ -19,7 +19,7 @@ namespace SPA_NetCore_Foundation06.Migrations
                 columns: table => new
                 {
                     idUser = table.Column<long>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     SignEmail = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true)
                 },
@@ -33,7 +33,7 @@ namespace SPA_NetCore_Foundation06.Migrations
                 columns: table => new
                 {
                     idUserSignIn = table.Column<long>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     idUser = table.Column<long>(nullable: false),
                     RefreshToken = table.Column<string>(nullable: true),
                     SignInDate = table.Column<DateTime>(nullable: false),

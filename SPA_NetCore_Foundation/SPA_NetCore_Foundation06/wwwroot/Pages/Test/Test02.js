@@ -40,7 +40,7 @@ Test02.prototype.Test01 = function (nData)
                     //아웃풋 지우기
                     objThis.divOutput.html("");
                     alert("error code : " + data.InfoCode + "\n"
-                        + "내용 : " + data.message);
+                        + "내용 : " + data.Message);
                 }
             }
             , error: function (error) {
@@ -71,7 +71,7 @@ Test02.prototype.Test02 = function ()
                         //아웃풋 지우기
                         objThis.divOutput.html("");
                         alert("error code : " + data.InfoCode + "\n"
-                            + "내용 : " + data.message);
+                            + "내용 : " + data.Message);
                     }
                 }
                 , error: function (error) {

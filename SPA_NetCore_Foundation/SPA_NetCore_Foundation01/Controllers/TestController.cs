@@ -11,6 +11,10 @@ namespace SPA_NetCore_Foundation.Controllers
     [ApiController]
     public class TestController : ControllerBase
     {
+        /// <summary>
+        /// 무조건 성공
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Call()
         {

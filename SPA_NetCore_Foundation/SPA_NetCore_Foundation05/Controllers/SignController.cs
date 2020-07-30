@@ -133,9 +133,9 @@ namespace SPA_NetCore_Foundation.Controllers
         /// </summary>
         private string sIdentityServer4_Url = GlobalStatic.AuthUrl;
 
-        
+
         /// <summary>
-        /// 
+        /// 리플레시 토큰을 이용하여 엑세스토큰을 갱신한다.
         /// </summary>
         /// <param name="sRefreshToken"></param>
         /// <returns></returns>
