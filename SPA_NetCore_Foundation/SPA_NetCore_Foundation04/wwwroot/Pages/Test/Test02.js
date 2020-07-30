@@ -64,14 +64,16 @@ Test02.prototype.Test02 = function ()
                 , success: function (data) {
                     console.log(data);
 
-                    if ("0" === data.InfoCode) {//에러 없음
+                    if ("0" === data.InfoCode) 
+                    {//에러 없음
                         objThis.divOutput.html("nTest001 : " + data.nTest001 + " sTest002 : " + data.sTest002);
                     }
-                    else {//에러 있음
+                    else 
+                    {//에러 있음
                         //아웃풋 지우기
                         objThis.divOutput.html("");
                         alert("error code : " + data.InfoCode + "\n"
-                            + "내용 : " + data.message);
+                            + "내용 : " + data.Message);
                     }
                 }
                 , error: function (error) {
