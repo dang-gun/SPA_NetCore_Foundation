@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using SPA_NetCore_Foundation.Model.ApiModel;
+using ApiModel;
 using SPA_NetCore_Foundation.Global;
 using SPA_NetCore_Foundation.Model;
 using SPA_NetCore_Foundation.Model.User;
@@ -43,9 +43,10 @@ namespace SPA_NetCore_Foundation.Controllers
             , [FromForm]string sPW)
         {
             //결과용
-            ApiResultReadyModel armResult = new ApiResultReadyModel(this);
+            ApiResultReady  rrResult = new ApiResultReady (this);
             //로그인 처리용 모델
-            SignInResultModel smResult = new SignInResultModel();
+            SignInResultModel armResult = new SignInResultModel();
+            rrResult.ResultObject = armResult;
 
             //유저 검색
             UserSignInfoModel user
@@ -62,34 +63,30 @@ namespace SPA_NetCore_Foundation.Controllers
 
                 if (true == tr.IsError)
                 {//에러가 있다.
-                    armResult.InfoCode = "1";
-                    armResult.Message = "아이디나 비밀번호가 틀렸습니다.";
-
-                    armResult.StatusCode = StatusCodes.Status401Unauthorized;
+                    rrResult.InfoCode = "1";
+                    rrResult.Message = "아이디나 비밀번호가 틀렸습니다.";
                 }
                 else
                 {//에러가 없다.
                     //로그인 되어있는 유저정보 저장
                     GlobalStatic.SignInList.Add(user.ID, tr.RefreshToken);
 
-                    smResult.id = user.ID;
-                    smResult.email = user.Email;
+                    armResult.id = user.ID;
+                    armResult.email = user.Email;
 
-                    smResult.lv = 0;
+                    armResult.lv = 0;
 
-                    smResult.access_token = tr.AccessToken;
-                    smResult.refresh_token = tr.RefreshToken;
+                    armResult.access_token = tr.AccessToken;
+                    armResult.refresh_token = tr.RefreshToken;
                 }
             }
             else
             {
-                armResult.InfoCode = "1";
-                armResult.Message = "아이디나 비밀번호가 틀렸습니다.";
-
-                armResult.StatusCode = StatusCodes.Status401Unauthorized;
+                rrResult.InfoCode = "1";
+                rrResult.Message = "아이디나 비밀번호가 틀렸습니다.";
             }
 
-            return armResult.ToResult(smResult);
+            return rrResult.ToResult(armResult);
         }
 
         /// <summary>
@@ -104,7 +101,7 @@ namespace SPA_NetCore_Foundation.Controllers
             [FromForm]int nID
             , [FromForm]string sRefreshToken)
         {
-            ApiResultReadyModel armResult = new ApiResultReadyModel(this);
+            ApiResultReady  armResult = new ApiResultReady (this);
             ApiResultBaseModel arbm = new ApiResultBaseModel();
 
             //사인아웃에 필요한 작업을 한다.
@@ -147,19 +144,18 @@ namespace SPA_NetCore_Foundation.Controllers
             [FromForm]string sRefreshToken)
         {
             //결과용
-            ApiResultReadyModel armResult = new ApiResultReadyModel(this);
+            ApiResultReady  rrResult = new ApiResultReady (this);
             //엑세스 토큰 갱신용 모델
-            SignInResultModel smResult = new SignInResultModel();
+            SignInResultModel armResult = new SignInResultModel();
+            rrResult.ResultObject = armResult;
 
             //토큰 갱신 요청
             TokenResponse tr = RefreshTokenAsync(sRefreshToken).Result;
 
             if (true == tr.IsError)
             {//에러가 있다.
-                armResult.InfoCode = "1";
-                armResult.Message = "토큰 갱신에 실패하였습니다.";
-
-                armResult.StatusCode = StatusCodes.Status401Unauthorized;
+                rrResult.InfoCode = "1";
+                rrResult.Message = "토큰 갱신에 실패하였습니다.";
             }
             else
             {//에러가 없다.
@@ -175,14 +171,14 @@ namespace SPA_NetCore_Foundation.Controllers
 
 
                 //모델에 입력
-                smResult.id = cm.id_int;
-                smResult.email = cm.email;
+                armResult.id = cm.id_int;
+                armResult.email = cm.email;
 
-                smResult.access_token = tr.AccessToken;
-                smResult.refresh_token = tr.RefreshToken;
+                armResult.access_token = tr.AccessToken;
+                armResult.refresh_token = tr.RefreshToken;
             }
 
-            return armResult.ToResult(smResult);
+            return rrResult.ToResult(armResult);
         }
 
 
@@ -196,7 +192,7 @@ namespace SPA_NetCore_Foundation.Controllers
         public ActionResult<SignInSimpleResultModel> AccessToUserInfo()
         {
             //리턴 보조
-            ApiResultReadyModel armResult = new ApiResultReadyModel(this);
+            ApiResultReady  armResult = new ApiResultReady (this);
             //리턴용 모델
             SignInSimpleResultModel tmResult = new SignInSimpleResultModel();
 

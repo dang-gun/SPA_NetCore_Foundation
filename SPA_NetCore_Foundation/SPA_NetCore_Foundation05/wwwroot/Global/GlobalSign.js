@@ -181,7 +181,7 @@ GlobalSign.Move_SignOut = function ()
                     if (error.responseJSON
                             && error.responseJSON.InfoCode) {
                         alert("실패코드 : " + error.responseJSON.InfoCode
-                            + "\n " + error.responseJSON.message);
+                            + "\n " + error.responseJSON.Message);
                     }
                 }
             }
