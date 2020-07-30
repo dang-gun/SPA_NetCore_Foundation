@@ -28,7 +28,7 @@ namespace SPA_NetCore_Foundation.Controllers
             [FromForm]string sID
             , [FromForm]string sPW)
         {
-            ApiResultReadyModel armResult = new ApiResultReadyModel(this);
+            ApiResultReady armResult = new ApiResultReady(this);
 
             //로그인 처리용 모델
             SignInModel smResult = new SignInModel();
@@ -60,7 +60,7 @@ namespace SPA_NetCore_Foundation.Controllers
         public ActionResult<string> SignOut(
             [FromForm]string sToken)
         {
-            ApiResultReadyModel armResult = new ApiResultReadyModel(this);
+            ApiResultReady armResult = new ApiResultReady(this);
 
             ApiResultBaseModel arbm = new ApiResultBaseModel();
 

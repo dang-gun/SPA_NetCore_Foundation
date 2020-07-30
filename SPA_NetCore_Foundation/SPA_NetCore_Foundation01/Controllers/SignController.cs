@@ -29,13 +29,13 @@ namespace SPA_NetCore_Foundation.Controllers
             , [FromForm]string sPW)
         {
             //API 지원
-            ApiResultReadyModel armResult 
-                = new ApiResultReadyModel(this);
+            ApiResultReady rrResult 
+                = new ApiResultReady(this);
 
             //로그인 처리용 모델
             SignInModel smResult = new SignInModel();
             //api 지원에 넣기
-            armResult.ResultObject = smResult;
+            rrResult.ResultObject = smResult;
 
 
             if (sID == "test01@email.net" && sPW == "1111")
@@ -51,28 +51,28 @@ namespace SPA_NetCore_Foundation.Controllers
             }
             else
             {
-                armResult.InfoCode = "-1";
-                armResult.Message = "일치하는 정보가 없습니다.";
+                rrResult.InfoCode = "-1";
+                rrResult.Message = "일치하는 정보가 없습니다.";
 
                 smResult.Complete = false;
             }
 
-            return armResult.ToResult(smResult);
+            return rrResult.ToResult(smResult);
         }
 
         [HttpPut]
         public ActionResult<string> SignOut(
             [FromForm]string sToken)
         {
-            ApiResultReadyModel armResult = new ApiResultReadyModel(this);
+            ApiResultReady rrResult = new ApiResultReady(this);
 
             //토큰의 앞이 유저 정보다.
             string[] sCutToken = sToken.Split("▩");
             //정보를 넣어 준다.
-            armResult.Message = sCutToken[0];
+            rrResult.Message = sCutToken[0];
 
             //임시로 아이디를 넘긴다.
-            return armResult.ToResult();
+            return rrResult.ToResult();
         }
 
     }

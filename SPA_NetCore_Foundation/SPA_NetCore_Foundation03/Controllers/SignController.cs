@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using SPA_NetCore_Foundation.Model.ApiModel;
+using ApiModel;
 using SPA_NetCore_Foundation.Global;
 using SPA_NetCore_Foundation.Model;
 using SPA_NetCore_Foundation.Model.User;
@@ -35,9 +35,10 @@ namespace SPA_NetCore_Foundation.Controllers
             , [FromForm]string sPW)
         {
             //결과용
-            ApiResultReadyModel armResult = new ApiResultReadyModel(this);
+            ApiResultReady rrResult = new ApiResultReady(this);
             //로그인 처리용 모델
-            SignInResultModel smResult = new SignInResultModel();
+            SignInResultModel armResult = new SignInResultModel();
+            rrResult.ResultObject = armResult;
 
             //유저 검색
             UserSignInfoModel user
@@ -50,20 +51,18 @@ namespace SPA_NetCore_Foundation.Controllers
             if (user != null)
             {
                 //에러가 없다.
-                armResult.Message = user.Email;
+                rrResult.Message = user.Email;
 
-                smResult.access_token = "dasdflcc090fkkc";
-                smResult.refresh_token = "das54340fl8fd";
+                armResult.access_token = "dasdflcc090fkkc";
+                armResult.refresh_token = "das54340fl8fd";
             }
             else
             {
-                armResult.InfoCode = "1";
-                armResult.Message = "아이디나 비밀번호가 틀렸습니다.";
-
-                armResult.StatusCode = StatusCodes.Status401Unauthorized;
+                rrResult.InfoCode = "1";
+                rrResult.Message = "아이디나 비밀번호가 틀렸습니다.";
             }
 
-            return armResult.ToResult(smResult);
+            return rrResult.ToResult();
         }
 
         /// <summary>
@@ -75,13 +74,12 @@ namespace SPA_NetCore_Foundation.Controllers
         public ActionResult<string> SignOut(
             [FromForm]string sRefreshToken)
         {
-            ApiResultReadyModel armResult = new ApiResultReadyModel(this);
-            ApiResultBaseModel arbm = new ApiResultBaseModel();
+            ApiResultReady rrResult = new ApiResultReady(this);
 
             //사인아웃에 필요한 작업을 한다.
 
             //임시로 아이디를 넘긴다.
-            return armResult.ToResult(arbm);
+            return rrResult.ToResult();
         }
 
     }

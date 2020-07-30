@@ -13,7 +13,7 @@ namespace ApiModel
     /// 결과 출력용으로 데이터는 외부로 부터 받아야 한다.
     /// 외부에서는 ToResult를 이용하여 API 전달용 개체를 받는다.
     /// </summary>
-    public class ApiResultReadyModel
+    public class ApiResultReady
     {
         /// <summary>
         /// 컨트롤러베이스의 기능을 쓰기위한 개체
@@ -68,7 +68,7 @@ namespace ApiModel
         /// 'ApiResultBaseModel'로 생성합니다.
         /// </summary>
         /// <param name="cbThis">컨트롤러 기능을 사용하기위한 인스턴스</param>
-        public ApiResultReadyModel(ControllerBase cbThis)
+        public ApiResultReady(ControllerBase cbThis)
         {
             this.ThisCB = cbThis;
             this.Success = true;
@@ -81,7 +81,7 @@ namespace ApiModel
         /// </summary>
         /// <param name="cbThis">컨트롤러 기능을 사용하기위한 인스턴스</param>
         /// <param name="arModel">리턴에 사용할 모델</param>
-        public ApiResultReadyModel(
+        public ApiResultReady(
             ControllerBase cbThis
             , ApiResultBaseModel arModel )
         {
