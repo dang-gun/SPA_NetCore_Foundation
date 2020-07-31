@@ -58,7 +58,7 @@ GlobalSign.Move_SignOut = function ()
                     case 0:
                     default:
                         //UI 갱신
-                        TopInfo.UserInfo_Load();
+                        SignInInfo.UserInfo_Load();
                         break;
                 }
             },

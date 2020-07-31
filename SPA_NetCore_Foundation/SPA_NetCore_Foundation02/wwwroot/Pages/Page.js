@@ -37,7 +37,21 @@ Page.Load = function (jsonOption, callbackFun)
                 Page.divMainMenu = divMain.find("#divMainMenu");
                 Page.divContents = divMain.find("#divContents");
 
+                AA.HtmlFileLoad(FS_FUrl.Page_Page_Menu
+                    , function (html)
+                    {
+                        //메뉴 바인딩
+                        var sHtml
+                            = GlobalStatic.DataBind.DataBind_All(
+                                html
+                                , {
+                                    MoveHome: FS_Url.Home,
+                                    MoveTest01: FS_Url.Test01
+                                })
+                                .ResultString;
 
+                        Page.divMainMenu.html(sHtml);
+                    });
 
                 //사인인 정보 로드
                 SignInInfo.Load();
@@ -70,12 +84,13 @@ Page.Remove = function ()
  * 페이지 이동
  * @param {string} sUrl 이동할 Url
  */
-Page.Move_Page = function (bSignIn, sUrl)
+Page.Move_Page = function (sUrl)
 {
     location.href = sUrl;
 };
 
+/** 홈으로 이동 */
 Page.Move_Home = function ()
 {
-    Page.Move_Page(false, FS_Url.Home);
+    Page.Move_Page(FS_Url.Home);
 };

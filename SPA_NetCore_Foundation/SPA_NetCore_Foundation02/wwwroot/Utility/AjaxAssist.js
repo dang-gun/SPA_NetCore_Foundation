@@ -139,79 +139,6 @@ AA.call = function (typeToken, jsonOption)
 };
 
 /**
-* 액세스 토큰 갱신
-* @param {function} callback 갱신이 성공하면 동작할 콜백
-*/
-AA.RefreshToAccess = function (callback)
-{
-    var refresh_token = GlobalSign.RefreshToken_Get();
-
-    if (null === refresh_token || "" === refresh_token)
-    {//리플레시 토큰이 없다.
-        //리플레시 토큰이 없으면 토큰을 갱신할 수 없으므로
-        //로그인이 필요하다.
-        GlobalSign.Move_SignIn_Remove(true, "로그인이 필요합니다.");
-    }
-    else
-    {//있다.
-
-        //갱신 시도
-        $.ajax({
-            type: AA.AjaxType.Put
-            , url: FS_Api.Sign_RefreshToAccess
-            , data: {
-                "nID": GlobalSign.SignIn_ID
-                , "sRefreshToken": refresh_token
-                , "sPlatformInfo": GlobalStatic.PlatformInfo
-            }
-            , dataType: "json"
-            , success: function (jsonResult)
-            {
-                console.log(jsonResult);
-
-                if (jsonResult.InfoCode === "0")
-                {//성공
-
-                    //받은 정보 다시 저장
-                    GlobalSign.SignIn_ID = jsonResult.idUser;
-                    GlobalSign.SignIn_Email = jsonResult.Email;
-                    GlobalSign.SignIn_ViewName = jsonResult.ViewName;
-                    //관리 권한
-                    GlobalSign.SignIn_MgrPer = jsonResult.ManagerPermission;
-
-                    GlobalSign.AccessToken_Set(jsonResult.access_token);
-                    GlobalSign.RefreshToken_SetOption(jsonResult.refresh_token);
-
-                    GlobalSign.QnAMark = jsonResult.QnAMark;
-
-                    //유저 정보를 갱신한다.
-                    TopInfo.UserInfo_Load();
-
-                    //요청한 콜백 진행
-                    if (typeof callback === "function")
-                    {
-                        callback();
-                    }
-
-                }
-                else
-                {//실패
-                    //리플래시 토큰 요청이 실패하면 모든 토큰을 지워야 한다.
-                    GlobalSign.Move_SignIn_Remove(true, "로그인이 필요합니다.");
-                }
-            }
-            , error: function (jqXHR, textStatus, errorThrown)
-            {
-                console.log(jqXHR);
-
-                //리플래시 토큰 요청이 실패하면 모든 토큰을 지워야 한다.
-                GlobalSign.Move_SignIn_Remove(true, "로그인이 필요합니다.");
-            }
-        });
-    }//end if
-};
-
-/**
  * 아작스로 파일을 로드한다.
  * @param {string} sFileUrl 파일 url
  * @param {function} funSuccess 성공시 콜백
@@ -227,3 +154,4 @@ AA.HtmlFileLoad = function (sFileUrl, funSuccess, jsonOption)
             , error: function (error) { console.log(error); }
         });
 };
+
