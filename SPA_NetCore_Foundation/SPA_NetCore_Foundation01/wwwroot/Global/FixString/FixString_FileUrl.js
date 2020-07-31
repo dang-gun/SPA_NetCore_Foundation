@@ -6,6 +6,8 @@ var FS_FUrl = {};
 
 FS_FUrl.Pages = "/Pages/";
 FS_FUrl.Page = FS_FUrl.Pages + "Page.html";
+FS_FUrl.Page_Page_Menu = FS_FUrl.Pages + "Page_Menu.html";
+
 
 FS_FUrl.SignInInfo = FS_FUrl.Pages + "SignInInfo/";
 FS_FUrl.SignInInfo_SignInHtml = FS_FUrl.SignInInfo + "SignInInfo_SignIn.html";

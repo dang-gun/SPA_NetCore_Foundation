@@ -26,11 +26,6 @@
     <_ContentIncludedByDefault Remove="wwwroot\Pages\SignIn\SignIn.js" />
     <_ContentIncludedByDefault Remove="wwwroot\Pages\Test\Test01.html" />
     <_ContentIncludedByDefault Remove="wwwroot\Pages\Test\Test01.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\Pages\TopInfo\TopInfo.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\Pages\TopInfo\TopInfo.html" />
-    <_ContentIncludedByDefault Remove="wwwroot\Pages\TopInfo\TopInfo.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\Pages\TopInfo\UserInfo_SignIn.html" />
-    <_ContentIncludedByDefault Remove="wwwroot\Pages\TopInfo\UserInfo_SignOut.html" />
     <_ContentIncludedByDefault Remove="wwwroot\test.html" />
   </ItemGroup>
 
@@ -44,6 +39,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="wwwroot\Pages\SignInInfo\SignInInfo.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Update="wwwroot\Pages\SignIn\SignIn.html">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>

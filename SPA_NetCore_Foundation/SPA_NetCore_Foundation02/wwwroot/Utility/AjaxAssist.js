@@ -30,7 +30,6 @@ AA.TokenRelayType = {
     CaseByCase: 2,
 };
 
-
 /**
  * get로 아작스 요청을 한다.
  * @param {TokenRelayType} typeToken 헤더에 토큰을 넣을지 여부
@@ -87,12 +86,17 @@ AA.delete = function (typeToken, jsonOption)
 };
 
 
+
 /**
  * jquery를 이용하여 요청을 처리합니다.
  * @param {TokenRelayType} typeToken 헤더에 토큰을 넣을지 여부
  * @param {json} jsonOption 처리할 옵션 객체
  */
-AA.call = function (typeToken, jsonOption) {
+AA.call = function (typeToken, jsonOption)
+{
+    //매개변수 백업
+    var typeTokenTemp = typeToken;
+
     //이 함수에서 기본값으로 추가할 옵션
     //기본이 비동기다.
     var jsonOpt = {
@@ -122,17 +126,90 @@ AA.call = function (typeToken, jsonOption) {
     jsonOpt.error = function (jqXHR, textStatus, errorThrown)
     {
         //여기에 공통 작업내용을 넣는다.
-
         if (funError)
         {
-            //성공하면 수행할 콜백
+            //에러 콜백이 있으면 호출
             funError(jqXHR, textStatus, errorThrown);
         }
     };
 
+
     $.ajax(jsonOpt);
+
 };
 
+/**
+* 액세스 토큰 갱신
+* @param {function} callback 갱신이 성공하면 동작할 콜백
+*/
+AA.RefreshToAccess = function (callback)
+{
+    var refresh_token = GlobalSign.RefreshToken_Get();
+
+    if (null === refresh_token || "" === refresh_token)
+    {//리플레시 토큰이 없다.
+        //리플레시 토큰이 없으면 토큰을 갱신할 수 없으므로
+        //로그인이 필요하다.
+        GlobalSign.Move_SignIn_Remove(true, "로그인이 필요합니다.");
+    }
+    else
+    {//있다.
+
+        //갱신 시도
+        $.ajax({
+            type: AA.AjaxType.Put
+            , url: FS_Api.Sign_RefreshToAccess
+            , data: {
+                "nID": GlobalSign.SignIn_ID
+                , "sRefreshToken": refresh_token
+                , "sPlatformInfo": GlobalStatic.PlatformInfo
+            }
+            , dataType: "json"
+            , success: function (jsonResult)
+            {
+                console.log(jsonResult);
+
+                if (jsonResult.InfoCode === "0")
+                {//성공
+
+                    //받은 정보 다시 저장
+                    GlobalSign.SignIn_ID = jsonResult.idUser;
+                    GlobalSign.SignIn_Email = jsonResult.Email;
+                    GlobalSign.SignIn_ViewName = jsonResult.ViewName;
+                    //관리 권한
+                    GlobalSign.SignIn_MgrPer = jsonResult.ManagerPermission;
+
+                    GlobalSign.AccessToken_Set(jsonResult.access_token);
+                    GlobalSign.RefreshToken_SetOption(jsonResult.refresh_token);
+
+                    GlobalSign.QnAMark = jsonResult.QnAMark;
+
+                    //유저 정보를 갱신한다.
+                    TopInfo.UserInfo_Load();
+
+                    //요청한 콜백 진행
+                    if (typeof callback === "function")
+                    {
+                        callback();
+                    }
+
+                }
+                else
+                {//실패
+                    //리플래시 토큰 요청이 실패하면 모든 토큰을 지워야 한다.
+                    GlobalSign.Move_SignIn_Remove(true, "로그인이 필요합니다.");
+                }
+            }
+            , error: function (jqXHR, textStatus, errorThrown)
+            {
+                console.log(jqXHR);
+
+                //리플래시 토큰 요청이 실패하면 모든 토큰을 지워야 한다.
+                GlobalSign.Move_SignIn_Remove(true, "로그인이 필요합니다.");
+            }
+        });
+    }//end if
+};
 
 /**
  * 아작스로 파일을 로드한다.
@@ -140,7 +217,8 @@ AA.call = function (typeToken, jsonOption) {
  * @param {function} funSuccess 성공시 콜백
  * @param {function} jsonOption 추가 옵션
  */
-AA.HtmlFileLoad = function (sFileUrl, funSuccess, jsonOption) {
+AA.HtmlFileLoad = function (sFileUrl, funSuccess, jsonOption)
+{
     AA.get(AA.TokenRelayType.None
         , {
             url: sFileUrl

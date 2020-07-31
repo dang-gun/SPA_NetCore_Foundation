@@ -7,6 +7,7 @@ var FS_Url = {};
 FS_Url.Error = "#/Error";
 
 FS_Url.Home = "#/Home";
+FS_Url.MyPage = "#/MyPage";
 FS_Url.SignIn = "#/SignIn";
 
 //테스트용
