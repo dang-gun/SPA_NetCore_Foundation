@@ -22,8 +22,11 @@ SignInInfo.UserInfo_Load = function ()
 {
     if (true === GlobalSign.SignIn)
     {//사인인 정보가 있음
+
         SignInInfo.divSignInInfo.load(FS_FUrl.SignInInfo_SignOutHtml
-            , function () {
+            , function ()
+            {
+                $("#aMyPage").attr("href", FS_Url.MyPage);
                 $("#spanEMail").html(GlobalSign.SignIn_ID);
             });
     }

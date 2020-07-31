@@ -63,30 +63,15 @@ Page.Remove = function ()
 
 /**
  * 페이지 이동
- * @param {boolean } bSignIn 사인인 확인
  * @param {string} sUrl 이동할 Url
  */
-Page.Move_Page = function (bSignIn, sUrl)
+Page.Move_Page = function (sUrl)
 {
-    if (true === bSignIn)
-    {//사인인이 필요하다.
-        if (true === GlobalSign.SignIn)
-        {
-            location.href = sUrl;
-        }
-        else
-        {//사인인이 안되있음
-            alert("사인인이 필요합니다.");
-        }
-    }
-    else
-    {//사인인이 필요없다.
-        location.href = sUrl;
-    }
+    location.href = sUrl;
 };
 
-
+/** 홈으로 이동 */
 Page.Move_Home = function ()
 {
-    Page.Move_Page(false, FS_Url.Home);
+    Page.Move_Page(FS_Url.Home);
 };
