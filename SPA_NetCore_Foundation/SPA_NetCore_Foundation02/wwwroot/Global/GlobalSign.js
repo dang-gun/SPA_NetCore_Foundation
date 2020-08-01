@@ -77,15 +77,6 @@ GlobalSign.Move_SignOut = function ()
 };
 
 /**
- * 엑세스 토큰 가지고오기
- * @returns {string} 엑세스 토큰
- */
-GlobalSign.AccessToken_Get = function ()
-{
-    return CA.Get(GlobalSign.AccessToken_CookieName);
-};
-
-/**
  * 엑세스토큰이 있으면 유저 정보를 갱신한다.
  * @param {function} callback 갱신에 성공하면 할 동작
  */

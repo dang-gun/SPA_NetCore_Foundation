@@ -18,7 +18,7 @@ function SignIn()
         Page.Remove();
 
         //사인 인 인터페이스
-        DivMain.load(FS_FUrl.SignIn_SignIn
+        divMain.load(FS_FUrl.SignIn_SignIn
             , function () {
                 //이메일
                 oThis.txtEMail = $("#txtEMail");

@@ -44,8 +44,9 @@ namespace SPA_NetCore_Foundation.Controllers
             ApiResultReady rrResult = new ApiResultReady(this);
             //리턴용 모델
             TestModel01 armResult = new TestModel01();
+            rrResult.ResultObject = armResult;
 
-            if(0 <= nData)
+            if (0 <= nData)
             {//양수다.
                 armResult.nTest = nData;
                 armResult.sTest = sData;

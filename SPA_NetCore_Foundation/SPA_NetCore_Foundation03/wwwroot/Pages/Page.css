@@ -1,22 +1,46 @@
-﻿/* 페이지 */
-#divPage div
-{
-    min-height:30px;
-    margin-bottom:10px;
+﻿h1, h2, h3, h4, h5 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+/* ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+    Page  
+◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇ */
+#divPage {
 }
 
-
-#divPage #divMainMenu div
-{
-    float:left;
-
-    margin-right:10px;
-}
-
-#divTopInfo {
+#divTop, #divMainMenu {
     border-bottom: 1px solid #b6b6b6;
+    min-height: 30px;
+    margin-bottom: 10px;
 }
+
+#divTop {
+}
+
+    #divTop:after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    #divTop > .TopLogo {
+        float: left;
+        margin-top: 1px;
+    }
+
+
+    #divTop > #divSignInInfo {
+        float: right;
+        margin-top: 1px;
+    }
+
+#divPage #divMainMenu div {
+    float: left;
+    margin-right: 10px;
+}
+
+
 
 #divMainMenu {
-    border-bottom: 1px solid #b6b6b6;
 }
+

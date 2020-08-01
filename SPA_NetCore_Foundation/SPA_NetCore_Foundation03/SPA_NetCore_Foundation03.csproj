@@ -6,6 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\Pages\MyPage\MyPage.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\Pages\MyPage\MyPage.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\Pages\SignInInfo\SignInInfo.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\Pages\SignInInfo\SignInInfo_SignIn.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\Pages\SignInInfo\SignInInfo_SignOut.html" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.4" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
@@ -16,6 +24,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="wwwroot\Pages\Page.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\Pages\Page.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Update="wwwroot\Utility\AjaxAssist.js">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>

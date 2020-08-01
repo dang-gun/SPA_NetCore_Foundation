@@ -64,7 +64,7 @@ GlobalSign.Move_SignOut = function ()
                     case 0:
                     default:
                         //UI 갱신
-                        TopInfo.UserInfo_Load();
+                        SignInInfo.UserInfo_Load();
                         break;
                 }
             },
@@ -74,11 +74,25 @@ GlobalSign.Move_SignOut = function ()
                 if (error.responseJSON
                         && error.responseJSON.InfoCode) {
                     alert("실패코드 : " + error.responseJSON.InfoCode
-                        + "\n " + error.responseJSON.message);
+                        + "\n " + error.responseJSON.Message);
                 }
             }
         });
 
         
+    }
+};
+
+
+/**
+ * 엑세스토큰이 있으면 유저 정보를 갱신한다.
+ * @param {function} callback 갱신에 성공하면 할 동작
+ */
+GlobalSign.AccessTokenToInfo = function (callback) 
+{
+    //이 프로젝트는 엑세스토큰이 없으니 내용이 필요없다.
+    if (typeof callback === "function")
+    {
+        callback();
     }
 };
