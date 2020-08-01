@@ -30,7 +30,6 @@ AA.TokenRelayType = {
     CaseByCase: 2,
 };
 
-
 /**
  * get로 아작스 요청을 한다.
  * @param {TokenRelayType} typeToken 헤더에 토큰을 넣을지 여부
@@ -85,6 +84,7 @@ AA.delete = function (typeToken, jsonOption)
     jsonOption.type = AA.AjaxType.Delete;
     AA.call(typeToken, jsonOption);
 };
+
 
 
 /**
@@ -148,13 +148,13 @@ AA.call = function (typeToken, jsonOption)
         }
     }
 
-
     //들어온 옵션을 합친다.(들어온 값 우선)
     jsonOpt = $.extend(jsonOpt, jsonOption);
 
     //success함수를 빼오고
     var funSuccess = jsonOpt.success;
-    jsonOpt.success = function (data) {
+    jsonOpt.success = function (data)
+    {
         //여기에 공통 작업내용을 넣는다.
 
         if (funSuccess)
@@ -166,7 +166,7 @@ AA.call = function (typeToken, jsonOption)
 
     //error함수를 빼오고
     var funError = jsonOpt.error;
-    jsonOpt.error = function (jqXHR, textStatus, errorThrown) 
+    jsonOpt.error = function (jqXHR, textStatus, errorThrown)
     {
         //여기에 공통 작업내용을 넣는다.
 
@@ -230,6 +230,7 @@ AA.RefreshToAccess = function (callback)
             , data: {
                 "nID": GlobalSign.SignIn_ID
                 , "sRefreshToken": refresh_token
+                , "sPlatformInfo": GlobalStatic.PlatformInfo
             }
             , dataType: "json"
             , success: function (jsonResult)
@@ -238,15 +239,21 @@ AA.RefreshToAccess = function (callback)
 
                 if (jsonResult.InfoCode === "0")
                 {//성공
+
                     //받은 정보 다시 저장
-                    GlobalSign.SignIn_ID = jsonResult.id;
-                    GlobalSign.SignIn_Email = jsonResult.email;
+                    GlobalSign.SignIn_ID = jsonResult.idUser;
+                    GlobalSign.SignIn_Email = jsonResult.Email;
+                    GlobalSign.SignIn_ViewName = jsonResult.ViewName;
 
                     GlobalSign.AccessToken_Set(jsonResult.access_token);
                     GlobalSign.RefreshToken_SetOption(jsonResult.refresh_token);
 
+
+                    //유저 정보를 갱신한다.
+                    TopInfo.UserInfo_Load();
+
                     //요청한 콜백 진행
-                    if (typeof (callback) === "function")
+                    if (typeof callback === "function")
                     {
                         callback();
                     }
@@ -275,7 +282,8 @@ AA.RefreshToAccess = function (callback)
  * @param {function} funSuccess 성공시 콜백
  * @param {function} jsonOption 추가 옵션
  */
-AA.HtmlFileLoad = function (sFileUrl, funSuccess, jsonOption) {
+AA.HtmlFileLoad = function (sFileUrl, funSuccess, jsonOption)
+{
     AA.get(AA.TokenRelayType.None
         , {
             url: sFileUrl
