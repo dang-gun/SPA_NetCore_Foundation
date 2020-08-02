@@ -20,7 +20,7 @@ namespace SPA_NetCore_Foundation.Controllers
     public class TestController : ControllerBase
     {
         /// <summary>
-        /// 
+        /// 무조건 성공
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -34,7 +34,8 @@ namespace SPA_NetCore_Foundation.Controllers
         }
 
         /// <summary>
-        /// 
+        /// 표준 리턴 테스트.
+        /// nData에 마이너스 값을 전달하면 오류가남
         /// </summary>
         /// <param name="nData"></param>
         /// <param name="sData"></param>
@@ -62,9 +63,9 @@ namespace SPA_NetCore_Foundation.Controllers
             return rrResult.ToResult(armResult);
         }
 
-        
+
         /// <summary>
-        /// 
+        /// 사인인 되어 있어야 동작
         /// </summary>
         /// <param name="nData"></param>
         /// <returns></returns>

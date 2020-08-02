@@ -44,7 +44,7 @@ namespace SPA_NetCore_Foundation
             Configuration = configuration;
 
             this.AuthUrl = Configuration["AuthServer:Url"];
-            GlobalStatic.AuthUrl = this.AuthUrl;
+            GlobalStatic.TokenProc = new TokenProcess(this.AuthUrl);
         }
 
         /// <summary>

@@ -27,7 +27,8 @@ GlobalSign.RefreshToken_CookieName = "spa_RefreshToken";
  * 엑세스 토큰 가지고오기
  * @returns {string} 엑세스 토큰
  */
-GlobalSign.AccessToken_Get = function () {
+GlobalSign.AccessToken_Get = function () 
+{
     return CA.Get(GlobalSign.AccessToken_CookieName);
 };
 /**
@@ -51,22 +52,6 @@ GlobalSign.RefreshToken_Get = function ()
 };
 
 
-GlobalSign.RefreshToken_SetOption = function (sRefreshToken)
-{
-    //타입 저장
-    var nSaveType = CA.SaveType.Default;
-
-    var sAutoSignIn = CA.Get(GlobalSign.AutoSignIn_CookieName);
-
-    if ("true" === sAutoSignIn)
-    {//자동저장 활성화 되있음
-        nSaveType = CA.SaveType.Month1;
-    }
-
-    //토큰 저장 시도
-    GlobalSign.RefreshToken_Set(sRefreshToken, nSaveType);
-};
-
 /**
  * 리플레시 토큰 저장하기
  * @param {string} sRefreshToken 저장할 리플레시 토큰
@@ -87,8 +72,33 @@ GlobalSign.RefreshToken_Set = function (sRefreshToken, bMonth1)
     CA.Set(GlobalSign.RefreshToken_CookieName
         , sRefreshToken
         , nSaveType);
-    
+
 };
+
+
+/**
+ *
+ * @param {any} sRefreshToken
+ */
+GlobalSign.RefreshToken_SetOption = function (sRefreshToken)
+{
+    //타입 저장
+    var nSaveType = CA.SaveType.Default;
+
+    var sAutoSignIn = CA.Get(GlobalSign.AutoSignIn_CookieName);
+
+    if ("true" === sAutoSignIn)
+    {//자동저장 활성화 되있음
+        nSaveType = CA.SaveType.Month1;
+    }
+
+    //토큰 저장 시도
+    GlobalSign.RefreshToken_Set(sRefreshToken, nSaveType);
+};
+
+
+
+
 
 /**
  * 사인인 페이지로 이동
@@ -98,6 +108,7 @@ GlobalSign.Move_SignIn = function ()
     location.href = FS_Url.SignIn;
 };
 
+
 /**
   서버쪽에서는 사인인이 안되있는 경우(토큰 만료 같은)
  * 프론트엔드에서 로그인 페이지로 넘기기 전에 사인인 관련 정보를 지워준다.
@@ -106,26 +117,51 @@ GlobalSign.Move_SignIn = function ()
  */
 GlobalSign.Move_SignIn_Remove = function (bMessage, sMessage)
 {
+    var sMsg = sMessage;
+
     GlobalSign.SignIn = false;
 
     GlobalSign.AccessToken_Set("");
     GlobalSign.RefreshToken_Set("", CA.SaveType.Default);
 
+    var funSiteMove = function ()
+    {
+        switch (GlobalStatic.SiteType)
+        {
+            case 0://일반타입
+                //주소를 보고 동작을 결정한다.
+                if ("" === location.hash)
+                {//주소가 없다.
+                    //홈으로 이동
+                    //location.href = FS_Url.Home;
+                    setTimeout(function () { location.href = "/"; }, 0);
+                }
+                else
+                {//주소가 있다.
+                    //UI 갱신
+                    SignInInfo.UserInfo_Load();
+                }
+                break;
+            case 1://관리자타입
+            default:
+                //사인인 페이지로 이동
+                GlobalSign.Move_SignIn();
+                break;
+        }
+    }
+
+
+
     if (true === bMessage)
     {
-        alert(sMessage);
+        alert(sMsg);
+        funSiteMove();
     }
-    
-    switch (GlobalStatic.SiteType)
+    else
     {
-        case 0://일반타입
-            break;
-        case 1://관리자타입
-        default:
-            //사인인 페이지로 이동
-            GlobalSign.Move_SignIn();
-            break;
+        funSiteMove();
     }
+
 };
 
 /**
@@ -135,7 +171,7 @@ GlobalSign.Move_SignOut = function ()
 {
     //사인아웃 시도
     //location.href = FS_Url.SignIn;
-    
+
     if (false === dgIsObject.IsBoolValue(GlobalSign.SignIn))
     {//사인 아웃이 되어 있음
         alert("사인아웃이 되어 있습니다.");
@@ -152,14 +188,19 @@ GlobalSign.Move_SignOut = function ()
                     , sRefreshToken: GlobalSign.RefreshToken_Get()
                 },
                 dataType: "text",
-                success: function (data) {
+                success: function (data)
+                {
                     console.log(data);
+
+                    //사인아웃 표시 
                     GlobalSign.SignIn = false;
+                    //엑세스 토큰 제거
                     GlobalSign.AccessToken_Set("");
 
-                    alert("사인아웃 성공 : " + data);
+                    // 엑세스 토큰 갱신
+                    GlobalSign.AccessTokenToInfo();
 
-                
+                    alert("사인아웃이 되어 있습니다.");
 
                     switch (GlobalStatic.SiteType)
                     {
@@ -171,24 +212,28 @@ GlobalSign.Move_SignOut = function ()
                         case 0:
                         default:
                             //UI 갱신
-                            TopInfo.UserInfo_Load();
+                            SignInInfo.UserInfo_Load();
                             break;
                     }
                 },
-                error: function (error) {
+                error: function (error)
+                {
                     console.log(error);
 
                     if (error.responseJSON
-                            && error.responseJSON.InfoCode) {
-                        alert("실패코드 : " + error.responseJSON.InfoCode
-                            + "\n " + error.responseJSON.Message);
+                        && error.responseJSON.InfoCode) 
+                    {
+                        alert(error.responseJSON.Message);
+                        //GlobalStatic.MessageBox_Error("",
+                        //    "실패코드 : " + error.responseJSON.InfoCode + "<br /> "
+                        //    + error.responseJSON.Message);
                     }
                 }
             }
         );
 
-        
-    }
+
+    }//end if
 };
 
 /**
@@ -208,31 +253,52 @@ GlobalSign.isAccessToken = function ()
 };
 
 
-/** 엑세스토큰이 있으면 유저 정보를 갱신한다. */
-GlobalSign.AccessTokenToInfo = function () {
+
+/**
+ * 엑세스토큰이 있으면 유저 정보를 갱신한다.
+ * @param {function} callback 갱신에 성공하면 할 동작
+ */
+GlobalSign.AccessTokenToInfo = function (callback) 
+{
     if (true === GlobalSign.isAccessToken())
     {//엑세스 토큰이 
         AA.get(AA.TokenRelayType.HeadAdd
             , {
                 url: FS_Api.Sign_AccessToUserInfo
-                , success: function (jsonData) {
-                    if ("0" === jsonData.InfoCode) {//에러 없음
+                , success: function (jsonData)
+                {
+                    if ("0" === jsonData.InfoCode)
+                    {//에러 없음
                         //사인인 되어있다고 확인해줌
                         GlobalSign.SignIn = true;
 
                         GlobalSign.SignIn_ID = jsonData.id;
                         GlobalSign.SignIn_Email = jsonData.email;
 
-                        if (TopInfo) {
-                            TopInfo.UserInfo_Load();
+                        GlobalSign.SignIn_ViewName = jsonResult.ViewName;
+
+                        //UI 갱신
+                        SignInInfo.UserInfo_Load();
+
+                        if (typeof callback === "function")
+                        {
+                            callback();
                         }
                     }
-                    else {//에러 있음
+                    else
+                    {//에러 있음
 
                     }
                 }
                 , error: function (jqXHR, textStatus, errorThrown) { }
             });
 
+    }
+    else
+    {
+        if (typeof callback === "function")
+        {
+            callback();
+        }
     }
 };

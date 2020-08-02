@@ -1,8 +1,9 @@
-﻿using IdentityServer4_Custom.IdentityServer4;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
+using IdentityServer4_Custom.IdentityServer4;
 
 namespace SPA_NetCore_Foundation.Global
 {

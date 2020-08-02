@@ -37,16 +37,6 @@
             <param name="sRefreshToken"></param>
             <returns></returns>
         </member>
-        <member name="F:SPA_NetCore_Foundation.Controllers.SignController.hcAuthClient">
-            <summary>
-            인증에 사용할  http클라이언트
-            </summary>
-        </member>
-        <member name="F:SPA_NetCore_Foundation.Controllers.SignController.sIdentityServer4_Url">
-            <summary>
-            IdentityServer4로 구현된 서버 주소
-            </summary>
-        </member>
         <member name="M:SPA_NetCore_Foundation.Controllers.SignController.RefreshToAccess(System.String)">
             <summary>
             리플레시 토큰을 이용하여 엑세스토큰을 갱신한다.
@@ -58,35 +48,6 @@
             <summary>
             엑세스토큰을 이용하여 유저 정보를 받는다.
             </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SPA_NetCore_Foundation.Controllers.SignController.RequestTokenAsync(System.String,System.String)">
-            <summary>
-            인증서버에 인증을 요청한다.
-            </summary>
-            <param name="sID"></param>
-            <param name="sPassword"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SPA_NetCore_Foundation.Controllers.SignController.RefreshTokenAsync(System.String)">
-            <summary>
-            액세스 토큰 갱신
-            </summary>
-            <param name="sRefreshToken">리플레시토큰</param>
-            <returns></returns>
-        </member>
-        <member name="M:SPA_NetCore_Foundation.Controllers.SignController.RevocationTokenAsync(System.String)">
-            <summary>
-            지정된 토큰 제거
-            </summary>
-            <param name="sRefreshToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SPA_NetCore_Foundation.Controllers.SignController.UserInfoAsync(System.String)">
-            <summary>
-            엑세스토큰을 이용하여 유저 정보를 받는다.
-            </summary>
-            <param name="sAccessToken"></param>
             <returns></returns>
         </member>
         <member name="T:SPA_NetCore_Foundation.Controllers.TestController">
@@ -120,9 +81,9 @@
             전역변수 모음
             </summary>
         </member>
-        <member name="F:SPA_NetCore_Foundation.Global.GlobalStatic.AuthUrl">
+        <member name="F:SPA_NetCore_Foundation.Global.GlobalStatic.TokenProc">
             <summary>
-            인증 서버 주소
+            토큰 처리관련
             </summary>
         </member>
         <member name="F:SPA_NetCore_Foundation.Global.GlobalStatic.UserList">
@@ -352,6 +313,56 @@
             <summary>
             클라이언트 접근 범위를 설정한다.
             </summary>
+            <returns></returns>
+        </member>
+        <member name="T:IdentityServer4_Custom.IdentityServer4.TokenProcess">
+            <summary>
+            토큰 처리 관련 기능들
+            </summary>
+        </member>
+        <member name="F:IdentityServer4_Custom.IdentityServer4.TokenProcess.hcAuthClient">
+            <summary>
+            인증에 사용할  http클라이언트
+            </summary>
+        </member>
+        <member name="F:IdentityServer4_Custom.IdentityServer4.TokenProcess.sIdentityServer4_Url">
+            <summary>
+            IdentityServer4로 구현된 서버 주소
+            </summary>
+        </member>
+        <member name="M:IdentityServer4_Custom.IdentityServer4.TokenProcess.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="sAuthUrl"></param>
+        </member>
+        <member name="M:IdentityServer4_Custom.IdentityServer4.TokenProcess.RequestTokenAsync(System.String,System.String)">
+            <summary>
+            인증서버에 인증을 요청한다.
+            </summary>
+            <param name="sID"></param>
+            <param name="sPassword"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IdentityServer4_Custom.IdentityServer4.TokenProcess.RefreshTokenAsync(System.String)">
+            <summary>
+            액세스 토큰 갱신
+            </summary>
+            <param name="sRefreshToken">리플레시토큰</param>
+            <returns></returns>
+        </member>
+        <member name="M:IdentityServer4_Custom.IdentityServer4.TokenProcess.RevocationTokenAsync(System.String)">
+            <summary>
+            지정된 토큰 제거
+            </summary>
+            <param name="sRefreshToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IdentityServer4_Custom.IdentityServer4.TokenProcess.UserInfoAsync(System.String)">
+            <summary>
+            엑세스토큰을 이용하여 유저 정보를 받는다.
+            </summary>
+            <param name="sAccessToken"></param>
             <returns></returns>
         </member>
         <member name="T:IdentityServer4_Custom.UserServices.CustomProfileService">

@@ -86,6 +86,7 @@ AA.delete = function (typeToken, jsonOption)
 };
 
 
+
 /**
  * jquery를 이용하여 요청을 처리합니다.
  * @param {TokenRelayType} typeToken 헤더에 토큰을 넣을지 여부
@@ -229,6 +230,7 @@ AA.RefreshToAccess = function (callback)
             , data: {
                 "nID": GlobalSign.SignIn_ID
                 , "sRefreshToken": refresh_token
+                , "sPlatformInfo": GlobalStatic.PlatformInfo
             }
             , dataType: "json"
             , success: function (jsonResult)
@@ -237,15 +239,21 @@ AA.RefreshToAccess = function (callback)
 
                 if (jsonResult.InfoCode === "0")
                 {//성공
+
                     //받은 정보 다시 저장
-                    GlobalSign.SignIn_ID = jsonResult.id;
-                    GlobalSign.SignIn_Email = jsonResult.email;
+                    GlobalSign.SignIn_ID = jsonResult.idUser;
+                    GlobalSign.SignIn_Email = jsonResult.Email;
+                    GlobalSign.SignIn_ViewName = jsonResult.ViewName;
 
                     GlobalSign.AccessToken_Set(jsonResult.access_token);
                     GlobalSign.RefreshToken_SetOption(jsonResult.refresh_token);
 
+
+                    //유저 정보를 갱신한다.
+                    TopInfo.UserInfo_Load();
+
                     //요청한 콜백 진행
-                    if (typeof (callback) === "function")
+                    if (typeof callback === "function")
                     {
                         callback();
                     }
@@ -268,14 +276,14 @@ AA.RefreshToAccess = function (callback)
     }//end if
 };
 
-
 /**
  * 아작스로 파일을 로드한다.
  * @param {string} sFileUrl 파일 url
  * @param {function} funSuccess 성공시 콜백
  * @param {function} jsonOption 추가 옵션
  */
-AA.HtmlFileLoad = function (sFileUrl, funSuccess, jsonOption) {
+AA.HtmlFileLoad = function (sFileUrl, funSuccess, jsonOption)
+{
     AA.get(AA.TokenRelayType.None
         , {
             url: sFileUrl

@@ -23,7 +23,8 @@ Page.Load = function (jsonOption, callbackFun)
 {
     var callbackFun_Backup = callbackFun;
 
-    if (Page.divMainMenu === null) {//페이지가 로드 되지 않았다.
+    if (Page.divMainMenu === null) 
+    {//페이지가 로드 되지 않았다.
 
         //페이지 html 로드
         divMain.load(FS_FUrl.Page
@@ -73,7 +74,7 @@ Page.Remove = function ()
     divMain.html("");
 
     Page.divMainMenu = null;
-    Page.divTop = null;
+    Page.divTopInfo = null;
     Page.divContents = null;
 };
 

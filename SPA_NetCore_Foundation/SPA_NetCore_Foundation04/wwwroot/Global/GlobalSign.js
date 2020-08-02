@@ -108,6 +108,7 @@ GlobalSign.Move_SignIn = function ()
     location.href = FS_Url.SignIn;
 };
 
+
 /**
   서버쪽에서는 사인인이 안되있는 경우(토큰 만료 같은)
  * 프론트엔드에서 로그인 페이지로 넘기기 전에 사인인 관련 정보를 지워준다.
@@ -232,7 +233,7 @@ GlobalSign.Move_SignOut = function ()
         );
 
 
-    }
+    }//end if
 };
 
 /**

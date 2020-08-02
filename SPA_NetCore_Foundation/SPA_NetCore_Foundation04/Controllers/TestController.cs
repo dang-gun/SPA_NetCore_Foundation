@@ -12,6 +12,9 @@ using SPA_NetCore_Foundation.Model;
 
 namespace SPA_NetCore_Foundation.Controllers
 {
+    /// <summary>
+    /// 테스트 전용
+    /// </summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class TestController : ControllerBase
