@@ -8,6 +8,11 @@ namespace Microsoft.Extensions.DependencyInjection
     /// </summary>
     public static class CustomIdentityServerBuilderExtensions
     {
+        /// <summary>
+        /// 저장소에 커스텀 유저를 추가한다.
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
         public static IIdentityServerBuilder AddCustomUserStore(this IIdentityServerBuilder builder)
         {
             //사용자 데이터 접근

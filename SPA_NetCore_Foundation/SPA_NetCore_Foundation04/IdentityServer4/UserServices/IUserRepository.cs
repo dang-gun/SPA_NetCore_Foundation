@@ -12,10 +12,26 @@ namespace IdentityServer4_Custom.UserServices
     /// </summary>
     public interface IUserRepository
     {
+        /// <summary>
+        /// 자격 증명 확인
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         bool ValidateCredentials(string username, string password);
 
+        /// <summary>
+        /// 아이디로 유저를 찾는다.
+        /// </summary>
+        /// <param name="nID"></param>
+        /// <returns></returns>
         UserSignInfoModel FindById(int nID);
 
+        /// <summary>
+        /// 이메일로 유저를 찾는다.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         UserSignInfoModel FindByEmail(string username);
     }
 }

@@ -26,12 +26,11 @@ namespace SPA_NetCore_Foundation.Controllers
     [ApiController]
     public class SignController : ControllerBase
     {
-
         /// <summary>
         /// 사인인 시도
         /// </summary>
-        /// <param name="sEmail">로그인에 사용할 이메일</param>
-        /// <param name="sPW">비밀번호</param>
+        /// <param name="sEmail"></param>
+        /// <param name="sPW"></param>
         /// <returns></returns>
         [HttpPut]
         public ActionResult<SignInResultModel> SignIn(
