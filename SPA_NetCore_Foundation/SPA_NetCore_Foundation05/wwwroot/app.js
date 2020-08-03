@@ -235,7 +235,8 @@ var app = Sammy(function ()
 
     this.get(FS_Url.Test01, function () 
     {
-        app.RouteCheck(function ()
+        app_Assist.RouteCheck(false, this,
+            function ()
         {
             //객체 생성
             GlobalStatic.Page_Now = new Test01();
@@ -244,7 +245,8 @@ var app = Sammy(function ()
 
     this.get(FS_Url.Test02, function () 
     {
-        app.RouteCheck(function ()
+        app_Assist.RouteCheck(false, this,
+            function ()
         {
             //객체 생성
             GlobalStatic.Page_Now = new Test02();
@@ -270,8 +272,8 @@ var app = Sammy(function ()
         var sCodeTemp = sCode;
 
         //사인인 필수 페이지
-        app_Assist.RouteCheck(false
-            , function ()
+        app_Assist.RouteCheck(false, this,
+            function ()
             {
                 //객체 생성
                 GlobalStatic.Page_Now = new Error(sCodeTemp);
@@ -304,40 +306,6 @@ var app = Sammy(function ()
 });
 
 
-/**
-* 라우트 체크.
-* 불허에 따른 작업은 이곳에서 한다.
-* @param {function} callback 허가가 났으면 동작시킬 콜백
-*/
-app.RouteCheck = function (callback)
-{
-    var bReturn = true;
-
-    switch (GlobalStatic.SiteType)
-    {
-        case 1://어드민 타입
-            if (false === GlobalSign.SignIn)
-            {//로그인 안되있음
-
-                //실패 알림
-                bReturn = false;
-                //로그인 페이지로 이동
-                GlobalSign.Move_SignIn();
-            }
-            break;
-
-        case 0://기본 타입
-        default:
-            bReturn = true;
-            break;
-    }
-
-    if (true === bReturn)
-    {//허가가 났다.
-        //콜백 호출
-        callback();
-    }
-};
 
 //어플리케이션 시작
 $(function ()

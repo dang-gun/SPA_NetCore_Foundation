@@ -1,22 +1,35 @@
-﻿
-/** app 지원 */
+﻿/** app 지원 */
 var app_Assist = {};
+
 /** 첫 토큰 체크를 했는지 여부 */
 app_Assist.bFirstAccessCheck = false;
-
 /** 라우트 진행전에 임시로 저장해두는 콜백 */
 app_Assist.RouteCallback = function ()
 {
 };
+
+/** 이전 주소 */
+app_Assist.Path_Previous = "";
+/** 이전 주소의 로그인 필수 여부 */
+app_Assist.Path_PreviousSignIn = false;
+
+/** 이전 주소 */
+app_Assist.Path_Now = "";
+/** 이전 주소의 로그인 필수 여부 */
+app_Assist.Path_NowSignIn = false;
+
+
+
 
 /**
 * 라우트 체크.
 * 불허에 따른 작업은 이곳에서 한다.
 * 개체를 생성할때 공통으로 해야할 동작이 있다면 이곳에서 처리한다.
 * @param {boolean} bSignIn 사인인이 필수 인지 여부
+* @param {object} objThis app this를 전달한다.
 * @param {function} callback 허가가 났으면 동작시킬 콜백
 */
-app_Assist.RouteCheck = function (bSignIn, callback)
+app_Assist.RouteCheck = function (bSignIn, objThis, callback)
 {
     var bSignInTemp = bSignIn;
     var callbackTemp = callback;
@@ -59,18 +72,31 @@ app_Assist.RouteCheck = function (bSignIn, callback)
 
         if (true === bReturn)
         {//허가가 났다.
+
+            //이전 주소 백업
+            app_Assist.Path_Previous = app_Assist.Path_Now;
+            app_Assist.Path_PreviousSignIn = app_Assist.Path_NowSignIn;
+
+            //지금 주소 저장
+            app_Assist.Path_Now = objThis.path;
+            app_Assist.Path_NowSignIn = bSignInTemp;
+
             //콜백 호출
-            callbackTemp();
+            callbackTemp({
+                /** 사인인 여부 */
+                SignIn: bSignInTemp
+            });
         }
         else
         {//실패 했다.
 
-            if (false === GlobalSign.isAccessToken())
+            //if (false === GlobalSign.isAccessToken())
+            if (false === GlobalSign.SignIn)
             {//엑세스토큰이 죽어 있다.
                 //죽어있을때만 안내를 해준다.
                 //어차피 엑세스토큰이 갱신됐을때 메시지가 출력되므로.
-                //alert("사인인이 필요합니다.");
-                GlobalStatic.MessageBox_Error("사인인이 필요합니다.");
+                alert("사인인이 필요합니다.");
+                //GlobalStatic.MessageBox_Error("", "사인인이 필요합니다.");
             }
 
             switch (GlobalStatic.SiteType)
@@ -82,7 +108,19 @@ app_Assist.RouteCheck = function (bSignIn, callback)
 
                 case 0://기본 타입
                 default:
-                    history.back();
+                    {
+                        //이전 페이지
+                        if (true === app_Assist.Path_PreviousSignIn)
+                        {//이전 페이지가 로그인 필수 페이지다.
+                            //홈으로 보낸다.
+                            Page.Move_Home();
+                        }
+                        else
+                        {//이전 페이지가 갈수 있는 곳이다.
+                            //뒤로가기
+                            history.back();
+                        }
+                    }
                     break;
             }
         }
@@ -108,6 +146,8 @@ app_Assist.RouteCheck = function (bSignIn, callback)
 
 
 
+
+
 // 라우트 어플리케이션 생성
 var app = Sammy(function ()
 {
@@ -123,7 +163,8 @@ var app = Sammy(function ()
                 app_Assist.RouteCallback = function () { };
             });
     }
-    
+
+
 
     //라우트 설정****
     //Page에 페이지 이동 공통화가 있는데 여기서는 사용하면
@@ -132,12 +173,13 @@ var app = Sammy(function ()
 
     this.get("/", function ()
     {
-        app.RouteCheck(function ()
-        {
-            //this.RouteCheck에서 로그인 체크를 해준다.
-            //그러니 여기서는 홈으로만 이동하면 된다.
-            location.href = FS_Url.Home;
-        });
+        app_Assist.RouteCheck(false, this,
+            function (jsonOpt)
+            {
+                //this.RouteCheck에서 로그인 체크를 해준다.
+                //그러니 여기서는 홈으로만 이동하면 된다.
+                location.href = FS_Url.Home;
+            });
     });
 
     this.get(FS_Url.Error + "/:code", function ()
@@ -145,12 +187,32 @@ var app = Sammy(function ()
         //파라미터 받기
         var nCode = this.params["code"];
 
-        
-        app.RouteCheck(function ()
-        {
-            //객체 생성
-            GlobalStatic.Page_Now = new Error(nCode);
-        });
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                //객체 생성
+                GlobalStatic.Page_Now = new Error(nCode);
+            });
+    });
+
+    this.get(FS_Url.Home, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                //객체 생성
+                GlobalStatic.Page_Now = new Home();
+            });
+    });
+
+    this.get(FS_Url.MyPage, function ()
+    {
+        app_Assist.RouteCheck(true, this,
+            function ()
+            {
+                //객체 생성
+                GlobalStatic.Page_Now = new MyPage();
+            });
     });
 
     this.get(FS_Url.SignIn, function ()
@@ -169,21 +231,12 @@ var app = Sammy(function ()
     });
 
 
-    this.get(FS_Url.Home, function ()
-    {
-        app.RouteCheck(function ()
-        {
-            //객체 생성
-            GlobalStatic.Page_Now = new Home();
-        });
-    });
-
-
 
 
     this.get(FS_Url.Test01, function () 
     {
-        app.RouteCheck(function ()
+        app_Assist.RouteCheck(false, this,
+            function ()
         {
             //객체 생성
             GlobalStatic.Page_Now = new Test01();
@@ -192,7 +245,8 @@ var app = Sammy(function ()
 
     this.get(FS_Url.Test02, function () 
     {
-        app.RouteCheck(function ()
+        app_Assist.RouteCheck(false, this,
+            function ()
         {
             //객체 생성
             GlobalStatic.Page_Now = new Test02();
@@ -202,7 +256,7 @@ var app = Sammy(function ()
     //this.get("#/", function () {
     //    //인덱스 페이지
     //    //$("#divMain").load("/Pages/index.html");
-    //    DivMain.html("홈");
+    //    divMain.html("홈");
     //});
 
     //this.get("#/param/:id", function () {
@@ -218,8 +272,8 @@ var app = Sammy(function ()
         var sCodeTemp = sCode;
 
         //사인인 필수 페이지
-        app_Assist.RouteCheck(false
-            , function ()
+        app_Assist.RouteCheck(false, this,
+            function ()
             {
                 //객체 생성
                 GlobalStatic.Page_Now = new Error(sCodeTemp);
@@ -232,19 +286,19 @@ var app = Sammy(function ()
         switch (GlobalStatic.SiteType)
         {
             case 0://일반
-                Page.Move_Page(false, FS_Url.Error + "/" + "404");
+                Page.Move_Page(FS_Url.Error + "/" + "404");
                 break;
             case 1://어드민 타입
                 //사인인이 되어 있을때 -> 컨탠츠 영역에 출력한다.
                 //사인인이 되어 있지 않을때 -> 사인인 페이지, 메시지 출력
                 if (true === GlobalSign.SignIn)
                 {
-                    Page.Move_Page(false, FS_Url.Error + "/" + "404");
+                    Page.Move_Page(FS_Url.Error + "/" + "404");
                 }
                 else
                 {
                     alert("404, 페이지를 찾지 못했습니다.");
-                    Page.Move_Page(false, FS_Url.SignIn);
+                    Page.Move_Page(FS_Url.SignIn);
                 }
                 break;
         }
@@ -252,43 +306,8 @@ var app = Sammy(function ()
 });
 
 
-/**
-* 라우트 체크.
-* 불허에 따른 작업은 이곳에서 한다.
-* @param {function} callback 허가가 났으면 동작시킬 콜백
-*/
-app.RouteCheck = function (callback)
-{
-    var bReturn = true;
-
-    switch (GlobalStatic.SiteType)
-    {
-        case 1://어드민 타입
-            if (false === GlobalSign.SignIn)
-            {//로그인 안되있음
-
-                //실패 알림
-                bReturn = false;
-                //로그인 페이지로 이동
-                GlobalSign.Move_SignIn();
-            }
-            break;
-
-        case 0://기본 타입
-        default:
-            bReturn = true;
-            break;
-    }
-
-    if (true === bReturn)
-    {//허가가 났다.
-        //콜백 호출
-        callback();
-    }
-};
-
-
 //어플리케이션 시작
-$(function () {
+$(function ()
+{
     app.run();
 });

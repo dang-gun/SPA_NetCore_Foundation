@@ -106,7 +106,7 @@ namespace SPA_NetCore_Foundation
                     new OpenApiInfo
                     {
                         Title = "SPA NetCore Foundation API",
-                        Description = "[ASP.NET Core] .NET Core로 구현한 SPA(Single Page Applications)(5) - 스웨거(Swagger) 설정 <br /> https://blog.danggun.net/https://blog.danggun.net/7690",
+                        Description = "[ASP.NET Core] .NET Core로 구현한 SPA(Single Page Applications)(5) - 스웨거(Swagger) 설정 <br /> https://blog.danggun.net/7689",
                         Version = "v1",
                         Contact = new OpenApiContact
                         {
@@ -137,7 +137,7 @@ namespace SPA_NetCore_Foundation
                 c.IncludeXmlComments(string.Format(@"{0}\SPA_NetCore_Foundation06.xml", System.AppDomain.CurrentDomain.BaseDirectory));
             });
 
-            
+
             services.AddDbContext<SpaNetCoreFoundationContext>();
 
         }

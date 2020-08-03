@@ -9,6 +9,8 @@ GlobalSign.SignIn = false;
 GlobalSign.SignIn_Email = "";
 /** 사인인 - 아이디 정보 */
 GlobalSign.SignIn_ID = 0;
+/** 사인인 - 표시 이름 */
+GlobalSign.SignIn_ViewName = "";
 
 /** 이메일 저장 - 쿠키용 이름 */
 GlobalSign.EmailSave_CookieName = "spa_EmailSave";
