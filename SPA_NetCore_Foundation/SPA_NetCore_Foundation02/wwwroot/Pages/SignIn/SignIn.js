@@ -46,15 +46,18 @@ SignIn.prototype.btnSignIn_onclick = function ()
 
     if (true === dgIsObject.IsBoolValue(GlobalSign.SignIn))
     {
-        alert("이미 사인인이 되어 있습니다.");
+        //alert("이미 사인인이 되어 있습니다.");
+        GlobalStatic.MessageBox_Error("", "이미 사인인이 되어 있습니다.");
     }
     else if (false === dgIsObject.IsStringNotEmpty(sEMail))
     {
-        alert("이메일을 입력하지 않았습니다.");
+        //alert("이메일을 입력하지 않았습니다.");
+        GlobalStatic.MessageBox_Error("", "이메일을 입력하지 않았습니다.");
     }
     else if (false === dgIsObject.IsStringNotEmpty(sPW))
     {
-        alert("비밀번호를 입력하지 않았습니다.");
+        //alert("비밀번호를 입력하지 않았습니다.");
+        GlobalStatic.MessageBox_Error("", "비밀번호를 입력하지 않았습니다.");
     }
     else
     {//성공
@@ -74,7 +77,8 @@ SignIn.prototype.btnSignIn_onclick = function ()
                             GlobalSign.SignIn_Token = data.Token;
                             GlobalSign.SignIn_ID = sEMail;
 
-                            alert("사인 인 성공");
+                            //alert("사인 인 성공");
+                            GlobalStatic.MessageBox_Info("", "사인 인 성공");
 
                             //홈으로 이동
                             Page.Move_Home();
@@ -82,15 +86,19 @@ SignIn.prototype.btnSignIn_onclick = function ()
                     }
                     else
                     {//에러 있음
-                        alert("error code : " + data.InfoCode + "\n"
-                            + "내용 : " + data.message);
+                        //alert("error code : " + data.InfoCode + "\n"
+                        //    + "내용 : " + data.Message);
+                        GlobalStatic.MessageBox_Error(""
+                            , "실패코드 : " + error.responseJSON.InfoCode
+                            + "\n " + error.responseJSON.Message);
                     }
                 }
                 , error: function (error)
                 {
                     console.log(error);
 
-                    alert("알수 없는 오류가 발생했습니다.");
+                    //alert("알수 없는 오류가 발생했습니다.");
+                    GlobalStatic.MessageBox_Error("", "알수 없는 오류가 발생했습니다.");
                 }
             });
     }

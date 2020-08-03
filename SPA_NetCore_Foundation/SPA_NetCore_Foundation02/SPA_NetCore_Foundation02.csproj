@@ -39,6 +39,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\Utility\DG_MessageBox\DG_MessageBox.js" />
+    <None Include="wwwroot\Utility\DG_Popup\DG_Popup.js" />
+    <None Include="wwwroot\Utility\DG_Popup\README.md" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="wwwroot\Pages\SignInInfo\SignInInfo.js">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
