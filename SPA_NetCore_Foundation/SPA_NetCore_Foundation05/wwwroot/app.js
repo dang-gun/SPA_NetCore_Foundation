@@ -178,7 +178,17 @@ var app = Sammy(function ()
             {
                 //this.RouteCheck에서 로그인 체크를 해준다.
                 //그러니 여기서는 홈으로만 이동하면 된다.
-                location.href = FS_Url.Home;
+                switch (GlobalStatic.SiteType) 
+                {
+                    case 1://어드민 타입
+                        location.href = FS_Url.SignIn;
+                        break;
+
+                    case 0:
+                    default:
+                        location.href = FS_Url.Home;
+                        break;
+                }
             });
     });
 

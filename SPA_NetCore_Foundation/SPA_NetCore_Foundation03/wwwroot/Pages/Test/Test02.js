@@ -42,7 +42,10 @@ Test02.prototype.Test01 = function (nData)
                 {//에러 있음
                     //아웃풋 지우기
                     objThis.divOutput.html("");
-                    alert("error code : " + data.InfoCode + "\n"
+                    //alert("error code : " + data.InfoCode + "\n"
+                    //    + "내용 : " + data.Message);
+                    GlobalStatic.MessageBox_Error(GlobalStatic.Title
+                        , "error code : " + data.InfoCode + "\n"
                         + "내용 : " + data.Message);
                 }
             }

@@ -95,8 +95,8 @@ app_Assist.RouteCheck = function (bSignIn, objThis, callback)
             {//엑세스토큰이 죽어 있다.
                 //죽어있을때만 안내를 해준다.
                 //어차피 엑세스토큰이 갱신됐을때 메시지가 출력되므로.
-                alert("사인인이 필요합니다.");
-                //GlobalStatic.MessageBox_Error("", "사인인이 필요합니다.");
+                //alert("사인인이 필요합니다.");
+                GlobalStatic.MessageBox_Error(GlobalStatic.Title, "사인인이 필요합니다.");
             }
 
             switch (GlobalStatic.SiteType)
@@ -295,7 +295,8 @@ var app = Sammy(function ()
                 }
                 else
                 {
-                    alert("404, 페이지를 찾지 못했습니다.");
+                    //alert("404, 페이지를 찾지 못했습니다.");
+                    GlobalStatic.MessageBox_Error(GlobalStatic.Title, "404, 페이지를 찾지 못했습니다.");
                     Page.Move_Page(FS_Url.SignIn);
                 }
                 break;

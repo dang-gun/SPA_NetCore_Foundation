@@ -19,6 +19,66 @@ GlobalStatic.Page_Now = null;
 GlobalStatic.PageType_Now = "";
 
 
+/** 프로젝트 제목 */
+GlobalStatic.Title = "SPA NetCore Foundation 03";
+
+//전역 함수 ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+
+/**
+ * 단순 메시지 박스 - 에러
+ * @param {string} sTitle 출력할 메시지
+ * @param {string} sMsg 출력할 메시지
+ */
+GlobalStatic.MessageBox_Error = function (sTitle, sMsg)
+{
+    var sTitleTemp = sTitle;
+
+    if ("" === sTitleTemp)
+    {
+        sTitleTemp = GlobalStatic.Title;
+    }
+
+    DG_MessageBox.Show({
+        Title: sTitleTemp,
+        Content: sMsg,
+
+        ButtonShowType: DG_MessageBox.ButtonShowType.Ok,
+        BigIconType: DG_MessageBox.BigIconType.Error,
+        ButtonEvent: function (btnType)
+        {
+            DG_Popup.Close();
+        }
+    });
+};
+
+/**
+ * 단순 메시지 박스 - 인포
+ * @param {string} sTitle 출력할 메시지
+ * @param {string} sMsg 출력할 메시지
+ */
+GlobalStatic.MessageBox_Info = function (sTitle, sMsg)
+{
+    var sTitleTemp = sTitle;
+
+    if ("" === sTitleTemp)
+    {
+        sTitleTemp = GlobalStatic.Title;
+    }
+
+    DG_MessageBox.Show({
+        Title: sTitleTemp,
+        Content: sMsg,
+
+        ButtonShowType: DG_MessageBox.ButtonShowType.Ok,
+        BigIconType: DG_MessageBox.BigIconType.Info,
+        ButtonEvent: function (btnType)
+        {
+            DG_Popup.Close();
+        }
+    });
+};
+
+
 //전역 유틸 ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
 
 /** 데이터 바인드 */

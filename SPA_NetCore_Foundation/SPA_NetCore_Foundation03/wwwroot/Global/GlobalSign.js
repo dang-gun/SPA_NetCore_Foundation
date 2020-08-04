@@ -34,7 +34,8 @@ GlobalSign.Move_SignOut = function ()
     
     if (false === dgIsObject.IsBoolValue(GlobalSign.SignIn))
     {//사인 아웃이 되어 있음
-        alert("사인아웃이 되어 있습니다.");
+        //alert("사인아웃이 되어 있습니다.");
+        GlobalStatic.MessageBox_Info(GlobalStatic.Title, "사인아웃이 되어 있습니다.");
     }
     else
     {
@@ -50,7 +51,8 @@ GlobalSign.Move_SignOut = function ()
                 console.log(data);
                 GlobalSign.SignIn = false;
 
-                alert("사인아웃 성공 : " + data);
+                //alert("사인아웃 성공 : " + data);
+                GlobalStatic.MessageBox_Info(GlobalStatic.Title, "사인아웃 성공 : " + data);
 
                 
 
@@ -73,7 +75,10 @@ GlobalSign.Move_SignOut = function ()
 
                 if (error.responseJSON
                         && error.responseJSON.InfoCode) {
-                    alert("실패코드 : " + error.responseJSON.InfoCode
+                    //alert("실패코드 : " + error.responseJSON.InfoCode
+                    //    + "\n " + error.responseJSON.Message);
+                    GlobalStatic.MessageBox_Error(GlobalStatic.Title
+                        , "실패코드 : " + error.responseJSON.InfoCode
                         + "\n " + error.responseJSON.Message);
                 }
             }
