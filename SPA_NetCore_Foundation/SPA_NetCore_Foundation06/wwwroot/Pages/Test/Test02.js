@@ -36,10 +36,13 @@ Test02.prototype.Test01 = function (nData)
                 if ("0" === data.InfoCode) {//에러 없음
                     objThis.divOutput.html("nTest : " + data.nTest + " sTest : " + data.sTest);
                 }
-                else {//에러 있음
+                else 
+                {//에러 있음
                     //아웃풋 지우기
-                    objThis.divOutput.html("");
-                    alert("error code : " + data.InfoCode + "\n"
+                    //alert("error code : " + data.InfoCode + "\n"
+                    //    + "내용 : " + data.Message);
+                    GlobalStatic.MessageBox_Error(GlobalStatic.Title
+                        , "error code : " + data.InfoCode + "\n"
                         + "내용 : " + data.Message);
                 }
             }
@@ -64,13 +67,18 @@ Test02.prototype.Test02 = function ()
                 , success: function (data) {
                     console.log(data);
 
-                    if ("0" === data.InfoCode) {//에러 없음
+                    if ("0" === data.InfoCode) 
+                    {//에러 없음
                         objThis.divOutput.html("nTest001 : " + data.nTest001 + " sTest002 : " + data.sTest002);
                     }
-                    else {//에러 있음
+                    else 
+                    {//에러 있음
                         //아웃풋 지우기
                         objThis.divOutput.html("");
-                        alert("error code : " + data.InfoCode + "\n"
+                        //alert("error code : " + data.InfoCode + "\n"
+                        //    + "내용 : " + data.Message);
+                        GlobalStatic.MessageBox_Error(GlobalStatic.Title
+                            , "error code : " + data.InfoCode + "\n"
                             + "내용 : " + data.Message);
                     }
                 }
@@ -81,6 +89,7 @@ Test02.prototype.Test02 = function ()
     }
     else
     {
-        alert("사인을 해야 사용할 수 있습니다.");
+        //alert("사인을 해야 사용할 수 있습니다.");
+        GlobalStatic.MessageBox_Error(GlobalStatic.Title, "사인을 해야 사용할 수 있습니다.");
     }
 };

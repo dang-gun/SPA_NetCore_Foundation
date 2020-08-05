@@ -17,6 +17,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Utility\DG_MessageBox\DG_MessageBox.js" />
+    <Content Remove="wwwroot\Utility\DG_Popup\DG_Popup.js" />
+    <Content Remove="wwwroot\Utility\DG_Popup\README.md" />
+  </ItemGroup>
+
+  <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\app.js" />
     <_ContentIncludedByDefault Remove="wwwroot\favicon.ico" />
     <_ContentIncludedByDefault Remove="wwwroot\Global\Debug.js" />
@@ -67,6 +73,12 @@
   <ItemGroup>
     <Folder Include="Migrations\" />
     <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Utility\DG_MessageBox\DG_MessageBox.js" />
+    <None Include="wwwroot\Utility\DG_Popup\DG_Popup.js" />
+    <None Include="wwwroot\Utility\DG_Popup\README.md" />
   </ItemGroup>
 
   <ItemGroup>

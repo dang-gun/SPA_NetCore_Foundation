@@ -168,7 +168,8 @@ SignIn.prototype.btnSignIn_onclick = function ()
                         //홈으로 이동
                         Page.Move_Home();
                     }
-                    else {//에러 있음
+                    else 
+                    {//에러 있음
                         //alert("error code : " + jsonData.InfoCode + "\n"
                         //    + "내용 : " + jsonData.Message);
                         GlobalStatic.MessageBox_Error(GlobalStatic.Title
@@ -177,7 +178,8 @@ SignIn.prototype.btnSignIn_onclick = function ()
                     }
 
                 }
-                , error: function (error) {
+                , error: function (error) 
+                {
                     console.log(error);
 
                     //alert("알수 없는 오류가 발생했습니다.");

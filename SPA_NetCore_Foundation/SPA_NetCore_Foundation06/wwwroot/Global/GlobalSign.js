@@ -159,7 +159,8 @@ GlobalSign.Move_SignIn_Remove = function (bMessage, sMessage)
 
     if (true === bMessage)
     {
-        alert(sMsg);
+        //alert(sMsg);
+        GlobalStatic.MessageBox_Info(GlobalStatic.Title, sMsg);
         funSiteMove();
     }
     else
@@ -179,7 +180,8 @@ GlobalSign.Move_SignOut = function ()
 
     if (false === dgIsObject.IsBoolValue(GlobalSign.SignIn))
     {//사인 아웃이 되어 있음
-        alert("사인아웃이 되어 있습니다.");
+        //alert("사인아웃이 되어 있습니다.");
+        GlobalStatic.MessageBox_Info(GlobalStatic.Title, "사인아웃이 되어 있습니다.");
     }
     else
     {
@@ -205,7 +207,8 @@ GlobalSign.Move_SignOut = function ()
                     // 엑세스 토큰 갱신
                     GlobalSign.AccessTokenToInfo();
 
-                    alert("사인아웃이 되어 있습니다.");
+                    //alert("사인아웃이 되어 있습니다.");
+                    GlobalStatic.MessageBox_Info(GlobalStatic.Title, "사인아웃이 되었습니다.");
 
                     switch (GlobalStatic.SiteType)
                     {
@@ -228,10 +231,10 @@ GlobalSign.Move_SignOut = function ()
                     if (error.responseJSON
                         && error.responseJSON.InfoCode) 
                     {
-                        alert(error.responseJSON.Message);
-                        //GlobalStatic.MessageBox_Error("",
-                        //    "실패코드 : " + error.responseJSON.InfoCode + "<br /> "
-                        //    + error.responseJSON.Message);
+                        //alert(error.responseJSON.Message);
+                        GlobalStatic.MessageBox_Error(GlobalStatic.Title,
+                            "실패코드 : " + error.responseJSON.InfoCode + "<br /> "
+                            + error.responseJSON.Message);
                     }
                 }
             }
