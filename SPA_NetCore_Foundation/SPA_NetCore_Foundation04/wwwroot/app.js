@@ -90,14 +90,18 @@ app_Assist.RouteCheck = function (bSignIn, objThis, callback)
         else
         {//실패 했다.
 
-            //if (false === GlobalSign.isAccessToken())
-            if (false === GlobalSign.SignIn)
+            if (false === bSignInTemp)
+            {//사인인이 필수가 아닌 페이지다.
+                //안내를 하지 않는다.
+            }
+            else if (false === GlobalSign.SignIn)
             {//엑세스토큰이 죽어 있다.
                 //죽어있을때만 안내를 해준다.
                 //어차피 엑세스토큰이 갱신됐을때 메시지가 출력되므로.
                 //alert("사인인이 필요합니다.");
                 GlobalStatic.MessageBox_Error(GlobalStatic.Title, "사인인이 필요합니다.");
             }
+            
 
             switch (GlobalStatic.SiteType)
             {

@@ -1,5 +1,4 @@
-﻿using SPA_NetCore_Foundation.Global;
-using ModelDB;
+﻿using ModelDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +9,8 @@ namespace IdentityServer4_Custom.UserServices
 {
     /// <summary>
     /// 3. 유저 저장소
-    /// 유저 정보 및 데이터 엑세스 기능
+    /// 유저 정보 및 데이터 엑세스 기능.
+    /// 각 프로젝트에 맞게 수정하여 사용한다.
     /// </summary>
     public class UserRepository : IUserRepository
     {
@@ -45,7 +45,7 @@ namespace IdentityServer4_Custom.UserServices
         /// </summary>
         /// <param name="nID"></param>
         /// <returns></returns>
-        public UserAuthModel FindById(int nID)
+        public UserRepositoryModel FindById(int nID)
         {
             UserAuthModel userReturn = new UserAuthModel();
 
@@ -58,7 +58,7 @@ namespace IdentityServer4_Custom.UserServices
                 userReturn.ManagerAuth_Set(mgrItem);
             }
 
-            return userReturn;
+            return this.ToUserRepositoryModel(userReturn);
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace IdentityServer4_Custom.UserServices
         /// </summary>
         /// <param name="sEmail"></param>
         /// <returns></returns>
-        public UserAuthModel FindByEmail(string sEmail)
+        public UserRepositoryModel FindByEmail(string sEmail)
         {
 
             UserAuthModel userAuth = null;
@@ -83,7 +83,29 @@ namespace IdentityServer4_Custom.UserServices
                 }
             }
 
-            return userAuth;
+            return this.ToUserRepositoryModel(userAuth);
+        }
+
+        /// <summary>
+        /// 로그인에 사용하는 UserSignInfoModel을
+        /// IdentityServer4_Custom.UserServices.UserRepositoryModel 로 변환한다.
+        /// </summary>
+        /// <param name="insUserDB"></param>
+        /// <returns></returns>
+        private UserRepositoryModel ToUserRepositoryModel(UserAuthModel insUserDB)
+        {
+            UserRepositoryModel urmReturn = null;
+
+            if (null != insUserDB)
+            {//데이터가 있다.
+                urmReturn = new UserRepositoryModel();
+                urmReturn.idUser = insUserDB.idUser;
+                urmReturn.SignEmail = insUserDB.SignEmail;
+                urmReturn.Password = string.Empty;
+            }
+
+
+            return urmReturn;
         }
     }
 }

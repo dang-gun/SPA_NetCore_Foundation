@@ -16,6 +16,7 @@ namespace IdentityServer4_Custom.UserServices
     /// <summary>
     /// 4. 'IdentityServerBuilder'에 전달될 프로필 서비스를 만든다.
     /// 유효성 검증이 된경우 토큰에 정보나 요구사항을 추가한다.
+    /// 필요한 데이터가 있는 경우 이것을 커스텀 해야한다.
     /// </summary>
     public class CustomProfileService : IProfileService
     {
@@ -57,14 +58,14 @@ namespace IdentityServer4_Custom.UserServices
                 context.RequestedClaimTypes,
                 context.Caller);
 
-            var user = _userRepository.FindById(nID);
+            UserRepositoryModel user = _userRepository.FindById(nID);
 
             var claims = new List<Claim>
             {
                 new Claim("role", "dataEventRecords.admin"),
                 new Claim("role", "dataEventRecords.user"),
-                new Claim("id", user.ID.ToString()),
-                new Claim("email", user.Email)
+                new Claim("id", user.idUser.ToString()),
+                new Claim("email", user.SignEmail)
             };
 
             context.IssuedClaims = claims;
@@ -80,7 +81,7 @@ namespace IdentityServer4_Custom.UserServices
         public async Task IsActiveAsync(IsActiveContext context)
         {
             int nID = Convert.ToInt32(context.Subject.GetSubjectId());
-            var user = _userRepository.FindById(nID);
+            UserRepositoryModel user = _userRepository.FindById(nID);
             //여기서 인증성공여부를 판단해서 메시지를 보낼 수 있을듯 한데...
             //인증관련 내용만 처리 가능
             //context.Subject.Claims
