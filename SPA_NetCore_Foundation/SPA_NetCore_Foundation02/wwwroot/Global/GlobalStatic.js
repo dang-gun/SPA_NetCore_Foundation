@@ -3,6 +3,9 @@
  */
 var GlobalStatic = {};
 
+/** 프로젝트 제목 */
+GlobalStatic.Title = "SPA NetCore Foundation 02";
+
 /** 디버그 여부 */
 GlobalStatic.Debug = false;
 
@@ -19,9 +22,6 @@ GlobalStatic.Page_Now = null;
 //현재 보고있는 페이지의 구분용 타이틀
 GlobalStatic.PageType_Now = "";
 
-
-/** 프로젝트 제목 */
-GlobalStatic.Title = "SPA NetCore Foundation 02";
 
 //전역 함수 ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
 
