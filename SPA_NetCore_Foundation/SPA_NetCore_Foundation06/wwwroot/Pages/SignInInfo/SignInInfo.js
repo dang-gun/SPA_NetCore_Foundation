@@ -20,41 +20,45 @@ SignInInfo.Load = function ()
  */
 SignInInfo.UserInfo_Load = function ()
 {
-    if (true === GlobalSign.SignIn)
-    {//사인인 정보가 있음
+    if (SignInInfo.divSignInInfo)
+    {
+        if (true === GlobalSign.SignIn)
+        {//사인인 정보가 있음
 
-        SignInInfo.divSignInInfo.load(FS_FUrl.SignInInfo_SignOutHtml
-            , function ()
-            {
-                $("#aMyPage").attr("href", FS_Url.MyPage);
-                $("#spanEMail").html(GlobalSign.SignIn_ID);
-            });
-    }
-    else
-    {//사인인 정보가 없음
-        //정보 없데이트
-        SignInInfo.divSignInInfo.load(FS_FUrl.SignInInfo_SignInHtml);
+            SignInInfo.divSignInInfo.load(FS_FUrl.SignInInfo_SignOutHtml
+                , function ()
+                {
+                    $("#aMyPage").attr("href", FS_Url.MyPage);
+                    $("#spanEMail").html(GlobalSign.SignIn_ID);
+                });
+        }
+        else
+        {//사인인 정보가 없음
+            //정보 없데이트
+            SignInInfo.divSignInInfo.load(FS_FUrl.SignInInfo_SignInHtml);
 
 
 
-        //현제 페이지 검사
-        if (true === app_Assist.Path_NowSignIn)
-        {//로그인 필수 페이지
-            //이전 페이지도 페이지 검사
-            if (true === app_Assist.Path_PreviousSignIn)
+            //현제 페이지 검사
+            if (true === app_Assist.Path_NowSignIn)
             {//로그인 필수 페이지
-                //홈으로 보낸다.
-                Page.Move_Home();
+                //이전 페이지도 페이지 검사
+                if (true === app_Assist.Path_PreviousSignIn)
+                {//로그인 필수 페이지
+                    //홈으로 보낸다.
+                    Page.Move_Home();
+                }
+                else
+                {//로그인 비필수
+                    //이전 페이지로 이동
+                    Page.Move_Page(app_Assist.Path_Previous);
+                }
             }
             else
             {//로그인 비필수
-                //이전 페이지로 이동
-                Page.Move_Page(app_Assist.Path_Previous);
+                //그대로 둔다.
             }
         }
-        else
-        {//로그인 비필수
-            //그대로 둔다.
-        }
     }
+    
 };
