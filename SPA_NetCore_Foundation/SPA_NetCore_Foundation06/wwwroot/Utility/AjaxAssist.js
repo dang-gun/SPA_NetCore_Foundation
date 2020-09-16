@@ -248,7 +248,7 @@ AA.RefreshToAccess = function (callback)
                     GlobalSign.RefreshToken_SetOption(jsonResult.refresh_token);
 
                     //유저 정보를 갱신한다.
-                    TopInfo.UserInfo_Load();
+                    SignInInfo.UserInfo_Load();
 
                     //요청한 콜백 진행
                     if (typeof callback === "function")

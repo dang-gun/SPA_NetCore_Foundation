@@ -55,7 +55,8 @@ namespace SPA_NetCore_Foundation.Controllers
                 armResult.nTest = nData;
                 armResult.sTest = sData;
             }
-            else
+
+            if (false == rrResult.IsSuccess())
             {
                 rrResult.InfoCode = "1";
                 rrResult.Message = "'nData'에 음수가 입력되었습니다.";

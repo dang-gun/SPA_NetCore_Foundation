@@ -73,7 +73,7 @@ Page.Remove = function ()
     divMain.html("");
 
     Page.divMainMenu = null;
-    Page.divTopInfo = null;
+    Page.divTop = null;
     Page.divContents = null;
 };
 
