@@ -82,7 +82,7 @@ namespace IdentityServer4.UserServices
         /// 인증 서버에서 넘어온 정보로 생성
         /// </summary>
         /// <param name="claims"></param>
-        public ClaimModel(IEnumerable<Claim> claims)
+        public ClaimModel(IEnumerable<Claim> claims )
         {
             this.Set(claims);
         }
@@ -100,7 +100,7 @@ namespace IdentityServer4.UserServices
             {
                 Claim claimItem = arrClaims[i];
 
-                switch (claimItem.Type)
+                switch(claimItem.Type)
                 {
                     case "iclient_id":
                         this.client_id = claimItem.Value;
@@ -120,9 +120,9 @@ namespace IdentityServer4.UserServices
                         break;
                 }
 
-
+                
             }
-
+            
         }
 
     }

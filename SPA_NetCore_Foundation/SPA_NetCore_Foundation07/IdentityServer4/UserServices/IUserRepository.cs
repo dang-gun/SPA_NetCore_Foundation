@@ -1,5 +1,7 @@
-﻿using ModelDB;
-using WebApiAuth.Model.Sign;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace IdentityServer4_Custom.UserServices
 {
@@ -12,23 +14,23 @@ namespace IdentityServer4_Custom.UserServices
         /// <summary>
         /// 자격 증명 확인
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
+        /// <param name="sSignEmail"></param>
+        /// <param name="sPassword"></param>
         /// <returns></returns>
-        bool ValidateCredentials(string username, string password);
+        bool ValidateCredentials(string sSignEmail, string sPassword);
 
         /// <summary>
         /// 아이디로 유저를 찾는다.
         /// </summary>
         /// <param name="nID"></param>
         /// <returns></returns>
-        UserAuthModel FindById(int nID);
+        UserRepositoryModel FindById(int nID);
 
         /// <summary>
         /// 이메일로 유저를 찾는다.
         /// </summary>
-        /// <param name="username"></param>
+        /// <param name="sSignEmail"></param>
         /// <returns></returns>
-        UserAuthModel FindByEmail(string username);
+        UserRepositoryModel FindByEmail(string sSignEmail);
     }
 }

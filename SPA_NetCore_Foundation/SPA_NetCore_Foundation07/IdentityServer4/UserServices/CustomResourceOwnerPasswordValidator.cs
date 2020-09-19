@@ -35,7 +35,7 @@ namespace IdentityServer4_Custom.UserServices
             {//일치하는 유저 정보가 있다.
 
                 //유저 정보 불러오기
-                var user = _userRepository.FindByEmail(context.UserName);
+                UserRepositoryModel user = _userRepository.FindByEmail(context.UserName);
 
                 //권한 부여 유형을 지정한다.
                 context.Result 
