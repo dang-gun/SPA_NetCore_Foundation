@@ -20,12 +20,12 @@ namespace SPA_NetCore_Foundation.Controllers
         /// <summary>
         /// 사인인 시도
         /// </summary>
-        /// <param name="sID"></param>
+        /// <param name="sEmail"></param>
         /// <param name="sPW"></param>
         /// <returns></returns>
         [HttpPut]
         public ActionResult<SignInModel> SignIn(
-            [FromForm]string sID
+            [FromForm]string sEmail
             , [FromForm]string sPW)
         {
             ApiResultReady armResult = new ApiResultReady(this);
@@ -34,7 +34,7 @@ namespace SPA_NetCore_Foundation.Controllers
             SignInModel smResult = new SignInModel();
             armResult.ResultObject = smResult;
 
-            if (sID == "test01@email.net" && sPW == "1111")
+            if (sEmail == "test01@email.net" && sPW == "1111")
             {
                 smResult.Complete = true;
                 
@@ -42,7 +42,7 @@ namespace SPA_NetCore_Foundation.Controllers
                 //그래서 토큰으로 유저를 구분할 수 있게 만든다.
                 smResult.Token 
                     = string.Format("{0}▩{1}"
-                                    , sID
+                                    , sEmail
                                     , Guid.NewGuid().ToString());
             }
             else

@@ -8,7 +8,7 @@ GlobalSign.SignIn = false;
 /** 사인인 - 아이디 정보 */
 GlobalSign.SignIn_ID = "";
 /** 사인인 - 토큰 정보 */
-GlobalSign.SignIn_token = "";
+GlobalSign.SignIn_Token = "";
 
 
 /** 리플레시 토큰 - 쿠키용 이름 */
@@ -44,7 +44,7 @@ GlobalSign.Move_SignOut = function ()
             url: FS_Api.Sign_SignOut,
             type: "PUT",
             data: {
-                sRefreshToken: GlobalSign.SignIn_token
+                sRefreshToken: GlobalSign.SignIn_Token
             },
             dataType: "text",
             success: function (data) {
