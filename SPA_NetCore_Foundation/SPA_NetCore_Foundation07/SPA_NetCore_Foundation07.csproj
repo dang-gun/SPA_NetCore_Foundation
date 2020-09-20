@@ -16,6 +16,51 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="wwwroot_Admin\app.js" />
+    <None Remove="wwwroot_Admin\favicon.ico" />
+    <None Remove="wwwroot_Admin\Global\Debug.js" />
+    <None Remove="wwwroot_Admin\Global\FixString\FixString_Api.js" />
+    <None Remove="wwwroot_Admin\Global\FixString\FixString_FileUrl.js" />
+    <None Remove="wwwroot_Admin\Global\FixString\FixString_Url.js" />
+    <None Remove="wwwroot_Admin\Global\GlobalSign.js" />
+    <None Remove="wwwroot_Admin\Global\GlobalStatic.js" />
+    <None Remove="wwwroot_Admin\index.html" />
+    <None Remove="wwwroot_Admin\Library\DG_JsDataBind\DG_JsDataBind.js" />
+    <None Remove="wwwroot_Admin\Library\DG_JsDataBind\DG_JsDataBind.min.js" />
+    <None Remove="wwwroot_Admin\Library\sammyjs\0.7.6\sammy.js" />
+    <None Remove="wwwroot_Admin\Library\sammyjs\0.7.6\sammy.min.js" />
+    <None Remove="wwwroot_Admin\Pages\Error\404.html" />
+    <None Remove="wwwroot_Admin\Pages\Error\Error.html" />
+    <None Remove="wwwroot_Admin\Pages\Error\Error.js" />
+    <None Remove="wwwroot_Admin\Pages\Error\ErrorDefult.html" />
+    <None Remove="wwwroot_Admin\Pages\Home\Home.html" />
+    <None Remove="wwwroot_Admin\Pages\Home\Home.js" />
+    <None Remove="wwwroot_Admin\Pages\Home\Home2.html" />
+    <None Remove="wwwroot_Admin\Pages\Home\Home3.html" />
+    <None Remove="wwwroot_Admin\Pages\MyPage\MyPage.html" />
+    <None Remove="wwwroot_Admin\Pages\MyPage\MyPage.js" />
+    <None Remove="wwwroot_Admin\Pages\Page.css" />
+    <None Remove="wwwroot_Admin\Pages\Page.html" />
+    <None Remove="wwwroot_Admin\Pages\Page.js" />
+    <None Remove="wwwroot_Admin\Pages\Page_Menu.html" />
+    <None Remove="wwwroot_Admin\Pages\SignInInfo\SignInInfo.js" />
+    <None Remove="wwwroot_Admin\Pages\SignInInfo\SignInInfo_SignIn.html" />
+    <None Remove="wwwroot_Admin\Pages\SignInInfo\SignInInfo_SignOut.html" />
+    <None Remove="wwwroot_Admin\Pages\SignIn\SignIn.html" />
+    <None Remove="wwwroot_Admin\Pages\SignIn\SignIn.js" />
+    <None Remove="wwwroot_Admin\Pages\SignIn\SignInAssist.js" />
+    <None Remove="wwwroot_Admin\Pages\Test\Test01.html" />
+    <None Remove="wwwroot_Admin\Pages\Test\Test01.js" />
+    <None Remove="wwwroot_Admin\Pages\Test\Test01_ListItem.html" />
+    <None Remove="wwwroot_Admin\Pages\Test\Test02.html" />
+    <None Remove="wwwroot_Admin\Pages\Test\Test02.js" />
+    <None Remove="wwwroot_Admin\test.html" />
+    <None Remove="wwwroot_Admin\Utility\AjaxAssist.js" />
+    <None Remove="wwwroot_Admin\Utility\CookieAssist.js" />
+    <None Remove="wwwroot_Admin\Utility\DG_IsObject\DG_IsObject.js" />
+    <None Remove="wwwroot_Admin\Utility\DG_MessageBox\DG_MessageBox.css" />
+    <None Remove="wwwroot_Admin\Utility\DG_MessageBox\DG_MessageBox.html" />
+    <None Remove="wwwroot_Admin\Utility\DG_Popup\DG_Popup.html" />
     <None Remove="wwwroot_Home\app.js" />
     <None Remove="wwwroot_Home\favicon.ico" />
     <None Remove="wwwroot_Home\Global\Debug.js" />
@@ -54,6 +99,186 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot_Admin\app.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\favicon.ico">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Global\Debug.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Global\FixString\FixString_Api.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Global\FixString\FixString_FileUrl.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Global\FixString\FixString_Url.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Global\GlobalSign.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Global\GlobalStatic.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\index.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Library\DG_JsDataBind\DG_JsDataBind.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Library\DG_JsDataBind\DG_JsDataBind.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Library\sammyjs\0.7.6\sammy.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Library\sammyjs\0.7.6\sammy.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\Error\404.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\Error\Error.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\Error\Error.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\Error\ErrorDefult.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\Home\Home3.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\Home\Home2.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\Home\Home.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\Home\Home.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\MyPage\MyPage.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\MyPage\MyPage.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\Page.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\Page.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\Page.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\Page_Menu.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\SignInInfo\SignInInfo.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\SignInInfo\SignInInfo_SignIn.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\SignInInfo\SignInInfo_SignOut.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\SignIn\SignIn.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\SignIn\SignIn.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\SignIn\SignInAssist.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\Test\Test01.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\Test\Test01.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\Test\Test01_ListItem.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\Test\Test02.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\Test\Test02.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\test.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Utility\AjaxAssist.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Utility\CookieAssist.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Utility\DG_IsObject\DG_IsObject.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Utility\DG_MessageBox\DG_MessageBox.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Utility\DG_MessageBox\DG_MessageBox.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Utility\DG_Popup\DG_Popup.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="wwwroot_Home\app.js">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
@@ -432,6 +657,8 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot_AdminEmpty\" />
+    <Folder Include="wwwroot_Admin\images\" />
   </ItemGroup>
 
   <ItemGroup>

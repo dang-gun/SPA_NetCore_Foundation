@@ -24,7 +24,8 @@ namespace SPA_NetCore_Foundation07
         public static void Main(string[] args)
         {
             CreateWebHostBuilder(args)
-                .UseWebRoot("wwwroot_Home")
+                //.UseWebRoot("wwwroot_Home")
+                .UseWebRoot("wwwroot_Admin")
                 .Build()
                 .Run();
         }
