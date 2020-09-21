@@ -1,17 +1,21 @@
 ﻿/**
  * 홈 클래스
- * @param {any} nType 
+ * @param {any} nViewType
  */
-function Home(nType)
+function Home(nViewType)
 {
     GlobalStatic.PageType_Now = this.constructor.name;
+
+    var objThis = this;
+    var nViewTypeTemp = nViewType;
+    objThis.ViewType = nViewTypeTemp;
 
     //불러올 html url
     var sHtmlUrl = "";
     //불러올 Script url
     var sScriptUrl = "";
 
-    switch (nType)
+    switch (nViewType)
     {
         case 2:
             sHtmlUrl = FS_FUrl.Home_Home2;
@@ -41,5 +45,11 @@ function Home(nType)
                 {
                 });
         });
+
+        //메뉴 활성화
+        Page.MenuActive(nViewTypeTemp);
     });
 }
+
+/** 홈 보기 타입 */
+Home.prototype.ViewType = 0;

@@ -147,6 +147,7 @@ SignInAssist.prototype.SignIn_onclick = function ()
 
                         GlobalSign.SignIn_ID = jsonData.id;
                         GlobalSign.SignIn_Email = sEmail;
+                        GlobalSign.SignIn_ViewName = 
 
 
                         //엑세스 토큰 저장
