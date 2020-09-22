@@ -190,17 +190,41 @@ var app = Sammy(function ()
         app_Assist.RouteCheck(false, this,
             function ()
             {
-                //객체 생성
                 GlobalStatic.Page_Now = new Error(nCode);
             });
     });
+
+    this.get(FS_Url.Charts_ChartJS, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new ChartJs();
+            });
+    });
+    this.get(FS_Url.Charts_Flot, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new Flot();
+            });
+    });
+    this.get(FS_Url.Charts_Inline, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new Inline();
+            });
+    });
+
 
     this.get(FS_Url.Home, function ()
     {
         app_Assist.RouteCheck(false, this,
             function ()
             {
-                //객체 생성
                 GlobalStatic.Page_Now = new Home(1);
             });
     });
@@ -209,7 +233,6 @@ var app = Sammy(function ()
         app_Assist.RouteCheck(false, this,
             function ()
             {
-                //객체 생성
                 GlobalStatic.Page_Now = new Home(2);
             });
     });
@@ -218,7 +241,6 @@ var app = Sammy(function ()
         app_Assist.RouteCheck(false, this,
             function ()
             {
-                //객체 생성
                 GlobalStatic.Page_Now = new Home(3);
             });
     });
@@ -228,7 +250,6 @@ var app = Sammy(function ()
         app_Assist.RouteCheck(true, this,
             function ()
             {
-                //객체 생성
                 GlobalStatic.Page_Now = new MyPage();
             });
     });
@@ -245,9 +266,81 @@ var app = Sammy(function ()
             //객체 생성
             GlobalStatic.Page_Now = new SignIn();
         }
-
     });
 
+    this.get(FS_Url.UiElements_General, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new General();
+            });
+    });
+    this.get(FS_Url.UiElements_Icons, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new Icons();
+            });
+    });
+    this.get(FS_Url.UiElements_Buttons, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new Buttons();
+            });
+    });
+    this.get(FS_Url.UiElements_Sliders, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new Sliders();
+            });
+    });
+    this.get(FS_Url.UiElements_ModalsNAlerts, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new ModalsNAlerts();
+            });
+    });
+    this.get(FS_Url.UiElements_NavbarNTabs, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new NavbarNTabs();
+            });
+    });
+    this.get(FS_Url.UiElements_Timeline, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new Timeline();
+            });
+    });
+    this.get(FS_Url.UiElements_Ribbons, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new Ribbons();
+            });
+    });
+
+    this.get(FS_Url.Widgets, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new Widgets();
+            });
+    });
 
 
 

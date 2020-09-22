@@ -74,6 +74,12 @@
     <None Remove="wwwroot_Admin\Library\DG_JsDataBind\DG_JsDataBind.min.js" />
     <None Remove="wwwroot_Admin\Library\sammyjs\0.7.6\sammy.js" />
     <None Remove="wwwroot_Admin\Library\sammyjs\0.7.6\sammy.min.js" />
+    <None Remove="wwwroot_Admin\Pages\Charts\ChartJs.html" />
+    <None Remove="wwwroot_Admin\Pages\Charts\ChartJs.js" />
+    <None Remove="wwwroot_Admin\Pages\Charts\Flot.html" />
+    <None Remove="wwwroot_Admin\Pages\Charts\Flot.js" />
+    <None Remove="wwwroot_Admin\Pages\Charts\Inline.html" />
+    <None Remove="wwwroot_Admin\Pages\Charts\Inline.js" />
     <None Remove="wwwroot_Admin\Pages\Error\404.html" />
     <None Remove="wwwroot_Admin\Pages\Error\Error.html" />
     <None Remove="wwwroot_Admin\Pages\Error\Error.js" />
@@ -99,6 +105,16 @@
     <None Remove="wwwroot_Admin\Pages\Test\Test01_ListItem.html" />
     <None Remove="wwwroot_Admin\Pages\Test\Test02.html" />
     <None Remove="wwwroot_Admin\Pages\Test\Test02.js" />
+    <None Remove="wwwroot_Admin\Pages\UiElements\Buttons.html" />
+    <None Remove="wwwroot_Admin\Pages\UiElements\General - 복사.js" />
+    <None Remove="wwwroot_Admin\Pages\UiElements\General.html" />
+    <None Remove="wwwroot_Admin\Pages\UiElements\General.js" />
+    <None Remove="wwwroot_Admin\Pages\UiElements\Icons - 복사.html" />
+    <None Remove="wwwroot_Admin\Pages\UiElements\Icons - 복사.js" />
+    <None Remove="wwwroot_Admin\Pages\UiElements\Icons.html" />
+    <None Remove="wwwroot_Admin\Pages\UiElements\Icons.js" />
+    <None Remove="wwwroot_Admin\Pages\Widgets\Widgets.html" />
+    <None Remove="wwwroot_Admin\Pages\Widgets\Widgets.js" />
     <None Remove="wwwroot_Admin\test.html" />
     <None Remove="wwwroot_Admin\Utility\AjaxAssist.js" />
     <None Remove="wwwroot_Admin\Utility\CookieAssist.js" />
@@ -376,6 +392,30 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Content Include="wwwroot_Admin\Pages\Charts\Inline.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\Charts\Inline.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\Charts\Flot.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\Charts\Flot.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\Charts\ChartJs.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\Charts\ChartJs.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="wwwroot_Admin\Pages\Error\404.html">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
@@ -473,6 +513,34 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
     <Content Include="wwwroot_Admin\Pages\Test\Test02.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\UiElements\Buttons.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\UiElements\Icons.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\UiElements\Icons.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\UiElements\General.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\UiElements\General.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\Widgets\Widgets.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\Widgets\Widgets.js">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
