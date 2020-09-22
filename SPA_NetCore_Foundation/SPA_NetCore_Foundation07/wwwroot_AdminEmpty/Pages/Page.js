@@ -55,6 +55,9 @@ Page.Load = function (jsonOption, callbackFun)
                         //메뉴 바인딩
                         Page.divMainMenu.html(sHtml);
 
+                        //메뉴 이벤트 연결
+                        Page.MenuOpenEvent_On();
+
                         //메뉴 활성화 시도
                         Page.MenuActive();
                     });
@@ -101,6 +104,140 @@ Page.Move_Home = function ()
 };
 
 
+
+/** 
+ *  메뉴 오픈 이벤트 연결 
+ *  원래는 AdminLTE3 공통 js에서 연결이 되야 하는데....
+ *  이유는 알 수 없지만 동작을 하지 않아 별도로 만들었다.
+ *  메뉴가 완성되면 호출해 준다.
+ */
+Page.MenuOpenEvent_On = function ()
+{
+    //이벤트 연결할 대상 찾기
+    var aTargets = $(".nav-sidebar a.nav-link[href='#']");
+
+
+    //이벤트 연결
+    aTargets.click(function (event)
+    {
+        event.preventDefault();
+        event.stopPropagation();
+
+        var domParent = $(this).parent("li");
+
+        //메뉴가 열려있는지 판단한다.
+        var bOpen = domParent.hasClass("menu-open");
+
+        if (true === bOpen)
+        {//열려있다,
+            //닫아 준다.
+            Page.MenuOpenEvent_Close(event, domParent);
+        }
+        else
+        {//닫쳐있다.
+            //열어 준다.
+            Page.MenuOpenEvent_Open(event, domParent);
+        }
+
+    });
+};
+
+/**
+ * 메뉴 열기 동작
+ * @param {any} event
+ * @param {any} domParent
+ */
+Page.MenuOpenEvent_Open = function (event, domParent)
+{
+    var domTarget = domParent;
+
+    //메뉴가 열려있는지 판단한다.
+    var bOpen = domParent.hasClass("menu-open");
+
+    if (false === bOpen)
+    {//닫쳐 있다.
+        //열어준다.
+        domTarget.addClass("menu-open");
+        var nHeight = domTarget.height();
+        domTarget.height(40);
+
+        domTarget
+            .animate(
+                {
+                    height: nHeight
+                },
+                {
+                    complete: function ()
+                    {
+                        domTarget.addClass("menu-open");
+                        domTarget.height("auto");
+                    }
+                });
+    }//end if
+};
+
+/**
+ * 메뉴 닫기 동작
+ * @param {any} event
+ * @param {any} domParent
+ */
+Page.MenuOpenEvent_Close = function (event, domParent)
+{
+    var domTarget = domParent;
+
+    //메뉴가 열려있는지 판단한다.
+    var bOpen = domParent.hasClass("menu-open");
+
+    if (true === bOpen)
+    {//열려 있다.
+        //닫아 준다.
+        domTarget
+            .animate(
+                {
+                    height: 40
+                },
+                {
+                    complete: function ()
+                    {
+                        domTarget.removeClass("menu-open");
+                        domTarget.height("auto");
+                    }
+                });
+    }
+};
+
+/** 메뉴 모두 열기 */
+Page.MenuOpenEvent_OpenAll = function ()
+{
+    //이벤트 연결할 대상 찾기
+    var aTargets = $(".nav-sidebar a.nav-link[href='#']");
+
+    for (var i = 0; i < aTargets.length; ++i)
+    {
+        var domParent = $(aTargets[i]).parent("li");
+        //열어 준다.
+        Page.MenuOpenEvent_Open(null, domParent);
+    }
+};
+
+/** 메뉴 모두 닫기 */
+Page.MenuOpenEvent_OpenClose = function ()
+{
+    //이벤트 연결할 대상 찾기
+    var aTargets = $(".nav-sidebar a.nav-link[href='#']");
+
+    for (var i = 0; i < aTargets.length; ++i)
+    {
+        var domParent = $(aTargets[i]).parent("li");
+        //열어 준다.
+        Page.MenuOpenEvent_Close(null, domParent);
+    }
+};
+
+/**
+ * 메뉴 활성화 요청
+ * @param {any} objTemp
+ */
 Page.MenuActive = function (objTemp)
 {
     //매뉴 아이디 규칙

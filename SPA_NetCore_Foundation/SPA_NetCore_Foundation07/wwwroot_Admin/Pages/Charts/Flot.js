@@ -45,7 +45,7 @@ Flot.prototype.StartTest = function ()
 {
     var objThis = this;
 
-    if (3 > objThis.StartTest)
+    if (3 > objThis.ScriptCount)
     {//로드된 스크립트가 적다
         return;
     }

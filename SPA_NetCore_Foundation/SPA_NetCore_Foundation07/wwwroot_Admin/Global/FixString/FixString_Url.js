@@ -11,11 +11,20 @@ FS_Url.Charts_ChartJS = "#/Charts/ChartJS";
 FS_Url.Charts_Flot = "#/Charts/Flot";
 FS_Url.Charts_Inline = "#/Charts/Inline";
 
+FS_Url.Forms_GeneralElements = "#/Forms/GeneralElements";
+FS_Url.Forms_AdvancedElements = "#/Forms/AdvancedElements";
+FS_Url.Forms_Editors = "#/Forms/Editors";
+FS_Url.Forms_Validation = "#/Forms/Validation";
+
 FS_Url.Home = "#/Home";
 FS_Url.Home2 = "#/Home2";
 FS_Url.Home3 = "#/Home3";
 FS_Url.MyPage = "#/MyPage";
 FS_Url.SignIn = "#/SignIn";
+
+FS_Url.Tables_SimpleTables = "#/Tables/SimpleTables";
+FS_Url.Tables_DataTables = "#/Tables/DataTables";
+FS_Url.Tables_jsGrid = "#/Tables/jsGrid";
 
 FS_Url.UiElements_General = "#/UiElements/General";
 FS_Url.UiElements_Icons = "#/UiElements/Icons";

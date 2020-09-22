@@ -47,9 +47,18 @@ Page.Load = function (jsonOption, callbackFun)
                                     MoveCharts_Flot: FS_Url.Charts_Flot,
                                     MoveCharts_Inline: FS_Url.Charts_Inline,
 
+                                    MoveForms_GeneralElements: FS_Url.Forms_GeneralElements,
+                                    MoveForms_AdvancedElements: FS_Url.Forms_AdvancedElements,
+                                    MoveForms_Editors: FS_Url.Forms_Editors,
+                                    MoveForms_Validation: FS_Url.Forms_Validation,
+
                                     MoveHome: FS_Url.Home,
                                     MoveHome2: FS_Url.Home2,
                                     MoveHome3: FS_Url.Home3,
+
+                                    MoveTables_SimpleTablesn: FS_Url.Tables_SimpleTables,
+                                    MoveTables_DataTables: FS_Url.Tables_DataTables,
+                                    MoveTables_jsGrid: FS_Url.Tables_jsGrid,
 
                                     MoveUiElements_General: FS_Url.UiElements_General,
                                     MoveUiElements_Icons: FS_Url.UiElements_Icons,

@@ -220,6 +220,40 @@ var app = Sammy(function ()
     });
 
 
+    this.get(FS_Url.Forms_GeneralElements, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new GeneralElements();
+            });
+    });
+    this.get(FS_Url.Forms_AdvancedElements, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new AdvancedElements();
+            });
+    });
+    this.get(FS_Url.Forms_Editors, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new Editors();
+            });
+    });
+    this.get(FS_Url.Forms_Validation, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new Validation();
+            });
+    });
+
+
     this.get(FS_Url.Home, function ()
     {
         app_Assist.RouteCheck(false, this,
@@ -267,6 +301,33 @@ var app = Sammy(function ()
             GlobalStatic.Page_Now = new SignIn();
         }
     });
+
+
+    this.get(FS_Url.Tables_SimpleTables, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new SimpleTables();
+            });
+    });
+    this.get(FS_Url.Tables_DataTables, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new DataTables();
+            });
+    });
+    this.get(FS_Url.Tables_jsGrid, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new jsGrid();
+            });
+    });
+
 
     this.get(FS_Url.UiElements_General, function ()
     {
