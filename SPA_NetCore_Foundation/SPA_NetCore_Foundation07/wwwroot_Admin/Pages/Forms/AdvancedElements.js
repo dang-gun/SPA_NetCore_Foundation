@@ -12,79 +12,14 @@ function AdvancedElements()
         Page.divContents.load("/Pages/Forms/AdvancedElements.html"
             , function ()
             {
-                $.getScript("/plugins/select2/js/select2.full.min.js"
-                    , function (data, textStatus, jqxhr)
-                    {
-                        ++objThis.ScriptCount;
-                        objThis.StartTest();
-                    });
-                $.getScript("/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"
-                    , function (data, textStatus, jqxhr)
-                    {
-                        ++objThis.ScriptCount;
-                        objThis.StartTest();
-                    });
-                $.getScript("/plugins/inputmask/jquery.inputmask.min.js"
-                    , function (data, textStatus, jqxhr)
-                    {
-                        ++objThis.ScriptCount;
-                        objThis.StartTest();
-                    });
-                $.getScript("/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"
-                    , function (data, textStatus, jqxhr)
-                    {
-                        ++objThis.ScriptCount;
-                        objThis.StartTest();
-                    });
-                $.getScript("/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"
-                    , function (data, textStatus, jqxhr)
-                    {
-                        ++objThis.ScriptCount;
-                        objThis.StartTest();
-                    });
-                $.getScript("/plugins/bootstrap-switch/js/bootstrap-switch.min.js"
-                    , function (data, textStatus, jqxhr)
-                    {
-                        ++objThis.ScriptCount;
-                        objThis.StartTest();
-                    });
-                $.getScript("/plugins/bs-stepper/js/bs-stepper.min.js"
-                    , function (data, textStatus, jqxhr)
-                    {
-                        ++objThis.ScriptCount;
-                        objThis.Start
-                    });
-                $.getScript("/plugins/dropzone/min/dropzone.min.js"
-                    , function (data, textStatus, jqxhr)
-                    {
-                        ++objThis.ScriptCount;
-                        objThis.Start
-                    });
+                objThis.StartTest();
             });
     });
 }
 
-/** 불러올 스크립트 개수 */
-AdvancedElements.prototype.ScriptCount = 0;
-/** StartTest 동작 여부 */
-AdvancedElements.prototype.StartFirst = false;
-
 AdvancedElements.prototype.StartTest = function ()
 {
     var objThis = this;
-
-    if (8 > objThis.ScriptCount)
-    {//로드된 스크립트가 적다
-        return;
-    }
-
-    if (true === objThis.StartFirst)
-    {
-        return;
-    }
-
-    //스타트 실행
-    objThis.StartFirst = true;
 
     //Initialize Select2 Elements
     $('.select2').select2()

@@ -12,51 +12,14 @@ function Flot()
         Page.divContents.load("/Pages/Charts/Flot.html"
             , function ()
             {
-                $.getScript("/plugins/flot/jquery.flot.js"
-                    , function (data, textStatus, jqxhr)
-                    {
-                        ++objThis.ScriptCount;
-                        objThis.StartTest();
-                    });
-                $.getScript("/plugins/flot/jquery.flot.js"
-                    , function (data, textStatus, jqxhr)
-                    {
-                        ++objThis.ScriptCount;
-                        objThis.StartTest();
-                    });
-                $.getScript("/plugins/flot/jquery.flot.js"
-                    , function (data, textStatus, jqxhr)
-                    {
-                        ++objThis.ScriptCount;
-                        objThis.StartTest();
-                    });
-
-                
+                objThis.StartTest();
             });
     });
 }
 
-/** 불러올 스크립트 개수 */
-Flot.prototype.ScriptCount = 0;
-/** StartTest 동작 여부 */
-Flot.prototype.StartFirst = false;
-
 Flot.prototype.StartTest = function ()
 {
     var objThis = this;
-
-    if (3 > objThis.ScriptCount)
-    {//로드된 스크립트가 적다
-        return;
-    }
-
-    if (true === objThis.StartFirst)
-    {
-        return;
-    }
-
-    //스타트 실행
-    objThis.StartFirst = true;
 
     /*
      * Flot Interactive Chart

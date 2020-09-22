@@ -12,44 +12,15 @@ function Validation()
         Page.divContents.load("/Pages/Forms/Validation.html"
             , function ()
             {
-                $.getScript("/plugins/jquery-validation/jquery.validate.min.js"
-                    , function (data, textStatus, jqxhr)
-                    {
-                        ++objThis.ScriptCount;
-                        objThis.StartTest();
-                    });
-                $.getScript("/plugins/jquery-validation/additional-methods.min.js"
-                    , function (data, textStatus, jqxhr)
-                    {
-                        ++objThis.ScriptCount;
-                        objThis.StartTest();
-                    });
+                objThis.StartTest();
             });
     });
 }
 
 
-/** 불러올 스크립트 개수 */
-Flot.prototype.ScriptCount = 0;
-/** StartTest 동작 여부 */
-Flot.prototype.StartFirst = false;
-
-Flot.prototype.StartTest = function ()
+Validation.prototype.StartTest = function ()
 {
     var objThis = this;
-
-    if (2 > objThis.ScriptCount)
-    {//로드된 스크립트가 적다
-        return;
-    }
-
-    if (true === objThis.StartFirst)
-    {
-        return;
-    }
-
-    //스타트 실행
-    objThis.StartFirst = true;
 
 
     $.validator.setDefaults({
