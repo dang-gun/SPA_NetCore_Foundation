@@ -13,6 +13,9 @@ function SimpleTables()
             , function ()
             {
 
+
+                //메뉴 활성화
+                Page.MenuActive();
             });
     });
 }

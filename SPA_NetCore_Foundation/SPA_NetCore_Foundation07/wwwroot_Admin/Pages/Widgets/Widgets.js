@@ -12,6 +12,9 @@ function Widgets()
         Page.divContents.load("/Pages/Widgets/Widgets.html"
             , function ()
             {
+
+                //메뉴 활성화
+                Page.MenuActive();
             });
 
         //메뉴 활성화

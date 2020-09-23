@@ -12,6 +12,9 @@ function Icons()
         Page.divContents.load("/Pages/UiElements/Icons.html"
             , function ()
             {
+
+                //메뉴 활성화
+                Page.MenuActive();
             });
     });
 }

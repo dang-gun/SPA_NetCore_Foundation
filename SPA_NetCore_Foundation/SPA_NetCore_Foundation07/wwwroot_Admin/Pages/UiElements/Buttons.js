@@ -12,6 +12,9 @@ function Buttons()
         Page.divContents.load("/Pages/UiElements/Buttons.html"
             , function ()
             {
+
+                //메뉴 활성화
+                Page.MenuActive();
             });
     });
 }

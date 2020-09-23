@@ -74,16 +74,18 @@
     <None Remove="wwwroot_Admin\Library\DG_JsDataBind\DG_JsDataBind.min.js" />
     <None Remove="wwwroot_Admin\Library\sammyjs\0.7.6\sammy.js" />
     <None Remove="wwwroot_Admin\Library\sammyjs\0.7.6\sammy.min.js" />
+    <None Remove="wwwroot_Admin\Pages\Calendar\ChartJs.html" />
+    <None Remove="wwwroot_Admin\Pages\Calendar\ChartJs.js" />
     <None Remove="wwwroot_Admin\Pages\Charts\ChartJs.html" />
     <None Remove="wwwroot_Admin\Pages\Charts\ChartJs.js" />
     <None Remove="wwwroot_Admin\Pages\Charts\Flot.html" />
     <None Remove="wwwroot_Admin\Pages\Charts\Flot.js" />
     <None Remove="wwwroot_Admin\Pages\Charts\Inline.html" />
     <None Remove="wwwroot_Admin\Pages\Charts\Inline.js" />
-    <None Remove="wwwroot_Admin\Pages\Error\404.html" />
-    <None Remove="wwwroot_Admin\Pages\Error\Error.html" />
-    <None Remove="wwwroot_Admin\Pages\Error\Error.js" />
-    <None Remove="wwwroot_Admin\Pages\Error\ErrorDefult.html" />
+    <None Remove="wwwroot_Admin\Pages\ErrorApp\404.html" />
+    <None Remove="wwwroot_Admin\Pages\ErrorApp\Error.html" />
+    <None Remove="wwwroot_Admin\Pages\ErrorApp\ErrorApp.js" />
+    <None Remove="wwwroot_Admin\Pages\ErrorApp\ErrorDefult.html" />
     <None Remove="wwwroot_Admin\Pages\Home\Home.html" />
     <None Remove="wwwroot_Admin\Pages\Home\Home.js" />
     <None Remove="wwwroot_Admin\Pages\Home\Home2.html" />
@@ -392,6 +394,14 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Content Include="wwwroot_Admin\Pages\Calendar\ChartJs.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Pages\Calendar\ChartJs.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="wwwroot_Admin\Pages\Charts\Inline.html">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
@@ -416,19 +426,19 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Include="wwwroot_Admin\Pages\Error\404.html">
+    <Content Include="wwwroot_Admin\Pages\ErrorApp\404.html">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Include="wwwroot_Admin\Pages\Error\Error.html">
+    <Content Include="wwwroot_Admin\Pages\ErrorApp\Error.html">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Include="wwwroot_Admin\Pages\Error\Error.js">
+    <Content Include="wwwroot_Admin\Pages\ErrorApp\ErrorApp.js">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Include="wwwroot_Admin\Pages\Error\ErrorDefult.html">
+    <Content Include="wwwroot_Admin\Pages\ErrorApp\ErrorDefult.html">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>

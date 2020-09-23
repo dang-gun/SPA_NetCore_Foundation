@@ -12,6 +12,9 @@ function NavbarNTabs()
         Page.divContents.load("/Pages/UiElements/NavbarNTabs.html"
             , function ()
             {
+
+                //메뉴 활성화
+                Page.MenuActive();
             });
     });
 }

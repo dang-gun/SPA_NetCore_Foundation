@@ -1,9 +1,10 @@
 ﻿
-function Error(sCode)
+function ErrorApp(sCode)
 {
     var objThis = this;
 
-    GlobalStatic.PageType_Now = PageType.Error;
+    GlobalStatic.PageType_Now = this.constructor.name;
+
     //에러 코드 저장
     objThis.Code = sCode;
 
@@ -22,12 +23,12 @@ function Error(sCode)
     });
 }
 
-Error.prototype.Code = "";
+ErrorApp.prototype.Code = "";
 
-Error.prototype.divError = null;
-Error.prototype.divErrorMore = null;
+ErrorApp.prototype.divError = null;
+ErrorApp.prototype.divErrorMore = null;
 
-Error.prototype.SelectPage = function (sCode)
+ErrorApp.prototype.SelectPage = function (sCode)
 {
     var objThis = this;
 
@@ -45,7 +46,7 @@ Error.prototype.SelectPage = function (sCode)
     objThis.ChangePage(sUrl);
 };
 
-Error.prototype.ChangePage = function (sUrl)
+ErrorApp.prototype.ChangePage = function (sUrl)
 {
     var objThis = this;
 

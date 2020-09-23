@@ -3,7 +3,8 @@ function Error(sCode)
 {
     var objThis = this;
 
-    GlobalStatic.PageType_Now = PageType.Error;
+    GlobalStatic.PageType_Now = this.constructor.name;
+
     //에러 코드 저장
     objThis.Code = sCode;
 

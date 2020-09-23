@@ -12,10 +12,10 @@ function Inline()
         Page.divContents.load("/Pages/Charts/Inline.html"
             , function ()
             {
-                //"/plugins/jquery-knob/jquery.knob.min.js"
-                //"/plugins/sparklines/sparkline.js"
-
                 objThis.StartTest();
+
+                //메뉴 활성화
+                Page.MenuActive();
             });
     });
 }

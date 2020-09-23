@@ -190,7 +190,16 @@ var app = Sammy(function ()
         app_Assist.RouteCheck(false, this,
             function ()
             {
-                GlobalStatic.Page_Now = new Error(nCode);
+                GlobalStatic.Page_Now = new ErrorApp(nCode);
+            });
+    });
+
+    this.get(FS_Url.Calendar, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new Calendar();
             });
     });
 
@@ -253,6 +262,14 @@ var app = Sammy(function ()
             });
     });
 
+    this.get(FS_Url.Gallery, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new Gallery();
+            });
+    });
 
     this.get(FS_Url.Home, function ()
     {
@@ -300,6 +317,115 @@ var app = Sammy(function ()
             //객체 생성
             GlobalStatic.Page_Now = new SignIn();
         }
+    });
+
+
+
+    this.get(FS_Url.Mailbox_Compose, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new Compose();
+            });
+    });
+    this.get(FS_Url.Mailbox_Inbox, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new Inbox();
+            });
+    });
+    this.get(FS_Url.Mailbox_Read, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new Read();
+            });
+    });
+
+
+    this.get(FS_Url.Pages_Contacts, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new Contacts();
+            });
+    });
+    this.get(FS_Url.Pages_ContactUs, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new ContactUs();
+            });
+    });
+    this.get(FS_Url.Pages_E_commerce, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new E_commerce();
+            });
+    });
+    this.get(FS_Url.Pages_FAQ, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new FAQ();
+            });
+    });
+    this.get(FS_Url.Pages_Invoice, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new Invoice();
+            });
+    });
+    this.get(FS_Url.Pages_Profile, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new Profile();
+            });
+    });
+    this.get(FS_Url.Pages_ProjectAdd, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new ProjectAdd();
+            });
+    });
+    this.get(FS_Url.Pages_ProjectDetail, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new ProjectDetail();
+            });
+    });
+    this.get(FS_Url.Pages_ProjectEdit, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new ProjectEdit();
+            });
+    });
+    this.get(FS_Url.Pages_Projects, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new Projects();
+            });
     });
 
 
@@ -448,7 +574,7 @@ var app = Sammy(function ()
             function ()
             {
                 //객체 생성
-                GlobalStatic.Page_Now = new Error(sCodeTemp);
+                GlobalStatic.Page_Now = new ErrorApp(sCodeTemp);
             });
     };
 

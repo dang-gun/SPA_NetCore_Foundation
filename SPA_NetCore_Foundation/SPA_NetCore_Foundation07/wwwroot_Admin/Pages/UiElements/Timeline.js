@@ -12,6 +12,9 @@ function Timeline()
         Page.divContents.load("/Pages/UiElements/Timeline.html"
             , function ()
             {
+
+                //메뉴 활성화
+                Page.MenuActive();
             });
     });
 }

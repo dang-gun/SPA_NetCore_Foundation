@@ -12,6 +12,9 @@ function Sliders()
         Page.divContents.load("/Pages/UiElements/Sliders.html"
             , function ()
             {
+
+                //메뉴 활성화
+                Page.MenuActive();
             });
     });
 }

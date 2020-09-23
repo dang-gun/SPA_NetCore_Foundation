@@ -13,6 +13,9 @@ function DataTables()
             , function ()
             {
                 objThis.StartTest();
+
+                //메뉴 활성화
+                Page.MenuActive();
             });
     });
 }

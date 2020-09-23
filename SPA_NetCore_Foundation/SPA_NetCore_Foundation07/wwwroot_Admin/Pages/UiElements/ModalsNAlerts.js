@@ -12,6 +12,9 @@ function ModalsNAlerts()
         Page.divContents.load("/Pages/UiElements/ModalsNAlerts.html"
             , function ()
             {
+
+                //메뉴 활성화
+                Page.MenuActive();
             });
     });
 }

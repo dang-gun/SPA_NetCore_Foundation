@@ -12,6 +12,9 @@ function Ribbons()
         Page.divContents.load("/Pages/UiElements/Ribbons.html"
             , function ()
             {
+
+                //메뉴 활성화
+                Page.MenuActive();
             });
     });
 }

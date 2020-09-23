@@ -12,8 +12,10 @@ function ChartJs()
         Page.divContents.load("/Pages/Charts/ChartJs.html"
             , function ()
             {
-                //"/plugins/chart.js/Chart.min.js"
                 objThis.StartTest();
+
+                //메뉴 활성화
+                Page.MenuActive();
             });
     });
 }

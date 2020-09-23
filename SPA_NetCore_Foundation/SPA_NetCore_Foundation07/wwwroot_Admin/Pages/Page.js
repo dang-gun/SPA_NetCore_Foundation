@@ -47,16 +47,35 @@ Page.Load = function (jsonOption, callbackFun)
                                     MoveCharts_Flot: FS_Url.Charts_Flot,
                                     MoveCharts_Inline: FS_Url.Charts_Inline,
 
+                                    MoveCalendar: FS_Url.Calendar,
+
                                     MoveForms_GeneralElements: FS_Url.Forms_GeneralElements,
                                     MoveForms_AdvancedElements: FS_Url.Forms_AdvancedElements,
                                     MoveForms_Editors: FS_Url.Forms_Editors,
                                     MoveForms_Validation: FS_Url.Forms_Validation,
 
+                                    MoveGallery: FS_Url.Gallery,
+
                                     MoveHome: FS_Url.Home,
                                     MoveHome2: FS_Url.Home2,
                                     MoveHome3: FS_Url.Home3,
 
-                                    MoveTables_SimpleTablesn: FS_Url.Tables_SimpleTables,
+                                    MoveMailbox_Compose: FS_Url.Mailbox_Compose,
+                                    MoveMailbox_Inbox: FS_Url.Mailbox_Inbox,
+                                    MoveMailbox_Read: FS_Url.Mailbox_Read,
+
+                                    MovePages_Contacts: FS_Url.Pages_Contacts,
+                                    MovePages_ContactUs: FS_Url.Pages_ContactUs,
+                                    MovePages_E_commerce: FS_Url.Pages_E_commerce,
+                                    MovePages_FAQ: FS_Url.Pages_FAQ,
+                                    MovePages_Invoice: FS_Url.Pages_Invoice,
+                                    MovePages_Profile: FS_Url.Pages_Profile,
+                                    MovePages_ProjectAdd: FS_Url.Pages_ProjectAdd,
+                                    MovePages_ProjectDetail: FS_Url.Pages_ProjectDetail,
+                                    MovePages_ProjectEdit: FS_Url.Pages_ProjectEdit,
+                                    MovePages_Projects: FS_Url.Pages_Projects,
+
+                                    MoveTables_SimpleTables: FS_Url.Tables_SimpleTables,
                                     MoveTables_DataTables: FS_Url.Tables_DataTables,
                                     MoveTables_jsGrid: FS_Url.Tables_jsGrid,
 

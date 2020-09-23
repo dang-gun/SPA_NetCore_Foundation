@@ -12,6 +12,9 @@ function General()
         Page.divContents.load("/Pages/UiElements/General.html"
             , function ()
             {
+
+                //메뉴 활성화
+                Page.MenuActive();
             });
     });
 }
