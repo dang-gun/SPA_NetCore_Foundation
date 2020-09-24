@@ -43,11 +43,30 @@ Page.Load = function (jsonOption, callbackFun)
                             = GlobalStatic.DataBind.DataBind_All(
                                 html
                                 , {
+                                    MoveCalendar: FS_Url.Calendar,
+
                                     MoveCharts_ChartJS: FS_Url.Charts_ChartJS,
                                     MoveCharts_Flot: FS_Url.Charts_Flot,
                                     MoveCharts_Inline: FS_Url.Charts_Inline,
 
-                                    MoveCalendar: FS_Url.Calendar,
+                                    MoveExtras_LRV_ForgotPasswordV1: FS_Url.Extras_LRV_ForgotPasswordV1,
+                                    MoveExtras_LRV_LoginV1: FS_Url.Extras_LRV_LoginV1,
+                                    MoveExtras_LRV_RecoverPasswordV1: FS_Url.Extras_LRV_RecoverPasswordV1,
+                                    MoveExtras_LRV_RegisterV1: FS_Url.Extras_LRV_RegisterV1,
+
+                                    MoveExtras_LRV_ForgotPasswordV2: FS_Url.Extras_LRV_ForgotPasswordV2,
+                                    MoveExtras_LRV_LoginV2: FS_Url.Extras_LRV_LoginV2,
+                                    MoveExtras_LRV_RecoverPasswordV2: FS_Url.Extras_LRV_RecoverPasswordV2,
+                                    MoveExtras_LRV_RegisterV2: FS_Url.Extras_LRV_RegisterV2,
+
+                                    MoveExtras_BlankPage: FS_Url.Extras_BlankPage,
+                                    MoveExtras_Error404: FS_Url.Extras_Error404,
+                                    MoveExtras_Error500: FS_Url.Extras_Error500,
+                                    MoveExtras_LanguageMenu: FS_Url.Extras_LanguageMenu,
+                                    MoveExtras_LegacyUserMenu: FS_Url.Extras_LegacyUserMenu,
+                                    MoveExtras_Lockscreen: FS_Url.Extras_Lockscreen,
+                                    MoveExtras_Pace: FS_Url.Extras_Pace,
+                                    MoveExtras_StarterPage: FS_Url.Extras_StarterPage,
 
                                     MoveForms_GeneralElements: FS_Url.Forms_GeneralElements,
                                     MoveForms_AdvancedElements: FS_Url.Forms_AdvancedElements,

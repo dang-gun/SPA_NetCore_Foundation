@@ -12,6 +12,30 @@ FS_Url.Charts_ChartJS = "#/Charts/ChartJS";
 FS_Url.Charts_Flot = "#/Charts/Flot";
 FS_Url.Charts_Inline = "#/Charts/Inline";
 
+FS_Url.Extras_LRV_ForgotPasswordV1 = "#/Extras/LoginNRegisterV1/ForgotPasswordV1";
+FS_Url.Extras_LRV_LoginV1 = "#/Extras/LoginNRegisterV1/LoginV1";
+FS_Url.Extras_LRV_RecoverPasswordV1 = "#/Extras/LoginNRegisterV1/RecoverPasswordV1";
+FS_Url.Extras_LRV_RegisterV1 = "#/Extras/LoginNRegisterV1/RegisterV1";
+
+FS_Url.Extras_LRV_ForgotPasswordV2 = "#/Extras/LoginNRegisterV2/ForgotPasswordV2";
+FS_Url.Extras_LRV_LoginV2 = "#/Extras/LoginNRegisterV2/LoginV2";
+FS_Url.Extras_LRV_RecoverPasswordV2 = "#/Extras/LoginNRegisterV2/RecoverPasswordV2";
+FS_Url.Extras_LRV_RegisterV2 = "#/Extras/LoginNRegisterV2/RegisterV2";
+
+FS_Url.Extras_LRV_ForgotPasswordV2 = "#/Extras/LoginNRegisterV2/ForgotPasswordV2";
+FS_Url.Extras_LRV_LoginV2 = "#/Extras/LoginNRegisterV2/LoginV2";
+FS_Url.Extras_LRV_RecoverPasswordV2 = "#/Extras/LoginNRegisterV2/RecoverPasswordV2";
+FS_Url.Extras_LRV_RegisterV2 = "#/Extras/LoginNRegisterV2/RegisterV2";
+
+FS_Url.Extras_BlankPage = "#/Extras/BlankPage";
+FS_Url.Extras_Error404 = "#/Extras/Error404";
+FS_Url.Extras_Error500 = "#/Extras/Error500";
+FS_Url.Extras_LanguageMenu = "#/Extras/LanguageMenu";
+FS_Url.Extras_LegacyUserMenu = "#/Extras/LegacyUserMenu";
+FS_Url.Extras_Lockscreen = "#/Extras/Lockscreen";
+FS_Url.Extras_Pace = "#/Extras/Pace";
+FS_Url.Extras_StarterPage = "#/Extras/StarterPage";
+
 FS_Url.Forms_GeneralElements = "#/Forms/GeneralElements";
 FS_Url.Forms_AdvancedElements = "#/Forms/AdvancedElements";
 FS_Url.Forms_Editors = "#/Forms/Editors";

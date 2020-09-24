@@ -229,6 +229,140 @@ var app = Sammy(function ()
     });
 
 
+    this.get(FS_Url.Extras_LRV_ForgotPasswordV1, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new ForgotPasswordV1();
+            });
+    });
+    this.get(FS_Url.Extras_LRV_LoginV1, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new LoginV1();
+            });
+    });
+    this.get(FS_Url.Extras_LRV_RecoverPasswordV1, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new RecoverPasswordV1();
+            });
+    });
+    this.get(FS_Url.Extras_LRV_RegisterV1, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new RegisterV1();
+            });
+    });
+
+
+    this.get(FS_Url.Extras_LRV_ForgotPasswordV2, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new ForgotPasswordV2();
+            });
+    });
+    this.get(FS_Url.Extras_LRV_LoginV2, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new LoginV2();
+            });
+    });
+    this.get(FS_Url.Extras_LRV_RecoverPasswordV2, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new RecoverPasswordV2();
+            });
+    });
+    this.get(FS_Url.Extras_LRV_RegisterV2, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new RegisterV2();
+            });
+    });
+
+
+    this.get(FS_Url.Extras_BlankPage, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new BlankPage();
+            });
+    });
+    this.get(FS_Url.Extras_Error404, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new Error404();
+            });
+    });
+    this.get(FS_Url.Extras_Error500, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new Error500();
+            });
+    });
+    this.get(FS_Url.Extras_LanguageMenu, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new LanguageMenu();
+            });
+    });
+    this.get(FS_Url.Extras_LegacyUserMenu, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new LegacyUserMenu();
+            });
+    });
+    this.get(FS_Url.Extras_Lockscreen, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new Lockscreen();
+            });
+    });
+    this.get(FS_Url.Extras_Pace, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new Pace();
+            });
+    });
+    this.get(FS_Url.Extras_StarterPage, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new StarterPage();
+            });
+    });
+
+
     this.get(FS_Url.Forms_GeneralElements, function ()
     {
         app_Assist.RouteCheck(false, this,
