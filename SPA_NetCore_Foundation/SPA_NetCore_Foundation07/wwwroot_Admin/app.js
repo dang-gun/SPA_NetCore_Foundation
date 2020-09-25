@@ -563,6 +563,25 @@ var app = Sammy(function ()
     });
 
 
+    this.get(FS_Url.Search_Enhanced, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new Enhanced();
+            });
+    });
+    this.get(FS_Url.Search_SimpleSearch, function ()
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                GlobalStatic.Page_Now = new SimpleSearch();
+            });
+    });
+
+
+
     this.get(FS_Url.Tables_SimpleTables, function ()
     {
         app_Assist.RouteCheck(false, this,

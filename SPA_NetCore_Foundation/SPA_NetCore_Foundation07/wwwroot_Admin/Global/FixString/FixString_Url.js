@@ -65,6 +65,10 @@ FS_Url.Pages_ProjectEdit = "#/Pages/ProjectEdit";
 FS_Url.Pages_Projects = "#/Pages/Projects";
 
 
+FS_Url.Search_Enhanced = "#/Search/Enhanced";
+FS_Url.Search_SimpleSearch = "#/Search/SimpleSearch";
+
+
 FS_Url.Tables_SimpleTables = "#/Tables/SimpleTables";
 FS_Url.Tables_DataTables = "#/Tables/DataTables";
 FS_Url.Tables_jsGrid = "#/Tables/jsGrid";

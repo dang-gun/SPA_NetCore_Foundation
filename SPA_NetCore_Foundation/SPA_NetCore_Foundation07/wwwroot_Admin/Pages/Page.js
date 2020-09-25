@@ -94,6 +94,9 @@ Page.Load = function (jsonOption, callbackFun)
                                     MovePages_ProjectEdit: FS_Url.Pages_ProjectEdit,
                                     MovePages_Projects: FS_Url.Pages_Projects,
 
+                                    MoveSearch_Enhanced: FS_Url.Search_Enhanced,
+                                    MoveSearch_SimpleSearch: FS_Url.Search_SimpleSearch,
+
                                     MoveTables_SimpleTables: FS_Url.Tables_SimpleTables,
                                     MoveTables_DataTables: FS_Url.Tables_DataTables,
                                     MoveTables_jsGrid: FS_Url.Tables_jsGrid,
