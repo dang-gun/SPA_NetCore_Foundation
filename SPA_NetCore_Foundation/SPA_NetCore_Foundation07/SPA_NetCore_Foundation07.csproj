@@ -58,6 +58,8 @@
     <None Remove="wwwroot_AdminEmpty\Utility\AjaxAssist.js" />
     <None Remove="wwwroot_AdminEmpty\Utility\CookieAssist.js" />
     <None Remove="wwwroot_AdminEmpty\Utility\DG_IsObject\DG_IsObject.js" />
+    <None Remove="wwwroot_AdminEmpty\Utility\DG_LoadingPopup\DG_LoadingPopup.html" />
+    <None Remove="wwwroot_AdminEmpty\Utility\DG_LoadingPopup\DG_LoadingPopupImage.gif" />
     <None Remove="wwwroot_AdminEmpty\Utility\DG_MessageBox\DG_MessageBox.css" />
     <None Remove="wwwroot_AdminEmpty\Utility\DG_MessageBox\DG_MessageBox.html" />
     <None Remove="wwwroot_AdminEmpty\Utility\DG_Popup\DG_Popup.html" />
@@ -121,6 +123,8 @@
     <None Remove="wwwroot_Admin\Utility\AjaxAssist.js" />
     <None Remove="wwwroot_Admin\Utility\CookieAssist.js" />
     <None Remove="wwwroot_Admin\Utility\DG_IsObject\DG_IsObject.js" />
+    <None Remove="wwwroot_Admin\Utility\DG_LoadingPopup\DG_LoadingPopup.html" />
+    <None Remove="wwwroot_Admin\Utility\DG_LoadingPopup\DG_LoadingPopupImage.gif" />
     <None Remove="wwwroot_Admin\Utility\DG_MessageBox\DG_MessageBox.css" />
     <None Remove="wwwroot_Admin\Utility\DG_MessageBox\DG_MessageBox.html" />
     <None Remove="wwwroot_Admin\Utility\DG_Popup\DG_Popup.html" />
@@ -156,6 +160,8 @@
     <None Remove="wwwroot_Home\Utility\AjaxAssist.js" />
     <None Remove="wwwroot_Home\Utility\CookieAssist.js" />
     <None Remove="wwwroot_Home\Utility\DG_IsObject\DG_IsObject.js" />
+    <None Remove="wwwroot_Home\Utility\DG_LoadingPopup\DG_LoadingPopup.html" />
+    <None Remove="wwwroot_Home\Utility\DG_LoadingPopup\DG_LoadingPopupImage.gif" />
     <None Remove="wwwroot_Home\Utility\DG_MessageBox\DG_MessageBox.css" />
     <None Remove="wwwroot_Home\Utility\DG_MessageBox\DG_MessageBox.html" />
     <None Remove="wwwroot_Home\Utility\DG_Popup\DG_Popup.html" />
@@ -327,6 +333,14 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
     <Content Include="wwwroot_AdminEmpty\Utility\DG_IsObject\DG_IsObject.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_AdminEmpty\Utility\DG_LoadingPopup\DG_LoadingPopup.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_AdminEmpty\Utility\DG_LoadingPopup\DG_LoadingPopupImage.gif">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
@@ -570,6 +584,14 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Content Include="wwwroot_Admin\Utility\DG_LoadingPopup\DG_LoadingPopup.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Admin\Utility\DG_LoadingPopup\DG_LoadingPopupImage.gif">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="wwwroot_Admin\Utility\DG_MessageBox\DG_MessageBox.css">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
@@ -739,6 +761,14 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
     <Content Include="wwwroot_Home\Utility\DG_IsObject\DG_IsObject.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Home\Utility\DG_LoadingPopup\DG_LoadingPopup.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot_Home\Utility\DG_LoadingPopup\DG_LoadingPopupImage.gif">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
@@ -970,6 +1000,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\Utility\DG_LoadingPopup\DG_LoadingPopup.js" />
     <None Include="wwwroot\Utility\DG_MessageBox\DG_MessageBox.js" />
     <None Include="wwwroot\Utility\DG_Popup\DG_Popup.js" />
     <None Include="wwwroot\Utility\DG_Popup\README.md" />

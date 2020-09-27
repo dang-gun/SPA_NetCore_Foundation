@@ -133,6 +133,8 @@ SignInAssist.prototype.SignIn_onclick = function ()
     }
     else
     {//성공
+        GlobalStatic.LoadingShow();
+
         AA.put(AA.TokenRelayType.None
             , {
                 url: FS_Api.Sign_SignIn
@@ -182,6 +184,7 @@ SignInAssist.prototype.SignIn_onclick = function ()
                             + "내용 : " + jsonData.Message);
                     }
 
+                    GlobalStatic.LoadingClose();
                 }
                 , error: function (error) 
                 {
@@ -189,6 +192,7 @@ SignInAssist.prototype.SignIn_onclick = function ()
 
                     //alert("알수 없는 오류가 발생했습니다.");
                     GlobalStatic.MessageBox_Error(GlobalStatic.Title, "알수 없는 오류가 발생했습니다.");
+                    GlobalStatic.LoadingClose();
                 }
             });
     }//end if

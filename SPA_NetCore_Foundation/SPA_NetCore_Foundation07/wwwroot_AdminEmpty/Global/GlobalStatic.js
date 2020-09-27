@@ -80,6 +80,27 @@ GlobalStatic.MessageBox_Info = function (sTitle, sMsg)
 
 
 
+/** 로댕 개체 생성 */
+GlobalStatic.LoadingDG = new DG_LoadingPopup(
+    {
+        /** 로딩에 사용할 이미지 경로 */
+        LoadingImageUrl: "/Utility/DG_LoadingPopup/DG_LoadingPopupImage.gif",
+        /** 기본 출력 메시지 */
+        LoadingMessageText: "Loading...",
+    });
+
+/** 로딩 표시  */
+GlobalStatic.LoadingShow = function ()
+{
+    GlobalStatic.LoadingDG.Show();
+};
+
+/** 로딩 닫기 */
+GlobalStatic.LoadingClose = function ()
+{
+    GlobalStatic.LoadingDG.Close();
+};
+
 //전역 유틸 ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
 
 /** 데이터 바인드 */
