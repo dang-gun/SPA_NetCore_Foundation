@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <UserSecretsId>c61cc180-c52c-4390-aefe-3891c4b48fa1</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -1001,9 +1002,22 @@
 
   <ItemGroup>
     <None Include="wwwroot\Utility\DG_LoadingPopup\DG_LoadingPopup.js" />
-    <None Include="wwwroot\Utility\DG_MessageBox\DG_MessageBox.js" />
-    <None Include="wwwroot\Utility\DG_Popup\DG_Popup.js" />
+    <None Include="wwwroot\Utility\DG_MessageBox\DG_MessageBox.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Utility\DG_Popup\DG_Popup.js">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
     <None Include="wwwroot\Utility\DG_Popup\README.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ProjectFile\SPAFoundation.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="SPA_NetCore_Foundation07.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
