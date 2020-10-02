@@ -4,6 +4,23 @@
         <name>SPA_NetCore_Foundation08</name>
     </assembly>
     <members>
+        <member name="T:SPA_NetCore_Foundation08.Migrations.Initialize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.Initialize.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.Initialize.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
         <member name="T:SPA_NetCore_Foundation.Controllers.SignController">
             <summary>
             사인 관련(인,아웃,조인)
@@ -122,6 +139,24 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="T:SPA_NetCore_Foundation.Program">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Program.Main(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
         </member>
         <member name="T:SPA_NetCore_Foundation.Startup">
             <summary>
@@ -479,31 +514,411 @@
             <param name="builder"></param>
             <returns></returns>
         </member>
-        <member name="T:SPA_NetCore_Foundation06.Migrations.Initialize">
+        <member name="T:ModelDB.Board">
             <summary>
-            
-            </summary>
-            <summary>
-            
+            게시판 기본 정보
             </summary>
         </member>
-        <member name="M:SPA_NetCore_Foundation06.Migrations.Initialize.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="P:ModelDB.Board.idBoard">
             <summary>
-            
+            고유키
             </summary>
-            <param name="migrationBuilder"></param>
         </member>
-        <member name="M:SPA_NetCore_Foundation06.Migrations.Initialize.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="P:ModelDB.Board.Title">
             <summary>
-            
+            게시판 제목
             </summary>
-            <param name="migrationBuilder"></param>
         </member>
-        <member name="M:SPA_NetCore_Foundation06.Migrations.Initialize.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="P:ModelDB.Board.UrlStandard">
+            <summary>
+            기준 Url
+            </summary>
+        </member>
+        <member name="P:ModelDB.Board.BoardState">
+            <summary>
+            보드 상태
+            </summary>
+        </member>
+        <member name="P:ModelDB.Board.BoardFaculty">
+            <summary>
+            게시판 기능 설정
+            </summary>
+        </member>
+        <member name="P:ModelDB.Board.AuthorityDefault">
+            <summary>
+            권한이 없을때 사용하는 기본권한
+            </summary>
+        </member>
+        <member name="P:ModelDB.Board.ShowCount">
+            <summary>
+            한페이지 컨탠츠 수.
+            BoardFaculty의 ShowCount_Server를 사용할때 사용할 정보.
+            </summary>
+        </member>
+        <member name="P:ModelDB.Board.idBoardGroup">
+            <summary>
+            소속 그룹 아이디
+            </summary>
+        </member>
+        <member name="P:ModelDB.Board.CreateDate">
+            <summary>
+            작성일
+            </summary>
+        </member>
+        <member name="P:ModelDB.Board.Memo">
+            <summary>
+            설명
+            </summary>
+        </member>
+        <member name="T:ModelDB.BoardAuthority">
+            <summary>
+            게시판 개별권한.
+            유저 기준으로
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardAuthority.idBoardAuthority">
+            <summary>
+            고유키
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardAuthority.idBoard">
+            <summary>
+            연결된 게시판의 고유번호
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardAuthority.idUser">
+            <summary>
+            소유 유저
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardAuthority.Authority">
+            <summary>
+            가지고 있는 권한.
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardAuthority.AuthState">
+            <summary>
+            권한 상태
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardAuthority.Memo">
+            <summary>
+            설명
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardAuthority.EditDate">
+            <summary>
+            수정 날짜
+            </summary>
+        </member>
+        <member name="T:ModelDB.BoardCategory">
+            <summary>
+            게시판별 카테고리.
+            인덱스 1은 무조건 전체 표시용이다.
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardCategory.idBoardCategory">
+            <summary>
+            고유키
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardCategory.idBoard">
+            <summary>
+            연결된 게시판
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardCategory.Title">
+            <summary>
+            카테고리 타이틀
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardCategory.Memo">
+            <summary>
+            설명
+            </summary>
+        </member>
+        <member name="T:ModelDB.BoardContent">
+            <summary>
+            게시물 상세 정보
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardContent.idBoardContent">
+            <summary>
+            고유키
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardContent.idBoard">
+            <summary>
+            연결된 보드 키
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardContent.idBoardPost">
+            <summary>
+            연결된 포스트 번호
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardContent.Content">
+            <summary>
+            내용
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardContent.WriteIP">
+            <summary>
+            작성시 ip
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardContent.EditIP">
+            <summary>
+            수정시 ip
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardContent.FileList">
+            <summary>
+            본문에 가지고 있는 파일 리스트.
+            구분자로 구분되어 있는 문자열이다.
+            </summary>
+        </member>
+        <member name="T:ModelDB.BoardGroup">
             <summary>
             
+            인덱스 1은 무조건 전체 표시용이다.
             </summary>
-            <param name="modelBuilder"></param>
+        </member>
+        <member name="P:ModelDB.BoardGroup.idBoardGroup">
+            <summary>
+            고유키
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardGroup.Title">
+            <summary>
+            카테고리 타이틀
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardGroup.Memo">
+            <summary>
+            설명
+            </summary>
+        </member>
+        <member name="T:ModelDB.BoardPost">
+            <summary>
+            게시물 기본 정보
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPost.idBoardPost">
+            <summary>
+            고유키
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPost.idBoard">
+            <summary>
+            소속 보드
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPost.idBoardCategory">
+            <summary>
+            카테고리
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPost.Title">
+            <summary>
+            제목
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPost.idUser">
+            <summary>
+            소유 유저
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPost.idUser_Forwarding">
+            <summary>
+            전달한 유저.
+            이 글을 다른 사람이 작성해서 소유 유저에게 전달한다.
+            0이거나 없으면 소유자가 작성한 글이다.
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPost.ViewCount">
+            <summary>
+            조회수
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPost.ViewCountNone">
+            <summary>
+            조회수(비회원 조회수)
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPost.ReplyCount">
+            <summary>
+            댓글 갯수
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPost.ThumbnailUrl">
+            <summary>
+            썸네일이 있으면 이미지 주소.
+            파일명은 빠저있다.
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPost.PostState">
+            <summary>
+            포스트 상태
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPost.WriteDate">
+            <summary>
+            작성일
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPost.EditDate">
+            <summary>
+            수정일
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPost.DeleteDate">
+            <summary>
+            삭제/블럭일
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPost.WriteIP">
+            <summary>
+            작성시 ip
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPost.EditIP">
+            <summary>
+            수정시 ip
+            </summary>
+        </member>
+        <member name="T:ModelDB.BoardPostReply">
+            <summary>
+            게시물의 댓글
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPostReply.idBoardPostReply">
+            <summary>
+            고유키
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPostReply.idBoard">
+            <summary>
+            연결된 보드 아이디
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPostReply.idBoardPost">
+            <summary>
+            연결된 포스트 아이디
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPostReply.idBoardPostReply_Re">
+            <summary>
+            다른 리플을 대상으로 했을 경우 해당 리플의 아이디.
+            없으면 0.
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPostReply.idBoardPostReply_ReParent">
+            <summary>
+            다른 리플을 대상으로 했을 경우 최상위 댓글 아이디.
+            최상위에 idBoardReply_Re가 0인 댓글을 찾아 넣어준다.
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPostReply.ReReplyCount">
+            <summary>
+            이 댓글 아래에 있는 댓글 개수
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPostReply.idUser">
+            <summary>
+            작성자 아이디
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPostReply.ReplyState">
+            <summary>
+            리플 상태
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPostReply.Title">
+            <summary>
+            타이틀
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPostReply.Content">
+            <summary>
+            내용
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPostReply.WriteDate">
+            <summary>
+            작성일
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPostReply.EditDate">
+            <summary>
+            수정일
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPostReply.DeleteDate">
+            <summary>
+            삭제/블럭일
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPostReply.WriteIP">
+            <summary>
+            작성시 ip
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPostReply.EditIP">
+            <summary>
+            수정시 ip
+            </summary>
+        </member>
+        <member name="T:ModelDB.FileInfo">
+            <summary>
+            파일 
+            </summary>
+        </member>
+        <member name="P:ModelDB.FileInfo.idFileList">
+            <summary>
+            고유키
+            </summary>
+        </member>
+        <member name="P:ModelDB.FileInfo.FileName">
+            <summary>
+            원래 파일 이름
+            </summary>
+        </member>
+        <member name="P:ModelDB.FileInfo.Ext">
+            <summary>
+            확장자
+            </summary>
+        </member>
+        <member name="P:ModelDB.FileInfo.Size">
+            <summary>
+            파일 크기
+            </summary>
+        </member>
+        <member name="P:ModelDB.FileInfo.FileDir">
+            <summary>
+            서버 로컬의 파일 위치
+            </summary>
+        </member>
+        <member name="P:ModelDB.FileInfo.FileUrl">
+            <summary>
+            저정되어 있는 파일의 Url
+            </summary>
+        </member>
+        <member name="P:ModelDB.FileInfo.Description">
+            <summary>
+            파일에 대한 설명
+            </summary>
+        </member>
+        <member name="P:ModelDB.FileInfo.EditorDivision">
+            <summary>
+            에디터에서 파일을 구분하기위해 사용한 구분값.
+            에디터가 아닌곳에서는 아직 사용하지 않는다.
+            </summary>
+        </member>
+        <member name="P:ModelDB.FileInfo.FileState">
+            <summary>
+            파일의 상태정보
+            </summary>
         </member>
         <member name="T:ModelDB.SpaNetCoreFoundationContext">
             <summary>
@@ -516,9 +931,54 @@
             </summary>
             <param name="options"></param>
         </member>
+        <member name="P:ModelDB.SpaNetCoreFoundationContext.Board">
+            <summary>
+            게시판 정보
+            </summary>
+        </member>
+        <member name="P:ModelDB.SpaNetCoreFoundationContext.BoardPost">
+            <summary>
+            게시물
+            </summary>
+        </member>
+        <member name="P:ModelDB.SpaNetCoreFoundationContext.BoardAuthority">
+            <summary>
+            게시판 개별권한
+            </summary>
+        </member>
+        <member name="P:ModelDB.SpaNetCoreFoundationContext.BoardCategory">
+            <summary>
+            게시판 카테고리 정보
+            </summary>
+        </member>
+        <member name="P:ModelDB.SpaNetCoreFoundationContext.BoardContent">
+            <summary>
+            게시물 내용
+            </summary>
+        </member>
+        <member name="P:ModelDB.SpaNetCoreFoundationContext.BoardGroup">
+            <summary>
+            게시판 그룹
+            </summary>
+        </member>
+        <member name="P:ModelDB.SpaNetCoreFoundationContext.BoardPostReply">
+            <summary>
+            게시물 댓글
+            </summary>
+        </member>
+        <member name="P:ModelDB.SpaNetCoreFoundationContext.FileInfo">
+            <summary>
+            파일 정보
+            </summary>
+        </member>
         <member name="P:ModelDB.SpaNetCoreFoundationContext.User">
             <summary>
             유저 사인인 정보
+            </summary>
+        </member>
+        <member name="P:ModelDB.SpaNetCoreFoundationContext.UserInfo">
+            <summary>
+            유저 정보중 자주쓰는 정보
             </summary>
         </member>
         <member name="P:ModelDB.SpaNetCoreFoundationContext.UserSignIn">
@@ -553,6 +1013,47 @@
             비밀번호
             </summary>
         </member>
+        <member name="T:ModelDB.UserInfo">
+            <summary>
+            유저 사인인 정보.
+            유저기준 정보임.
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserInfo.idUserInfo">
+            <summary>
+            고유키
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserInfo.idUser">
+            <summary>
+            연결된 유저 고유키
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserInfo.ViewName">
+            <summary>
+            표시용 이름
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserInfo.SignUpDate">
+            <summary>
+            가입일
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserInfo.SignInDate">
+            <summary>
+            직접 로그인한 마지막 날짜
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserInfo.RefreshDate">
+            <summary>
+            토큰으로 로그인한 마지막 날짜
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserInfo.PlatformInfo">
+            <summary>
+            접속 플랫폼
+            </summary>
+        </member>
         <member name="T:ModelDB.UserSignIn">
             <summary>
             유저 사인인 한 유저의 정보.
@@ -581,6 +1082,265 @@
         <member name="P:ModelDB.UserSignIn.RefreshDate">
             <summary>
             토큰 갱신 시간
+            </summary>
+        </member>
+        <member name="T:ModelDB.BoardAuthorityStateType">
+            <summary>
+            게시판 권한 상태 구분
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardAuthorityStateType.None">
+            <summary>
+            없음
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardAuthorityStateType.Use">
+            <summary>
+            정상 사용
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardAuthorityStateType.Stop">
+            <summary>
+            정지
+            </summary>
+        </member>
+        <member name="T:ModelDB.BoardAuthorityType">
+            <summary>
+            게시판 권한 구분
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardAuthorityType.None">
+            <summary>
+            없음
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardAuthorityType.ReadList">
+            <summary>
+            리스트 보기 권한.
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardAuthorityType.ReadListNonMember">
+            <summary>
+            리스트 보기 권한.(비회원)
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardAuthorityType.Read">
+            <summary>
+            게시물 읽기 권한.
+            리스트 보기권한이 없는 상태로 이 권한이 있으면
+            직접 주소를 넣어야 접근 가능하다.
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardAuthorityType.ReadNonMember">
+            <summary>
+            비회원 게시물 읽기 가능
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardAuthorityType.Write">
+            <summary>
+            쓰기 권한.
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardAuthorityType.WriteReply">
+            <summary>
+            댓글 쓰기 권한
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardAuthorityType.WriteNonMember">
+            <summary>
+            비회원은 쓰기 가능
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardAuthorityType.WriteReplyNonMember">
+            <summary>
+            비회원은 댓글 쓰기 가능
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardAuthorityType.Delete">
+            <summary>
+            지우기 권한.
+            자기 글만 지울 수 있는 권한이다.
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardAuthorityType.DeleteOther">
+            <summary>
+            다른 사람 글을 지울수 있는지 권한
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardAuthorityType.Edit">
+            <summary>
+            수정 권한.
+            자기글만 수정할 수 있다.
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardAuthorityType.EditOther">
+            <summary>
+            다른사람 글을 수정할 수 있는 권한.
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardAuthorityType.NoticeAll">
+            <summary>
+            공지 권한 - 전체글 작성권한
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardAuthorityType.NoticeGroup">
+            <summary>
+            공지 권한 - 게시판 그룹 공지 작성권한
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardAuthorityType.NoticeBoard">
+            <summary>
+            공지 권한 - 게시판 공지 작성 권한
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardAuthorityType.All">
+            <summary>
+            전체 권한
+            </summary>
+        </member>
+        <member name="T:ModelDB.BoardFacultyType">
+            <summary>
+            게시판 기능 옵션 구분
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardFacultyType.None">
+            <summary>
+            없음
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardFacultyType.ShowCount_Server">
+            <summary>
+            한페이지 컨탠츠 수 - 서버 데이터 사용.
+            이 값이 없으면 유저 데이터 사용
+            디폴트.
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardFacultyType.ReplyList">
+            <summary>
+            리플 리스트를 표시할지 여부
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardFacultyType.MyList">
+            <summary>
+            자기리스트만 보이는 게시판인지 여부
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardFacultyType.Favorites">
+            <summary>
+            즐겨찾기 기능 허용 여부
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardFacultyType.All">
+            <summary>
+            전체 권한
+            </summary>
+        </member>
+        <member name="T:ModelDB.BoardPostReplyStateType">
+            <summary>
+            리플 상태값
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardPostReplyStateType.None">
+            <summary>
+            없음
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardPostReplyStateType.Normal">
+            <summary>
+            정상
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardPostReplyStateType.Delete">
+            <summary>
+            삭제 함.
+            데몬으로 영구 삭제 예약
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardPostReplyStateType.Block">
+            <summary>
+            관리자에 의해 블럭됨
+            </summary>
+        </member>
+        <member name="T:ModelDB.BoardPostStateType">
+            <summary>
+            게시판 상태
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardPostStateType.None">
+            <summary>
+            없음
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardPostStateType.Normal">
+            <summary>
+            정상
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardPostStateType.Delete">
+            <summary>
+            삭제 함.
+            데몬으로 영구 삭제 예약
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardPostStateType.Block">
+            <summary>
+            관리자에 의해 블럭됨
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardPostStateType.Notice_All">
+            <summary>
+            전체 공지
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardPostStateType.Notice_Group">
+            <summary>
+            그룹 공지
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardPostStateType.Notice_Board">
+            <summary>
+            해당 게시판 공지
+            </summary>
+        </member>
+        <member name="T:ModelDB.BoardStateType">
+            <summary>
+            게시판 상태
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardStateType.None">
+            <summary>
+            없음
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardStateType.Use">
+            <summary>
+            사용중
+            </summary>
+        </member>
+        <member name="F:ModelDB.BoardStateType.NotUse">
+            <summary>
+            사용안함.
+            </summary>
+        </member>
+        <member name="T:ModelDB.FileStateType">
+            <summary>
+            파일 상태 타입
+            </summary>
+        </member>
+        <member name="F:ModelDB.FileStateType.None">
+            <summary>
+            없음
+            </summary>
+        </member>
+        <member name="F:ModelDB.FileStateType.Normal">
+            <summary>
+            정상
+            </summary>
+        </member>
+        <member name="F:ModelDB.FileStateType.DeleteReservation">
+            <summary>
+            삭제 예약.
+            데몬이돌면서 제거한다.
             </summary>
         </member>
         <member name="T:ApiModel.ApiResultBaseModel">
@@ -779,6 +1539,847 @@
             <summary>
             대상을 찾지 못했다.
             </summary>
+        </member>
+        <member name="T:Boards.Model.BoardAuthCheckType">
+            <summary>
+            게시판 권한 체크 타입
+            </summary>
+        </member>
+        <member name="F:Boards.Model.BoardAuthCheckType.None">
+            <summary>
+            없음
+            </summary>
+        </member>
+        <member name="F:Boards.Model.BoardAuthCheckType.Success">
+            <summary>
+            성공
+            </summary>
+        </member>
+        <member name="F:Boards.Model.BoardAuthCheckType.NoBoardId">
+            <summary>
+            보드 아이디가 없다.
+            </summary>
+        </member>
+        <member name="F:Boards.Model.BoardAuthCheckType.NotFindBoard">
+            <summary>
+            게시판을 찾지 못했다.
+            </summary>
+        </member>
+        <member name="F:Boards.Model.BoardAuthCheckType.NotUseBoard">
+            <summary>
+            게시판을 사용할 수 없는 상테다.
+            </summary>
+        </member>
+        <member name="T:Boards.Model.BoardCommonSortType">
+            <summary>
+            게시판 리스트 정렬 방향
+            </summary>
+        </member>
+        <member name="F:Boards.Model.BoardCommonSortType.None">
+            <summary>
+            없음
+            </summary>
+        </member>
+        <member name="F:Boards.Model.BoardCommonSortType.Asc">
+            <summary>
+            오름 차순
+            1 -> 2 -> 3 (↗)
+            </summary>
+        </member>
+        <member name="F:Boards.Model.BoardCommonSortType.Desc">
+            <summary>
+            내림 차순
+            3 -> 2 -> 1 (↘)
+            </summary>
+        </member>
+        <member name="T:Boards.Model.BoardInterface">
+            <summary>
+            게시판 리스트 공통 맴버
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardInterface.TotalCount">
+            <summary>
+            검색된 게시물 숫자
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardInterface.PageNumber">
+            <summary>
+            지금 보고 있는 페이지 번호
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardInterface.ShowCount">
+            <summary>
+            한페이지의 컨탠츠 개수
+            </summary>
+        </member>
+        <member name="T:Boards.Model.BoardItemType">
+            <summary>
+            게시판의 리스트 아이템의 타입
+            </summary>
+        </member>
+        <member name="F:Boards.Model.BoardItemType.None">
+            <summary>
+            없음. 기본
+            </summary>
+        </member>
+        <member name="F:Boards.Model.BoardItemType.NoticeAll">
+            <summary>
+            공지
+            </summary>
+        </member>
+        <member name="F:Boards.Model.BoardItemType.NoticeGroup">
+            <summary>
+            공지(그룹)
+            </summary>
+        </member>
+        <member name="F:Boards.Model.BoardItemType.NoticeBoard">
+            <summary>
+            공지(게시판)
+            </summary>
+        </member>
+        <member name="T:Boards.Model.BoardAuthItemModel">
+            <summary>
+            게시판 개별 권한 정보 아이템
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardAuthItemModel.idBoardAuthority">
+            <summary>
+            게시판 권한 고유 아이디
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardAuthItemModel.idBoard">
+            <summary>
+            연결된 게시판의 고유번호
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardAuthItemModel.idUser">
+            <summary>
+            소유 유저
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardAuthItemModel.Authority">
+            <summary>
+            가지고 있는 권한.
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardAuthItemModel.AuthState">
+            <summary>
+            권한 상태
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardAuthItemModel.SignEmail">
+            <summary>
+            사인인 이메일
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardAuthItemModel.UserName">
+            <summary>
+            소유 유저 이름
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardAuthItemModel.Memo">
+            <summary>
+            설명
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardAuthItemModel.EditDate">
+            <summary>
+            수정 날짜
+            </summary>
+        </member>
+        <member name="M:Boards.Model.BoardAuthItemModel.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boards.Model.BoardAuthItemModel.#ctor(ModelDB.BoardAuthority)">
+            <summary>
+            
+            </summary>
+            <param name="baData"></param>
+        </member>
+        <member name="T:Boards.Model.BoardAuthListResultModel">
+            <summary>
+            게시판 권한 리스트
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardAuthListResultModel.List">
+            <summary>
+            해당 게시판에 연결된 권한 리스트
+            </summary>
+        </member>
+        <member name="T:Boards.Model.BoardCategoryModel">
+            <summary>
+            게시판 카테고리를 유저에게 제공하기위한 모델
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardCategoryModel.idBoardCategory">
+            <summary>
+            고유키
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardCategoryModel.Title">
+            <summary>
+            카테고리 타이틀
+            </summary>
+        </member>
+        <member name="M:Boards.Model.BoardCategoryModel.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boards.Model.BoardCategoryModel.#ctor(ModelDB.BoardCategory)">
+            <summary>
+            카테고리 데이터를 이용하여 생성
+            </summary>
+            <param name="dataBoardCategory"></param>
+        </member>
+        <member name="T:Boards.Model.BoardListCallModel">
+            <summary>
+            유저에게 미리 보낼 게시판 정보 리스트
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardListCallModel.nBoardId">
+            <summary>
+            소속 보드
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardListCallModel.nPostView">
+            <summary>
+            소속 보드
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardListCallModel.nShowCount">
+            <summary>
+            한화면에 보일 컨탠츠 개수.
+            사용자 호출이 허용된 게시판만 사용가능.
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardListCallModel.nPageNumber">
+            <summary>
+            보려고하는 페이지 번호
+            </summary>
+        </member>
+        <member name="T:Boards.Model.BoardListInfoModel">
+            <summary>
+            게시판 리스트 정보.
+            게시판의 기본 연결 주소를 유저에게 전달하기위한 모델이다.
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardListInfoModel.idBoard">
+            <summary>
+            소속 보드
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardListInfoModel.Title">
+            <summary>
+            게시판 이름
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardListInfoModel.UrlStandard">
+            <summary>
+            기준 Url
+            </summary>
+        </member>
+        <member name="M:Boards.Model.BoardListInfoModel.#ctor(ModelDB.Board)">
+            <summary>
+            
+            </summary>
+            <param name="dbBoard"></param>
+        </member>
+        <member name="T:Boards.Model.BoardPostCreateResultModel">
+            <summary>
+            게시물 작성 요청 완료용
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostCreateResultModel.PostID">
+            <summary>
+            선택된 포스트 아이디
+            </summary>
+        </member>
+        <member name="T:Boards.Model.BoardPostCreateViewResultModel">
+            <summary>
+            게시물 작성 화면 요청시 리턴용
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostCreateViewResultModel.BoardCategory">
+            <summary>
+            이 게시판이 가지고 있는 카테고리
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostCreateViewResultModel.NoticeAll">
+            <summary>
+            공지 권한 - 전체
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostCreateViewResultModel.NoticeGroup">
+            <summary>
+            공지 권한 - 그룹
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostCreateViewResultModel.NoticeBoard">
+            <summary>
+            공지 권한 - 게시판
+            </summary>
+        </member>
+        <member name="T:Boards.Model.BoardPostEditResultModel">
+            <summary>
+            게시물 수정 요청시 리턴용
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostEditResultModel.idBoardPost">
+            <summary>
+            고유키
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostEditResultModel.idBoard">
+            <summary>
+            소속 보드
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostEditResultModel.idBoardCategory">
+            <summary>
+            카테고리
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostEditResultModel.Title">
+            <summary>
+            제목
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostEditResultModel.idUser">
+            <summary>
+            소유 유저
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostEditResultModel.ViewCount">
+            <summary>
+            조회수
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostEditResultModel.PostState">
+            <summary>
+            포스트 상태
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostEditResultModel.WriteDate">
+            <summary>
+            작성일
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostEditResultModel.EditDate">
+            <summary>
+            수정일
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostEditResultModel.UserName">
+            <summary>
+            유저 이름
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostEditResultModel.Content">
+            <summary>
+            내용
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostEditResultModel.FileInfoList">
+            <summary>
+            파일 정보 리스트
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostEditResultModel.BoardCategory">
+            <summary>
+            이 게시판이 가지고 있는 카테고리
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostEditResultModel.NoticeAll">
+            <summary>
+            공지 권한 - 전체
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostEditResultModel.NoticeGroup">
+            <summary>
+            공지 권한 - 그룹
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostEditResultModel.NoticeBoard">
+            <summary>
+            공지 권한 - 게시판
+            </summary>
+        </member>
+        <member name="M:Boards.Model.BoardPostEditResultModel.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boards.Model.BoardPostEditResultModel.#ctor(ModelDB.BoardPost,ModelDB.UserInfo,ModelDB.BoardContent)">
+            <summary>
+            
+            </summary>
+            <param name="bpData"></param>
+            <param name="uiData"></param>
+            <param name="bcData"></param>
+        </member>
+        <member name="M:Boards.Model.BoardPostEditResultModel.Reset(ModelDB.BoardPost,ModelDB.UserInfo,ModelDB.BoardContent)">
+            <summary>
+            
+            </summary>
+            <param name="bpData"></param>
+            <param name="uiData"></param>
+            <param name="bcData"></param>
+        </member>
+        <member name="T:Boards.Model.BoardPostListModel">
+            <summary>
+            게시물 리스트용 아이템
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostListModel.idBoardPost">
+            <summary>
+            고유키
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostListModel.idBoard">
+            <summary>
+            소속 보드
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostListModel.idBoardCategory">
+            <summary>
+            카테고리
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostListModel.Title">
+            <summary>
+            제목
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostListModel.idUser">
+            <summary>
+            소유 유저
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostListModel.idUser_Forwarding">
+            <summary>
+            전달한 유저.
+            이 글을 다른 사람이 작성해서 소유 유저에게 전달한다.
+            0이거나 없으면 소유자가 작성한 글이다.
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostListModel.ViewCount">
+            <summary>
+            조회수
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostListModel.ViewCountNone">
+            <summary>
+            조회수(비회원)
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostListModel.ReplyCount">
+            <summary>
+            댓글 갯수
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostListModel.ThumbnailUrl">
+            <summary>
+            썸네일이 있는지 여부
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostListModel.WriteDate">
+            <summary>
+            작성일
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostListModel.EditDate">
+            <summary>
+            수정일
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostListModel.UserName">
+            <summary>
+            작성자 이름
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostListModel.UserName_Forwarding">
+            <summary>
+            포워딩 전달
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostListModel.PostState">
+            <summary>
+            포스트 상태
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostListModel.ItemType">
+            <summary>
+            아이템 타입
+            </summary>
+        </member>
+        <member name="M:Boards.Model.BoardPostListModel.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boards.Model.BoardPostListModel.#ctor(ModelDB.BoardPost,ModelDB.UserInfo,ModelDB.UserInfo,Boards.Model.BoardItemType)">
+            <summary>
+            
+            </summary>
+            <param name="bpData"></param>
+            <param name="uiData"></param>
+            <param name="uiData_Forwarding"></param>
+            <param name="typeBoardItem"></param>
+        </member>
+        <member name="M:Boards.Model.BoardPostListModel.Reset(ModelDB.BoardPost,ModelDB.UserInfo,ModelDB.UserInfo,Boards.Model.BoardItemType)">
+            <summary>
+            
+            </summary>
+            <param name="bpData"></param>
+            <param name="uiData"></param>
+            <param name="uiData_Forwarding"></param>
+            <param name="typeBoardItem"></param>
+        </member>
+        <member name="T:Boards.Model.BoardPostReplyCreateResultModel">
+            <summary>
+            리플 작성 완료 리절트 모델
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostReplyCreateResultModel.NewItem">
+            <summary>
+            완성된 리플 개체
+            </summary>
+        </member>
+        <member name="T:Boards.Model.BoardPostReplyRelationTreeModel">
+            <summary>
+            댓글 관계정보
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostReplyRelationTreeModel.idBoardPostReply">
+            <summary>
+            댓글 고유번호
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostReplyRelationTreeModel.idBoardPostReply_Re">
+            <summary>
+            댓글 대상
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostReplyRelationTreeModel.Depth">
+            <summary>
+            깊이
+            </summary>
+        </member>
+        <member name="T:Boards.Model.BoardPostResultModel">
+            <summary>
+            게시물 리스트 정보
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostResultModel.List">
+            <summary>
+            검색된 게시물 리스트
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostResultModel.idBoard">
+            <summary>
+            지정한 보드 id
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostResultModel.idBoardPost">
+            <summary>
+            선택한 포스트 id
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostResultModel.TotalCount">
+            <summary>
+            소속된 보드의 게시물 숫자
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostResultModel.PageNumber">
+            <summary>
+            지금 보고 있는 페이지 번호
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostResultModel.ShowCount">
+            <summary>
+            한페이지의 컨탠츠 개수
+            </summary>
+        </member>
+        <member name="T:Boards.Model.BoardPostSummaryResultModel">
+            <summary>
+            요약 게시판 게시물 리스트
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostSummaryResultModel.List">
+            <summary>
+            게시물 리스트
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostSummaryResultModel.BoardTitle">
+            <summary>
+            게시판 제목
+            </summary>
+        </member>
+        <member name="T:Boards.Model.BoardPostViewReplyModel">
+            <summary>
+            게시물 보기시 댓글 아이템 정보
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostViewReplyModel.UserName">
+            <summary>
+            유저 이름
+            </summary>
+        </member>
+        <member name="M:Boards.Model.BoardPostViewReplyModel.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boards.Model.BoardPostViewReplyModel.#ctor(ModelDB.UserInfo,ModelDB.BoardPostReply)">
+            <summary>
+            
+            </summary>
+            <param name="uiData"></param>
+            <param name="bcData"></param>
+        </member>
+        <member name="M:Boards.Model.BoardPostViewReplyModel.#ctor(ModelDB.UserInfo,ModelDB.BoardPostReply,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="uiData"></param>
+            <param name="bcData"></param>
+            <param name="bType"></param>
+        </member>
+        <member name="M:Boards.Model.BoardPostViewReplyModel.Reset(ModelDB.UserInfo,ModelDB.BoardPostReply)">
+            <summary>
+            
+            </summary>
+            <param name="uiData"></param>
+            <param name="bcData"></param>
+        </member>
+        <member name="M:Boards.Model.BoardPostViewReplyModel.Reset_ViewType(ModelDB.UserInfo,ModelDB.BoardPostReply)">
+            <summary>
+            리플의 상태값에 따라 다른 정보를 준다.
+            </summary>
+            <param name="uiData"></param>
+            <param name="bcData"></param>
+        </member>
+        <member name="T:Boards.Model.BoardPostViewReplyResultModel">
+            <summary>
+            게시물 보기시 댓글 리스트 전달용
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostViewReplyResultModel.List">
+            <summary>
+            리플 리스트
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostViewReplyResultModel.WriteReply">
+            <summary>
+            리플 작성 권한이 있는지 여부
+            </summary>
+        </member>
+        <member name="T:Boards.Model.BoardPostViewResultModel">
+            <summary>
+            게시물 보기용 모델
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostViewResultModel.idBoardPost">
+            <summary>
+            고유키
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostViewResultModel.idBoard">
+            <summary>
+            소속 보드
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostViewResultModel.idBoardCategory">
+            <summary>
+            카테고리
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostViewResultModel.Title">
+            <summary>
+            제목
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostViewResultModel.idUser">
+            <summary>
+            소유 유저
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostViewResultModel.idUser_Forwarding">
+            <summary>
+            전달한 유저.
+            이 글을 다른 사람이 작성해서 소유 유저에게 전달한다.
+            0이거나 없으면 소유자가 작성한 글이다.
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostViewResultModel.ViewCount">
+            <summary>
+            조회수
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostViewResultModel.ViewCountNone">
+            <summary>
+            조회수(비회원)
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostViewResultModel.WriteDate">
+            <summary>
+            작성일
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostViewResultModel.EditDate">
+            <summary>
+            수정일
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostViewResultModel.UserName">
+            <summary>
+            유저 이름
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostViewResultModel.UserName_Forwarding">
+            <summary>
+            포워딩 유저 이름
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostViewResultModel.Content">
+            <summary>
+            내용
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostViewResultModel.EditAuth">
+            <summary>
+            수정권한이 있는지 여부
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostViewResultModel.DeleteAuth">
+            <summary>
+            삭제권한이 있는지 여부
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostViewResultModel.ReplyList">
+            <summary>
+            리플 리스트 표시 여부
+            </summary>
+        </member>
+        <member name="P:Boards.Model.BoardPostViewResultModel.ReplyWrite">
+            <summary>
+            리플 쓰기 권한이 있는지 여부
+            </summary>
+        </member>
+        <member name="M:Boards.Model.BoardPostViewResultModel.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boards.Model.BoardPostViewResultModel.#ctor(ModelDB.BoardPost,ModelDB.UserInfo,ModelDB.UserInfo,ModelDB.BoardContent)">
+            <summary>
+            
+            </summary>
+            <param name="bpData"></param>
+            <param name="uiData"></param>
+            <param name="uiData_Forwarding"></param>
+            <param name="bcData"></param>
+        </member>
+        <member name="M:Boards.Model.BoardPostViewResultModel.Reset(ModelDB.BoardPost,ModelDB.UserInfo,ModelDB.UserInfo,ModelDB.BoardContent)">
+            <summary>
+            
+            </summary>
+            <param name="bpData"></param>
+            <param name="uiData"></param>
+            <param name="uiData_Forwarding"></param>
+            <param name="bcData"></param>
+        </member>
+        <member name="T:FileList.Model.FileInfoModel">
+            <summary>
+            파일 정보 모델
+            </summary>
+        </member>
+        <member name="P:FileList.Model.FileInfoModel.Name">
+            <summary>
+            파일 이름
+            </summary>
+        </member>
+        <member name="P:FileList.Model.FileInfoModel.Extension">
+            <summary>
+            파일 확장자
+            </summary>
+        </member>
+        <member name="P:FileList.Model.FileInfoModel.Size">
+            <summary>
+            파일 크기
+            </summary>
+        </member>
+        <member name="P:FileList.Model.FileInfoModel.Type">
+            <summary>
+            파일의 타입 정보
+            </summary>
+        </member>
+        <member name="P:FileList.Model.FileInfoModel.Description">
+            <summary>
+            파일에 대한 설명
+            </summary>
+        </member>
+        <member name="P:FileList.Model.FileInfoModel.EditorDivision">
+            <summary>
+            에디터에서 사용될 파일 구분값
+            </summary>
+        </member>
+        <member name="P:FileList.Model.FileInfoModel.BinaryIs">
+            <summary>
+            바이너리 정보를 사용할지 여부.
+            이것이 true이면 동적으로 바이너리 정보를 읽어 미리보기이미지로 출력하게 된다.
+            이미 처리된 데이터인경우 이것이 false가 되어야 한다.
+            </summary>
+        </member>
+        <member name="P:FileList.Model.FileInfoModel.BinaryReadyIs">
+            <summary>
+            바이너리 정보를 사용할때 바이너리 데이터가 준비가 끝났는지 여부
+            </summary>
+        </member>
+        <member name="P:FileList.Model.FileInfoModel.Binary">
+            <summary>
+            로컬파일인 경우 파일의 바이너리 정보.
+            base64로 들어온다.
+            </summary>
+        </member>
+        <member name="P:FileList.Model.FileInfoModel.idFile">
+            <summary>
+            파일이 업로드되어 있을때 고유 번호
+            </summary>
+        </member>
+        <member name="P:FileList.Model.FileInfoModel.Url">
+            <summary>
+            파일이 업로드 되어 있는 상태에 가지고 있는
+            </summary>
+        </member>
+        <member name="P:FileList.Model.FileInfoModel.Thumbnail">
+            <summary>
+            썸네일 여부
+            </summary>
+        </member>
+        <member name="P:FileList.Model.FileInfoModel.Edit">
+            <summary>
+             수정여부
+            </summary>
+        </member>
+        <member name="P:FileList.Model.FileInfoModel.Delete">
+            <summary>
+            삭제여부
+            </summary>
+        </member>
+        <member name="M:FileList.Model.FileInfoModel.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FileList.Model.FileInfoModel.#ctor(ModelDB.FileInfo)">
+            <summary>
+            파일 리스트 DB를 받아 변환한다.
+            </summary>
+            <param name="flData"></param>
         </member>
         <member name="T:WebApiAuth.Model.Sign.SignInResultModel">
             <summary>

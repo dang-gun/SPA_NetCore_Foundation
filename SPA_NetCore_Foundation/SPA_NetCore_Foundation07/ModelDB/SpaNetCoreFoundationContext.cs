@@ -38,6 +38,10 @@ namespace ModelDB
         /// </summary>
         public DbSet<User> User { get; set; }
         /// <summary>
+        /// 유저 정보중 자주쓰는 정보
+        /// </summary>
+        public DbSet<UserInfo> UserInfo { get; set; }
+        /// <summary>
         /// 사용자 사인인 리스트
         /// </summary>
         public DbSet<UserSignIn> UserSignIn { get; set; }

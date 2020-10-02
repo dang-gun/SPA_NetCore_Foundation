@@ -521,6 +521,11 @@
             유저 사인인 정보
             </summary>
         </member>
+        <member name="P:ModelDB.SpaNetCoreFoundationContext.UserInfo">
+            <summary>
+            유저 정보중 자주쓰는 정보
+            </summary>
+        </member>
         <member name="P:ModelDB.SpaNetCoreFoundationContext.UserSignIn">
             <summary>
             사용자 사인인 리스트
@@ -551,6 +556,47 @@
         <member name="P:ModelDB.User.Password">
             <summary>
             비밀번호
+            </summary>
+        </member>
+        <member name="T:ModelDB.UserInfo">
+            <summary>
+            유저 사인인 정보.
+            유저기준 정보임.
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserInfo.idUserInfo">
+            <summary>
+            고유키
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserInfo.idUser">
+            <summary>
+            연결된 유저 고유키
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserInfo.ViewName">
+            <summary>
+            표시용 이름
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserInfo.SignUpDate">
+            <summary>
+            가입일
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserInfo.SignInDate">
+            <summary>
+            직접 로그인한 마지막 날짜
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserInfo.RefreshDate">
+            <summary>
+            토큰으로 로그인한 마지막 날짜
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserInfo.PlatformInfo">
+            <summary>
+            접속 플랫폼
             </summary>
         </member>
         <member name="T:ModelDB.UserSignIn">

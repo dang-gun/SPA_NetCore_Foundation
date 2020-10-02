@@ -33,10 +33,52 @@ namespace ModelDB
             }
         }
 
+        #region Board
+        /// <summary>
+        /// 게시판 정보
+        /// </summary>
+        public DbSet<Board> Board { get; set; }
+        /// <summary>
+        /// 게시물
+        /// </summary>
+        public DbSet<BoardPost> BoardPost { get; set; }
+        /// <summary>
+        /// 게시판 개별권한
+        /// </summary>
+        public DbSet<BoardAuthority> BoardAuthority { get; set; }
+        /// <summary>
+        /// 게시판 카테고리 정보
+        /// </summary>
+        public DbSet<BoardCategory> BoardCategory { get; set; }
+        /// <summary>
+        /// 게시물 내용
+        /// </summary>
+        public DbSet<BoardContent> BoardContent { get; set; }
+        /// <summary>
+        /// 게시판 그룹
+        /// </summary>
+        public DbSet<BoardGroup> BoardGroup { get; set; }
+        /// <summary>
+        /// 게시물 댓글
+        /// </summary>
+        public DbSet<BoardPostReply> BoardPostReply { get; set; }
+        #endregion
+
+        #region File
+        /// <summary>
+        /// 파일 정보
+        /// </summary>
+        public DbSet<FileInfo> FileInfo { get; set; }
+        #endregion
+
         /// <summary>
         /// 유저 사인인 정보
         /// </summary>
         public DbSet<User> User { get; set; }
+        /// <summary>
+        /// 유저 정보중 자주쓰는 정보
+        /// </summary>
+        public DbSet<UserInfo> UserInfo { get; set; }
         /// <summary>
         /// 사용자 사인인 리스트
         /// </summary>
