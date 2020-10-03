@@ -210,7 +210,6 @@ var app = Sammy(function ()
         app_Assist.RouteCheck(true, this,
             function ()
             {
-                //객체 생성
                 GlobalStatic.Page_Now = new MyPage();
             });
     });
@@ -224,8 +223,20 @@ var app = Sammy(function ()
         }
         else
         {//로그인 되어있지 않음
-            //객체 생성
             GlobalStatic.Page_Now = new SignIn();
+        }
+    });
+    this.get(FS_Url.SignUp, function ()
+    {
+        if (true === GlobalSign.SignIn)
+        {//로그인 되어 있음
+            //홈으로 이동
+            location.href = FS_Url.Home;
+        }
+        else
+        {//로그인 되어있지 않음
+            //객체 생성
+            GlobalStatic.Page_Now = new SignUp();
         }
 
     });

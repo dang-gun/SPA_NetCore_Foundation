@@ -21,6 +21,23 @@
             </summary>
             <param name="migrationBuilder"></param>
         </member>
+        <member name="T:SPA_NetCore_Foundation08.Migrations.Setting_Data_Add">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.Setting_Data_Add.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.Setting_Data_Add.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
         <member name="T:SPA_NetCore_Foundation.Controllers.SignController">
             <summary>
             사인 관련(인,아웃,조인)
@@ -52,6 +69,29 @@
             <summary>
             엑세스토큰을 이용하여 유저 정보를 받는다.
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.SignController.SignEmailCheck(System.String)">
+            <summary>
+            사인에 사용할 이메일 체크
+            </summary>
+            <param name="sEmail"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.SignController.ViewNameCheck(System.String)">
+            <summary>
+            표시이름 중복 확인
+            </summary>
+            <param name="sViewName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.SignController.SignUp(System.String,System.String,System.String)">
+            <summary>
+            가입
+            </summary>
+            <param name="sEmail"></param>
+            <param name="sViewName"></param>
+            <param name="sPassword"></param>
             <returns></returns>
         </member>
         <member name="T:SPA_NetCore_Foundation.Controllers.TestController">
@@ -920,6 +960,37 @@
             파일의 상태정보
             </summary>
         </member>
+        <member name="T:ModelDB.Setting_Data">
+            <summary>
+            이 프로그램 전체에서 사용되는 세팅 정보.
+            매번 DB에서 호출하면 자원낭비가 심하므로 메모리에 올려서 사용한다.
+            </summary>
+        </member>
+        <member name="P:ModelDB.Setting_Data.idSetting_Data">
+            <summary>
+            고유키
+            </summary>
+        </member>
+        <member name="P:ModelDB.Setting_Data.Number">
+            <summary>
+            표시 순서로 사용할 숫자
+            </summary>
+        </member>
+        <member name="P:ModelDB.Setting_Data.Name">
+            <summary>
+            구분용 고유 이름
+            </summary>
+        </member>
+        <member name="P:ModelDB.Setting_Data.ValueData">
+            <summary>
+            설정값
+            </summary>
+        </member>
+        <member name="P:ModelDB.Setting_Data.Description">
+            <summary>
+            이 설정의 설명
+            </summary>
+        </member>
         <member name="T:ModelDB.SpaNetCoreFoundationContext">
             <summary>
             
@@ -984,6 +1055,11 @@
         <member name="P:ModelDB.SpaNetCoreFoundationContext.UserSignIn">
             <summary>
             사용자 사인인 리스트
+            </summary>
+        </member>
+        <member name="P:ModelDB.SpaNetCoreFoundationContext.Setting_Data">
+            <summary>
+            서버 세팅 정보
             </summary>
         </member>
         <member name="M:ModelDB.SpaNetCoreFoundationContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">

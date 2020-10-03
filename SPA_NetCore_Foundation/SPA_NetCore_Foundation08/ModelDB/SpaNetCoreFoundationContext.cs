@@ -71,6 +71,7 @@ namespace ModelDB
         public DbSet<FileInfo> FileInfo { get; set; }
         #endregion
 
+        #region 유저 관련
         /// <summary>
         /// 유저 사인인 정보
         /// </summary>
@@ -83,6 +84,12 @@ namespace ModelDB
         /// 사용자 사인인 리스트
         /// </summary>
         public DbSet<UserSignIn> UserSignIn { get; set; }
+        #endregion
+
+        /// <summary>
+        /// 서버 세팅 정보
+        /// </summary>
+        public DbSet<Setting_Data> Setting_Data { get; set; }
 
         /// <summary>
         /// 
@@ -90,19 +97,50 @@ namespace ModelDB
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasData(new User
-            { 
-                idUser = 1
-                , SignEmail = "test01@email.net"
-                , Password = "1111"
-            }
-            , new User
-            { 
-                idUser = 2
-                ,
-                SignEmail = "test02@email.net"
-                , Password = "1111"
-            });
+            //서버 기본 세팅 정보************************************
+            modelBuilder.Entity<Setting_Data>().HasData(
+                new Setting_Data
+                {
+                    idSetting_Data = 1,
+                    Number = 1,
+                    Name = "Title",
+                    ValueData = "ASP.NET Core SPA Foundation 08",
+                    Description = "프로그램 전체에 표시될 이름",
+                });
+
+            #region 유저 정보
+            //유저************************************
+            modelBuilder.Entity<User>().HasData(
+                new User
+                { 
+                    idUser = 1,
+                    SignEmail = "test01@email.net",
+                    Password = "1111"
+                }
+                , new User
+                { 
+                    idUser = 2,
+                    SignEmail = "test02@email.net",
+                    Password = "1111"
+                });
+
+            //유저 정보************************************
+            modelBuilder.Entity<UserInfo>().HasData(
+                new UserInfo
+                { 
+                    idUserInfo = 1,
+                    idUser = 1,
+                    ViewName = "root",
+                }
+                , new UserInfo
+                {
+                    idUserInfo = 2,
+                    idUser = 2,
+                    ViewName = "admin",
+                });
+            #endregion
+
+
         }
     }
 }

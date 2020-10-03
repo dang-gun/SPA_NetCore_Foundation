@@ -97,6 +97,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\Pages\SignUp\SignUp.js" />
     <None Include="wwwroot\Utility\DG_LoadingPopup\DG_LoadingPopup.js" />
     <None Include="wwwroot\Utility\DG_MessageBox\DG_MessageBox.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

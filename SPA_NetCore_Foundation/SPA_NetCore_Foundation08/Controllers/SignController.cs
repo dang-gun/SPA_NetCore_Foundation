@@ -16,6 +16,7 @@ using SPA_NetCore_Foundation.Model;
 using ModelDB;
 using WebApiAuth.Model.Sign;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 
 namespace SPA_NetCore_Foundation.Controllers
 {
@@ -290,6 +291,166 @@ namespace SPA_NetCore_Foundation.Controllers
             return armResult.ToResult(tmResult);
         }
 
+
+
+        /// <summary>
+        /// 사인에 사용할 이메일 체크
+        /// </summary>
+        /// <param name="sEmail"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<ApiResultBaseModel> SignEmailCheck(string sEmail)
+        {
+            //리턴 보조
+            ApiResultReady armResult = new ApiResultReady(this);
+
+            using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext())
+            {
+                User findUser
+                    = db1.User
+                        .Where(m => m.SignEmail == sEmail)
+                        .FirstOrDefault();
+
+                if (null == findUser)
+                {//성공
+                    armResult.InfoCode = "0";
+                }
+                else
+                {//이미 있음
+                    armResult.InfoCode = "-1";
+                    armResult.Message = "이미 사용중인 아이디 입니다.";
+                }
+            }
+
+            return armResult.ToResult(null);
+        }
+
+        /// <summary>
+        /// 표시이름 중복 확인
+        /// </summary>
+        /// <param name="sViewName"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<ApiResultBaseModel> ViewNameCheck(string sViewName)
+        {
+            //리턴 보조
+            ApiResultReady armResult = new ApiResultReady(this);
+
+            //유저 정보 추출
+            ClaimModel cm = new ClaimModel(((ClaimsIdentity)User.Identity).Claims);
+
+            using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext())
+            {
+                UserInfo findUserInfo
+                    = db1.UserInfo
+                        .Where(m => m.ViewName == sViewName)
+                        .FirstOrDefault();
+
+                if (null == findUserInfo)
+                {//성공
+
+                    armResult.InfoCode = "0";
+                }
+                else
+                {//이미 있음
+                    if (findUserInfo.idUser == cm.id_int)
+                    {//내 아이디다.
+                        //내가 쓰는 내 닉네임은 중복검사에서 제외이므로
+                        //성공으로 취급한다.
+                        armResult.InfoCode = "0";
+                    }
+                    else
+                    {
+                        armResult.InfoCode = "-1";
+                        armResult.Message = "이미 사용중인 닉네임 입니다.";
+                    }
+
+                }
+            }
+
+            return armResult.ToResult(null);
+        }
+
+
+        /// <summary>
+        /// 가입
+        /// </summary>
+        /// <param name="sEmail"></param>
+        /// <param name="sViewName"></param>
+        /// <param name="sPassword"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult<ApiResultBaseModel> SignUp(
+            [FromForm] string sEmail
+            , [FromForm] string sViewName
+            , [FromForm] string sPassword)
+        {
+            //리턴 보조
+            ApiResultReady armResult = new ApiResultReady(this);
+
+            DateTime dtNow = DateTime.Now;
+
+
+            //인증 정보에서 유저 정보 추출
+            //유저 정보 추출
+            ClaimModel cm = new ClaimModel(((ClaimsIdentity)User.Identity).Claims);
+
+
+            using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext())
+            {
+                User findUser
+                    = db1.User
+                        .Where(m => m.SignEmail == sEmail)
+                        .FirstOrDefault();
+
+                //표시 이름 검색
+                UserInfo findViewName
+                    = db1.UserInfo
+                        .Where(m => m.ViewName == sViewName)
+                        .FirstOrDefault();
+
+
+
+                if ("0" == armResult.InfoCode
+                    && null != findUser)
+                {//이미 있음
+                    armResult.InfoCode = "-1";
+                    armResult.Message = "이미 사용중인 아이디 입니다.";
+                }
+
+
+                if ("0" == armResult.InfoCode
+                    && null != findViewName)
+                {
+                    armResult.InfoCode = "-3";
+                    armResult.Message = "표시이름을 사용하는 사용자가 있습니다.";
+                }
+
+
+                if ("0" == armResult.InfoCode)
+                {//성공
+
+                    //사인인 정보 추가
+                    User newUser = new User();
+                    newUser.SignEmail = sEmail;
+                    newUser.Password = sPassword;
+                    db1.User.Add(newUser);
+                    db1.SaveChanges();
+
+                    //사용자 정보 추가
+                    UserInfo newUI = new UserInfo();
+                    newUI.idUser = newUser.idUser;
+                    newUI.ViewName = newUser.SignEmail;
+                    newUI.ViewName = sViewName;
+                    newUI.SignUpDate = dtNow;
+                    db1.UserInfo.Add(newUI);
+
+                    db1.SaveChanges();
+                }
+            }
+
+            return armResult.ToResult(null);
+        }
 
 
     }

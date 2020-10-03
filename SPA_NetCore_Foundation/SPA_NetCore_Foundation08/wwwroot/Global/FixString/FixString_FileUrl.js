@@ -26,6 +26,8 @@ FS_FUrl.MyPage_MyPageHtml = FS_FUrl.MyPage + "MyPage.html";
 
 FS_FUrl.SignIn = FS_FUrl.Pages + "SignIn/";
 FS_FUrl.SignIn_SignIn = FS_FUrl.SignIn + "SignIn.html";
+FS_FUrl.SignUp = FS_FUrl.Pages + "SignUp/";
+FS_FUrl.SignUp_SignUp = FS_FUrl.SignUp + "SignUp.html";
 
 
 FS_FUrl.Test = FS_FUrl.Pages + "Test/";
