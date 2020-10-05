@@ -54,6 +54,10 @@ namespace SPA_NetCore_Foundation
             //인증 정보
             this.AuthUrl = Configuration["AuthServer:Url"];
             GlobalStatic.TokenProc = new TokenProcess(this.AuthUrl);
+
+
+            //세팅 로드
+            GlobalStatic.Setting_DataProc.Setting_Load();
         }
 
         /// <summary>

@@ -11,6 +11,9 @@ GlobalSign.SignIn_Email = "";
 GlobalSign.SignIn_ID = 0;
 /** 사인인 - 표시 이름 */
 GlobalSign.SignIn_ViewName = "";
+/** 사인인 - 가지고 있는 관리 등급 : ManagementClassType 참고 */
+GlobalSign.SignIn_MgtClass = "";
+
 
 /** 이메일 저장 - 쿠키용 이름 */
 GlobalSign.EmailSave_CookieName = "spa_EmailSave";
@@ -282,8 +285,10 @@ GlobalSign.AccessTokenToInfo = function (callback)
 
                         GlobalSign.SignIn_ID = jsonData.id;
                         GlobalSign.SignIn_Email = jsonData.email;
-
                         GlobalSign.SignIn_ViewName = jsonData.ViewName;
+
+                        GlobalSign.SignIn_MgtClass = jsonData.MgtClass;
+
 
                         //UI 갱신
                         SignInInfo.UserInfo_Load();

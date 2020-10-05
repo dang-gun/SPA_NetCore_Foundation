@@ -1,7 +1,7 @@
 ﻿
 using ModelDB;
 
-namespace Boards.Model
+namespace BoardModel
 {
  
     /// <summary>

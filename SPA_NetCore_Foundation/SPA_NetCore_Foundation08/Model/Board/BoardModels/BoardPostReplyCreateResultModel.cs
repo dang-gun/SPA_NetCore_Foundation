@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Boards.Model
+namespace BoardModel
 {
     /// <summary>
     /// 리플 작성 완료 리절트 모델

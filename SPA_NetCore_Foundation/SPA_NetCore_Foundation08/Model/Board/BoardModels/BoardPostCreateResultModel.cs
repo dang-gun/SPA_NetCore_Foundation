@@ -1,7 +1,7 @@
 ﻿using ModelDB;
 using ApiModel;
 
-namespace Boards.Model
+namespace BoardModel
 {
     /// <summary>
     /// 게시물 작성 요청 완료용

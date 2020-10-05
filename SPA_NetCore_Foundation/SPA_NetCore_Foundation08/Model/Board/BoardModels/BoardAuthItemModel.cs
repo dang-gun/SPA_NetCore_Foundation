@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Boards.Model
+namespace BoardModel
 {
     /// <summary>
     /// 게시판 개별 권한 정보 아이템

@@ -1,16 +1,18 @@
-﻿using ModelDB;
-using ApiModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Boards.Model
+using ModelDB;
+using ApiModel;
+using FileList.Model;
+
+namespace BoardModel
 {
     /// <summary>
-    /// 게시물 보기용 모델
+    /// 게시물 수정 요청시 리턴용
     /// </summary>
-    public class BoardPostViewResultModel : ApiResultBaseModel
+    public class BoardPostEditResultModel : ApiResultBaseModel
     {
         /// <summary>
         /// 고유키
@@ -36,22 +38,17 @@ namespace Boards.Model
         /// 소유 유저
         /// </summary>
         public long idUser { get; set; }
-        /// <summary>
-        /// 전달한 유저.
-        /// 이 글을 다른 사람이 작성해서 소유 유저에게 전달한다.
-        /// 0이거나 없으면 소유자가 작성한 글이다.
-        /// </summary>
-        public long idUser_Forwarding { get; set; }
 
 
         /// <summary>
         /// 조회수
         /// </summary>
         public long ViewCount { get; set; }
+
         /// <summary>
-        /// 조회수(비회원)
+        /// 포스트 상태
         /// </summary>
-        public long ViewCountNone { get; set; }
+        public BoardPostStateType PostState { get; set; }
 
         /// <summary>
         /// 작성일
@@ -67,10 +64,6 @@ namespace Boards.Model
         /// 유저 이름
         /// </summary>
         public string UserName { get; set; }
-        /// <summary>
-        /// 포워딩 유저 이름
-        /// </summary>
-        public string UserName_Forwarding { get; set; }
 
 
         /// <summary>
@@ -79,32 +72,37 @@ namespace Boards.Model
         public string Content { get; set; }
 
         /// <summary>
-        /// 수정권한이 있는지 여부
+        /// 파일 정보 리스트
         /// </summary>
-        public bool EditAuth { get; set; }
-
-        /// <summary>
-        /// 삭제권한이 있는지 여부
-        /// </summary>
-        public bool DeleteAuth { get; set; }
+        public List<FileInfoModel> FileInfoList { get; set; }
 
 
+
+        #region 작성용 정보들
         /// <summary>
-        /// 리플 리스트 표시 여부
+        /// 이 게시판이 가지고 있는 카테고리
         /// </summary>
-        public bool ReplyList { get; set; }
+        public List<BoardCategoryModel> BoardCategory { get; set; }
+
         /// <summary>
-        /// 리플 쓰기 권한이 있는지 여부
+        /// 공지 권한 - 전체
         /// </summary>
-        public bool ReplyWrite { get; set; }
+        public bool NoticeAll { get; set; }
+        /// <summary>
+        /// 공지 권한 - 그룹
+        /// </summary>
+        public bool NoticeGroup { get; set; }
+        /// <summary>
+        /// 공지 권한 - 게시판
+        /// </summary>
+        public bool NoticeBoard { get; set; }
+        #endregion
 
         /// <summary>
         /// 
         /// </summary>
-        public BoardPostViewResultModel()
+        public BoardPostEditResultModel()
         {
-            this.ReplyList = false;
-            this.ReplyWrite = false;
         }
 
         /// <summary>
@@ -112,17 +110,12 @@ namespace Boards.Model
         /// </summary>
         /// <param name="bpData"></param>
         /// <param name="uiData"></param>
-        /// <param name="uiData_Forwarding"></param>
         /// <param name="bcData"></param>
-        public BoardPostViewResultModel(BoardPost bpData
+        public BoardPostEditResultModel(BoardPost bpData
             , UserInfo uiData
-            , UserInfo uiData_Forwarding
             , BoardContent bcData)
         {
-            this.ReplyList = false;
-            this.ReplyWrite = false;
-
-            this.Reset(bpData, uiData, uiData_Forwarding, bcData);
+            this.Reset(bpData, uiData, bcData);
         }
 
         /// <summary>
@@ -130,11 +123,9 @@ namespace Boards.Model
         /// </summary>
         /// <param name="bpData"></param>
         /// <param name="uiData"></param>
-        /// <param name="uiData_Forwarding"></param>
         /// <param name="bcData"></param>
         public void Reset(BoardPost bpData
             , UserInfo uiData
-            , UserInfo uiData_Forwarding
             , BoardContent bcData)
         {
             this.idBoardPost = bpData.idBoardPost;
@@ -142,22 +133,20 @@ namespace Boards.Model
             this.idBoardCategory = bpData.idBoardCategory;
             this.Title = bpData.Title;
             this.idUser = bpData.idUser;
-            this.idUser_Forwarding = bpData.idUser_Forwarding;
             this.ViewCount = bpData.ViewCount;
-            this.ViewCountNone = bpData.ViewCountNone;
+
+            this.PostState = bpData.PostState;
             this.WriteDate = bpData.WriteDate;
             this.EditDate = bpData.EditDate;
 
 
             this.UserName = uiData.ViewName;
-            if(null != uiData_Forwarding)
-            {
-                this.UserName_Forwarding = uiData_Forwarding.ViewName;
-            }
-            
 
 
             this.Content = bcData.Content;
+
+
+            this.FileInfoList = new List<FileInfoModel>();
         }
 
     }

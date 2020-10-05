@@ -1,4 +1,5 @@
 ﻿using ApiModel;
+using ModelDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,11 @@ namespace WebApiAuth.Model.Sign
         /// 표시 이름
         /// </summary>
         public string ViewName { get; set; }
+
+        /// <summary>
+        /// 가지고 있는 관리 등급
+        /// </summary>
+        public ManagementClassType MgtClass { get; set; }
 
         /// <summary>
         /// 

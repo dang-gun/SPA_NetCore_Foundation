@@ -244,6 +244,8 @@ AA.RefreshToAccess = function (callback)
                     GlobalSign.SignIn_Email = jsonResult.Email;
                     GlobalSign.SignIn_ViewName = jsonResult.ViewName;
 
+                    GlobalSign.SignIn_MgtClass = jsonResult.MgtClass;
+
                     GlobalSign.AccessToken_Set(jsonResult.access_token);
                     GlobalSign.RefreshToken_SetOption(jsonResult.refresh_token);
 

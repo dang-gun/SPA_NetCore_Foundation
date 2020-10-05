@@ -50,12 +50,12 @@ namespace SPA_NetCore_Foundation.Controllers
 
 
             //검색된 유저
-            User user = null;
+            User findUser = null;
 
             using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext())
             {
                 //유저 검색
-                user
+                findUser
                     = db1.User
                         .FirstOrDefault(m =>
                             m.SignEmail == sEmail
@@ -63,7 +63,7 @@ namespace SPA_NetCore_Foundation.Controllers
             }
 
 
-            if (user != null)
+            if (findUser != null)
             {
                 //토큰 요청
                 TokenResponse tr = GlobalStatic.TokenProc.RequestTokenAsync(sEmail, sPW).Result;
@@ -80,7 +80,7 @@ namespace SPA_NetCore_Foundation.Controllers
                         //기존 로그인한 유저 검색
                         UserSignIn[] arrSL
                             = db1.UserSignIn
-                                .Where(m => m.idUser == user.idUser)
+                                .Where(m => m.idUser == findUser.idUser)
                                 .ToArray();
 
                         //기존 로그인한 유저 정보 제거
@@ -88,10 +88,15 @@ namespace SPA_NetCore_Foundation.Controllers
                         //db 적용
                         db1.SaveChanges();
 
+                        //사인인 한 유저의 정보
+                        UserInfo findUI
+                            = db1.UserInfo
+                                .Where(m => m.idUser == findUser.idUser)
+                                .FirstOrDefault();
 
                         //로그인 되어있는 유저정보 저장
                         UserSignIn slItem = new UserSignIn();
-                        slItem.idUser = user.idUser;
+                        slItem.idUser = findUser.idUser;
                         slItem.RefreshToken = tr.RefreshToken;
                         slItem.SignInDate = dtNow;
                         slItem.RefreshDate = dtNow;
@@ -102,9 +107,11 @@ namespace SPA_NetCore_Foundation.Controllers
                         db1.SaveChanges();
 
                         //로그인한 유저에게 전달할 정보
-                        armResult.idUser = user.idUser;
-                        armResult.Email = user.SignEmail;
-                        armResult.ViewName = armResult.Email;
+                        armResult.idUser = findUser.idUser;
+                        armResult.Email = findUser.SignEmail;
+                        armResult.ViewName = findUI.ViewName;
+
+                        armResult.MgtClass = findUI.MgtClass;
 
                         armResult.access_token = tr.AccessToken;
                         armResult.refresh_token = tr.RefreshToken;
@@ -233,10 +240,18 @@ namespace SPA_NetCore_Foundation.Controllers
                         db1.SaveChanges();
 
 
+                        //사인인 한 유저의 정보
+                        UserInfo findUI
+                            = db1.UserInfo
+                                .Where(m => m.idUser == cm.id_int)
+                                .FirstOrDefault();
+
                         //유저에게 전달할 정보 만들기
                         armResult.idUser = cm.id_int;
                         armResult.Email = cm.email;
-                        armResult.ViewName = armResult.Email;
+                        armResult.ViewName = findUI.ViewName;
+
+                        armResult.MgtClass = findUI.MgtClass;
 
                         armResult.access_token = tr.AccessToken;
                         armResult.refresh_token = tr.RefreshToken;
@@ -265,21 +280,28 @@ namespace SPA_NetCore_Foundation.Controllers
             ClaimModel cm = new ClaimModel(((ClaimsIdentity)User.Identity).Claims);
 
             //검색된 유저
-            User user = null;
+            User findUser = null;
 
             using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext())
             {
                 //유저 검색
-                user
+                findUser
                     = db1.User
                         .FirstOrDefault(m =>
                             m.idUser == cm.id_int);
 
-                if(null != user)
+                if(null != findUser)
                 {//유저 정보가 있다.
-                    tmResult.idUser = user.idUser;
-                    tmResult.Email = user.SignEmail;
-                    tmResult.ViewName = tmResult.Email;
+                    UserInfo fundUI
+                        = db1.UserInfo
+                            .Where(m => m.idUser == findUser.idUser)
+                            .FirstOrDefault();
+
+                    tmResult.idUser = findUser.idUser;
+                    tmResult.Email = findUser.SignEmail;
+                    tmResult.ViewName = fundUI.ViewName;
+
+                    tmResult.MgtClass = fundUI.MgtClass;
                 }
                 else
                 {//유저 정보가 없다.
@@ -442,6 +464,7 @@ namespace SPA_NetCore_Foundation.Controllers
                     newUI.idUser = newUser.idUser;
                     newUI.ViewName = newUser.SignEmail;
                     newUI.ViewName = sViewName;
+                    newUI.MgtClass = ManagementClassType.User;
                     newUI.SignUpDate = dtNow;
                     db1.UserInfo.Add(newUI);
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Boards.Model
+namespace BoardModel
 {
     /// <summary>
     /// 게시판 리스트 정렬 방향

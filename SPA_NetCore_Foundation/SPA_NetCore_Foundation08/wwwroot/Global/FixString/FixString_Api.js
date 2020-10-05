@@ -16,6 +16,13 @@ FS_Api.Sign_SignEmailCheck = FS_Api.Sign + "SignEmailCheck";
 FS_Api.Sign_ViewNameCheck = FS_Api.Sign + "ViewNameCheck";
 FS_Api.Sign_SignUp = FS_Api.Sign + "SignUp";
 
+/** 세팅 데이터 */
+FS_Api.SettingData = FS_Api.Api + "SettingData/";
+FS_Api.SettingData_SettingLoad = FS_Api.SettingData + "SettingLoad";
+FS_Api.SettingData_SettingList = FS_Api.SettingData + "SettingList";
+FS_Api.SettingData_SettingApply = FS_Api.SettingData + "SettingApply";
+FS_Api.SettingData_SettingSet = FS_Api.SettingData + "SettingSet";
+
 
 FS_Api.Test = FS_Api.Api + "Test/";
 FS_Api.Test_Test01 = FS_Api.Test + "Test01";

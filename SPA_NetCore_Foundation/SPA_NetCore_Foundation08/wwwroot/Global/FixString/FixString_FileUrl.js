@@ -17,6 +17,13 @@ FS_FUrl.Error = FS_FUrl.Pages + "Error/";
 FS_FUrl.Error_Home = FS_FUrl.Error + "Error.html";
 FS_FUrl.Error_404 = FS_FUrl.Error + "404.html";
 
+FS_FUrl.Admin = FS_FUrl.Pages + "Admin/";
+FS_FUrl.Admin_Admin_MenuHtml = FS_FUrl.Admin + "Admin_Menu.html";
+
+FS_FUrl.Admin_SettingData = FS_FUrl.Admin + "SettingData/";
+FS_FUrl.Admin_SettingData_SettingDataHtml = FS_FUrl.Admin_SettingData + "SettingData.html";
+FS_FUrl.Admin_SettingData_SettingData_ListItemHtml = FS_FUrl.Admin_SettingData + "SettingData_ListItem.html";
+FS_FUrl.Admin_SettingData_SettingData_ListTitleHtml = FS_FUrl.Admin_SettingData + "SettingData_ListTitle.html";
 
 FS_FUrl.Home = FS_FUrl.Pages + "Home/";
 FS_FUrl.Home_Home = FS_FUrl.Home + "Home.html";

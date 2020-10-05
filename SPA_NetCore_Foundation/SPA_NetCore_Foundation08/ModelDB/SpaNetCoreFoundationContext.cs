@@ -131,12 +131,14 @@ namespace ModelDB
                     idUserInfo = 1,
                     idUser = 1,
                     ViewName = "root",
+                    MgtClass = ManagementClassType.Root,
                 }
                 , new UserInfo
                 {
                     idUserInfo = 2,
                     idUser = 2,
                     ViewName = "admin",
+                    MgtClass = ManagementClassType.Admin,
                 });
             #endregion
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Boards.Model
+namespace BoardModel
 {
     /// <summary>
     /// 게시판 리스트 공통 맴버

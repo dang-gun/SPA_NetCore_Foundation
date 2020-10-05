@@ -1,4 +1,5 @@
 ﻿using ApiModel;
+using ModelDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,11 @@ namespace WebApiAuth.Model.Sign
         /// </summary>
         public string ViewName { get; set; }
 
+        /// <summary>
+        /// 가지고 있는 관리 등급
+        /// </summary>
+        public ManagementClassType MgtClass { get; set; }
+
 
         /// <summary>
         /// 엑세스 토큰
@@ -44,8 +50,10 @@ namespace WebApiAuth.Model.Sign
         {
             this.idUser = 0;
             this.Email = string.Empty;
-
             this.ViewName = string.Empty;
+
+            this.MgtClass = ManagementClassType.None;
+            
 
             this.access_token = string.Empty;
             this.refresh_token = string.Empty;

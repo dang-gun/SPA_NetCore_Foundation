@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ModelDB;
 
 namespace SPA_NetCore_Foundation08.Migrations
 {
     [DbContext(typeof(SpaNetCoreFoundationContext))]
-    partial class SpaNetCoreFoundationContextModelSnapshot : ModelSnapshot
+    [Migration("20201005201020_UserInfo_Edit001")]
+    partial class UserInfo_Edit001
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

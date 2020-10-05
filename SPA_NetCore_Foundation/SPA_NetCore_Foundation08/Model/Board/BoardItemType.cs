@@ -1,6 +1,6 @@
 ﻿
 
-namespace Boards.Model
+namespace BoardModel
 {
     /// <summary>
     /// 게시판의 리스트 아이템의 타입

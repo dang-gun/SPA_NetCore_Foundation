@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Boards.Model
+namespace BoardModel
 {
     /// <summary>
     /// 게시물 리스트 정보

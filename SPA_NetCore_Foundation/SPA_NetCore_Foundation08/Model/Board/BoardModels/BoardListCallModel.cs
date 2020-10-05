@@ -1,5 +1,5 @@
 ﻿
-namespace Boards.Model
+namespace BoardModel
 {
     /// <summary>
     /// 유저에게 미리 보낼 게시판 정보 리스트

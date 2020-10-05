@@ -195,6 +195,18 @@ var app = Sammy(function ()
             });
     });
 
+
+    this.get(FS_Url.Admin_SettingData, function ()
+    {
+        app_Assist.RouteCheck(true, this,
+            function ()
+            {
+                //객체 생성
+                GlobalStatic.Page_Now = new SettingData();
+            });
+    });
+
+
     this.get(FS_Url.Home, function ()
     {
         app_Assist.RouteCheck(false, this,

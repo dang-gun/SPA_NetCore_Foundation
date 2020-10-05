@@ -29,6 +29,16 @@ namespace ModelDB
         public string ViewName { get; set; }
 
         /// <summary>
+        /// 관리 등급
+        /// </summary>
+        public ManagementClassType MgtClass { get; set; }
+        /// <summary>
+        /// 부모의 고유키
+        /// 관리 등급이 직원이면 위임받은 부모의 고유키를 넣는다.
+        /// </summary>
+        public long idUser_Parent { get; set; }
+
+        /// <summary>
         /// 가입일
         /// </summary>
         public DateTime SignUpDate { get; set; }
