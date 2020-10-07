@@ -7,7 +7,7 @@ namespace ModelDB
     /// <summary>
     /// 파일 
     /// </summary>
-    public class FileInfo
+    public class FileData
     {
         /// <summary>
         /// 고유키

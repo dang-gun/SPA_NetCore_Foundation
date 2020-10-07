@@ -19,6 +19,52 @@ namespace SPA_NetCore_Foundation08.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("BoardModel.BoardPostReplyRelationTreeModel", b =>
+                {
+                    b.Property<long>("idBoardPostReply")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Depth")
+                        .HasColumnType("int");
+
+                    b.Property<long>("idBoardPostReply_Re")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("idBoardPostReply");
+
+                    b.ToTable("BoardPostReplyRelationTreeModels");
+                });
+
+            modelBuilder.Entity("ModelDB.ApiLog", b =>
+                {
+                    b.Property<long>("idApiLog")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApiKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CallDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Contents")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Step01")
+                        .HasColumnType("nvarchar(512)")
+                        .HasMaxLength(512);
+
+                    b.Property<long>("idUser")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("idApiLog");
+
+                    b.ToTable("ApiLog");
+                });
+
             modelBuilder.Entity("ModelDB.Board", b =>
                 {
                     b.Property<long>("idBoard")
@@ -58,6 +104,20 @@ namespace SPA_NetCore_Foundation08.Migrations
                     b.HasKey("idBoard");
 
                     b.ToTable("Board");
+
+                    b.HasData(
+                        new
+                        {
+                            idBoard = 1L,
+                            AuthorityDefault = 0,
+                            BoardFaculty = 0,
+                            BoardState = 1,
+                            CreateDate = new DateTime(2020, 10, 8, 6, 41, 26, 241, DateTimeKind.Local).AddTicks(2473),
+                            Memo = "테스트용 게시판",
+                            ShowCount = (short)0,
+                            Title = "Test",
+                            idBoardGroup = 0L
+                        });
                 });
 
             modelBuilder.Entity("ModelDB.BoardAuthority", b =>
@@ -88,6 +148,17 @@ namespace SPA_NetCore_Foundation08.Migrations
                     b.HasKey("idBoardAuthority");
 
                     b.ToTable("BoardAuthority");
+
+                    b.HasData(
+                        new
+                        {
+                            idBoardAuthority = 1L,
+                            AuthState = 0,
+                            Authority = 2147483647,
+                            EditDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            idBoard = 1L,
+                            idUser = 1L
+                        });
                 });
 
             modelBuilder.Entity("ModelDB.BoardCategory", b =>
@@ -110,6 +181,15 @@ namespace SPA_NetCore_Foundation08.Migrations
                     b.HasKey("idBoardCategory");
 
                     b.ToTable("BoardCategory");
+
+                    b.HasData(
+                        new
+                        {
+                            idBoardCategory = 1L,
+                            Memo = "전체 게시판에 표시되는 분류.",
+                            Title = "All",
+                            idBoard = 1L
+                        });
                 });
 
             modelBuilder.Entity("ModelDB.BoardContent", b =>
@@ -142,6 +222,17 @@ namespace SPA_NetCore_Foundation08.Migrations
                     b.HasKey("idBoardContent");
 
                     b.ToTable("BoardContent");
+
+                    b.HasData(
+                        new
+                        {
+                            idBoardContent = 1L,
+                            Content = "DB 생성후 테스트용 자동생성 게시물입니다.<br />내용",
+                            EditIP = "",
+                            WriteIP = "",
+                            idBoard = 1L,
+                            idBoardPost = 0L
+                        });
                 });
 
             modelBuilder.Entity("ModelDB.BoardGroup", b =>
@@ -221,6 +312,24 @@ namespace SPA_NetCore_Foundation08.Migrations
                     b.HasKey("idBoardPost");
 
                     b.ToTable("BoardPost");
+
+                    b.HasData(
+                        new
+                        {
+                            idBoardPost = 1L,
+                            DeleteDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EditDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PostState = 0,
+                            ReplyCount = 0,
+                            Title = "DB 생성후 테스트용 자동생성 게시물입니다.",
+                            ViewCount = 0L,
+                            ViewCountNone = 0L,
+                            WriteDate = new DateTime(2020, 10, 8, 6, 41, 26, 242, DateTimeKind.Local).AddTicks(5689),
+                            idBoard = 1L,
+                            idBoardCategory = 0L,
+                            idUser = 1L,
+                            idUser_Forwarding = 0L
+                        });
                 });
 
             modelBuilder.Entity("ModelDB.BoardPostReply", b =>
@@ -277,9 +386,28 @@ namespace SPA_NetCore_Foundation08.Migrations
                     b.HasKey("idBoardPostReply");
 
                     b.ToTable("BoardPostReply");
+
+                    b.HasData(
+                        new
+                        {
+                            idBoardPostReply = 1L,
+                            Content = "DB 생성후 테스트용 자동생성 게시물의 댓글입니다.",
+                            DeleteDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EditDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EditIP = "",
+                            ReReplyCount = 0,
+                            ReplyState = 0,
+                            WriteDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            WriteIP = "",
+                            idBoard = 1L,
+                            idBoardPost = 0L,
+                            idBoardPostReply_Re = 0L,
+                            idBoardPostReply_ReParent = 0L,
+                            idUser = 0L
+                        });
                 });
 
-            modelBuilder.Entity("ModelDB.FileInfo", b =>
+            modelBuilder.Entity("ModelDB.FileData", b =>
                 {
                     b.Property<long>("idFileList")
                         .ValueGeneratedOnAdd()
@@ -316,7 +444,7 @@ namespace SPA_NetCore_Foundation08.Migrations
 
                     b.HasKey("idFileList");
 
-                    b.ToTable("FileInfo");
+                    b.ToTable("FileData");
                 });
 
             modelBuilder.Entity("ModelDB.Setting_Data", b =>
@@ -383,6 +511,34 @@ namespace SPA_NetCore_Foundation08.Migrations
                             Password = "1111",
                             SignEmail = "test02@email.net"
                         });
+                });
+
+            modelBuilder.Entity("ModelDB.UserApi", b =>
+                {
+                    b.Property<long>("idUserApi")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApiKey")
+                        .HasColumnType("nvarchar(64)")
+                        .HasMaxLength(64);
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserApiState")
+                        .HasColumnType("int");
+
+                    b.Property<long>("idUser")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("idUserApi");
+
+                    b.ToTable("UserApi");
                 });
 
             modelBuilder.Entity("ModelDB.UserInfo", b =>

@@ -1,0 +1,41 @@
+﻿
+<div class="BoardComm_PostView clfix">
+
+</div>
+<div class="BoardComm_Reply">
+    <div class="replay_total">
+        댓글 <span id="BoardComm_Reply_Count">0</span>개
+    </div>
+    <div class="BoardComm_Reply_Write full body">
+        <textarea type="text" id="txtBoardComm_Reply_Write" rows="4" cols="50" />
+        <!--<input type="text" id="txtBoardComm_Reply_Write" placeholder="댓글 추가" />-->
+        <button class="btn_write form-control btn-outline" onclick="BoardCA.PostReplyCreate()">댓글쓰기</button>
+    </div>
+    <ul class="BoardComm_Reply_List"></ul>
+</div>
+
+<div class="BoardComm_List">
+    <table>
+        <colgroup>
+            <col class="board_Info id" style="width:20%;" />
+            <col class="board_Info Tit" style="width:auto;" />
+            <col class="board_Info Name" style="width:20%;" />
+            <col class="board_Info Count" style="width:20%;" />
+            <col class="board_Info Date" style="width:20%;" />
+        </colgroup>
+        <thead class="BoardComm_Head"></thead>
+        <!--<div class="BoardComm_Title"></div>-->
+        <tbody class="BoardComm_ListItem"></tbody>
+    </table>
+
+    <div class="table_util">
+        <div class="BoardComm_Foot"></div>
+        <div class="BoardComm_Tools">
+            <button id="btnBoardComm_Tools_PostCreate" class="btn_write form-control btn-outline" onclick="BoardCA.PostCreateShow()"><i class="fa fa-pencil gray" style=""></i>글쓰기</button>
+            <label class="labBoardComm_Tools_PostCount">글수:<span class="spanBoardComm_Tools_PostCount">0</span></label>
+        </div>
+    </div>
+</div>
+
+
+

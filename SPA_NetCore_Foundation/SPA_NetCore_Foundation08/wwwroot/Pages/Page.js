@@ -44,7 +44,8 @@ Page.Load = function (jsonOption, callbackFun)
                                 , {
                                     MoveHome: FS_Url.Home,
                                     MoveTest01: FS_Url.Test01,
-                                    MoveTest02: FS_Url.Test02
+                                    MoveTest02: FS_Url.Test02,
+                                    MoveTestTestBoard: FS_Url.TestBoard,
                                 })
                                 .ResultString;
 

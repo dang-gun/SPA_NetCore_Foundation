@@ -1,0 +1,22 @@
+﻿<div class="videoInsertPop">
+    <div class="DG_PopupTitle DG_MessageBoxTitle">
+        {{Title}}
+    </div>
+
+    <div class="videoInsertWrap">
+        <div class="videoInsertTxt">
+            <input type="radio" name="VideoSiteSelete" onclick="BoardCA.VideoSelect(BoardCA.VideoType.YouTube);" checked />유튜브
+            <input type="radio" name="VideoSiteSelete" onclick="BoardCA.VideoSelect(BoardCA.VideoType.XVideos);" />엑스비디오
+            <input type="text" id="txtVideoUrl" class="videoInsertUrl" onkeyup="BoardCA.VideoInsertHtml_OnChange(event)" />
+        </div>
+
+        <div id="divViewVideo" class="videoInsertBox">
+
+        </div>
+
+        <div class="btn_edit_wrap">
+            <button class="form-control btn-outline btn_confirm " onclick="BoardCA.VideoInsertHtml_OnClick(event)">확인</button>
+            <button class="form-control btn-outline btn_cancel" onclick="DG_Popup.Close();">취소</button>
+        </div>
+    </div>
+</div>

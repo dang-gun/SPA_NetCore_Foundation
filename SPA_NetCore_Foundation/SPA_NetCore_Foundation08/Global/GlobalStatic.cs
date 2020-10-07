@@ -1,4 +1,5 @@
-﻿using IdentityServer4_Custom.IdentityServer4;
+﻿using Faculty.File;
+using IdentityServer4_Custom.IdentityServer4;
 using SPA_NetCore_Foundation.Faculty;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,11 @@ namespace SPA_NetCore_Foundation.Global
         public static TokenProcess TokenProc = null;
 
         /// <summary>
+        /// 로컬 root 경로
+        /// </summary>
+        public static string Dir_LocalRoot = "";
+
+        /// <summary>
         /// DB 타입
         /// </summary>
         public static string DBType = "";
@@ -26,6 +32,12 @@ namespace SPA_NetCore_Foundation.Global
         /// </summary>
         public static string DBString = "";
 
+        /// <summary>
+        /// 게시판 제목 길이
+        /// Board.Title 기준.
+        /// 이걸 변경하려면 Board.Title을 같이 변경해야 한다.
+        /// </summary>
+        public static int BoardTitleMexLength = 128;
 
         /// <summary>
         /// 관리 등급 지원
@@ -39,6 +51,18 @@ namespace SPA_NetCore_Foundation.Global
         public static Setting_DataProcess Setting_DataProc
             = new Setting_DataProcess();
 
+
+
+        /// <summary>
+        /// 전역에서 사용할 랜덤 함수
+        /// </summary>
+        public static Random Rand = new Random();
+
+
+        /// <summary>
+        /// 파일 처리 유틸
+        /// </summary>
+        public static FileProcess FileProc = new FileProcess();
 
     }
 }

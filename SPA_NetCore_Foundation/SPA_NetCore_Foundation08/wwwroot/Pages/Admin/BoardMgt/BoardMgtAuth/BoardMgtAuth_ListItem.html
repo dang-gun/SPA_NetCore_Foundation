@@ -1,0 +1,30 @@
+﻿<div id="divBoardAdminAuth_{{idBoardAuthority}}" class="BoardAdminItem clfix" idUser="{{idUser}}" idBoard="{{idBoard}}" idBoardAuthority="{{idBoardAuthority}}">
+    <div class="BoardAdminItem_Right">
+        <input type="text" value="{{UserName}}" />
+    </div>
+
+    <div class="BoardAdminItem_State">
+        <!-- BoardAuthorityStateType 참고 -->
+        <select class="selectAuthState" value="{{AuthState}}">
+            <option value="1">사용중</option>
+            <option value="2">정지</option>
+        </select>
+    </div>
+
+    <div class="BoardAdminItem_Name">
+        {{BoardAuthHtml}}
+    </div>
+
+    <div class="BoardAdminItem_State">
+        {{EditDate:DateTimeBr}}
+    </div>
+    <div class="BoardAdminItem_ValueData">
+        <input type="text" class="BoardAuthMemo" value="{{Memo}}" />
+    </div>
+
+
+    <div class="BoardAdminItem_Edit">
+        <button onclick="GlobalStatic.Page_Now.BoardAuthEdit({{idBoardAuthority}})">수정</button>
+        <!--<button onclick="GlobalStatic.Page_Now.({{idBoardAuthority}})">삭제</button>-->
+    </div>
+</div>

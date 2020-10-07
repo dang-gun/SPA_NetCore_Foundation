@@ -90,6 +90,7 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.6.3" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.6.3" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="5.6.3" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -97,6 +98,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\Faculty\Board\BoardAuth.js" />
+    <None Include="wwwroot\Faculty\Board\BoardCommon.js" />
+    <None Include="wwwroot\Faculty\Board\BoardCommonAssist.js" />
+    <None Include="wwwroot\Faculty\Board\BoardFaculty.js" />
+    <None Include="wwwroot\Faculty\Board\BoardPostCategory.js" />
+    <None Include="wwwroot\Faculty\Board\BoardPostState.js" />
     <None Include="wwwroot\Faculty\ListBind\ListBind.js" />
     <None Include="wwwroot\Pages\SignUp\SignUp.js" />
     <None Include="wwwroot\Utility\DG_LoadingPopup\DG_LoadingPopup.js" />

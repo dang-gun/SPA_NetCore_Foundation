@@ -68,7 +68,7 @@ namespace SPA_NetCore_Foundation.Faculty
                 }
                 else
                 {
-                    if (ui.MgtClass < typeMgtClass)
+                    if (ui.MgtClass > typeMgtClass)
                     {//권한이 없다.
                         typePCReturn = ManagementClassCheckType.NoPer;
                     }

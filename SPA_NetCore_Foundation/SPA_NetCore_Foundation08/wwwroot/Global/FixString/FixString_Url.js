@@ -8,6 +8,7 @@ FS_Url.Error = "#/Error";
 
 FS_Url.Admin = "#/Admin";
 FS_Url.Admin_SettingData = FS_Url.Admin + "/SettingData";
+FS_Url.Admin_BoardMgt = FS_Url.Admin + "/BoardMgt";
 
 FS_Url.Home = "#/Home";
 FS_Url.MyPage = "#/MyPage";
@@ -17,3 +18,4 @@ FS_Url.SignUp = "#/SignUp";
 //테스트용
 FS_Url.Test01 = "#/Test01";
 FS_Url.Test02 = "#/Test02";
+FS_Url.TestBoard = "#/TestBoard";

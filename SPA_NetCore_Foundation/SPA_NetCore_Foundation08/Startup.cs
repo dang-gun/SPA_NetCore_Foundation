@@ -40,10 +40,13 @@ namespace SPA_NetCore_Foundation
         /// 
         /// </summary>
         /// <param name="configuration"></param>
-        public Startup(IConfiguration configuration)
+        /// <param name="env"></param>
+        public Startup(IConfiguration configuration, IHostEnvironment env)
         {
             Configuration = configuration;
 
+            //로컬 경로 저장
+            GlobalStatic.Dir_LocalRoot = env.ContentRootPath;
 
             //DB 커낵션 스트링 받아오기
             string sConnectStringSelect = "SpaNetCoreFoundation_mssql";

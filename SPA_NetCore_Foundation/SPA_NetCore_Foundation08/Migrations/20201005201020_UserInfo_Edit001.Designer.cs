@@ -9,10 +9,17 @@ using ModelDB;
 
 namespace SPA_NetCore_Foundation08.Migrations
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [DbContext(typeof(SpaNetCoreFoundationContext))]
     [Migration("20201005201020_UserInfo_Edit001")]
     partial class UserInfo_Edit001
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618

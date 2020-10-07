@@ -1,0 +1,61 @@
+﻿<div class="DG_PopupTitle DG_MessageBoxTitle">
+    {{Title}}
+</div>
+
+<table style="width: 700px;">
+    <colgroup>
+        <col style="width: 20%;" />
+        <col style="width: 80%;" />
+    </colgroup>
+    <tr>
+        <th>제목</th>
+        <td><input type="text" id="txtBoardAdmin_Create_Title" /></td>
+    </tr>
+    <tr>
+        <th>상태</th>
+        <td>
+            <select id="selectBoardAdmin_Create_State">
+                <option value="1">사용</option>
+                <option value="2">사용하지 않음</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <th>기본 권한</th>
+        <td id="tdBoardAdmin_Create_BoardAuth">
+            <!--<div class="check_wrap">
+        <label><input type="checkbox" name="BoardAuthorityType" value="ReadList" /><span>리스트 보기</span></label>
+        <label><input type="checkbox" name="BoardAuthorityType" value="Read" /><span>읽기</span></label>
+        <label><input type="checkbox" name="BoardAuthorityType" value="ReadNonMember" /><span>비회원 읽기</span></label>
+
+        <label><input type="checkbox" name="BoardAuthorityType" value="Write" /><span>쓰기</span></label>
+        <label><input type="checkbox" name="BoardAuthorityType" value="WriteReply" /><span>댓글 쓰기</span></label>
+
+        <label><input type="checkbox" name="BoardAuthorityType" value="WriteNonMember" /><span>비회원 쓰기</span></label>
+        <label><input type="checkbox" name="BoardAuthorityType" value="WriteReplyNonMember" /><span>비회원 댓글 쓰기</span></label>
+
+    </div>
+    <div class="check_wrap">
+        <label><input type="checkbox" name="BoardAuthorityType" value="Delete" /><span>지우기 권한</span></label>
+        <label><input type="checkbox" name="BoardAuthorityType" value="DeleteOther" /><span>다른 사람 글 지우기</span></label>
+
+        <label><input type="checkbox" name="BoardAuthorityType" value="Edit" /><span>수정 권한</span></label>
+        <label><input type="checkbox" name="BoardAuthorityType" value="EditOther" /><span>다른 사람 글 수정</span></label>
+    </div>-->
+            <div class="check_wrap">
+                {{BoardAuthHtml}}
+            </div>
+            
+        </td>
+    </tr>
+    <tr>
+        <th>메모</th>
+        <td><input type="text" id="txtBoardAdmin_Create_Memo" /></td>
+    </tr>
+
+</table>
+
+<div class="btn_wrap">
+    <button class="btn_type btn_confirm" onclick="GlobalStatic.Page_Now.BoardCreate()">생성</button>
+    <button class="btn_type btn_cancel" onclick="DG_Popup.Close()">취소</button>
+</div>

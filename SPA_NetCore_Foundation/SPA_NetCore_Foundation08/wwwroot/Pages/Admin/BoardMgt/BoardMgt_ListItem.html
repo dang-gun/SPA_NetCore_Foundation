@@ -1,0 +1,23 @@
+﻿<tr id="div{{idBoard}}" class="BoardAdminItem">
+    <td class="BoardAdminItem_Number">
+        <input type="text" value="{{idBoard}}" />
+    </td>
+    <td class="BoardAdminItem_Name">
+        <input type="text" value="{{Title}}" />
+    </td>
+    <td class="BoardAdminItem_State">
+        <input type="text" value="{{BoardState}}" />
+    </td>
+    <td class="BoardAdminItem_State">
+        <button class="form-control btn-outline" onclick="Page.Move_Page(true, FS_Url.Admin_BoardAdmin_BoardAdminAuth + '/' + {{idBoard}})">개별권한</button>
+    </td>
+    <td class="BoardAdminItem_ValueData">
+        <input type="text" value="{{CreateDate:Date}}" />
+    </td>
+    <td class="BoardAdminItem_Description">
+        <input type="text" value="{{Memo}}" />
+    </td>
+    <td class="BoardAdminItem_Edit">
+        <button class="form-control btn-outline" onclick="GlobalStatic.Page_Now.BoardEidtShow({{idBoard}})">수정</button>
+    </td>
+</tr>

@@ -1,0 +1,37 @@
+﻿<div class="article_viewer">
+    <div id="divViewer"></div>
+    <div id="divReReplyCreateWrap" class="d-none">
+        <div id="divReReplyCreate_{{idBoardPost}}" class="BoardComm_Reply_Write">
+            <textarea type="text" id="txtBoardComm_ReReply_Write" rows="4" cols="50" />
+            <button onclick="BoardCA.PostReReplyCreate(this)" class="form-control btn-outline">댓글쓰기</button>
+            <button onclick="BoardCA.PostReReplyCreateCancel()" class="cancel form-control btn-outline">취소</button>
+        </div>
+    </div>
+</div>
+<div class="article_header">
+    <div class="ArticleTitle">
+        <div class="title_text">{{Title}}</div><button class="{{FavoritesCss}}" onclick="BoardCA.FavoritesAuto(this, event, '{{idBoardPost}}')">F</button>
+    </div>
+    <div class="WriterInfo">
+        <div class="profile_area">
+            <div class="profile_info aa">
+                <div class="nick_box">
+                    <div class="initial"><img id="imgUserFace" src="{{idUser:UserFaceUrl}}"></div>
+                    <a id="aUserName{{ViewUserId}}" href="javascript:void(0);" class="nickname">{{ViewUserName}}</a>
+                </div>
+            </div>
+            <div class="article_info">
+                <span class="date">{{WriteDate:DateTime}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="btn_edit_wrap">
+    <button onclick="BoardCA.PostEditShow({{idBoardPost}});" class="form-control btn-outline {{EditAuthClass}}">수정</button>
+    <button onclick="BoardCA.PostDeleteShow({{idBoardPost}});" class="form-control btn-outline {{DeleteAuthClass}}">삭제</button>
+    <!--<button onclick="BoardCA.ListLink();" class="form-control btn-outline">목록</button>-->
+</div>
+
+<div id="divSummaryList">
+
+</div>

@@ -42,8 +42,8 @@ namespace SPA_NetCore_Foundation.Controllers
             //결과용
             ApiResultReady rrResult = new ApiResultReady(this);
             //로그인 처리용 모델
-            SignInResultModel armResult = new SignInResultModel();
-            rrResult.ResultObject = armResult;
+            SignInResultModel rmResult = new SignInResultModel();
+            rrResult.ResultObject = rmResult;
 
             //API 호출 시간
             DateTime dtNow = DateTime.Now;
@@ -107,14 +107,14 @@ namespace SPA_NetCore_Foundation.Controllers
                         db1.SaveChanges();
 
                         //로그인한 유저에게 전달할 정보
-                        armResult.idUser = findUser.idUser;
-                        armResult.Email = findUser.SignEmail;
-                        armResult.ViewName = findUI.ViewName;
+                        rmResult.idUser = findUser.idUser;
+                        rmResult.Email = findUser.SignEmail;
+                        rmResult.ViewName = findUI.ViewName;
 
-                        armResult.MgtClass = findUI.MgtClass;
+                        rmResult.MgtClass = findUI.MgtClass;
 
-                        armResult.access_token = tr.AccessToken;
-                        armResult.refresh_token = tr.RefreshToken;
+                        rmResult.access_token = tr.AccessToken;
+                        rmResult.refresh_token = tr.RefreshToken;
                     }
 
 
@@ -128,7 +128,7 @@ namespace SPA_NetCore_Foundation.Controllers
                 rrResult.Message = "아이디나 비밀번호가 틀렸습니다.";
             }
 
-            return rrResult.ToResult(armResult);
+            return rrResult.ToResult(rmResult);
         }
 
         /// <summary>

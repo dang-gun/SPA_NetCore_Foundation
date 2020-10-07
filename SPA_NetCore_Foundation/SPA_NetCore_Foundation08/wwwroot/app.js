@@ -205,6 +205,15 @@ var app = Sammy(function ()
                 GlobalStatic.Page_Now = new SettingData();
             });
     });
+    this.get(FS_Url.Admin_BoardMgt, function ()
+    {
+        app_Assist.RouteCheck(true, this,
+            function ()
+            {
+                //객체 생성
+                GlobalStatic.Page_Now = new BoardMgt();
+            });
+    });
 
 
     this.get(FS_Url.Home, function ()
@@ -265,7 +274,6 @@ var app = Sammy(function ()
             GlobalStatic.Page_Now = new Test01();
         });
     });
-
     this.get(FS_Url.Test02, function () 
     {
         app_Assist.RouteCheck(false, this,
@@ -274,6 +282,15 @@ var app = Sammy(function ()
             //객체 생성
             GlobalStatic.Page_Now = new Test02();
         });
+    });
+    this.get(FS_Url.TestBoard, function () 
+    {
+        app_Assist.RouteCheck(false, this,
+            function ()
+            {
+                //객체 생성
+                GlobalStatic.Page_Now = new TestBoard();
+            });
     });
 
     //this.get("#/", function () {

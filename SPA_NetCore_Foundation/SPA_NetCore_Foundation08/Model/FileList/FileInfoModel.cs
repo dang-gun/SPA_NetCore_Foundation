@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FileList.Model
+namespace FileListModel
 {
     /// <summary>
     /// 파일 정보 모델
@@ -88,7 +88,7 @@ namespace FileList.Model
         /// 파일 리스트 DB를 받아 변환한다.
         /// </summary>
         /// <param name="flData"></param>
-        public FileInfoModel(FileInfo flData)
+        public FileInfoModel(FileData flData)
         {
             this.idFile = flData.idFileList;
             this.Name = flData.FileName;

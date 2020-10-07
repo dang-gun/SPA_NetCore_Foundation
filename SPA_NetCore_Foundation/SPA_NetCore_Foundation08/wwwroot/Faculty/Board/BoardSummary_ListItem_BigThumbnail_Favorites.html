@@ -1,0 +1,16 @@
+﻿
+    <div class="cont_item">
+        <div class="video-info-box">
+            <a id="video-title-link" href="{{Url}}" class="summary_Wrap">
+                <div class="img_box" style="background: url({{ThumbnailFullUrl}}) no-repeat top center;background-size: cover;background-color:#fff;"></div>
+                <div id="video-meta-block" class="video-meta-block fav">
+                    <div><div class="initial"><img id="imgUserFace" src="{{idUser:UserFaceUrl}}"></div></div>
+                    <div class="video-tit">{{Title}}</div>
+                    <div id="metadata-line" class="video-meta">
+                        <span>{{WriteDate:Date}}</span>
+                    </div>
+                </div>
+            </a>
+            <button class="{{FavoritesCss}}" onclick="BoardCA.FavoritesAuto(this, event, '{{idBoardPost}}')">F</button>
+        </div>
+    </div>

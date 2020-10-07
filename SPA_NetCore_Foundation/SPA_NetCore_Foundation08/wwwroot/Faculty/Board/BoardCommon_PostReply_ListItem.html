@@ -1,0 +1,23 @@
+﻿<li id="divPostReplyItem_{{idBoardPostReply}}" idBoardPostReply="{{idBoardPostReply}}" class="reply_List">
+    <div class="initial">
+        <img src="{{idUser:UserFaceUrl}}">
+    </div>
+    <div class="reply_user_info">
+        <div class="reply_Name">
+            <!--<em class="nick_level">
+            <img src="/Pages/img/icon/ico_class20.gif" class="icon_level">
+        </em>-->
+            {{UserName}}
+        </div>
+        <div class="reply_Date">{{WriteDate:DateTime}}</div>
+        <div class="reply_btn_add">
+            <button id="btnPostReplyItem_{{idBoardPostReply}}_ReReply" class="{{ReReplyCss}} reply_show" myListOpen="Open" onclick="BoardCA.ReRePlayList({{idBoardPost}}, {{idBoardPostReply}})">댓글 {{ReReplyCount}}개 보기</button>
+            <button onclick="BoardCA.PostReReplayCreateShow({{idBoardPost}}, {{idBoardPostReply}})">댓글 작성</button>
+        </div>
+        <div class="reply_Cont"><span class="text_comment">{{Content}}</span></div>
+    </div>
+    <div id="divPostReplyItem_{{idBoardPostReply}}_ReReplyCreate">
+
+    </div>
+    <div id="divPostReplyItem_{{idBoardPostReply}}_ReReply" class="{{ReReplyCss}}"></div>
+</li>

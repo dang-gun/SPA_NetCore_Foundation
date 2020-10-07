@@ -51,6 +51,249 @@
             <param name="bAdminMode"></param>
             <returns></returns>
         </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostView_Auth(System.Int32,System.Int32)">
+            <summary>
+            해당 포스팅의 정보를 리턴한다. - 권한 전달 필수
+            </summary>
+            <param name="idBoard">진입 기준 보드값. 포스트의 보드와 다를 수 있다.</param>
+            <param name="idBoardPost"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostView(System.Int32,System.Int32)">
+            <summary>
+            해당 포스팅의 정보를 리턴한다.
+            </summary>
+            <param name="idBoard">진입 기준 보드값. 포스트의 보드와 다를 수 있다.</param>
+            <param name="idBoardPost"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostReplyList_Auth(System.Int64,System.Int64)">
+            <summary>
+            리플 리스트 - 권한 전달 필수
+            </summary>
+            <param name="idBoard">진입 기준 보드값. 포스트의 보드와 다를 수 있다.</param>
+            <param name="idBoardPost"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostReplyList(System.Int64,System.Int64)">
+            <summary>
+            리플 리스트
+            </summary>
+            <param name="idBoard">진입 기준 보드값. 포스트의 보드와 다를 수 있다.</param>
+            <param name="idBoardPost"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostReReplyList_Auth(System.Int32,System.Int32,System.Int64)">
+            <summary>
+            대댓글 리스트 - 권한 전달 필수
+            </summary>
+            <param name="idBoard"></param>
+            <param name="idBoardPost"></param>
+            <param name="idBoardReply"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostReReplyList(System.Int64,System.Int64,System.Int64)">
+            <summary>
+            대댓글 리스트 - 권한 전달 필수
+            </summary>
+            <param name="idBoard"></param>
+            <param name="idBoardPost"></param>
+            <param name="idBoardReply">이 댓글을 부모로 하고 있는 댓글을 검색함</param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostReplyCreate_Auth(System.Int64,System.Int64,System.Int64,System.String,System.String)">
+            <summary>
+            리플 작성 - 권한 전달 필수
+            </summary>
+            <param name="idBoard"></param>
+            <param name="idBoardPost"></param>
+            <param name="idBoardReply_Target">대댓글인경우 대상 없으면 0</param>
+            <param name="sTitle"></param>
+            <param name="sContent"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostReplyCreate(System.Int64,System.Int64,System.Int64,System.String,System.String)">
+            <summary>
+            리플 작성
+            </summary>
+            <param name="idBoard"></param>
+            <param name="idBoardPost"></param>
+            <param name="idBoardReply_Target">대댓글인경우 대상 없으면 0</param>
+            <param name="sTitle"></param>
+            <param name="sContent"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostReplyDelete_Auth(System.Int64,System.Int64,System.Int64,ModelDB.BoardPostReplyStateType)">
+            <summary>
+            리플 삭제 - 로그인 필수
+            이름을 삭제지만 실제 동작은 상태값 변경이다.
+            </summary>
+            <param name="idBoard"></param>
+            <param name="idBoardPost"></param>
+            <param name="idBoardReply_Target"></param>
+            <param name="typeReplyState"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostReplyDelete(System.Int64,System.Int64,System.Int64,ModelDB.BoardPostReplyStateType)">
+            <summary>
+            리플 삭제
+            이름을 삭제지만 실제 동작은 상태값 변경이다.
+            </summary>
+            <param name="idBoard"></param>
+            <param name="idBoardPost"></param>
+            <param name="idBoardReply">삭제할 대상</param>
+            <param name="typeReplyState"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostCreateView_Auth(System.Int64)">
+            <summary>
+            포스트 작성 뷰 요청 - 권한 전달 필수
+            </summary>
+            <param name="idBoard"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostCreateView(System.Int64)">
+            <summary>
+            포스트 작성 뷰 요청
+            </summary>
+            <param name="idBoard"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostCreate_Auth(System.Int32,System.String,ModelDB.BoardPostStateType,System.Int32,System.String,FileListModel.FileInfoModel[],System.Int64)">
+            <summary>
+            포스트 작성 - 권한 전달 필수
+            </summary>
+            <param name="idBoard"></param>
+            <param name="sTitle"></param>
+            <param name="typeBoardState"></param>
+            <param name="nBoardCategory"></param>
+            <param name="sContent"></param>
+            <param name="listFileInfo"></param>
+            <param name="idUserTarget">전달 대상 유저</param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostCreate(System.Int64,System.String,ModelDB.BoardPostStateType,System.Int32,System.String,FileListModel.FileInfoModel[],System.Int64)">
+            <summary>
+            포스트 작성
+            </summary>
+            <param name="idBoard"></param>
+            <param name="sTitle"></param>
+            <param name="typeBoardState"></param>
+            <param name="nBoardCategory"></param>
+            <param name="sContent"></param>
+            <param name="listFileInfo"></param>
+            <param name="idUserTarget">전달 대상 유저</param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostCreateProcess(System.Int64,System.Int64,System.String,ModelDB.BoardPostStateType,System.Int32,System.String,FileListModel.FileInfoModel[],System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="idUser"></param>
+            <param name="idBoard"></param>
+            <param name="sTitle"></param>
+            <param name="typeBoardState"></param>
+            <param name="nBoardCategory"></param>
+            <param name="sContent"></param>
+            <param name="listFileInfo"></param>
+            <param name="idUserTarget"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostCreate_Api(System.String,System.Int64,System.String,System.String,FileListModel.FileInfoModel[])">
+            <summary>
+            포스트 작성 - 외부 API
+            API를 사용하여 게시물을 작성한다.
+            </summary>
+            <param name="sApiKey"></param>
+            <param name="idBoard"></param>
+            <param name="sTitle"></param>
+            <param name="sContent"></param>
+            <param name="listFileInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostEditView_Auth(System.Int32,System.Int32)">
+            <summary>
+            포스트를 수정하기위한 데이터 요청 - 권한 전달 필수
+            </summary>
+            <param name="idBoard"></param>
+            <param name="idBoardPost"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostEditView(System.Int32,System.Int32)">
+            <summary>
+            포스트를 수정하기위한 데이터 요청
+            </summary>
+            <param name="idBoard"></param>
+            <param name="idBoardPost"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostEdit_Auth(System.Int64,System.Int64,System.String,ModelDB.BoardPostStateType,System.Int32,System.String,FileListModel.FileInfoModel[])">
+            <summary>
+            포스트 수정 - 권한 전달 필수
+            </summary>
+            <param name="idBoard"></param>
+            <param name="idBoardPost"></param>
+            <param name="sTitle"></param>
+            <param name="typeBoardState"></param>
+            <param name="nBoardCategory"></param>
+            <param name="sContent"></param>
+            <param name="listFileInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostEdit(System.Int64,System.Int64,System.String,ModelDB.BoardPostStateType,System.Int32,System.String,FileListModel.FileInfoModel[])">
+            <summary>
+            포스트 수정
+            </summary>
+            <param name="idBoard"></param>
+            <param name="idBoardPost"></param>
+            <param name="sTitle"></param>
+            <param name="typeBoardState"></param>
+            <param name="nBoardCategory"></param>
+            <param name="sContent"></param>
+            <param name="listFileInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostDeleteView_Auth(System.Int64,System.Int64)">
+            <summary>
+            포스트 삭제하기위한 데이터 요청 - 권한 전달 필수
+            </summary>
+            <param name="idBoard"></param>
+            <param name="idBoardPost"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostDeleteView(System.Int64,System.Int64)">
+            <summary>
+            포스트 삭제하기위한 데이터 요청
+            </summary>
+            <param name="idBoard"></param>
+            <param name="idBoardPost"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostDelete_Auth(System.Int64,System.Int64)">
+            <summary>
+            포스트 삭제 - 권한 전달 필수
+            </summary>
+            <param name="idBoard"></param>
+            <param name="idBoardPost"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostDelete(System.Int64,System.Int64)">
+            <summary>
+            포스트 삭제
+            </summary>
+            <param name="idBoard"></param>
+            <param name="idBoardPost"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.SummaryList(System.String,System.Int32,System.String)">
+            <summary>
+            게시판의 조건에 맞는 갯수
+            </summary>
+            <param name="sBoardIdList">게시판 아이디 리스트 문자열</param>
+            <param name="nShowCount">표시할 개수. 최대 50개</param>
+            <param name="sSearchWord">검색어</param>
+            <returns></returns>
+        </member>
         <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.AuthGet(System.Int64,System.Int64,ModelDB.BoardAuthorityType@,BoardModel.BoardAuthCheckType@)">
             <summary>
             게시판에 해당하는 권한을 가지고 온다.
@@ -59,6 +302,78 @@
             <param name="idUser"></param>
             <param name="typeBoardAuth"></param>
             <param name="typeCheck"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SPA_NetCore_Foundation.Controllers.BoardMgtController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardMgtController.TestPostAdd(System.Int32)">
+            <summary>
+            테스트용으로 데이터를 300개 추가합니다.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardMgtController.List">
+            <summary>
+            게시판 관리자 - 생성된 게시판 리스트
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardMgtController.Item(System.Int32)">
+            <summary>
+            선택한 게시판의 정보를 받는다.
+            </summary>
+            <param name="nBoardId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardMgtController.Edit(System.Int64,System.String,System.Int16,ModelDB.BoardStateType,ModelDB.BoardFacultyType,ModelDB.BoardAuthorityType,System.String)">
+            <summary>
+            계시판 정보 수정
+            </summary>
+            <param name="nBoardId"></param>
+            <param name="sTitle"></param>
+            <param name="nShowCount"></param>
+            <param name="typeBoardState"></param>
+            <param name="typeBoardFaculty"></param>
+            <param name="nAuthorityDefault"></param>
+            <param name="sMemo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardMgtController.Create(System.String,ModelDB.BoardStateType,ModelDB.BoardAuthorityType,System.String)">
+            <summary>
+            게시판 관리 - 게시판 생성
+            </summary>
+            <param name="sTitle"></param>
+            <param name="typeBoardState"></param>
+            <param name="nAuthorityDefault"></param>
+            <param name="sMemo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardMgtController.AuthAdd(System.Int64,System.Int64)">
+            <summary>
+            권한 유저 추가.
+            권한을 별도로 지정하지 않고 수정을 통해 권한을 지정한다.
+            </summary>
+            <param name="nBoardId"></param>
+            <param name="nUserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardMgtController.AuthList(System.Int64)">
+            <summary>
+            보드 권한 리스트
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardMgtController.AuthEdit(System.Int64,System.Int32,System.Int32,System.String)">
+            <summary>
+            게시판 권한 수정
+            </summary>
+            <param name="nBoardAuthority"></param>
+            <param name="nAuthority"></param>
+            <param name="nAuthState"></param>
+            <param name="sMemo"></param>
             <returns></returns>
         </member>
         <member name="T:SPA_NetCore_Foundation.Controllers.SettingDataController">
@@ -266,6 +581,11 @@
             토큰 처리관련
             </summary>
         </member>
+        <member name="F:SPA_NetCore_Foundation.Global.GlobalStatic.Dir_LocalRoot">
+            <summary>
+            로컬 root 경로
+            </summary>
+        </member>
         <member name="F:SPA_NetCore_Foundation.Global.GlobalStatic.DBType">
             <summary>
             DB 타입
@@ -276,6 +596,13 @@
             DB 컨낵션 스트링 저장
             </summary>
         </member>
+        <member name="F:SPA_NetCore_Foundation.Global.GlobalStatic.BoardTitleMexLength">
+            <summary>
+            게시판 제목 길이
+            Board.Title 기준.
+            이걸 변경하려면 Board.Title을 같이 변경해야 한다.
+            </summary>
+        </member>
         <member name="F:SPA_NetCore_Foundation.Global.GlobalStatic.MgtA">
             <summary>
             관리 등급 지원
@@ -284,6 +611,16 @@
         <member name="F:SPA_NetCore_Foundation.Global.GlobalStatic.Setting_DataProc">
             <summary>
             메모리에 올라온 세팅정보
+            </summary>
+        </member>
+        <member name="F:SPA_NetCore_Foundation.Global.GlobalStatic.Rand">
+            <summary>
+            전역에서 사용할 랜덤 함수
+            </summary>
+        </member>
+        <member name="F:SPA_NetCore_Foundation.Global.GlobalStatic.FileProc">
+            <summary>
+            파일 처리 유틸
             </summary>
         </member>
         <member name="T:SPA_NetCore_Foundation.Model.TestModel01">
@@ -354,11 +691,12 @@
             인증서버 주소
             </summary>
         </member>
-        <member name="M:SPA_NetCore_Foundation.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+        <member name="M:SPA_NetCore_Foundation.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Hosting.IHostEnvironment)">
             <summary>
             
             </summary>
             <param name="configuration"></param>
+            <param name="env"></param>
         </member>
         <member name="P:SPA_NetCore_Foundation.Startup.Configuration">
             <summary>
@@ -389,6 +727,62 @@
             </summary>
             <param name="operation"></param>
             <param name="context"></param>
+        </member>
+        <member name="T:Faculty.File.FileProcess">
+            <summary>
+            파일 변환 관련
+            </summary>
+        </member>
+        <member name="M:Faculty.File.FileProcess.Base64ToByte(System.String)">
+            <summary>
+            base64 바이너리 정보를 바이트배열로 변환한다.
+            </summary>
+            <param name="base64String"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Faculty.File.FileProcess.FileInDb(System.String,FileListModel.FileInfoModel[],FileListModel.FileInfoModel@,System.Byte[]@)">
+            <summary>
+            파일을 저장하고 DB에 정보를 저장한다.
+            </summary>
+            <param name="sDir"></param>
+            <param name="listFileInfo"></param>
+            <param name="fiThumbnail"></param>
+            <param name="byteThumbnail"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Faculty.File.FileProcess.WWW_Json(System.String,System.Object)">
+            <summary>
+            wwwroot 내보내는 json파일 처리
+            </summary>
+            <param name="sDir"></param>
+            <param name="objList"></param>
+        </member>
+        <member name="M:Faculty.File.FileProcess.WWW_Json_BoardInfo">
+            <summary>
+            게시판 정보 json으로 저장 - 유저에게 보낼 게시판 정보
+            </summary>
+        </member>
+        <member name="M:Faculty.File.FileProcess.GetReducedImage(System.Int32,System.Int32,System.IO.Stream)">
+            <summary>
+            스크림을 파일로 바꾼다.
+            </summary>
+            <param name="width"></param>
+            <param name="height"></param>
+            <param name="resourceImage"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Faculty.StringExtension">
+            <summary>
+            문자열 확장 메소드
+            </summary>
+        </member>
+        <member name="M:Faculty.StringExtension.WithMaxLength(System.String,System.Int32)">
+            <summary>
+            문자열 지정한 크기만큼 잘라준다.
+            </summary>
+            <param name="value"></param>
+            <param name="maxLength"></param>
+            <returns></returns>
         </member>
         <member name="T:IdentityServer4_Custom.IdentityServer4.AuthRequest.MyExtensionGrantValidator">
             <summary>
@@ -756,6 +1150,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:SPA_NetCore_Foundation08.Migrations.UserInfo_Edit001.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <summary>
@@ -768,6 +1165,99 @@
             
             </summary>
             <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.UserInfo_Edit001.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+        <member name="T:SPA_NetCore_Foundation08.Migrations.Board_DefultDataAdd">
+            <summary>
+            
+            </summary>
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.Board_DefultDataAdd.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.Board_DefultDataAdd.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.Board_DefultDataAdd.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+        <member name="T:SPA_NetCore_Foundation08.Migrations.API_Add">
+            <summary>
+            
+            </summary>
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.API_Add.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.API_Add.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.API_Add.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+        <member name="T:ModelDB.ApiLog">
+            <summary>
+            API 요청 로그
+            </summary>
+        </member>
+        <member name="P:ModelDB.ApiLog.idApiLog">
+            <summary>
+            고유키
+            </summary>
+        </member>
+        <member name="P:ModelDB.ApiLog.ApiKey">
+            <summary>
+            사인인에 사용하는 키
+            </summary>
+        </member>
+        <member name="P:ModelDB.ApiLog.idUser">
+            <summary>
+            사용 계정
+            </summary>
+        </member>
+        <member name="P:ModelDB.ApiLog.CallDate">
+            <summary>
+            호출 날짜
+            </summary>
+        </member>
+        <member name="P:ModelDB.ApiLog.Step01">
+            <summary>
+            분류 단계01
+            </summary>
+        </member>
+        <member name="P:ModelDB.ApiLog.Contents">
+            <summary>
+            호출 내용
+            </summary>
         </member>
         <member name="T:ModelDB.Board">
             <summary>
@@ -1124,53 +1614,53 @@
             수정시 ip
             </summary>
         </member>
-        <member name="T:ModelDB.FileInfo">
+        <member name="T:ModelDB.FileData">
             <summary>
             파일 
             </summary>
         </member>
-        <member name="P:ModelDB.FileInfo.idFileList">
+        <member name="P:ModelDB.FileData.idFileList">
             <summary>
             고유키
             </summary>
         </member>
-        <member name="P:ModelDB.FileInfo.FileName">
+        <member name="P:ModelDB.FileData.FileName">
             <summary>
             원래 파일 이름
             </summary>
         </member>
-        <member name="P:ModelDB.FileInfo.Ext">
+        <member name="P:ModelDB.FileData.Ext">
             <summary>
             확장자
             </summary>
         </member>
-        <member name="P:ModelDB.FileInfo.Size">
+        <member name="P:ModelDB.FileData.Size">
             <summary>
             파일 크기
             </summary>
         </member>
-        <member name="P:ModelDB.FileInfo.FileDir">
+        <member name="P:ModelDB.FileData.FileDir">
             <summary>
             서버 로컬의 파일 위치
             </summary>
         </member>
-        <member name="P:ModelDB.FileInfo.FileUrl">
+        <member name="P:ModelDB.FileData.FileUrl">
             <summary>
             저정되어 있는 파일의 Url
             </summary>
         </member>
-        <member name="P:ModelDB.FileInfo.Description">
+        <member name="P:ModelDB.FileData.Description">
             <summary>
             파일에 대한 설명
             </summary>
         </member>
-        <member name="P:ModelDB.FileInfo.EditorDivision">
+        <member name="P:ModelDB.FileData.EditorDivision">
             <summary>
             에디터에서 파일을 구분하기위해 사용한 구분값.
             에디터가 아닌곳에서는 아직 사용하지 않는다.
             </summary>
         </member>
-        <member name="P:ModelDB.FileInfo.FileState">
+        <member name="P:ModelDB.FileData.FileState">
             <summary>
             파일의 상태정보
             </summary>
@@ -1252,7 +1742,7 @@
             게시물 댓글
             </summary>
         </member>
-        <member name="P:ModelDB.SpaNetCoreFoundationContext.FileInfo">
+        <member name="P:ModelDB.SpaNetCoreFoundationContext.FileData">
             <summary>
             파일 정보
             </summary>
@@ -1260,6 +1750,11 @@
         <member name="P:ModelDB.SpaNetCoreFoundationContext.User">
             <summary>
             유저 사인인 정보
+            </summary>
+        </member>
+        <member name="P:ModelDB.SpaNetCoreFoundationContext.UserApi">
+            <summary>
+            유저 API 정보
             </summary>
         </member>
         <member name="P:ModelDB.SpaNetCoreFoundationContext.UserInfo">
@@ -1272,9 +1767,19 @@
             사용자 사인인 리스트
             </summary>
         </member>
+        <member name="P:ModelDB.SpaNetCoreFoundationContext.ApiLog">
+            <summary>
+            api 호출 로그
+            </summary>
+        </member>
         <member name="P:ModelDB.SpaNetCoreFoundationContext.Setting_Data">
             <summary>
             서버 세팅 정보
+            </summary>
+        </member>
+        <member name="P:ModelDB.SpaNetCoreFoundationContext.BoardPostReplyRelationTreeModels">
+            <summary>
+            게시판 댓글 관계 검색 모델
             </summary>
         </member>
         <member name="M:ModelDB.SpaNetCoreFoundationContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
@@ -1302,6 +1807,42 @@
         <member name="P:ModelDB.User.Password">
             <summary>
             비밀번호
+            </summary>
+        </member>
+        <member name="T:ModelDB.UserApi">
+            <summary>
+            유저 API 정보
+            외부에서 api를 사용할때 필요한 정보
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserApi.idUserApi">
+            <summary>
+            고유키
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserApi.ApiKey">
+            <summary>
+            사인인에 사용하는 키
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserApi.idUser">
+            <summary>
+            사용 계정
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserApi.UserApiState">
+            <summary>
+            상태
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserApi.StartDate">
+            <summary>
+            시작 날짜
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserApi.EndDate">
+            <summary>
+            끝 날짜(만료 예정일)
             </summary>
         </member>
         <member name="T:ModelDB.UserInfo">
@@ -1696,6 +2237,36 @@
             테스트 유저
             </summary>
         </member>
+        <member name="T:ModelDB.UserApiStateType">
+            <summary>
+            유저 api 상태값
+            </summary>
+        </member>
+        <member name="F:ModelDB.UserApiStateType.None">
+            <summary>
+            없음
+            </summary>
+        </member>
+        <member name="F:ModelDB.UserApiStateType.Normal">
+            <summary>
+            정상
+            </summary>
+        </member>
+        <member name="F:ModelDB.UserApiStateType.Delete">
+            <summary>
+            삭제.
+            </summary>
+        </member>
+        <member name="F:ModelDB.UserApiStateType.Block">
+            <summary>
+            관리자에 의해 막힘
+            </summary>
+        </member>
+        <member name="F:ModelDB.UserApiStateType.Expiration">
+            <summary>
+            기간 만료
+            </summary>
+        </member>
         <member name="T:ApiModel.ApiResultBaseModel">
             <summary>
             API 결과 공통 베이스.
@@ -1891,6 +2462,16 @@
         <member name="F:ApiModel.ApiResultType.TargetFindError">
             <summary>
             대상을 찾지 못했다.
+            </summary>
+        </member>
+        <member name="T:BoardMgtModel.BoardListResultModel">
+            <summary>
+            게시판 리스트 전달용
+            </summary>
+        </member>
+        <member name="P:BoardMgtModel.BoardListResultModel.List">
+            <summary>
+            게시판 리스트
             </summary>
         </member>
         <member name="T:BoardModel.BoardAuthCheckType">
@@ -2645,90 +3226,90 @@
             <param name="uiData_Forwarding"></param>
             <param name="bcData"></param>
         </member>
-        <member name="T:FileList.Model.FileInfoModel">
+        <member name="T:FileListModel.FileInfoModel">
             <summary>
             파일 정보 모델
             </summary>
         </member>
-        <member name="P:FileList.Model.FileInfoModel.Name">
+        <member name="P:FileListModel.FileInfoModel.Name">
             <summary>
             파일 이름
             </summary>
         </member>
-        <member name="P:FileList.Model.FileInfoModel.Extension">
+        <member name="P:FileListModel.FileInfoModel.Extension">
             <summary>
             파일 확장자
             </summary>
         </member>
-        <member name="P:FileList.Model.FileInfoModel.Size">
+        <member name="P:FileListModel.FileInfoModel.Size">
             <summary>
             파일 크기
             </summary>
         </member>
-        <member name="P:FileList.Model.FileInfoModel.Type">
+        <member name="P:FileListModel.FileInfoModel.Type">
             <summary>
             파일의 타입 정보
             </summary>
         </member>
-        <member name="P:FileList.Model.FileInfoModel.Description">
+        <member name="P:FileListModel.FileInfoModel.Description">
             <summary>
             파일에 대한 설명
             </summary>
         </member>
-        <member name="P:FileList.Model.FileInfoModel.EditorDivision">
+        <member name="P:FileListModel.FileInfoModel.EditorDivision">
             <summary>
             에디터에서 사용될 파일 구분값
             </summary>
         </member>
-        <member name="P:FileList.Model.FileInfoModel.BinaryIs">
+        <member name="P:FileListModel.FileInfoModel.BinaryIs">
             <summary>
             바이너리 정보를 사용할지 여부.
             이것이 true이면 동적으로 바이너리 정보를 읽어 미리보기이미지로 출력하게 된다.
             이미 처리된 데이터인경우 이것이 false가 되어야 한다.
             </summary>
         </member>
-        <member name="P:FileList.Model.FileInfoModel.BinaryReadyIs">
+        <member name="P:FileListModel.FileInfoModel.BinaryReadyIs">
             <summary>
             바이너리 정보를 사용할때 바이너리 데이터가 준비가 끝났는지 여부
             </summary>
         </member>
-        <member name="P:FileList.Model.FileInfoModel.Binary">
+        <member name="P:FileListModel.FileInfoModel.Binary">
             <summary>
             로컬파일인 경우 파일의 바이너리 정보.
             base64로 들어온다.
             </summary>
         </member>
-        <member name="P:FileList.Model.FileInfoModel.idFile">
+        <member name="P:FileListModel.FileInfoModel.idFile">
             <summary>
             파일이 업로드되어 있을때 고유 번호
             </summary>
         </member>
-        <member name="P:FileList.Model.FileInfoModel.Url">
+        <member name="P:FileListModel.FileInfoModel.Url">
             <summary>
             파일이 업로드 되어 있는 상태에 가지고 있는
             </summary>
         </member>
-        <member name="P:FileList.Model.FileInfoModel.Thumbnail">
+        <member name="P:FileListModel.FileInfoModel.Thumbnail">
             <summary>
             썸네일 여부
             </summary>
         </member>
-        <member name="P:FileList.Model.FileInfoModel.Edit">
+        <member name="P:FileListModel.FileInfoModel.Edit">
             <summary>
              수정여부
             </summary>
         </member>
-        <member name="P:FileList.Model.FileInfoModel.Delete">
+        <member name="P:FileListModel.FileInfoModel.Delete">
             <summary>
             삭제여부
             </summary>
         </member>
-        <member name="M:FileList.Model.FileInfoModel.#ctor">
+        <member name="M:FileListModel.FileInfoModel.#ctor">
             <summary>
             
             </summary>
         </member>
-        <member name="M:FileList.Model.FileInfoModel.#ctor(ModelDB.FileInfo)">
+        <member name="M:FileListModel.FileInfoModel.#ctor(ModelDB.FileData)">
             <summary>
             파일 리스트 DB를 받아 변환한다.
             </summary>

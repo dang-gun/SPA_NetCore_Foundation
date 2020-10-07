@@ -43,6 +43,7 @@ AdminFaculty.prototype.MenuLoad = function ()
                     , ["defult"]
                     , {
                         AdminMenu_SettingData: FS_Url.Admin_SettingData
+                        , AdminMenu_BoardMgt: FS_Url.Admin_BoardMgt
                     }
                     , DG_JsDataBind_MatchType.Select)
                     .ResultString;
