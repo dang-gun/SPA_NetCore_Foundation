@@ -4,7 +4,7 @@
 var GlobalStatic = {};
 
 /** 프로젝트 제목 */
-GlobalStatic.Title = "SPA NetCore Foundation 06";
+GlobalStatic.Title = "SPA NetCore Foundation 07";
 
 /** 디버그 여부 */
 GlobalStatic.Debug = false;
