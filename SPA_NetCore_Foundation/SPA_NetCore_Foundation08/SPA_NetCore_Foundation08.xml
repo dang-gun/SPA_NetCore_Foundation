@@ -1098,9 +1098,6 @@
             <summary>
             
             </summary>
-            <summary>
-            
-            </summary>
         </member>
         <member name="M:SPA_NetCore_Foundation08.Migrations.Initialize.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <summary>
@@ -1113,116 +1110,6 @@
             
             </summary>
             <param name="migrationBuilder"></param>
-        </member>
-        <member name="M:SPA_NetCore_Foundation08.Migrations.Initialize.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <summary>
-            
-            </summary>
-            <param name="modelBuilder"></param>
-        </member>
-        <member name="T:SPA_NetCore_Foundation08.Migrations.Setting_Data_Add">
-            <summary>
-            
-            </summary>
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:SPA_NetCore_Foundation08.Migrations.Setting_Data_Add.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <summary>
-            
-            </summary>
-            <param name="migrationBuilder"></param>
-        </member>
-        <member name="M:SPA_NetCore_Foundation08.Migrations.Setting_Data_Add.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <summary>
-            
-            </summary>
-            <param name="migrationBuilder"></param>
-        </member>
-        <member name="M:SPA_NetCore_Foundation08.Migrations.Setting_Data_Add.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <summary>
-            
-            </summary>
-            <param name="modelBuilder"></param>
-        </member>
-        <member name="T:SPA_NetCore_Foundation08.Migrations.UserInfo_Edit001">
-            <summary>
-            
-            </summary>
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:SPA_NetCore_Foundation08.Migrations.UserInfo_Edit001.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <summary>
-            
-            </summary>
-            <param name="migrationBuilder"></param>
-        </member>
-        <member name="M:SPA_NetCore_Foundation08.Migrations.UserInfo_Edit001.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <summary>
-            
-            </summary>
-            <param name="migrationBuilder"></param>
-        </member>
-        <member name="M:SPA_NetCore_Foundation08.Migrations.UserInfo_Edit001.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <summary>
-            
-            </summary>
-            <param name="modelBuilder"></param>
-        </member>
-        <member name="T:SPA_NetCore_Foundation08.Migrations.Board_DefultDataAdd">
-            <summary>
-            
-            </summary>
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:SPA_NetCore_Foundation08.Migrations.Board_DefultDataAdd.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <summary>
-            
-            </summary>
-            <param name="migrationBuilder"></param>
-        </member>
-        <member name="M:SPA_NetCore_Foundation08.Migrations.Board_DefultDataAdd.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <summary>
-            
-            </summary>
-            <param name="migrationBuilder"></param>
-        </member>
-        <member name="M:SPA_NetCore_Foundation08.Migrations.Board_DefultDataAdd.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <summary>
-            
-            </summary>
-            <param name="modelBuilder"></param>
-        </member>
-        <member name="T:SPA_NetCore_Foundation08.Migrations.API_Add">
-            <summary>
-            
-            </summary>
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:SPA_NetCore_Foundation08.Migrations.API_Add.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <summary>
-            
-            </summary>
-            <param name="migrationBuilder"></param>
-        </member>
-        <member name="M:SPA_NetCore_Foundation08.Migrations.API_Add.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <summary>
-            
-            </summary>
-            <param name="migrationBuilder"></param>
-        </member>
-        <member name="M:SPA_NetCore_Foundation08.Migrations.API_Add.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <summary>
-            
-            </summary>
-            <param name="modelBuilder"></param>
         </member>
         <member name="T:ModelDB.ApiLog">
             <summary>

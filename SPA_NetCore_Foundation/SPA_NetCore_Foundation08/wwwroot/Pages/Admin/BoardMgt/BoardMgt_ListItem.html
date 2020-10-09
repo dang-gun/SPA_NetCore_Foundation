@@ -9,7 +9,7 @@
         <input type="text" value="{{BoardState}}" />
     </td>
     <td class="BoardAdminItem_State">
-        <button class="form-control btn-outline" onclick="Page.Move_Page(true, FS_Url.Admin_BoardAdmin_BoardAdminAuth + '/' + {{idBoard}})">개별권한</button>
+        <button class="form-control btn-outline" onclick="Page.Move_Page(FS_Url.Admin_BoardMgtAuth + '/' + {{idBoard}})">개별권한</button>
     </td>
     <td class="BoardAdminItem_ValueData">
         <input type="text" value="{{CreateDate:Date}}" />

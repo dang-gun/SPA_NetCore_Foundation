@@ -15,6 +15,23 @@ namespace SPA_NetCore_Foundation08.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "ApiLog",
+                columns: table => new
+                {
+                    idApiLog = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ApiKey = table.Column<string>(nullable: true),
+                    idUser = table.Column<long>(nullable: false),
+                    CallDate = table.Column<DateTime>(nullable: false),
+                    Step01 = table.Column<string>(maxLength: 512, nullable: true),
+                    Contents = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApiLog", x => x.idApiLog);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Board",
                 columns: table => new
                 {
@@ -154,7 +171,21 @@ namespace SPA_NetCore_Foundation08.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FileInfo",
+                name: "BoardPostReplyRelationTreeModels",
+                columns: table => new
+                {
+                    idBoardPostReply = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    idBoardPostReply_Re = table.Column<long>(nullable: false),
+                    Depth = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BoardPostReplyRelationTreeModels", x => x.idBoardPostReply);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FileData",
                 columns: table => new
                 {
                     idFileList = table.Column<long>(nullable: false)
@@ -170,7 +201,23 @@ namespace SPA_NetCore_Foundation08.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FileInfo", x => x.idFileList);
+                    table.PrimaryKey("PK_FileData", x => x.idFileList);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Setting_Data",
+                columns: table => new
+                {
+                    idSetting_Data = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Number = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    ValueData = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Setting_Data", x => x.idSetting_Data);
                 });
 
             migrationBuilder.CreateTable(
@@ -188,6 +235,23 @@ namespace SPA_NetCore_Foundation08.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserApi",
+                columns: table => new
+                {
+                    idUserApi = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ApiKey = table.Column<string>(maxLength: 64, nullable: true),
+                    idUser = table.Column<long>(nullable: false),
+                    UserApiState = table.Column<int>(nullable: false),
+                    StartDate = table.Column<DateTime>(nullable: false),
+                    EndDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserApi", x => x.idUserApi);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserInfo",
                 columns: table => new
                 {
@@ -195,6 +259,8 @@ namespace SPA_NetCore_Foundation08.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     idUser = table.Column<long>(nullable: false),
                     ViewName = table.Column<string>(maxLength: 16, nullable: true),
+                    MgtClass = table.Column<int>(nullable: false),
+                    idUser_Parent = table.Column<long>(nullable: false),
                     SignUpDate = table.Column<DateTime>(nullable: false),
                     SignInDate = table.Column<DateTime>(nullable: false),
                     RefreshDate = table.Column<DateTime>(nullable: false),
@@ -222,14 +288,61 @@ namespace SPA_NetCore_Foundation08.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "User",
-                columns: new[] { "idUser", "Password", "SignEmail" },
-                values: new object[] { 1L, "1111", "test01@email.net" });
+                table: "Board",
+                columns: new[] { "idBoard", "AuthorityDefault", "BoardFaculty", "BoardState", "CreateDate", "Memo", "ShowCount", "Title", "UrlStandard", "idBoardGroup" },
+                values: new object[] { 1L, 0, 0, 1, new DateTime(2020, 10, 10, 5, 4, 31, 706, DateTimeKind.Local).AddTicks(8425), "테스트용 게시판", (short)0, "Test", null, 0L });
+
+            migrationBuilder.InsertData(
+                table: "BoardAuthority",
+                columns: new[] { "idBoardAuthority", "AuthState", "Authority", "EditDate", "Memo", "idBoard", "idUser" },
+                values: new object[] { 1L, 0, 2147483647, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1L, 1L });
+
+            migrationBuilder.InsertData(
+                table: "BoardCategory",
+                columns: new[] { "idBoardCategory", "Memo", "Title", "idBoard" },
+                values: new object[] { 1L, "전체 게시판에 표시되는 분류.", "All", 1L });
+
+            migrationBuilder.InsertData(
+                table: "BoardContent",
+                columns: new[] { "idBoardContent", "Content", "EditIP", "FileList", "WriteIP", "idBoard", "idBoardPost" },
+                values: new object[] { 1L, "DB 생성후 테스트용 자동생성 게시물입니다.<br />내용", "", null, "", 1L, 1L });
+
+            migrationBuilder.InsertData(
+                table: "BoardPost",
+                columns: new[] { "idBoardPost", "DeleteDate", "EditDate", "EditIP", "PostState", "ReplyCount", "ThumbnailUrl", "Title", "ViewCount", "ViewCountNone", "WriteDate", "WriteIP", "idBoard", "idBoardCategory", "idUser", "idUser_Forwarding" },
+                values: new object[] { 1L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 0, 0, null, "DB 생성후 테스트용 자동생성 게시물입니다.", 0L, 0L, new DateTime(2020, 10, 10, 5, 4, 31, 708, DateTimeKind.Local).AddTicks(164), null, 1L, 0L, 1L, 0L });
+
+            migrationBuilder.InsertData(
+                table: "BoardPostReply",
+                columns: new[] { "idBoardPostReply", "Content", "DeleteDate", "EditDate", "EditIP", "ReReplyCount", "ReplyState", "Title", "WriteDate", "WriteIP", "idBoard", "idBoardPost", "idBoardPostReply_Re", "idBoardPostReply_ReParent", "idUser" },
+                values: new object[] { 1L, "DB 생성후 테스트용 자동생성 게시물의 댓글입니다.", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", 0, 0, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", 1L, 0L, 0L, 0L, 0L });
+
+            migrationBuilder.InsertData(
+                table: "Setting_Data",
+                columns: new[] { "idSetting_Data", "Description", "Name", "Number", "ValueData" },
+                values: new object[] { 1L, "프로그램 전체에 표시될 이름", "Title", 1, "ASP.NET Core SPA Foundation 08" });
 
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "idUser", "Password", "SignEmail" },
-                values: new object[] { 2L, "1111", "test02@email.net" });
+                values: new object[,]
+                {
+                    { 1L, "1111", "root" },
+                    { 2L, "1111", "admin" },
+                    { 3L, "1111", "test01@email.net" },
+                    { 4L, "1111", "test02@email.net" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "UserInfo",
+                columns: new[] { "idUserInfo", "MgtClass", "PlatformInfo", "RefreshDate", "SignInDate", "SignUpDate", "ViewName", "idUser", "idUser_Parent" },
+                values: new object[,]
+                {
+                    { 1L, 1, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "root", 1L, 0L },
+                    { 2L, 10000, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin", 2L, 0L },
+                    { 3L, 1000000, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "테스트01", 3L, 0L },
+                    { 4L, 1000000, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "테스트02", 4L, 0L }
+                });
         }
 
         /// <summary>
@@ -238,6 +351,9 @@ namespace SPA_NetCore_Foundation08.Migrations
         /// <param name="migrationBuilder"></param>
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ApiLog");
+
             migrationBuilder.DropTable(
                 name: "Board");
 
@@ -260,10 +376,19 @@ namespace SPA_NetCore_Foundation08.Migrations
                 name: "BoardPostReply");
 
             migrationBuilder.DropTable(
-                name: "FileInfo");
+                name: "BoardPostReplyRelationTreeModels");
+
+            migrationBuilder.DropTable(
+                name: "FileData");
+
+            migrationBuilder.DropTable(
+                name: "Setting_Data");
 
             migrationBuilder.DropTable(
                 name: "User");
+
+            migrationBuilder.DropTable(
+                name: "UserApi");
 
             migrationBuilder.DropTable(
                 name: "UserInfo");

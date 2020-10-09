@@ -112,7 +112,7 @@ namespace SPA_NetCore_Foundation08.Migrations
                             AuthorityDefault = 0,
                             BoardFaculty = 0,
                             BoardState = 1,
-                            CreateDate = new DateTime(2020, 10, 8, 6, 41, 26, 241, DateTimeKind.Local).AddTicks(2473),
+                            CreateDate = new DateTime(2020, 10, 10, 5, 4, 31, 706, DateTimeKind.Local).AddTicks(8425),
                             Memo = "테스트용 게시판",
                             ShowCount = (short)0,
                             Title = "Test",
@@ -231,7 +231,7 @@ namespace SPA_NetCore_Foundation08.Migrations
                             EditIP = "",
                             WriteIP = "",
                             idBoard = 1L,
-                            idBoardPost = 0L
+                            idBoardPost = 1L
                         });
                 });
 
@@ -324,7 +324,7 @@ namespace SPA_NetCore_Foundation08.Migrations
                             Title = "DB 생성후 테스트용 자동생성 게시물입니다.",
                             ViewCount = 0L,
                             ViewCountNone = 0L,
-                            WriteDate = new DateTime(2020, 10, 8, 6, 41, 26, 242, DateTimeKind.Local).AddTicks(5689),
+                            WriteDate = new DateTime(2020, 10, 10, 5, 4, 31, 708, DateTimeKind.Local).AddTicks(164),
                             idBoard = 1L,
                             idBoardCategory = 0L,
                             idUser = 1L,
@@ -503,11 +503,23 @@ namespace SPA_NetCore_Foundation08.Migrations
                         {
                             idUser = 1L,
                             Password = "1111",
-                            SignEmail = "test01@email.net"
+                            SignEmail = "root"
                         },
                         new
                         {
                             idUser = 2L,
+                            Password = "1111",
+                            SignEmail = "admin"
+                        },
+                        new
+                        {
+                            idUser = 3L,
+                            Password = "1111",
+                            SignEmail = "test01@email.net"
+                        },
+                        new
+                        {
+                            idUser = 4L,
                             Password = "1111",
                             SignEmail = "test02@email.net"
                         });
@@ -598,6 +610,28 @@ namespace SPA_NetCore_Foundation08.Migrations
                             SignUpDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ViewName = "admin",
                             idUser = 2L,
+                            idUser_Parent = 0L
+                        },
+                        new
+                        {
+                            idUserInfo = 3L,
+                            MgtClass = 1000000,
+                            RefreshDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SignInDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SignUpDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ViewName = "테스트01",
+                            idUser = 3L,
+                            idUser_Parent = 0L
+                        },
+                        new
+                        {
+                            idUserInfo = 4L,
+                            MgtClass = 1000000,
+                            RefreshDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SignInDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SignUpDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ViewName = "테스트02",
+                            idUser = 4L,
                             idUser_Parent = 0L
                         });
                 });

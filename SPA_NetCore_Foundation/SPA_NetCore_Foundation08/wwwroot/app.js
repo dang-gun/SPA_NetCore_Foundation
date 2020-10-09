@@ -205,6 +205,7 @@ var app = Sammy(function ()
                 GlobalStatic.Page_Now = new SettingData();
             });
     });
+
     this.get(FS_Url.Admin_BoardMgt, function ()
     {
         app_Assist.RouteCheck(true, this,
@@ -212,6 +213,26 @@ var app = Sammy(function ()
             {
                 //객체 생성
                 GlobalStatic.Page_Now = new BoardMgt();
+            });
+    });
+    this.get(FS_Url.Admin_BoardMgtAuth + "/:boardid", function ()
+    {
+        //파라미터 받기
+        var nBoardId = this.params["boardid"];
+        if ("" === nBoardId)
+        {
+            nBoardId = 0;
+        }
+        else
+        {
+            nBoardId = Number(nBoardId);
+        }
+
+        app_Assist.RouteCheck(true, this,
+            function ()
+            {
+                //객체 생성
+                GlobalStatic.Page_Now = new BoardMgtAuth(nBoardId);
             });
     });
 

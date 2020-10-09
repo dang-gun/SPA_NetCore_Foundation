@@ -15,24 +15,26 @@ function BoardMgtAuth(nBoardId)
     Page.Load({}, function ()
     {
         //화면 인터페이스
-        Page.divContents.load("Pages/Admin/BoardAdmin/BoardMgtAuth/BoardMgtAuth.html"
+        Page.divContents.load("Pages/Admin/BoardMgt/BoardMgtAuth/BoardMgtAuth.html"
             , function () 
             {
                 //데이터 바인드 영역
                 objThis.divList = $("#divList");
 
-                //메뉴
-                AA.HtmlFileLoad(FS_FUrl.Admin_Admin_Menu
-                    , function (html)
-                    {
-                        $("#divAdmin_Menu").html(html);
-                    }
-                    , {}
-                );
+                //관리자 기능
+                objThis.AdminFaculty
+                    = new AdminFaculty(
+                        {
+                            MenuArea: $("#divAdmin_Menu"),
+                            BtnName: "liAdminMenu_" + GlobalStatic.PageType_Now
+                        });
+
+                //메뉴 불러오기
+                objThis.AdminFaculty.MenuLoad();
 
 
                 //데이터 바인드에 사용할 리스트 아이템 html 받아오기
-                AA.HtmlFileLoad("Pages/Admin/BoardAdmin/BoardMgtAuth/BoardMgtAuth_ListTitle.html"
+                AA.HtmlFileLoad("Pages/Admin/BoardMgt/BoardMgtAuth/BoardMgtAuth_ListTitle.html"
                     , function (html)
                     {
                         objThis.BoardMgtAuth_ListTitleHtml = html;
@@ -40,7 +42,7 @@ function BoardMgtAuth(nBoardId)
                     }
                     , {}
                 );
-                AA.HtmlFileLoad("Pages/Admin/BoardAdmin/BoardMgtAuth/BoardMgtAuth_ListItem.html"
+                AA.HtmlFileLoad("Pages/Admin/BoardMgt/BoardMgtAuth/BoardMgtAuth_ListItem.html"
                     , function (html)
                     {
                         objThis.BoardMgtAuth_ListItemHtml = html;
@@ -49,9 +51,6 @@ function BoardMgtAuth(nBoardId)
                     , {}
                 );
 
-
-                // 엑세스 토큰 갱신
-                GlobalSign.AccessTokenToInfo();
             });
     });
 } 
@@ -89,6 +88,7 @@ BoardMgtAuth.prototype.ListBind = null;
  */
 BoardMgtAuth.prototype.Reset_ListTitle = function (bItem)
 {
+    
     var objThis = this;
 
     if ((true === objThis.bFirstBind)
@@ -98,7 +98,8 @@ BoardMgtAuth.prototype.Reset_ListTitle = function (bItem)
         return;
     }
 
-
+    //첫 바인딩이 완료 되었는지 여부
+    objThis.bFirstBind = true;
 
     //사용할 기능
     objThis.ListBind
@@ -135,7 +136,7 @@ BoardMgtAuth.prototype.Reset_ListItem = function ()
 
     AA.get(AA.TokenRelayType.HeadAdd
         , {
-            url: FS_Api.Admin_BoardAuthList
+            url: FS_Api.BoardMgt_AuthList
             , data: { nBoardId: objThis.BoardId }
             , success: function (jsonData)
             {
@@ -201,7 +202,7 @@ BoardMgtAuth.prototype.AddUser = function ()
     {
         AA.post(AA.TokenRelayType.HeadAdd
             , {
-                url: FS_Api.Admin_BoardAuthAdd
+                url: FS_Api.BoardMgt_AuthAdd
                 , data: {
                     nBoardId: objThis.BoardId,
                     nUserId: nUserId
@@ -262,7 +263,7 @@ BoardMgtAuth.prototype.BoardAuthEdit = function (nBoardAuthorityId)
 
     AA.patch(AA.TokenRelayType.HeadAdd
         , {
-            url: FS_Api.Admin_BoardAuthEdit
+            url: FS_Api.BoardMgt_AuthEdit
             , data: {
                 nBoardAuthority: nBoardAuthorityId,
                 nAuthority: nAuthority,

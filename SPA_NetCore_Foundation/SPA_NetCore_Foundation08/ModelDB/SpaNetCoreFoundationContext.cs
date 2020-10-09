@@ -132,12 +132,24 @@ namespace ModelDB
                 new User
                 { 
                     idUser = 1,
-                    SignEmail = "test01@email.net",
+                    SignEmail = "root",
                     Password = "1111"
                 }
                 , new User
                 { 
                     idUser = 2,
+                    SignEmail = "admin",
+                    Password = "1111"
+                }
+                , new User
+                {
+                    idUser = 3,
+                    SignEmail = "test01@email.net",
+                    Password = "1111"
+                }
+                , new User
+                {
+                    idUser = 4,
                     SignEmail = "test02@email.net",
                     Password = "1111"
                 });
@@ -157,6 +169,20 @@ namespace ModelDB
                     idUser = 2,
                     ViewName = "admin",
                     MgtClass = ManagementClassType.Admin,
+                }
+                , new UserInfo
+                {
+                    idUserInfo = 3,
+                    idUser = 3,
+                    ViewName = "테스트01",
+                    MgtClass = ManagementClassType.User,
+                }
+                , new UserInfo
+                {
+                    idUserInfo = 4,
+                    idUser = 4,
+                    ViewName = "테스트02",
+                    MgtClass = ManagementClassType.User,
                 });
             #endregion
 

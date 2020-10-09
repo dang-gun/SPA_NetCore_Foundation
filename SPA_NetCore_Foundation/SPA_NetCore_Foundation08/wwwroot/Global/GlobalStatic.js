@@ -104,3 +104,29 @@ GlobalStatic.LoadingClose = function ()
 
 /** 데이터 바인드 */
 GlobalStatic.DataBind = new DG_JsDataBind();
+
+/** 자주쓰는 규칙 추가 */
+GlobalStatic.DataBind.MatchPatternListAdd(
+    "Custom"
+    , {
+        ":DateTimeBr": function (sOriData, sMatchString, sValue, jsonValue)
+        {
+            return GlobalStatic.DataBind.ReplaceAll(sOriData, sMatchString, moment(sValue).format("YYYY-MM-DD<br />hh:mm"));
+        }
+        , ":DateTime": function (sOriData, sMatchString, sValue, jsonValue)
+        {
+            return GlobalStatic.DataBind.ReplaceAll(sOriData, sMatchString, moment(sValue).format("YYYY-MM-DD hh:mm"));
+        }
+        , ":Time": function (sOriData, sMatchString, sValue, jsonValue)
+        {
+            return GlobalStatic.DataBind.ReplaceAll(sOriData, sMatchString, moment("2000-01-01 " + sValue).format("HH:mm"));
+        }
+        , ":Date": function (sOriData, sMatchString, sValue, jsonValue)
+        {
+            return GlobalStatic.DataBind.ReplaceAll(sOriData, sMatchString, moment(sValue).format("YYYY-MM-DD"));
+        }
+        , ":string": function (sOriData, sMatchString, sValue, jsonValue)
+        {
+            return GlobalStatic.DataBind.ReplaceAll(sOriData, sMatchString, dgIsObject.IsStringValue(sValue));
+        }
+    });

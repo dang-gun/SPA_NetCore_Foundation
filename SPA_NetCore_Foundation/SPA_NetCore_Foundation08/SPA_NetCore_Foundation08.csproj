@@ -15,6 +15,8 @@
     <Compile Remove="Migrations\20201002202259_Board_Add.Designer.cs" />
     <Compile Remove="Migrations\20201002203034_Initialize.cs" />
     <Compile Remove="Migrations\20201002203034_Initialize.Designer.cs" />
+    <Compile Remove="Migrations\20201009200319_Initialize.cs" />
+    <Compile Remove="Migrations\20201009200319_Initialize.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -106,6 +108,8 @@
     <None Include="wwwroot\Faculty\Board\BoardPostState.js" />
     <None Include="wwwroot\Faculty\ListBind\ListBind.js" />
     <None Include="wwwroot\Pages\SignUp\SignUp.js" />
+    <None Include="wwwroot\Utility\DG_FlagEnum\DG_FlagEnum.js" />
+    <None Include="wwwroot\Utility\DG_FlagEnum\README.md" />
     <None Include="wwwroot\Utility\DG_LoadingPopup\DG_LoadingPopup.js" />
     <None Include="wwwroot\Utility\DG_MessageBox\DG_MessageBox.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
