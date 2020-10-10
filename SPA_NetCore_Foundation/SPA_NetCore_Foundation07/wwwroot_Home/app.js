@@ -190,7 +190,6 @@ var app = Sammy(function ()
         app_Assist.RouteCheck(false, this,
             function ()
             {
-                //객체 생성
                 GlobalStatic.Page_Now = new Error(nCode);
             });
     });
@@ -204,7 +203,6 @@ var app = Sammy(function ()
         }
         else
         {//로그인 되어있지 않음
-            //객체 생성
             GlobalStatic.Page_Now = new SignIn();
         }
 
@@ -217,7 +215,6 @@ var app = Sammy(function ()
         app_Assist.RouteCheck(false, this,
             function ()
             {
-                //객체 생성
                 GlobalStatic.Page_Now = new About();
             });
     });
@@ -228,7 +225,6 @@ var app = Sammy(function ()
         app_Assist.RouteCheck(true, this,
             function ()
             {
-                //객체 생성
                 GlobalStatic.Page_Now = new Admin();
             });
     });
@@ -239,7 +235,6 @@ var app = Sammy(function ()
         app_Assist.RouteCheck(false, this,
             function ()
             {
-                //객체 생성
                 GlobalStatic.Page_Now = new Home();
             });
     });
@@ -251,7 +246,6 @@ var app = Sammy(function ()
         app_Assist.RouteCheck(true, this,
             function ()
             {
-                //객체 생성
                 GlobalStatic.Page_Now = new MyPage();
             });
     });
@@ -263,7 +257,6 @@ var app = Sammy(function ()
         app_Assist.RouteCheck(false, this,
             function ()
             {
-                //객체 생성
                 GlobalStatic.Page_Now = new Test01();
             });
     });
@@ -273,7 +266,6 @@ var app = Sammy(function ()
         app_Assist.RouteCheck(false, this,
             function ()
             {
-                //객체 생성
                 GlobalStatic.Page_Now = new Test02();
             });
     });
@@ -283,7 +275,6 @@ var app = Sammy(function ()
         app_Assist.RouteCheck(false, this,
             function ()
             {
-                //객체 생성
                 GlobalStatic.Page_Now = new Test_Popup();
             });
     });
@@ -293,7 +284,6 @@ var app = Sammy(function ()
         app_Assist.RouteCheck(false, this,
             function ()
             {
-                //객체 생성
                 GlobalStatic.Page_Now = new SamplePage();
             });
     });
@@ -320,7 +310,6 @@ var app = Sammy(function ()
         app_Assist.RouteCheck(false, this,
             function ()
             {
-                //객체 생성
                 GlobalStatic.Page_Now = new Error(sCodeTemp);
             });
     };
