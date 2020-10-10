@@ -74,6 +74,9 @@ function BoardMgt()
     });
 } 
 
+/** 이 클래스에서 사용할 제목 */
+BoardMgt.prototype.Title = null;
+
 /** 사용할 영역 */
 BoardMgt.prototype.divList = null;
 /** 관리자 기능 */
@@ -116,6 +119,8 @@ BoardMgt.prototype.BoardStateType =
 };
 
 
+/** 첫바인딩을 했는지 여부 */
+BoardMgt.prototype.bFirstBind = false;
 
 
 /**
@@ -126,11 +131,15 @@ BoardMgt.prototype.Reset_ListTitle = function (bItem)
 {
     var objThis = this;
 
-    if (("" === objThis.BoardMgt_ListTitleHtml)
+    if ((true === objThis.bFirstBind)
+        || ("" === objThis.BoardMgt_ListTitleHtml)
         || ("" === objThis.BoardMgt_ListItemHtml))
     {
         return;
     }
+
+    //첫 바인딩이 완료 되었는지 여부
+    objThis.bFirstBind = true;
 
     //사용할 기능
     objThis.ListBind
@@ -288,7 +297,7 @@ BoardMgt.prototype.BoardCreate = function ()
 
                 if ("" !== sMsg)
                 {
-                    GlobalStatic.MessageBox_Error("", sMsg);
+                    GlobalStatic.MessageBox_Error(objThis.Title, sMsg);
                 }
 
 
@@ -296,14 +305,14 @@ BoardMgt.prototype.BoardCreate = function ()
             error: function (jqXHR, textStatus, errorThrown)
             {
                 console.log(jqXHR);
-                alert(GlobalStatic.Lang.Now.UnknownError);
+                GlobalStatic.MessageBox_Error(objThis.Title, GlobalStatic.Lang.Now.UnknownError);
             }
         });
+    }
 
-        if (false === bReturn)
-        {
-            GlobalStatic.MessageBox_Error("게시판 생성", sMsg);
-        }
+    if (false === bReturn)
+    {
+        GlobalStatic.MessageBox_Error(objThis.Title, sMsg);
     }
 
     return bReturn;

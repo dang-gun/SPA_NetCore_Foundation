@@ -10,6 +10,7 @@ FS_Url.Admin = "#/Admin";
 FS_Url.Admin_SettingData = FS_Url.Admin + "/SettingData";
 FS_Url.Admin_BoardMgt = FS_Url.Admin + "/BoardMgt";
 FS_Url.Admin_BoardMgtAuth = FS_Url.Admin + "/BoardMgtAuth";
+FS_Url.Admin_UserMgt = FS_Url.Admin + "/UserMgt";
 
 FS_Url.Home = "#/Home";
 FS_Url.MyPage = "#/MyPage";

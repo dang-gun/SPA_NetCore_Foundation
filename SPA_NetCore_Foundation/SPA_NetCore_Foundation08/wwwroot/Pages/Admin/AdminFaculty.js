@@ -44,6 +44,7 @@ AdminFaculty.prototype.MenuLoad = function ()
                     , {
                         AdminMenu_SettingData: FS_Url.Admin_SettingData
                         , AdminMenu_BoardMgt: FS_Url.Admin_BoardMgt
+                        , AdminMenu_UserMgt: FS_Url.Admin_UserMgt
                     }
                     , DG_JsDataBind_MatchType.Select)
                     .ResultString;

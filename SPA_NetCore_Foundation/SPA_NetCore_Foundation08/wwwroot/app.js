@@ -236,6 +236,19 @@ var app = Sammy(function ()
             });
     });
 
+    this.get(FS_Url.Admin_UserMgt, function ()
+    {
+        app_Assist.RouteCheck(true, this,
+            function ()
+            {
+                //객체 생성
+                GlobalStatic.Page_Now = new UserMgt();
+            });
+    });
+
+
+
+
 
     this.get(FS_Url.Home, function ()
     {

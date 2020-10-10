@@ -1,9 +1,9 @@
-﻿<div id="divBoardAdminAuth_{{idBoardAuthority}}" class="BoardAdminItem clfix" idUser="{{idUser}}" idBoard="{{idBoard}}" idBoardAuthority="{{idBoardAuthority}}">
-    <div class="BoardAdminItem_Right">
-        <input type="text" value="{{UserName}}" />
+﻿<div id="divBoardMgtAuth_{{idBoardAuthority}}" class="TrItem tr" idUser="{{idUser}}" idBoard="{{idBoard}}" idBoardAuthority="{{idBoardAuthority}}">
+    <div class="td TdUserName">
+        {{UserName}}
     </div>
 
-    <div class="BoardAdminItem_State">
+    <div class="td TdState">
         <!-- BoardAuthorityStateType 참고 -->
         <select class="selectAuthState" value="{{AuthState}}">
             <option value="1">사용중</option>
@@ -11,19 +11,19 @@
         </select>
     </div>
 
-    <div class="BoardAdminItem_Name">
+    <div class="td TdBoardAuthHtml">
         {{BoardAuthHtml}}
     </div>
 
-    <div class="BoardAdminItem_State">
+    <div class="td TdEditDate">
         {{EditDate:DateTimeBr}}
     </div>
-    <div class="BoardAdminItem_ValueData">
-        <input type="text" class="BoardAuthMemo" value="{{Memo}}" />
+    <div class="td TdMemo">
+        <input type="text" class="BoardAuthMemo" value="{{Memo}}" readonly multiple />
     </div>
 
 
-    <div class="BoardAdminItem_Edit">
+    <div class="td TdEdit">
         <button onclick="GlobalStatic.Page_Now.BoardAuthEdit({{idBoardAuthority}})">수정</button>
         <!--<button onclick="GlobalStatic.Page_Now.({{idBoardAuthority}})">삭제</button>-->
     </div>

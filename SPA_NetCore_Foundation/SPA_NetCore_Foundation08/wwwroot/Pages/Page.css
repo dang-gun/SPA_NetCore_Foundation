@@ -47,3 +47,112 @@
 
 #divMainMenu {
 }
+
+
+/* ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+    BoardMgt - List  
+◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇ */
+.BoardMgtList {
+    width: 100%;
+}
+.BoardMgtList .TrItem {
+}
+    .BoardMgtList .TrItem td {
+        padding: 16px 2px;
+    }
+
+    .BoardMgtList .TrItem input[type=text] {
+        width: calc(100% - 4px);
+        text-align: center;
+        border: 0 none;
+    }
+    .BoardMgtList .TrItem .TdId {
+        width: 30px;
+    }
+
+    .BoardMgtList .TrItem .TdTitle {
+        width: auto;
+    }
+    .BoardMgtList .TrItem td.TdTitle input {
+        text-align: left;
+    }
+
+    .BoardMgtList .TrItem .TdState {
+        width: 80px;
+    }
+
+    .BoardMgtList .TrItem .TdBoardAuth {
+        width: 70px;
+    }
+
+    .BoardMgtList .TrItem .TdCreateDate {
+        width: 80px;
+    }
+
+    .BoardMgtList .TrItem .TdMemo {
+        width: auto;
+    }
+    .BoardMgtList .TrItem td.TdMemo input {
+        text-align: left;
+    }
+
+    .BoardMgtList .TrItem .TdEdit {
+        width: 50px;
+    }
+
+
+/* ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+    BoardMgtAuth - List  
+◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇ */
+.BoardMgtAuthList {
+    width: 100%;
+}
+    .BoardMgtAuthList .TrItem.tr div {
+        text-align: center;
+    }
+
+    .BoardMgtAuthList .TrItem.tr {
+        display: table;
+        width: 100%;
+    }
+
+
+    .BoardMgtAuthList .TrItem .td
+    , .BoardMgtAuthList .TrItem .th {
+        display: table-cell;
+        padding: 16px 2px;
+    }
+    .BoardMgtAuthList .TrItem input[type=text] {
+        width: calc(100% - 4px);
+        text-align: center;
+        border: 0 none;
+    }
+
+    .BoardMgtAuthList .TrItem .TdUserName {
+        width: 150px;
+    }
+
+    .BoardMgtAuthList .TrItem .TdBoardAuthHtml {
+        width: auto;
+    }
+        .BoardMgtAuthList .TrItem .TdBoardAuthHtml div {
+            text-align: left;
+        }
+        .BoardMgtAuthList .TrItem .TdBoardAuthHtml div label {
+            display: inline-block;
+            margin: 0 10px;
+            line-height: 24px;
+            text-align: center;
+        }
+
+    .BoardMgtAuthList .TrItem .TdEditDate {
+        width: 90px;
+    }
+    
+
+    .BoardMgtAuthList .TrItem .TdMemo {
+        width: 150px;
+    }
+    .BoardMgtAuthList .TrItem .TdEdit {
+        width: 80px;
+    }

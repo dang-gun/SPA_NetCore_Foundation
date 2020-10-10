@@ -1,0 +1,53 @@
+﻿
+	<tr class="user_info_list" idUser="{{idUser}}">
+		<td class="user_info id">
+			{{idUser}}
+		</td>
+		<td class="user_info mail">
+			<a href="javascript:void(0);" onclick="Page.Move_Page(false, FS_Url.Admin_AdminQnA_AdminQnA + '?iduser=' + '{{idUser}}');">
+				{{SignEmail}}<br />
+				({{ViewName}})
+			</a>
+		</td>
+		<td class="user_info mail">
+			<input type="text" id="txtPassword{{idUser}}" name="txtPassword{{idUser}}" value="" />
+		</td>
+		<td class="user_info mail">
+			<input type="text" id="txtPhone{{idUser}}" name="txtPhone{{idUser}}" value="{{Phone:string}}" />
+		</td>
+
+		<td class="user_info mail">
+			{{SignUpDate:DateTime}}
+		</td>
+		<td class="user_info mail">
+			{{IpSignIn:SignInDateCheck}}
+		</td>
+		<td class="user_info ip user_control">
+			<div>
+				<div onclick="Page.Move_IPAdmin('{{IpSignIn:SignInIpCheck}}');">{{IpSignIn:SignInIpCheck}}</div>
+				<input type="checkbox" name="adminUserInfo_Bio_{{idUser}}" id="ad04_{{idUser}}" value="true" {{BlockTrue}} /><label for="ad04_{{idUser}}"><span></span></label>
+			</div>
+		</td>
+		<td class="user_info mail">
+			{{AttendanceCount}}
+		</td>
+
+		<td class="user_control">
+			<div>
+				<div>계정</div>
+				<input type="checkbox" name="adminUserInfo_Bio_{{idUser}}" id="ad01_{{idUser}}" value="true" {{BlockTrue}} /><label for="ad01_{{idUser}}"><span></span></label>
+			</div>
+			<div>
+				<div>글쓰기</div>
+				<input type="checkbox" name="boardCreate_Bio_{{idUser}}" id="ad02_{{idUser}}" value="true" {{BoardCreateTrue}} /><label for="ad02_{{idUser}}"><span></span></label>
+			</div>
+			<div>
+				<div>댓글</div>
+				<input type="checkbox" name="boardReplyCreate_Bio_{{idUser}}" id="ad03_{{idUser}}" value="true" {{BoardReplyCreateTrue}} /><label for="ad03_{{idUser}}"><span></span></label>
+			</div>
+		</td>
+
+		<td class="user_info mail">
+			<button  class="form-control btn-outline" id="btnEdit_{{idUser}}" onclick="GlobalStatic.Page_Now.UserInfoEdit({{idUser}})">수정</button>
+		</td>
+	</tr>
