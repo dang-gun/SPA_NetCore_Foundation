@@ -143,6 +143,34 @@ app_Assist.RouteCheck = function (bSignIn, objThis, callback)
 };
 
 
+/**
+ * 페이지로 이동할때 개체를 새로 생성할지 말지를 처리해준다.
+ * @param {any} objTarget
+ * @param {any} bNew 강제로 새로 생성할지 여부
+ * @param {any} bCallAction 새로 생성되지 않는경우 액션을 호출할지 여부
+ */
+app_Assist.MoveNewPage = function (objTarget, bNew, bCallAction)
+{
+    if ((true === bNew)
+        || (objTarget.name !== GlobalStatic.PageType_Now))
+    {//강제로 새로 생성하거나
+        //같은 개체가 아니다.
+        //개체 생성
+        GlobalStatic.Page_Now = new objTarget();
+    }
+    else
+    {
+        if (true === bCallAction)
+        {//액션호출 요청
+            if ("function" === typeof GlobalStatic.Page_Now.Action)
+            {//대상이 액션을 가지고 있다.
+                GlobalStatic.Page_Now.Action();
+            }
+        }
+    }
+}
+
+
 
 // 라우트 어플리케이션 생성
 var app = Sammy(function () 
