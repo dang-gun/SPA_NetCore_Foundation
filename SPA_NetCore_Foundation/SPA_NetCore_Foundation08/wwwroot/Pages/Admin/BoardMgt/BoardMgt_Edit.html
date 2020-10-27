@@ -9,16 +9,16 @@
     </colgroup>
     <tr>
         <th>번호</th>
-        <td><input type="text" id="txtBoardAdmin_Edit_idBoard" readonly value="{{idBoard}}" /></td>
+        <td><input type="text" id="txtBoardMgt_Edit_idBoard" readonly value="{{idBoard}}" /></td>
     </tr>
     <tr>
         <th>제목</th>
-        <td><input type="text" id="txtBoardAdmin_Edit_Title" value="{{TitleBoard}}" /></td>
+        <td><input type="text" id="txtBoardMgt_Edit_Title" value="{{TitleBoard}}" /></td>
     </tr>
     <tr>
         <th>상태</th>
         <td>
-            <select id="selectBoardAdmin_Edit_State">
+            <select id="selectBoardMgt_Edit_State">
                 <option {{State_Use}} value="1">사용</option>
                 <option {{State_NotUse}} value="2">사용하지 않음</option>
             </select>
@@ -28,7 +28,7 @@
     <tr>
         <th>개시물 수</th>
         <td>
-            <input type="text" id="txtBoardAdmin_Edit_ShowCount" value="{{ShowCount}}" />
+            <input type="text" id="txtBoardMgt_Edit_ShowCount" value="{{ShowCount}}" />
         </td>
     </tr>
 
@@ -52,7 +52,7 @@
     </tr>
     <tr>
         <th>메모</th>
-        <td><input type="text" id="txtBoardAdmin_Edit_Memo" value="{{Memo}}" /></td>
+        <td><input type="text" id="txtBoardMgt_Edit_Memo" value="{{Memo}}" /></td>
     </tr>
 
 </table>

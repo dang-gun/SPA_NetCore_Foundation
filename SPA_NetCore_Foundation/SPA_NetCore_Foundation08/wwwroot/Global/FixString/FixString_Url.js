@@ -21,3 +21,4 @@ FS_Url.SignUp = "#/SignUp";
 FS_Url.Test01 = "#/Test01";
 FS_Url.Test02 = "#/Test02";
 FS_Url.TestBoard = "#/TestBoard";
+FS_Url.TestBoardRoot = "#/TestBoardRoot";

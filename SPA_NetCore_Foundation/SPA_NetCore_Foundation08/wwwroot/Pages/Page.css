@@ -50,6 +50,73 @@
 
 
 /* ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+    BoardCommon - List  
+◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇ */
+.BoardComm_List {
+}
+.BoardComm_Table {
+    width: 100%;
+}
+    .BoardComm_List .TdId {
+        width: 32px;
+    }
+    .BoardComm_List .TdTitle {
+        width: auto;
+    }
+    .BoardComm_List .TdName {
+        width: 150px;
+    }
+    .BoardComm_List .TdCount {
+        width: 32px;
+    }
+    .BoardComm_List .TdDate {
+        width: 85px;
+    }
+
+.BoardComm_Body .BoardComm_TrItem td:not(:last-child) {
+    box-sizing: border-box;
+    border-right: 1px solid #000;
+}
+.BoardComm_Body .TdId {
+    text-align: center;
+}
+.BoardComm_Body .TdName {
+    text-align: center;
+}
+.BoardComm_Body .TdCount {
+    text-align: center;
+}
+.BoardComm_Body .TdDate {
+    text-align: center;
+}
+
+/* ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+    BoardCommon - PostView  
+◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇ */
+.BoardComm_PostView > .PostHeaderArea > .TitleArea > .TitleText {
+    font-size: 24px;
+}
+.BoardComm_PostView > .PostHeaderArea > .PostInfoArea > .Step1:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.BoardComm_PostView > .PostHeaderArea > .PostInfoArea > .Step1 > .UserInfoArea {
+    float: left;
+}
+.BoardComm_PostView > .PostHeaderArea > .PostInfoArea > .Step1 > .PostInfo {
+    float: right;
+}
+.BoardComm_PostView > .PostHeaderArea > .PostInfoArea > .Step2 > .CreateDate {
+    font-size: 12px;
+}
+
+.BoardComm_PostView > .PostContent {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
     BoardMgt - List  
 ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇ */
 .BoardMgtList {

@@ -10,7 +10,8 @@ function TestBoard()
     {
         //화면 인터페이스
         Page.divContents.load("/Pages/Test/TestBoard.html"
-            , function () {
+            , function () 
+            {
                 objThis.divList = $("#divList");
 
                 //게시판 기능초기화 및 게시판 표시
@@ -37,7 +38,7 @@ function TestBoard()
 TestBoard.prototype.divList = null;
 
 /** 사용할 게시판 아이디 */
-TestBoard.prototype.BoardID = 1;
+TestBoard.prototype.BoardID = 2;
 /** 게시판 공통 */
 TestBoard.prototype.BoardComm = null;
 

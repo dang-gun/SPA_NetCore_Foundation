@@ -1,26 +1,25 @@
-﻿    <div class="article_header">
-        <div class="ArticleTitle">
-            <div class="title_text">{{Title}}</div>
+﻿    <div class="PostHeaderArea">
+        <div class="TitleArea">
+            <div class="TitleText">{{Title}}</div>
         </div>
-        <div class="WriterInfo">
-            <div class="profile_area">
-                <div class="profile_info">
-                    <div class="nick_box">
-                        <div class="initial"><img id="imgUserFace" src=""></div>
-                        <a id="aUserName{{ViewUserId}}" href="javascript:void(0);" class="nickname">{{ViewUserName}}</a>
-                    </div>
+        <div class="PostInfoArea">
+            <div class="Step1">
+                <div class="UserInfoArea">
+                    <a id="aUserName{{ViewUserId}}" href="javascript:void(0);" class="UserName">{{ViewUserName}}</a>
                 </div>
-                <div class="article_info">
-                    <span class="date">{{WriteDate:DateTime}}</span>
-                    <span class="count">조회 {{ViewCount}}</span>
+                <div class="PostInfo">
+                    <span class="ViewCount">조회 : {{ViewCount}}</span>
                 </div>
+            </div>
+            <div class="Step2">
+                <span class="CreateDate">{{WriteDate:DateTime}}</span>
             </div>
         </div>
     </div>
-    <div class="article_viewer">
+    <div class="PostContent">
         <div id="divViewer"></div>
     </div>
-    <div class="btn_edit_wrap">
+    <div class="PostControlArea">
         <!--<button onclick="BoardCA.ListLink();" class="form-control btn-outline">목록</button>-->
         <button onclick="BoardCA.PostEditShow({{idBoardPost}});" class="form-control btn-outline">수정</button>
         <button onclick="BoardCA.PostDeleteShow({{idBoardPost}});" class="form-control btn-outline">삭제</button>

@@ -552,7 +552,7 @@ BoardCommon.prototype.BindTitle = function (
         idBoardPost: "번호"
         , Title: "제목"
         , UserName: "작성자"
-        , ViewCount: "조회수"
+        , ViewCount: "조회"
         , WriteDate: "작성일"
     };
 
@@ -755,20 +755,6 @@ BoardCommon.prototype.BindItem_Items = function (arrJsonData)
         {//없다.
             jsonItemData.ViewUserName = jsonItemData.UserName;
             jsonItemData.ViewUserId = jsonItemData.idUser;
-        }
-
-        //즐겨찾기 여부
-        switch (jsonItemData.FavoritesType)
-        {
-            case BoardCA.BoardFavoritesType.None:
-                jsonItemData.FavoritesCss = "d-none";
-                break;
-            case BoardCA.BoardFavoritesType.Add:
-                jsonItemData.FavoritesCss = " BoardFavorites_Add";
-                break;
-            case BoardCA.BoardFavoritesType.Nothing:
-                jsonItemData.FavoritesCss = " BoardFavorites_Nothing";
-                break;
         }
         
         sHtmlTemp
@@ -1004,20 +990,6 @@ BoardCommon.prototype.PostViewBind = function (jsonData)
     {//없다.
         jsonData.ViewUserName = jsonData.UserName;
         jsonData.ViewUserId = jsonData.idUser;
-    }
-
-    //즐겨찾기 여부
-    switch (jsonData.FavoritesType)
-    {
-        case BoardCA.BoardFavoritesType.None:
-            jsonData.FavoritesCss = "d-none";
-            break;
-        case BoardCA.BoardFavoritesType.Add:
-            jsonData.FavoritesCss = " BoardFavorites_Add";
-            break;
-        case BoardCA.BoardFavoritesType.Nothing:
-            jsonData.FavoritesCss = " BoardFavorites_Nothing";
-            break;
     }
 
     //수정 권한 확인

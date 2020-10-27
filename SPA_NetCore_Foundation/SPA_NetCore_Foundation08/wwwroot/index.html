@@ -21,8 +21,8 @@
     <!-- moment 2.24.0 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
-    <!-- Page css : 다른 css보다 뒤에 선언해야 한다. -->
-    <link rel="stylesheet" href="/Pages/Page.css">
+    <!-- ckeditor4 -->
+    <script src="Library/ckeditor4/ckeditor.js"></script>
 
     <script>
         var divMain = null;
@@ -36,8 +36,10 @@
 
     <!-- sammyjs 0.7.6 -->
     <script src="/Library/sammyjs/0.7.6/sammy.min.js"></script>
-    <script src="/Library/DG_JsDataBind/DG_JsDataBind.js"></script>
     <!-- 유틸리티 or 라이브러리 -->
+    <script src="/Library/DG_JsDataBind/DG_JsDataBind.js"></script>
+    <link rel="stylesheet" href="/Library/DG_JsFileSelector/DG_JsFileSelector.css">
+    <script src="/Library/DG_JsFileSelector/DG_JsFileSelector.js"></script>
     <script src="/Utility/DG_FlagEnum/DG_FlagEnum.js"></script>
     <script src="/Utility/DG_IsObject/DG_IsObject.js"></script>
     <script src="/Utility/DG_LoadingPopup/DG_LoadingPopup.js"></script>
@@ -61,6 +63,9 @@
     <script src="/Faculty/ManagementClassType.js"></script>
     <!-- 라우터 처리용 어플리케이션 -->
     <script src="/app.js"></script>
+
+    <!-- Page css : 다른 css보다 뒤에 선언해야 한다. -->
+    <link rel="stylesheet" href="/Pages/Page.css">
 </head>
 
 <body>
@@ -96,7 +101,8 @@
     <!-- 페이지 컨트롤러 - 테스트용 -->
     <script src="/Pages/Test/Test01.js"></script>
     <script src="/Pages/Test/Test02.js"></script>
-    <script src="/Pages/Test/TestTestBoard.js"></script>
+    <script src="/Pages/Test/TestBoard.js"></script>
+    <script src="/Pages/Test/TestBoardRoot.js"></script>
 </body>
 
 </html>

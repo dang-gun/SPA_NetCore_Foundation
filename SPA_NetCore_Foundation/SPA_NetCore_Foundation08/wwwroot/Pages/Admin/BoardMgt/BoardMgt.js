@@ -75,7 +75,7 @@ function BoardMgt()
 } 
 
 /** 이 클래스에서 사용할 제목 */
-BoardMgt.prototype.Title = null;
+BoardMgt.prototype.Title = "게시판 관리";
 
 /** 사용할 영역 */
 BoardMgt.prototype.divList = null;
@@ -497,18 +497,15 @@ BoardMgt.prototype.BoardEidt = function ()
 
                     //아이템 리스트 
                     objThis.Reset_ListItem();
+
+                    //
+                    GlobalStatic.MessageBox_Info(objThis.Title, sMsg);
                 }
                 else
                 {// 실패
                     sMsg = data.Message;
+                    GlobalStatic.MessageBox_Error(objThis.Title, sMsg);
                 }
-
-
-                if ("" !== sMsg)
-                {
-                    GlobalStatic.MessageBox_Error("", sMsg);
-                }
-
 
             },
             error: function (jqXHR, textStatus, errorThrown)
