@@ -10,6 +10,9 @@ function BoardCommon(nBoardID, bItem, jsonOption, callback)
 {
     var objThis = this;
 
+    //게시판 번호 백업
+    objThis.BoardID = nBoardID;
+
     //옵션 합치기
     objThis.BoardOption = Object.assign({},objThis.jsonOption_Defult, jsonOption);
 
@@ -18,7 +21,7 @@ function BoardCommon(nBoardID, bItem, jsonOption, callback)
     //제목 백업
     objThis.MessageTitle = objThis.BoardOption.BoardTitle;
 
-    var nBoardIDTemp = nBoardID;
+    var nBoardIDTemp = objThis.BoardID;
     var nbItemTemp = bItem;
     objThis.FirstBind_Callback = callback;
 
@@ -28,7 +31,7 @@ function BoardCommon(nBoardID, bItem, jsonOption, callback)
         {
             objThis.BoardCommon_BodyHtml = html;
             //게시판 초기화
-            objThis.Initialize(objThis.TableArea, nBoardIDTemp, nbItemTemp);
+            objThis.Initialize(nbItemTemp);
         }
         , {}
     );
@@ -37,7 +40,7 @@ function BoardCommon(nBoardID, bItem, jsonOption, callback)
         {
             objThis.BoardCommon_TitleHtml = html;
             //게시판 초기화
-            objThis.Initialize(objThis.TableArea, nBoardIDTemp, nbItemTemp);
+            objThis.Initialize(nbItemTemp);
         }
         , {}
     );
@@ -46,7 +49,7 @@ function BoardCommon(nBoardID, bItem, jsonOption, callback)
         {
             objThis.BoardCommon_ListItemHtml = html;
             //게시판 초기화
-            objThis.Initialize(objThis.TableArea, nBoardIDTemp, nbItemTemp);
+            objThis.Initialize(nbItemTemp);
         }
         , {}
     );
@@ -55,7 +58,7 @@ function BoardCommon(nBoardID, bItem, jsonOption, callback)
         {
             objThis.BoardCommon_PostViewHtml = html;
             //게시판 초기화
-            objThis.Initialize(objThis.TableArea, nBoardIDTemp, nbItemTemp);
+            objThis.Initialize(nbItemTemp);
         }
         , {}
     );
@@ -64,7 +67,7 @@ function BoardCommon(nBoardID, bItem, jsonOption, callback)
         {
             objThis.BoardCommon_PostReply_ListItemHtml = html;
             //게시판 초기화
-            objThis.Initialize(objThis.TableArea, nBoardIDTemp, nbItemTemp);
+            objThis.Initialize(nbItemTemp);
         }
         , {}
     );
@@ -162,6 +165,8 @@ BoardCommon.prototype.jsonOption_Defult = {
 /** 게시판 생성 옵션 저장 */
 BoardCommon.prototype.BoardOption = null;
 
+/** 사용할 게시판 번호 */
+BoardCommon.prototype.BoardID = 0;
 /** 타이틀로 사용할 html */
 BoardCommon.prototype.MessageTitle = "게시판";
 /** 게시판에서만 사용할 데이터 바인드 */
@@ -253,12 +258,10 @@ BoardCommon.prototype.ScrollTimerId = -1;
 
 /**
  * 지정한 대상에 초기화 해줍니다.
- * @param {object} objTable 바로 바인딩할 데이터
+ * @param {boolean} bItem 아이템 바인징 여부
  */
 BoardCommon.prototype.Initialize = function (
-    objTableArea
-    , nBoardID
-    , bItem)
+    bItem)
 {
     var objThis = this;
 
@@ -312,10 +315,8 @@ BoardCommon.prototype.Initialize = function (
             }
         });
 
-    //사용할 영역 백업
-    objThis.TableArea = objTableArea;
 
-    //
+    //설정 리셋
     objThis.Reset();
 
     //보드 동작 요청
@@ -325,7 +326,6 @@ BoardCommon.prototype.Initialize = function (
 
 /**
  * 영역을 다시 세팅한다.
- * @param {any} nBoardID
  */
 BoardCommon.prototype.Reset = function ()
 {
@@ -497,19 +497,17 @@ BoardCommon.prototype.ListDisplay = function (bShow)
 
 
 /** 가지고 있는 페이지에서 다음 페이지로 이동한다. */
-BoardCommon.prototype.PageMoveNext = function (nBoardID)
+BoardCommon.prototype.PageMoveNext = function ()
 {
     var objThis = this;
 
     if (false === objThis.BindItemLoading)
     {//로딩이 진행중이 아니다.
 
-        var nBoardIDTemp = nBoardID;
-
         //다음 페이지 번호 받기
         var nPageNum = objThis.PageNumber + 1;
 
-        objThis.BindItem(nBoardIDTemp, nPageNum, null);
+        objThis.BindItem(nPageNum, null);
     }
 };
 
@@ -521,14 +519,12 @@ BoardCommon.prototype.PageMoveNext = function (nBoardID)
 
 /**
  * 리스트를 다시 그려준다.
- * @param {int} nBoardID 사용할 보드 번호
  * @param {bool} bItem 아이템도 다시 그릴지 여부
  * @param {int} nPageNum 선택된 페이지 번호
  * @param {function} callback 바인딩이 끝나면 동작시킬 콜백
  */
 BoardCommon.prototype.BindTitle = function (
-    nBoardID
-    , bItem
+    bItem
     , nPageNum
     , callback)
 {
@@ -545,7 +541,6 @@ BoardCommon.prototype.BindTitle = function (
     //포스트뷰 대상이 있는지 확인
     var pvid = dgIsObject.IsIntValue(jsonQuery["pvid"]);
     
-    var nBoardIDTemp = nBoardID;
     var bItemTemp = bItem;
 
     var jsonTitle = {
@@ -588,7 +583,7 @@ BoardCommon.prototype.BindTitle = function (
 
     if (true === bItemTemp)
     {
-        objThis.BindItem(nBoardIDTemp, nPageNum, callback);
+        objThis.BindItem(nPageNum, callback);
     }
     else
     {//더이상 바인딩이 없다.
@@ -603,17 +598,14 @@ BoardCommon.prototype.BindTitle = function (
 
 /**
  * 아이템 리스트를 받고 리스트 갱신을 요청한다.
- * @param {int} nBoardID 사용할 보드아이디
  * @param {int} nPageNum 선택된 페이지 번호
  * @param {function} callback 바인딩이 끝나면 동작시킬 콜백
  */
 BoardCommon.prototype.BindItem = function (
-    nBoardID
-    , nPageNum
+    nPageNum
     , callback)
 {
     var objThis = this;
-    var nBoardIDTemp = nBoardID;
     var nPageNumTemp = 0 <= nPageNum ? nPageNum : 1;
     var callbackTemp = callback;
 
@@ -625,7 +617,7 @@ BoardCommon.prototype.BindItem = function (
             url: FS_Api.Board_List
             , url_Auth: FS_Api.Board_List_Auth
             , data: {
-                idBoard: nBoardIDTemp,
+                idBoard: objThis.BoardID,
                 nPageNumber: nPageNumTemp,
                 bAdminMode: objThis.BoardOption.AdminMode
             }
@@ -897,10 +889,9 @@ BoardCommon.prototype.PagingBind = function (jsonData)
 
 /**
  * 대상 게시물 보기
- * @param {any} idBoard
- * @param {any} nPostView
+ * @param {any} nPostView 포스트 고유 번호
  */
-BoardCommon.prototype.PostView = function (idBoard, nPostView)
+BoardCommon.prototype.PostView = function (nPostView)
 {
     var objThis = this;
 
@@ -910,7 +901,7 @@ BoardCommon.prototype.PostView = function (idBoard, nPostView)
         return;
     }
 
-    var idBoardTemp = idBoard;
+    var idBoardTemp = objThis.BoardID;
     var nPostViewTemp = nPostView;
 
     var bReturn = true;
@@ -1033,8 +1024,7 @@ BoardCommon.prototype.PostViewBind = function (jsonData)
     //대댓글 영역 백업
     objThis.divReReplyCreate = $("#divReReplyCreate_" + jsonData.idBoardPost);
 
-    //토스트 뷰어
-    //objThis.ToastViewerNew(objThis, jsonData);
+    //뷰어 생성
     $("#divViewer").html(jsonData.Content);
 
 
@@ -1060,7 +1050,7 @@ BoardCommon.prototype.PostViewBind = function (jsonData)
     }
 };
 
-BoardCommon.prototype.PostReplyList = function (idBoard, idBoardPost)
+BoardCommon.prototype.PostReplyList = function (idBoardPost)
 {
     var objThis = this;
     //로딩 표시
@@ -1072,7 +1062,7 @@ BoardCommon.prototype.PostReplyList = function (idBoard, idBoardPost)
             url: FS_Api.Board_PostReplyList
             , url_Auth: FS_Api.Board_PostReplyList_Auth
             , data: {
-                idBoard: idBoard,
+                idBoard: objThis.BoardID,
                 idBoardPost: idBoardPost
             }
             , success: function (jsonData)
@@ -1145,14 +1135,12 @@ BoardCommon.prototype.PostReplyListBind = function (jsonList)
 
 /**
  * 대댓글 리스트 바인딩
- * @param {any} idBoard
  * @param {any} idBoardPost
  * @param {any} idBoardReply_Target 리스트를 불러올 부모 댓글 아이디
  * @param {any} bCompulsion 강제로 갱신할지 여부
  */
 BoardCommon.prototype.PostReReplyList = function (
-    idBoard
-    , idBoardPost
+    idBoardPost
     , idBoardReply_Target
     , bCompulsion)
 {
@@ -1180,7 +1168,7 @@ BoardCommon.prototype.PostReReplyList = function (
                 url: FS_Api.Board_PostReReplyList
                 , url_Auth: FS_Api.Board_PostReReplyList_Auth
                 , data: {
-                    idBoard: idBoard,
+                    idBoard: objThis.BoardID,
                     idBoardPost: idBoardPost,
                     idBoardReply: idBoardReply_Target_Temp
                 }
@@ -1262,13 +1250,11 @@ BoardCommon.prototype.PostReReplyListBind = function (
 
 /**
  * 리플 작성
- * @param {any} jsonData
  * @param {any} nPostView
  * @param {any} idBoardReply_Target
  */
 BoardCommon.prototype.PostReplyCreate = function (
-    idBoard
-    , nPostView
+    nPostView
     , idBoardReply_Target)
 {
     var objThis = this;
@@ -1280,7 +1266,7 @@ BoardCommon.prototype.PostReplyCreate = function (
     
 
     var jsonData = {
-        idBoard: idBoard,
+        idBoard: objThis.BoardID,
         idBoardPost: nPostView,
         idBoardReply_Target: dgIsObject.IsIntValue(idBoardReply_Target),
         typeReplyState: 0,
@@ -1360,13 +1346,11 @@ BoardCommon.prototype.PostReplyCreate = function (
 
 /**
  * 대댓글 작성창 표시
- * @param {any} idBoard
  * @param {any} idBoardPost
  * @param {any} idBoardPostReply_Target
  */
 BoardCommon.prototype.PostReReplyCreateShow = function (
-    idBoard
-    , idBoardPost
+    idBoardPost
     , idBoardPostReply_Target)
 {
     var objThis = this;
@@ -1407,12 +1391,11 @@ BoardCommon.prototype.PostReReplyCreateCancel = function ()
 
 /**
  * 포스트 작성창 보기
- * @param {any} idBoard
  */
-BoardCommon.prototype.PostCreateShow = function (idBoard)
+BoardCommon.prototype.PostCreateShow = function ()
 {
     var objThis = this;
-    var idBoardTemp = idBoard;
+    var idBoardTemp = objThis.BoardID;
 
     var bReturn = true;
     var sMsg = "";
@@ -1477,8 +1460,7 @@ BoardCommon.prototype.PostCreateShow = function (idBoard)
                         //글자수
                         objThis.labLength = $("#labLength");
                         $("#labLengthMax").html(GlobalStatic.BoardMaxLength);
-                        //토스트 에디터 생성
-                        //objThis.ToastEditorNew(objThis);
+                        //에디터 생성
                         objThis.CKEditorNew(objThis);
                     }
                     else
@@ -1747,14 +1729,13 @@ BoardCommon.prototype.PostCreate = function ()
 
 /**
  * 
- * @param {any} idBoard
  * @param {any} idBoardPost
  */
-BoardCommon.prototype.PostEditShow = function (idBoard, idBoardPost)
+BoardCommon.prototype.PostEditShow = function (idBoardPost)
 {
     var objThis = this;
 
-    var idBoardTemp = idBoard;
+    var idBoardTemp = objThis.BoardID;
     var idBoardPostTemp = idBoardPost;
 
     var bReturn = true;
@@ -1852,8 +1833,7 @@ BoardCommon.prototype.PostEditBind = function (jsonData)
     objThis.labLength = $("#labLength");
     $("#labLengthMax").html(GlobalStatic.BoardMaxLength);
 
-    //토스트 에디터 생성
-    //objThis.ToastEditorNew(objThis, jsonData);
+    //에디터 생성
     objThis.CKEditorNew(objThis, jsonData);
 
     //파일 업로드 
@@ -1863,17 +1843,16 @@ BoardCommon.prototype.PostEditBind = function (jsonData)
 
 /**
  * 포스트 수정 시도
- * @param {any} idBoard
  * @param {any} idBoardPost
  */
-BoardCommon.prototype.PostEdit = function (idBoard, idBoardPost)
+BoardCommon.prototype.PostEdit = function (idBoardPost)
 {
     var objThis = this;
     var bReturn = true;
     var sMessage = "";
 
     //게시판 아이디
-    var idBoardTemp = dgIsObject.IsIntValue(idBoard);
+    var idBoardTemp = objThis.BoardID;
 
     // 허용 호스트 리스트
     var iframeSrcArray = new Array("https://www.youtube.com/embed/","http://twitch.tv/");
@@ -1886,8 +1865,8 @@ BoardCommon.prototype.PostEdit = function (idBoard, idBoardPost)
         idBoard: idBoardTemp,
         idBoardPost: idBoardPost,
         sTitle: dgIsObject.IsStringValue($("#txtBoard_PostCreate_Title").val()),
-        typeBoardState: bps.GetHtmlValue(idBoard),
-        nBoardCategory: bpc.GetHtmlValue(idBoard),
+        typeBoardState: bps.GetHtmlValue(idBoardTemp),
+        nBoardCategory: bpc.GetHtmlValue(idBoardTemp),
         //sContent: objThis.Editor.getMarkdown(),
         sContent: objThis.Editor.document.getBody().getHtml(),
         listFileInfo: objThis.dgFS.ItemList_Get()
@@ -2002,11 +1981,11 @@ BoardCommon.prototype.PostEdit = function (idBoard, idBoardPost)
 
 
 
-BoardCommon.prototype.PostDeleteView = function (idBoard, idBoardPost)
+BoardCommon.prototype.PostDeleteView = function (idBoardPost)
 {
     var objThis = this;
 
-    var idBoardTemp = idBoard;
+    var idBoardTemp = objThis.BoardID;
     var idBoardPostTemp = idBoardPost;
 
     var bReturn = true;
@@ -2061,11 +2040,11 @@ BoardCommon.prototype.PostDeleteView = function (idBoard, idBoardPost)
     }
 };
 
-BoardCommon.prototype.PostDeleteBind = function (idBoard, idBoardPost)
+BoardCommon.prototype.PostDeleteBind = function (idBoardPost)
 {
     var objThis = this;
 
-    var idBoardTemp = idBoard;
+    var idBoardTemp = objThis.BoardID;
     var idBoardPostTemp = idBoardPost;
 
     DG_MessageBox.Show({
@@ -2190,112 +2169,6 @@ BoardCommon.prototype.CKEditorNew = function (objThis, jsonData)
     
     
 };
-
-
-BoardCommon.prototype.ToastEditorNew = function (objThis, jsonData)
-{
-    //사용할 옵션
-    var jsonDataTemp = {
-        Content: ""
-    };
-
-    //들어온 옵션 합치기
-    jsonData = Object.assign(jsonDataTemp, jsonData);
-    
-
-    objThis.Editor = new toastui.Editor({
-        el: document.querySelector("#divEditor"),
-        previewStyle: "vertical",
-        initialEditType: "wysiwyg",
-        height: "500px",
-        language: "ko-KR",
-        toolbarItems: [
-            'heading',
-            'bold',
-            'italic',
-            'strike',
-            'divider',
-            'hr',
-            'quote',
-            'divider',
-            'ul',
-            'ol',
-            'task',
-            'indent',
-            'outdent',
-            'divider',
-            'table',
-            //'image',
-            {//이미지 삽이 버튼
-                type: 'button',
-                options: {
-                    className: 'tui-image tui-toolbar-icons',
-                    event: "clickInsertImage",
-                    tooltip: "이미지 삽입",
-                }
-            },
-            'link',
-            'divider',
-            'code',
-            'codeblock',
-            'divider',
-            {//비디오 넣기 기능 추가
-                type: "button",
-                options: {
-                    //text: "Video",
-                    className: "tui-video tui-toolbar-icons",
-                    event: "clickVideo",
-                    tooltip: "유튜브 삽입",
-                }
-            }
-        ],
-        events: {
-            change: function ()
-            {
-                //마크다운 받기
-                var sMarkdown = objThis.Editor.getMarkdown();
-                //이미지를 제거한 글자수
-                var nImageRemoveLentgh = BoardCA.Markdown_ImageRemove_Lentgh(sMarkdown);
-
-                objThis.labLength.html(nImageRemoveLentgh);
-            }
-        },
-        initialValue: jsonData.Content,
-        plugins: [videoJsPlugin, youtubePlugin]
-    });
-
-    //이미지 삽입 버튼 이벤트*****************
-    objThis.Editor.eventManager.addEventType("clickInsertImage");
-    objThis.Editor.eventManager.listen("clickInsertImage"
-        , function (event)
-        {
-            BoardCA.Tools_InsertImageClick(event);
-        });
-
-    //비디오 삽입 버튼 이벤트 *************************
-    objThis.Editor.eventManager.addEventType("clickVideo");
-    objThis.Editor.eventManager.listen("clickVideo", function ()
-    {
-
-        objThis.InsertVideoShow(objThis);
-    });
-};
-
-
-BoardCommon.prototype.ToastViewerNew = function (objThis, jsonData)
-{
-    //토스트 뷰어
-    objThis.Viewer = toastui.Editor.factory({
-        el: document.querySelector("#divViewer"),
-        viewer: true,
-        previewStyle: "vertical",
-        height: "500px",
-        language: "ko-KR",
-        initialValue: jsonData.Content,
-        plugins: [youtubePlugin, videoJsPlugin]
-    });
-};
-
 
 BoardCommon.prototype.FileSelectorNew = function (arrFileList)
 {

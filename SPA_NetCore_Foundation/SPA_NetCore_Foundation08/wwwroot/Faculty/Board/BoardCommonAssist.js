@@ -250,7 +250,7 @@ BoardCA.ListLink = function ()
     //쿼리가 있으면 제거
     var sCutHash = location.hash.split("?")[0];
 
-    location.href = sCutHash + "?bid=" + GlobalStatic.Page_Now.BoardID;
+    location.href = sCutHash;
 };
 
 
@@ -282,8 +282,7 @@ BoardCA.Tools_InsertVideoClick = function ()
 BoardCA.Reset_List = function (nPageNum, bItem)
 {
     GlobalStatic.Page_Now.BoardComm.BindTitle(
-        GlobalStatic.Page_Now.BoardID
-        , bItem
+        bItem
         , nPageNum
         , GlobalStatic.Page_Now.BoardComm.FirstBind_Callback);
 
@@ -307,8 +306,7 @@ BoardCA.ListShowBind = function ()
     }
 
     GlobalStatic.Page_Now.BoardComm.BindTitle(
-        GlobalStatic.Page_Now.BoardID
-        , true
+        true
         , nPN
         , null);
 };
@@ -324,8 +322,7 @@ BoardCA.PostViewLink = function (nPostView)
     //쿼리가 있으면 제거
     var sCutHash = location.hash.split("?")[0];
 
-    location.href = sCutHash + "?bid=" + GlobalStatic.Page_Now.BoardID
-        + "&pvid=" + nPV;
+    location.href = sCutHash + "?pvid=" + nPV;
 };
 
 /**
@@ -340,29 +337,25 @@ BoardCA.PostViewLink_Board = function (nBoardId, nPostView)
     //쿼리가 있으면 제거
     var sCutHash = location.hash.split("?")[0];
 
-    location.href = sCutHash + "?bid=" + nBoardId
-        + "&pvid=" + nPV;
+    location.href = sCutHash + "?pvid=" + nPV;
 };
 
 /**
  * 게시물을 보기위해 쿼리를 만들어 호출한다.
  * @param {int} sUrl 볼 게시판의 주소
- * @param {int} nBoardId 볼 게시판 아이디
  * @param {int} nPostView 볼 게시물 번호
  */
-BoardCA.PostViewLink_MoveBoard = function (sUrl,nBoardId, nPostView)
+BoardCA.PostViewLink_MoveBoard = function (sUrl,nPostView)
 {
     var nPV = dgIsObject.IsIntValue(nPostView);
 
-    location.href = sUrl + "/?bid=" + nBoardId
-        + "&pvid=" + nPV;
+    location.href = sUrl + "/?pvid=" + nPV;
 };
 
-BoardCA.PostViewLinkGet_MoveBoard = function (sUrl, nBoardId, nPostView)
+BoardCA.PostViewLinkGet_MoveBoard = function (sUrl, nPostView)
 {
     
-    return sUrl + "/?bid=" + nBoardId
-        + "&pvid=" + nPostView;
+    return sUrl + "/?pvid=" + nPostView;
 };
 
  /**
@@ -376,8 +369,7 @@ BoardCA.Action = function (bItem)
     //쿼리가 있는지 확인
     var jsonQuery = getParamsSPA();
 
-    if ((undefined !== jsonQuery["bid"])
-        && (undefined !== jsonQuery["pvid"]))
+    if ((undefined !== jsonQuery["pvid"]))
     {//보드 아이디가 있고
         //포스트 뷰 아이디가 있다.
 
@@ -602,8 +594,7 @@ BoardCA.PageMoveLink = function (nPageNum)
     var sCutHash = location.hash.split("?")[0];
 
     //주소 완성하기
-    location.href = sCutHash + "?bid=" + GlobalStatic.Page_Now.BoardID
-        + "&pn=" + nPN;
+    location.href = sCutHash + "?pn=" + nPN;
 };
 
 /**
@@ -825,8 +816,7 @@ BoardCA.Summary.BindItem_Items = function (
                 .find(el => el.idBoard === jsonItemData.idBoard)
                 .UrlStandard;
         jsonItemData.Url = sBoardUrl
-            + "?bid=" + jsonItemData.idBoard
-            + "&pvid=" + jsonItemData.idBoardPost;
+            + "?pvid=" + jsonItemData.idBoardPost;
 
         //썸네일 주소
         if ("" !== jsonItemData.ThumbnailUrl
