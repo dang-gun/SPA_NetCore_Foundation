@@ -154,11 +154,19 @@ BoardCommon.prototype.jsonOption_Defult = {
      * */
     Mode: BoardCA.ModeType.Defult,
 
-/**
- * 관리자 모드 사용할지 여부.
- * 관리자 권한이 있어야 동작한다.
- * */
-    AdminMode: false
+    /**
+     * 관리자 모드 사용할지 여부.
+     * 관리자 권한이 있어야 동작한다.
+     * */
+    AdminMode: false,
+    /** 디버그 모드 여부 */
+    Debug: false,
+
+    /**
+     * 첨부 파일 최대 갯수
+     * -1 = 무한
+     * */
+    FileMax: -1,
 
 };
 
@@ -1488,14 +1496,33 @@ BoardCommon.prototype.PostCreateShow = function ()
 
 };
 
+/**
+ * 파일 로드 완료
+ * @param {any} objThis
+ * @param {any} objThis_Toss
+ */
 BoardCommon.prototype.FS_LoadComplete = function (objThis, objThis_Toss)
 {
-    console.log("로드 완료");
-
-    objThis.InsertImage(objThis, objThis_Toss.LoadCompleteFile);
+    objThis.ImageInsert(objThis, objThis_Toss.LoadCompleteFile);
 };
 
-BoardCommon.prototype.InsertImage = function (objThis, arrFIle)
+/**
+ * 파일 삭제 완료
+ * @param {any} objThis
+ * @param {any} jsonFIle
+ * @param {any} domDivItme
+ */
+BoardCommon.prototype.FS_DeleteComplete = function (objThis, jsonFIle, domDivItme)
+{
+    objThis.ImageDelete(objThis, jsonFIle, domDivItme);
+};
+
+/**
+ * 에디터에 이미지를 추가해준다.
+ * @param {any} objThis
+ * @param {any} arrFIle
+ */
+BoardCommon.prototype.ImageInsert = function (objThis, arrFIle)
 {
     for (var i = 0; i < arrFIle.length; ++i)
     {
@@ -1504,22 +1531,29 @@ BoardCommon.prototype.InsertImage = function (objThis, arrFIle)
         var sExt = this.ImageType.find(element => element === itemFile.Extension);
         if (undefined !== sExt)
         {
-            //https://github.com/nhn/tui.editor/issues/48#issuecomment-390594250
-            //objThis.Editor.importManager.eventManager
-            //    .emit("command"
-            //        , "AddImage"
-            //        , {
-            //            imageUrl: itemFile.Binary
-            //            , altText: itemFile.EditorDivision
-            //        });
-
-            CKEDITOR.instances.divEditor.insertHtml(
-                //'<img idEditorDivision="' + itemFile.EditorDivision
-                //+ '" src="' + itemFile.Binary + '" />');
-                '<img  src="' + itemFile.Binary + '" />');
+            //에디터에 html 태그를 추가해준다.
+            objThis.Editor.insertHtml(
+                '<img idEditorDivision="' + itemFile.EditorDivision
+                + '" alt="' + itemFile.EditorDivision
+                + '" src="' + itemFile.Binary + '" />');
         }
     }
 };
+
+/**
+ * 에디터에 이미지 제거
+ * @param {any} objThis
+ * @param {any} jsonFIle
+ * @param {any} domDivItme
+ */
+BoardCommon.prototype.ImageDelete = function (objThis, jsonFIle, domDivItme)
+{
+
+    jQuery(objThis.Editor.editable().$)
+        .find("img[ideditordivision='" + jsonFIle.EditorDivision + "']")
+        .remove();
+};
+
 
 /**
  * 비디오 입력 창 표시
@@ -1606,7 +1640,6 @@ BoardCommon.prototype.PostCreate = function ()
         sTitle: dgIsObject.IsStringValue($("#txtBoard_PostCreate_Title").val()),
         typeBoardState: bps.GetHtmlValue(idBoard),
         nBoardCategory: bpc.GetHtmlValue(idBoard),
-        //sContent: objThis.Editor.getMarkdown(),
         sContent: objThis.Editor.document.getBody().getHtml(),
         listFileInfo: objThis.dgFS.ItemList_Get()
     };
@@ -1867,7 +1900,6 @@ BoardCommon.prototype.PostEdit = function (idBoardPost)
         sTitle: dgIsObject.IsStringValue($("#txtBoard_PostCreate_Title").val()),
         typeBoardState: bps.GetHtmlValue(idBoardTemp),
         nBoardCategory: bpc.GetHtmlValue(idBoardTemp),
-        //sContent: objThis.Editor.getMarkdown(),
         sContent: objThis.Editor.document.getBody().getHtml(),
         listFileInfo: objThis.dgFS.ItemList_Get()
     };
@@ -2145,6 +2177,7 @@ BoardCommon.prototype.CKEditorNew = function (objThis, jsonData)
             language: "ko",
             removeButtons: 'Image',
             //https://ckeditor.com/docs/ckeditor4/latest/guide/dev_allowed_content_rules.html
+            allowedContent: 'img(left,right)[!src,alt,width,height,ideditordivision];',
             //allowedContent: 'h1 h2 h3 p blockquote strong em;' +
             //    'a[!href];' +
             //    'img(left,right)[!src,alt,width,height];' +
@@ -2170,6 +2203,10 @@ BoardCommon.prototype.CKEditorNew = function (objThis, jsonData)
     
 };
 
+/**
+ * 파일 선택 인터페이스를 생성한다.
+ * @param {any} arrFileList 생성이 끝나면 추가할 파일 리스트
+ */
 BoardCommon.prototype.FileSelectorNew = function (arrFileList)
 {
     var objThis = this;
@@ -2177,13 +2214,17 @@ BoardCommon.prototype.FileSelectorNew = function (arrFileList)
     //파일 업로드 
     objThis.dgFS = new DG_JsFileSelector({
         Area: $("#divFileList"),
-        Debug: true,
-        MaxFileCount: 1,
+        Debug: objThis.BoardOption.Debug,
+        MaxFileCount: objThis.BoardOption.FileMax,
 
         ExtAllow: objThis.ImageType,
         LoadComplete: function (objThis_Toss)
         {
             objThis.FS_LoadComplete(objThis, objThis_Toss);
+        },
+        DeleteComplete: function (jsonFIle, domDivItme)
+        {
+            objThis.FS_DeleteComplete(objThis, jsonFIle, domDivItme);
         }
     });
 

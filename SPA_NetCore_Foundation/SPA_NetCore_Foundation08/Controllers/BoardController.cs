@@ -23,6 +23,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
 using Newtonsoft.Json;
+using HtmlAgilityPack;
 
 namespace SPA_NetCore_Foundation.Controllers
 {
@@ -1559,18 +1560,50 @@ namespace SPA_NetCore_Foundation.Controllers
                                 , out byteThumbnail);
 
 
+                        //html 민첩성 팩으로 변환 **************************
+                        HtmlAgilityPack.HtmlDocument domContent
+                            = new HtmlAgilityPack.HtmlDocument();
+                        domContent.LoadHtml(sContentTemp);
+
                         foreach (FileData itemFL in arrFL)
                         {
-                            //컨탠츠에 해당 파일을 찾아 url과 교체한다.*****
-                            //마크업에서 '![분류 이름]'을 찾는다.
-                            Regex regImg = new Regex(@"(?<=\!\[" + itemFL.EditorDivision + @"\]).*?(?=\))");
-                            sContentTemp = regImg.Replace(sContentTemp, "(" + itemFL.FileUrl);
+                            if ((FileStateType.NewFile == itemFL.FileState)
+                                || (FileStateType.Edit == itemFL.FileState))
+                            {//추가 이거나
+                             //수정이다.
+                             //'EditorDivision' 속성 찾기
+                                HtmlNodeCollection nodeColl
+                                    = domContent.DocumentNode
+                                        .SelectNodes("//img[@ideditordivision='" + itemFL.EditorDivision + "']");
 
-                            sbFileList.Append("," + itemFL.idFileList);
-                        }
+
+                                if (null != nodeColl)
+                                {//검색이 있을때만 동작
+                                 //찾은 대상 수정하기
+                                    foreach (HtmlNode nodeItem in nodeColl)
+                                    {
+                                        nodeItem.SetAttributeValue("src", itemFL.FileUrl);
+                                        nodeItem.SetAttributeValue("alt", itemFL.Description);
+                                    }
+                                }
+                            }
+
+                            if ((FileStateType.Normal == itemFL.FileState)
+                                || (FileStateType.NewFile == itemFL.FileState)
+                                || (FileStateType.Edit == itemFL.FileState))
+                            {//기본상태
+                                //추가 상태
+                                //수정 상태일때는 파일리스트 정보를 준다.
+
+                                sbFileList.Append("," + itemFL.idFileList);
+                            }
+                        }//end foreach (FileList itemFL in arrFL)
+
+                        //완성된 돔을 html로 전달
+                        sContentTemp = domContent.DocumentNode.OuterHtml;
 
 
-                        //썸네일 저장
+                        //썸네일 저장 *****************************************
                         if (null != fiThumbnail)
                         {
                             Stream streamThumbnai = new MemoryStream(byteThumbnail);
@@ -2052,18 +2085,50 @@ namespace SPA_NetCore_Foundation.Controllers
                                 , out byteThumbnail);
 
 
+                        //html 민첩성 팩으로 변환 **************************
+                        HtmlAgilityPack.HtmlDocument domContent
+                            = new HtmlAgilityPack.HtmlDocument();
+                        domContent.LoadHtml(sContentTemp);
+
                         foreach (FileData itemFL in arrFL)
                         {
-                            //컨탠츠에 해당 파일을 찾아 url과 교체한다.*****
-                            //마크업에서 '![분류 이름]'을 찾는다.
-                            Regex regImg = new Regex(@"(?<=\!\[" + itemFL.EditorDivision + @"\]).*?(?=\))");
-                            sContentTemp = regImg.Replace(sContentTemp, "(" + itemFL.FileUrl);
+                            if ((FileStateType.NewFile == itemFL.FileState)
+                                || (FileStateType.Edit == itemFL.FileState))
+                            {//추가 이거나
+                             //수정이다.
+                             //'EditorDivision' 속성 찾기
+                                HtmlNodeCollection nodeColl
+                                    = domContent.DocumentNode
+                                        .SelectNodes("//img[@ideditordivision='" + itemFL.EditorDivision + "']");
 
-                            sbFileList.Append("," + itemFL.idFileList);
-                        }
+
+                                if (null != nodeColl)
+                                {//검색이 있을때만 동작
+                                 //찾은 대상 수정하기
+                                    foreach (HtmlNode nodeItem in nodeColl)
+                                    {
+                                        nodeItem.SetAttributeValue("src", itemFL.FileUrl);
+                                        nodeItem.SetAttributeValue("alt", itemFL.Description);
+                                    }
+                                }
+                            }
+
+                            if ((FileStateType.Normal == itemFL.FileState)
+                                || (FileStateType.NewFile == itemFL.FileState)
+                                || (FileStateType.Edit == itemFL.FileState))
+                            {//기본상태
+                                //추가 상태
+                                //수정 상태일때는 파일리스트 정보를 준다.
+
+                                sbFileList.Append("," + itemFL.idFileList);
+                            }
+                        }//end foreach (FileList itemFL in arrFL)
+
+                        //완성된 돔을 html로 전달
+                        sContentTemp = domContent.DocumentNode.OuterHtml;
 
 
-                        //썸네일 저장
+                        //썸네일 저장 ***************************************
                         if (null != fiThumbnail)
                         {
                             Stream streamThumbnai = new MemoryStream(byteThumbnail);

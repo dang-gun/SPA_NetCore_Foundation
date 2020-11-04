@@ -25,5 +25,19 @@ namespace ModelDB
         /// </summary>
         DeleteReservation = 2,
 
+        /// <summary>
+        /// 새로운 파일.
+        /// 상태구분을 위해 사용한다.
+        /// 동작은 Normal과 같으나 상태값을 다시 확인할때 'Normal'로 변경한다.
+        /// </summary>
+        NewFile = 3,
+
+        /// <summary>
+        /// 수정.
+        /// 상태구분을 위해 사용한다.
+        /// 동작은 Normal과 같으나 상태값을 다시 확인할때 'Normal'로 변경한다.
+        /// </summary>
+        Edit = 4,
+
     }
 }

@@ -495,10 +495,10 @@ BoardCA.FavoritesAuto = function (domBtnThis, event, idBoardPost)
 //◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
 
 /** 포스트 보기 요청 */
-BoardCA.PostView = function (nPostView)
+BoardCA.PostView = function (idBoardPost)
 {
-    var nPV = dgIsObject.IsIntValue(nPostView);
-    GlobalStatic.Page_Now.BoardComm.PostView(GlobalStatic.Page_Now.BoardID, nPV);
+    var nPV = dgIsObject.IsIntValue(idBoardPost);
+    GlobalStatic.Page_Now.BoardComm.PostView(nPV);
 };
 
 /** 댓글 작성 요청 */
@@ -508,29 +508,28 @@ BoardCA.PostReplyCreate = function ()
     var jsonQuery = getParamsSPA();
 
     GlobalStatic.Page_Now.BoardComm.PostReplyCreate(
-        GlobalStatic.Page_Now.BoardID
-        , dgIsObject.IsIntValue(jsonQuery["pvid"]));
+        dgIsObject.IsIntValue(jsonQuery["pvid"]));
 };
 
 
 
 /** 포스트 수정 표시 */
-BoardCA.PostEditShow = function (nPostView)
+BoardCA.PostEditShow = function (idBoardPost)
 {
-    var nPV = dgIsObject.IsIntValue(nPostView);
-    GlobalStatic.Page_Now.BoardComm.PostEditShow(GlobalStatic.Page_Now.BoardID, nPV);
+    var nPV = dgIsObject.IsIntValue(idBoardPost);
+    GlobalStatic.Page_Now.BoardComm.PostEditShow(nPV);
 };
 /** 포스트 수정 요청 */
 BoardCA.PostEdit = function (nPostView)
 {
     var nPV = dgIsObject.IsIntValue(nPostView);
-    GlobalStatic.Page_Now.BoardComm.PostEdit(GlobalStatic.Page_Now.BoardID, nPV);
+    GlobalStatic.Page_Now.BoardComm.PostEdit(nPV);
 };
 /** 포스트 삭제 표시 */
 BoardCA.PostDeleteShow = function (nPostView)
 {
     var nPV = dgIsObject.IsIntValue(nPostView);
-    GlobalStatic.Page_Now.BoardComm.PostDeleteView(GlobalStatic.Page_Now.BoardID, nPV);
+    GlobalStatic.Page_Now.BoardComm.PostDeleteView(nPV);
 };
 
 
@@ -538,7 +537,7 @@ BoardCA.PostDeleteShow = function (nPostView)
 /** 글쓰기 화면 표시 */
 BoardCA.PostCreateShow = function ()
 {
-    GlobalStatic.Page_Now.BoardComm.PostCreateShow(GlobalStatic.Page_Now.BoardID);
+    GlobalStatic.Page_Now.BoardComm.PostCreateShow();
 };
 /** 글쓰기 시도 */
 BoardCA.PostCreate = function ()
@@ -559,7 +558,7 @@ BoardCA.PageMoveNext = function ()
 {
     if (typeof GlobalStatic.Page_Now.BoardComm === "object")
     {
-        GlobalStatic.Page_Now.BoardComm.PageMoveNext(GlobalStatic.Page_Now.BoardID);
+        GlobalStatic.Page_Now.BoardComm.PageMoveNext();
     }
     
 };
@@ -632,8 +631,7 @@ BoardCA.PostReReplayCreateShow = function (
     , idBoardReply_Target)
 {
     GlobalStatic.Page_Now.BoardComm.PostReReplyCreateShow(
-        GlobalStatic.Page_Now.BoardID
-        , idBoardPost
+        idBoardPost
         , idBoardReply_Target);
 };
 
@@ -649,8 +647,7 @@ BoardCA.PostReReplyCreate = function (btnThis)
     var idBoardReply_Target = dgIsObject.IsIntValue(btn.attr("idBoardReply"));
 
     GlobalStatic.Page_Now.BoardComm.PostReplyCreate(
-        GlobalStatic.Page_Now.BoardID
-        , dgIsObject.IsIntValue(jsonQuery["pvid"])
+        dgIsObject.IsIntValue(jsonQuery["pvid"])
         , idBoardReply_Target);
 };
 
@@ -672,8 +669,7 @@ BoardCA.PostReReplyCreateCancel = function ()
 BoardCA.ReRePlayList = function (idBoardPost, idBoardReply_Target)
 {
     GlobalStatic.Page_Now.BoardComm.PostReReplyList(
-        GlobalStatic.Page_Now.BoardID
-        , idBoardPost
+        idBoardPost
         , idBoardReply_Target);
 };
 

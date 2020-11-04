@@ -55,7 +55,7 @@ namespace Faculty.File
             , out FileInfoModel fiThumbnail
             , out byte[] byteThumbnail)
         {
-            List<FileData> listFileNew = new List<FileData>();
+            List<FileData> listReturnFile = new List<FileData>();
 
             fiThumbnail = null;
             byteThumbnail = null;
@@ -95,7 +95,8 @@ namespace Faculty.File
                         newFL.Ext = itemFI.Extension;
                         newFL.Description = itemFI.Description;
                         newFL.EditorDivision = itemFI.EditorDivision;
-                        newFL.FileState = FileStateType.Normal;
+                        //새로 파일 처리를 한다.
+                        newFL.FileState = FileStateType.NewFile;
 
                         //기초정보 생성
                         db1.FileData.Add(newFL);
@@ -150,16 +151,37 @@ namespace Faculty.File
                         newFL.FileUrl = sFileUrlName;
 
 
-                        db1.SaveChanges();
-
-
                         //완성된 파일 정보 백업
-                        listFileNew.Add(newFL);
+                        listReturnFile.Add(newFL);
+                    }
+                    else if (true == itemFI.Edit)
+                    {//수정이다.**********************************
+                        //수정은 파일정보만 수정된다.
+                        if (0 >= itemFI.idFile)
+                        {//파일 정보가 없다.
+                            //수정가 불가능하다.
+                        }
+                        else
+                        {
+                            //파일정보를 찾는다.
+                            FileData findFl
+                                = db1.FileData
+                                    .Where(m => m.idFileList == itemFI.idFile)
+                                    .FirstOrDefault();
+
+                            //
+                            findFl.Description = itemFI.Description;
+                            //타입으로 복구
+                            findFl.FileState = FileStateType.Normal;
+
+                            //완성된 파일 정보 백업
+                            listReturnFile.Add(findFl);
+                        }
                     }
                     else if (true == itemFI.Delete)
-                    {//삭제다.
+                    {//삭제다.**********************************
 
-                        if(0>= itemFI.idFile)
+                        if (0 >= itemFI.idFile)
                         {//파일 정보가 없다.
                             //삭제가 불가능하다.
                         }
@@ -173,14 +195,20 @@ namespace Faculty.File
 
                             //삭제 타입으로 변경
                             findFl.FileState = FileStateType.DeleteReservation;
+
+
+                            //완성된 파일 정보 백업
+                            listReturnFile.Add(findFl);
                         }
-                        
                     }
-                    
-                }
+
+                }//end foreach (FileInfoModel itemFI in listFileInfo)
+
+                //DB에 적용
+                db1.SaveChanges();
             }//end using db1
 
-            return listFileNew.ToArray();
+            return listReturnFile.ToArray();
         }//end FileInDb
 
 
