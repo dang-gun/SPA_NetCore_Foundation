@@ -84,6 +84,14 @@ namespace SPA_NetCore_Foundation.Controllers
                 //쇼카운트의 최소값은 1이다.
                 nShowCount = 1;
             }
+            
+            //페이지 넘버
+            if(0 >= nPageNumber)
+            {//0이하다
+                //최소값 설정
+                nPageNumber = 1;
+            }
+
 
             //유저 정보 추출
             ClaimModel cm = new ClaimModel(((ClaimsIdentity)User.Identity).Claims);
@@ -160,15 +168,8 @@ namespace SPA_NetCore_Foundation.Controllers
                             armResult.ShowCount = nShowCount;
                         }
 
-                        //페이지 번호
-                        if (0 >= nPageNumber)
-                        {//번호가 잘못됐다.
-                            armResult.PageNumber = 1;
-                        }
-                        else
-                        {//재대로됨
-                            armResult.PageNumber = nPageNumber;
-                        }
+                        //페이지 번호 입력
+                        armResult.PageNumber = nPageNumber;
 
 
 

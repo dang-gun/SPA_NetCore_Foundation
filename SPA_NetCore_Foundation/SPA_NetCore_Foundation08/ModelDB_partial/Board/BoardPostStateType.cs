@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ModelDB
 {
     /// <summary>
-    /// 게시판 상태
+    /// 게시물 상태
     /// </summary>
     public enum BoardPostStateType
     {

@@ -1,34 +1,42 @@
-﻿<div id="divFileList"></div>
+﻿<div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <span class="input-group-text" >제목</span>
+    </div>
+    <input type="text" id="txtBoard_PostCreate_Title" class="form-control Board_PostCreate_TitleInput" value="{{TitlePost}}">
+</div>
 
-<table id="tableBoard_PostCreate" idBoard="{{idBoard}}">
-    <colgroup>
-        <col style="width: 80px;" />
-        <col style="width: auto;" />
-    </colgroup>
-    <tr>
-        <th>제목</th>
-        <td><input type="text" id="txtBoard_PostCreate_Title" value="{{TitlePost}}" /></td>
-    </tr>
-    <tr>
-        <th>게시판</th>
-        <td>
-            {{PostCategoryHtml}}{{BoardPostStateHtml}}
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <div>
-                {{EditorLengthTitle}}<label id="labLength">0</label>/<label id="labLengthMax">0</label>
-            </div>
-            <div id="divEditor"></div>
-        </td>
-    </tr>
+<div id="divBoard_PostCreate_Category" class="input-group mb-3">
+    <div class="input-group-prepend">
+        <span class="input-group-text">구분</span>
+    </div>
+    <div class="form-control">
+        {{PostCategoryHtml}}
+    </div>
+</div>
 
-</table>
-<div class="clfix">
-    <div class="btn_edit_wrap">
-        <button onclick="BoardCA.PostCreate()" class="form-control btn-outline">작성완료</button>
-        <button onclick="BoardCA.ListView();" class="form-control btn-outline">취소</button>
-        <button onclick="BoardCA.ListView();" class="form-control btn-outline">목록</button>
+<div>
+    <div id="divFileList"></div>
+</div>
+
+<div>
+    {{EditorLengthTitle}}<label id="labLength">0</label>/<label id="labLengthMax">0</label>
+</div>
+
+<div id="divBoard_PostCreate_Editor" class="Board_PostCreate_EditorWrap input-group mb-3">
+    <div id="divEditor" class="Board_PostCreate_EditorWrap2"></div>
+</div>
+
+<div class="BoardComm_CreateTools container">
+    <div class="row">
+        <div class="BoardComm_CreateTools_Left col">
+            {{BoardPostStateHtml}}
+        </div>
+        <div class="BoardComm_CreateTools_Center col-5">
+            <button onclick="BoardCA.PostCreate()" class="btn btn-primary">작성완료</button>
+            <a class="btn btn-outline-dark" href="{{UrlListView}}">취소</a>
+        </div>
+        <div class="BoardComm_PostTools_Right col">
+            <a class="btn btn-primary" href="{{UrlListView}}">목록</a>
+        </div>
     </div>
 </div>

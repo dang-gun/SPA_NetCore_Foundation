@@ -1993,7 +1993,7 @@
         </member>
         <member name="T:ModelDB.BoardPostStateType">
             <summary>
-            게시판 상태
+            게시물 상태
             </summary>
         </member>
         <member name="F:ModelDB.BoardPostStateType.None">

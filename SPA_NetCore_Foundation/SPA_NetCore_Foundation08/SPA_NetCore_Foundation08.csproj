@@ -20,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\Pages\modern-business.css" />
     <Content Remove="wwwroot\Utility\DG_LoadingPopup\DG_LoadingPopup.js" />
     <Content Remove="wwwroot\Utility\DG_MessageBox\DG_MessageBox.js" />
     <Content Remove="wwwroot\Utility\DG_Popup\DG_Popup.js" />
@@ -434,7 +433,6 @@
     <None Include="wwwroot\Library\ckeditor4\youtube\plugin.js" />
     <None Include="wwwroot\Library\DG_JsFileSelector\DG_JsFileSelector.js" />
     <None Include="wwwroot\Library\DG_JsFileSelector\README.md" />
-    <None Include="wwwroot\Pages\modern-business.css" />
     <None Include="wwwroot\Pages\SignUp\SignUp.js" />
     <None Include="wwwroot\Utility\DG_FlagEnum\DG_FlagEnum.js" />
     <None Include="wwwroot\Utility\DG_FlagEnum\README.md" />

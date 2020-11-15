@@ -16,7 +16,8 @@ function TestBoard()
 
                 //게시판 기능초기화 및 게시판 표시
                 objThis.BoardComm
-                    = new BoardCommon(objThis.BoardID, true
+                    = new BoardCommon(objThis.BoardID
+                        , true
                         , {
                             TableArea: objThis.divList,
                             FileUrl_Body: BoardCA.FileUrl.Body,

@@ -6,12 +6,18 @@
  * @param {json} jsonOption 생성 옵션
  * @param {function} callback 바인딩이 끝나면 동작시킬 콜백
  */
-function BoardCommon(nBoardID, bItem, jsonOption, callback)
+function BoardCommon(
+    nBoardID
+    , bItem
+    , jsonOption
+    , callback)
 {
     var objThis = this;
 
     //게시판 번호 백업
     objThis.BoardID = nBoardID;
+    //해쉬 이후 url
+    objThis.UrlHash = BoardCA.UrlHash();
 
     //옵션 합치기
     objThis.BoardOption = Object.assign({},objThis.jsonOption_Defult, jsonOption);
@@ -21,7 +27,6 @@ function BoardCommon(nBoardID, bItem, jsonOption, callback)
     //제목 백업
     objThis.MessageTitle = objThis.BoardOption.BoardTitle;
 
-    var nBoardIDTemp = objThis.BoardID;
     var nbItemTemp = bItem;
     objThis.FirstBind_Callback = callback;
 
@@ -175,6 +180,8 @@ BoardCommon.prototype.BoardOption = null;
 
 /** 사용할 게시판 번호 */
 BoardCommon.prototype.BoardID = 0;
+/** 이 게시판이 사용되는 페이지의 해쉬 이후 URL  */
+BoardCommon.prototype.UrlHash = "";
 /** 타이틀로 사용할 html */
 BoardCommon.prototype.MessageTitle = "게시판";
 /** 게시판에서만 사용할 데이터 바인드 */
@@ -386,8 +393,13 @@ BoardCommon.prototype.Reset = function ()
         }
     }
 
-    //기본 모양 만들기
-    objThis.TableArea.html(objThis.BoardCommon_BodyHtml);
+    //게시판 바디  만들기
+    //objThis.TableArea.html(objThis.BoardCommon_BodyHtml);
+    objThis.TableArea.html(
+        objThis.DataBind.DataBind_All(
+            objThis.BoardCommon_BodyHtml
+            , { UrlListView: objThis.UrlHash })
+            .ResultString);
 
     //자주쓰는 영역 찾기
     objThis.BoardComm_PostView = objThis.TableArea.find(".BoardComm_PostView");
@@ -486,8 +498,7 @@ BoardCommon.prototype.ListDisplay = function (bShow)
     if (true === bShow)
     {
         //화면에 표시
-        //objThis.BoardComm_List.removeClass("d-none");
-        objThis.BoardComm_List.removeClass("d-none-mobile01");
+        objThis.BoardComm_List.removeClass("d-none");
     }
     else
     {
@@ -498,8 +509,7 @@ BoardCommon.prototype.ListDisplay = function (bShow)
         objThis.BoardComm_Foot.empty();
 
         //화면에 표시 안함
-        //objThis.BoardComm_List.addClass("d-none");
-        objThis.BoardComm_List.addClass("d-none-mobile01");
+        objThis.BoardComm_List.addClass("d-none");
     }
 };
 
@@ -722,7 +732,7 @@ BoardCommon.prototype.BindItem_Items = function (arrJsonData)
         //지금 보고 있는 글인지 확인
         if (pvid === dgIsObject.IsIntValue(jsonItemData.idBoardPost))
         {//보고있는 아이템이다.
-            jsonItemData.ItemNow = "ItemNow";
+            jsonItemData.ItemNow = "ItemNow table-primary";
         }
         else
         {
@@ -806,9 +816,8 @@ BoardCommon.prototype.PagingBind = function (jsonData)
     }
 
     //해쉬이후 주소 받기 *****
-    var sCutHash = BoardCA.UrlHash();
-    //url 쿼리 시작하기
-    sCutHash = sCutHash + "?";
+    //페이지네이션에 사용할 url만들기
+    var sUrlPart = objThis.UrlHash + "?";
 
     //쿼리가 있는지 확인 *****
     var jsonQuery = getParamsSPA();
@@ -822,8 +831,6 @@ BoardCommon.prototype.PagingBind = function (jsonData)
         nPN = 1;
     }
 
-    //페이지네이션에 사용할 url만들기
-    var sUrlPart = sCutHash;
 
     //카테고리 정보 전달하기
     if (0 < nCat)
@@ -893,6 +900,7 @@ BoardCommon.prototype.PagingBind = function (jsonData)
     //지금 페이지************************
     domBtn = objThis.PaginationButton(nPN.toString(), nPN, sUrlPart);
     domBtn.addClass("disabled");
+    domBtn.addClass("active");
     domBtn.addClass("BoardComm_PageNow");
     domUl.append(domBtn);
 
@@ -1929,6 +1937,9 @@ BoardCommon.prototype.PostEditBind = function (jsonData)
     jsonData.PostCategoryHtml = bpc.InputHtml(idBoard, jsonData);
     jsonData.BoardPostStateHtml = bps.InputHtml(idBoard, jsonData);
 
+    //목록에 이동할 url 지정
+    jsonData.UrlListView = objThis.UrlHash;
+
     //컨탠츠 그리기
     var sHtml
         = objThis.DataBind.DataBind_All(
@@ -2094,7 +2105,10 @@ BoardCommon.prototype.PostEdit = function (idBoardPost)
 
 
 
-
+/**
+ * 
+ * @param {any} idBoardPost
+ */
 BoardCommon.prototype.PostDeleteView = function (idBoardPost)
 {
     var objThis = this;

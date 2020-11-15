@@ -1,27 +1,35 @@
-﻿    <div class="PostHeaderArea">
-        <div class="TitleArea">
-            <div class="TitleText">{{Title}}</div>
-        </div>
-        <div class="PostInfoArea">
-            <div class="Step1">
-                <div class="UserInfoArea">
-                    <a id="aUserName{{ViewUserId}}" href="javascript:void(0);" class="UserName">{{ViewUserName}}</a>
-                </div>
-                <div class="PostInfo">
-                    <span class="ViewCount">조회 : {{ViewCount}}</span>
-                </div>
+﻿<div class="PostHeaderArea">
+    <div class="TitleArea">
+        <div class="TitleText">{{Title}}</div>
+    </div>
+    <div class="PostInfoArea">
+        <div class="Step1">
+            <div class="UserInfoArea">
+                <a id="aUserName{{ViewUserId}}" href="javascript:void(0);" class="UserName">{{ViewUserName}}</a>
             </div>
-            <div class="Step2">
-                <span class="CreateDate">{{WriteDate:DateTime}}</span>
+            <div class="PostInfo">
+                <span class="ViewCount">조회 : {{ViewCount}}</span>
             </div>
         </div>
+        <div class="Step2">
+            <span class="CreateDate">{{WriteDate:DateTime}}</span>
+        </div>
     </div>
-    <div class="PostContent">
-        <div id="divViewer"></div>
-    </div>
-    <div class="PostControlArea">
+</div>
 
-        <button onclick="BoardCA.PostEditShow({{idBoardPost}});" class="form-control btn-outline">수정</button>
-        <button onclick="BoardCA.PostDeleteShow({{idBoardPost}});" class="form-control btn-outline">삭제</button>
-        <button onclick="BoardCA.ListLink();" class="form-control btn-outline">목록</button>
+<div class="PostView_PostContent">
+    <div id="divViewer"></div>
+</div>
+
+<div class="PostView_PostTools container">
+    <div class="row">
+        <div class="PostTools_Left col">
+            <button class="btn btn-primary" onclick="BoardCA.PostCreateShow()">글쓰기</button>
+            <button class="btn btn-outline-primary" onclick="BoardCA.PostEditShow({{idBoardPost}});">수정</button>
+            <button class="btn btn-outline-dark" onclick="BoardCA.PostDeleteShow({{idBoardPost}});">삭제</button>
+        </div>
+        <div class="PostTools_Right col">
+            <a class="btn btn-primary" href="{{UrlListView}}">목록</a>
+        </div>
     </div>
+</div>
