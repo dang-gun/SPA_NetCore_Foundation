@@ -39,6 +39,16 @@ BoardCA.FileUrl.Summary_NoThumbnailListItem = "/Faculty/Board/BoardSummary_NoThu
  * 게시판에 사용될 데이터
  * ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇*/
 
+/** 게시판에서 사용될 url 쿼리  */
+BoardCA.UrlQ = {
+    /** 게시물 아이디  */
+    PostViewId: "pvid",
+    /** 페이지 번호  */
+    PageNumber: "pn",
+    /** 카테고리  */
+    Category: "cat",
+};
+
 /** 게시판 모드 타입 */
 BoardCA.ModeType = {
     /** 
@@ -84,16 +94,12 @@ BoardCA.RegExr = {};
 //BoardCA.RegExr.ImageCut = /(?<=\(data:image).*?(?=\))/g; // 크롬에서만 동작
 BoardCA.RegExr.ImageCut = /(?=\(data:image).*?(?=\))/g;
 
-/**
- * 마크다운에서 base64로 들어있는 이미지를 제외하고 글자수를 검사한다.
- * @param {string} sMarkdown 검사할 마크다운 문자열
- * @returns {int} 이미지를 제외한 글자수
- */
-BoardCA.Markdown_ImageRemove_Lentgh = function (sMarkdown)
-{
-    return sMarkdown.replace(BoardCA.RegExr.ImageCut, "").length;
-};
 
+/** 지금 주소에서 해쉬 뒷주소를 리턴한다. */
+BoardCA.UrlHash = function ()
+{
+    return location.hash.split("?")[0];
+};
 
 /** 
  *  유튜브 주소 추출 - url 쿼리

@@ -57,25 +57,27 @@
 .BoardComm_Table {
     width: 100%;
 }
-    .BoardComm_List .TdId {
-        width: 32px;
+    .BoardComm_Table .BoardComm_TrTitle {
+        text-align:center;
     }
-    .BoardComm_List .TdTitle {
-        width: auto;
+.BoardComm_List .TdId {
+        width: 56px;
     }
-    .BoardComm_List .TdName {
-        width: 150px;
-    }
-    .BoardComm_List .TdCount {
-        width: 32px;
-    }
-    .BoardComm_List .TdDate {
-        width: 85px;
-    }
+.BoardComm_List .TdTitle {
+    width: auto;
+}
+.BoardComm_List .TdName {
+    width: 150px;
+}
+.BoardComm_List .TdCount {
+    width: 56px;
+}
+.BoardComm_List .TdDate {
+    width: 106px;
+}
 
 .BoardComm_Body .BoardComm_TrItem td:not(:last-child) {
     box-sizing: border-box;
-    border-right: 1px solid #000;
 }
 .BoardComm_Body .TdId {
     text-align: center;

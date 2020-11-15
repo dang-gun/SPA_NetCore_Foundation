@@ -552,7 +552,7 @@ BoardCommon.prototype.BindTitle = function (
     var bItemTemp = bItem;
 
     var jsonTitle = {
-        idBoardPost: "번호"
+        idBoardPost: "#"
         , Title: "제목"
         , UserName: "작성자"
         , ViewCount: "조회"
@@ -675,10 +675,16 @@ BoardCommon.prototype.BindItem_Items = function (arrJsonData)
 {
     var objThis = this;
 
+    //url에서 해쉬부분만 자른다.
+    //url 쿼리는 제거
+    var sPageHash = location.hash.split("?")[0];
+
     //쿼리가 있는지 확인
     var jsonQuery = getParamsSPA();
     //포스트뷰 대상이 있는지 확인
-    var pvid = dgIsObject.IsIntValue(jsonQuery["pvid"]);
+    var pvid = dgIsObject.IsIntValue(jsonQuery[BoardCA.UrlQ.PostViewId]);
+    //페이지 번호 확인
+    var pn = dgIsObject.IsIntValue(jsonQuery[BoardCA.UrlQ.PageNumber]);
 
     if (BoardCA.ModeType.InfiniteScroll === objThis.BoardOption.Mode)
     {//리스트 끝에 추가
@@ -699,6 +705,19 @@ BoardCommon.prototype.BindItem_Items = function (arrJsonData)
     for (var i = 0; i < arrJsonData.length; ++i)
     {
         var jsonItemData = arrJsonData[i];
+
+        //포스트 뷰 url 만들기
+        jsonItemData.PostViewUrl
+            = sPageHash + "?"
+            + BoardCA.UrlQ.PostViewId + "=" + jsonItemData.idBoardPost + "&";
+
+        if (0 < pn)
+        {//페이지 번호가 있다.
+            //있을때만 페이지 번호를 넣는다.
+            jsonItemData.PostViewUrl
+                = BoardCA.UrlQ.PageNumber + "=" + pn + "&";
+        }
+                
 
         //지금 보고 있는 글인지 확인
         if (pvid === dgIsObject.IsIntValue(jsonItemData.idBoardPost))
@@ -780,12 +799,39 @@ BoardCommon.prototype.PagingBind = function (jsonData)
     var domBtn = null;
     var nTemp = 0;
 
-
     if (BoardCA.ModeType.InfiniteScroll === objThis.BoardOption.Mode)
     {//무한 스크롤 모드다.
         //무한 스크롤에서 페이징은 표시하지 않는다.
         return;
     }
+
+    //해쉬이후 주소 받기 *****
+    var sCutHash = BoardCA.UrlHash();
+    //url 쿼리 시작하기
+    sCutHash = sCutHash + "?";
+
+    //쿼리가 있는지 확인 *****
+    var jsonQuery = getParamsSPA();
+    //카테고리 정보 받기 ***
+    var nCat = dgIsObject.IsIntValue(jsonQuery[BoardCA.UrlQ.Category]);
+
+    //페이지 번호 받기 ***
+    var nPN = dgIsObject.IsIntValue(jsonQuery[BoardCA.UrlQ.PageNumber]);
+    if (0 >= nPN)
+    {
+        nPN = 1;
+    }
+
+    //페이지네이션에 사용할 url만들기
+    var sUrlPart = sCutHash;
+
+    //카테고리 정보 전달하기
+    if (0 < nCat)
+    {//카테고리 정보가 있다.
+        sUrlPart += BoardCA.UrlQ.Category + "=" + nCat + "&";
+    }
+
+
 
     //글수 표시
     objThis.spanBoardComm_Tools_PostCount.html(jsonData.TotalCount);
@@ -794,101 +840,137 @@ BoardCommon.prototype.PagingBind = function (jsonData)
     objThis.PageTotal = parseInt(jsonData.TotalCount / jsonData.ShowCount) + 1;
 
     //기본 dom만들기
-    var domPage = $("<div class='BoardComm_Paging'></div>");
+    var domPage = $('<nav></nav>');
+    var domUl = $('<ul class="pagination justify-content-center"></ul>');
+    domPage.append(domUl);
 
 
-    //맨 앞으로***********
-    domBtn = $("<button onclick='BoardCA.PageMoveLink(-2100)'>&lt;&lt;</button>");
-    domBtn.addClass("BoardComm_Paginate BoardComm_PageFirst");
+    //맨 앞으로 ***********
+    domBtn = objThis.PaginationButton("&lt;&lt;", 1, sUrlPart);
+    domBtn.addClass("BoardComm_PageFirst");
+    
     if (1 >= objThis.PageNumber)
     {//맨 앞페이지다.
         //더이상 갈때가 없다.
-        domBtn.attr("disabled", "disabled");
+        domBtn.addClass("disabled");
     }
-    domPage.append(domBtn);
+    domUl.append(domBtn);
 
 
-    //앞으로*************
-    nTemp = objThis.PageNumber - 1;
+    //앞으로 *************
+    nTemp = nPN - 1;
     if (0 >= nTemp)
     {//0보다 작다.
         //1로 처리
         nTemp = 1;
     }
 
-    domBtn = $("<button onclick='BoardCA.PageMoveLink(" + nTemp + ")'>&lt;</button>");
-    domBtn.addClass("BoardComm_Paginate BoardComm_PagePrevious");
+    domBtn = objThis.PaginationButton("&lt;", nTemp, sUrlPart);
+    domBtn.addClass("BoardComm_PagePrevious");
+
     if (1 >= objThis.PageNumber)
     {//맨 앞페이지다.
         //더이상 갈때가 없다.
-        domBtn.attr("disabled", "disabled");
+        domBtn.addClass("disabled");
     }
-    domPage.append(domBtn);
+    domUl.append(domBtn);
 
 
 
     //지금 페이지 앞번호********************
-    for (var i = objThis.PageNumber - 4; i < objThis.PageNumber; ++i)
+    for (var i = nPN - 4; i < nPN; ++i)
     {
-        domBtn = $("<button onclick='BoardCA.PageMoveLink(" + i + ")'>" + i + "</button>");
-        domBtn.addClass("BoardComm_Paginate BoardComm_PageBefore");
+        domBtn = objThis.PaginationButton(i.toString(), i, sUrlPart);
+        domBtn.addClass("BoardComm_PageBefore");
+
         if (0 >= i)
         {//0보다 이하
             domBtn.css("visibility", "hidden");
         }
-        domPage.append(domBtn);
+        domUl.append(domBtn);
     }
 
     //지금 페이지************************
-    domBtn = $("<button>" + i + "</button>");
-    domBtn.addClass("BoardComm_Paginate BoardComm_PageNow");
-    domPage.append(domBtn);
+    domBtn = objThis.PaginationButton(nPN.toString(), nPN, sUrlPart);
+    domBtn.addClass("disabled");
+    domBtn.addClass("BoardComm_PageNow");
+    domUl.append(domBtn);
 
-    //지금 페이지 뒷번호************************
-    for (var j = objThis.PageNumber + 1; j < objThis.PageNumber + 4 + 1; ++j)
+
+    //지금 페이지 뒷번호 ************************
+    for (var j = nPN + 1; j < nPN + 4 + 1; ++j)
     {
-        domBtn = $("<button onclick='BoardCA.PageMoveLink(" + j + ")'>" + j + "</button>");
-        domBtn.addClass("BoardComm_Paginate BoardComm_PageAfter");
+        domBtn = objThis.PaginationButton(j.toString(), j, sUrlPart);
+        domBtn.addClass("BoardComm_PageAfter");
+
         if ( objThis.PageTotal < j)
         {//0보다 이하
             domBtn.css("visibility", "hidden");
         }
-        domPage.append(domBtn);
+        domUl.append(domBtn);
     }
     
 
 
-    //뒤로***************
-    nTemp = objThis.PageNumber + 1;
+    //뒤로 ***************
+    nTemp = nPN + 1;
     if (objThis.PageTotal <= nTemp)
     {//최대 페이지가 넘었다.
         //최대 페이지로 설정
         nTemp = objThis.PageTotal;
     }
 
-    domBtn = $("<button onclick='BoardCA.PageMoveLink(" + nTemp + ")'>&gt;</button>");
-    domBtn.addClass("BoardComm_Paginate BoardComm_PageNext");
-    if (objThis.PageTotal <= objThis.PageNumber)
-    {//맨 뒷페이지다.
-        //더이상 갈때가 없다.
-        domBtn.attr("disabled", "disabled");
-    }
-    domPage.append(domBtn);
+    domBtn = objThis.PaginationButton("&gt;", nTemp, sUrlPart);
+    domBtn.addClass("BoardComm_PageNext");
 
-    //맨 뒤로*******************
-    domBtn = $("<button onclick='BoardCA.PageMoveLink(-1100)'>&gt;&gt;</button>");
-    domBtn.addClass("BoardComm_Paginate BoardComm_PageLast");
-    if (objThis.PageTotal <= objThis.PageNumber)
+    if (objThis.PageTotal <= nPN)
     {//맨 뒷페이지다.
         //더이상 갈때가 없다.
-        domBtn.attr("disabled", "disabled");
+        domBtn.addClass("disabled");
     }
-    domPage.append(domBtn);
+    domUl.append(domBtn);
+
+
+    //맨 뒤로 *******************
+    domBtn = objThis.PaginationButton("&gt;&gt;", objThis.PageTotal, sUrlPart);
+    domBtn.addClass("BoardComm_PageLast");
+
+    if (objThis.PageTotal <= nPN)
+    {//맨 뒷페이지다.
+        //더이상 갈때가 없다.
+        domBtn.addClass("disabled");
+    }
+
+    domUl.append(domBtn);
 
 
     objThis.BoardComm_Foot.html(domPage);
 };
 
+/**
+ * 페이지네이션에 사용할 버튼을 완성하여 리턴한다.
+ * @param {string} sPageNumber 사용할 페이지 텍스트
+ * @param {int} nPageNumber 사용할 페이지 번호
+ * @param {string} sUrlPart url 앞쪽
+ * @returns {dom} 완성된 제이쿼리 li 완성
+ */
+BoardCommon.prototype.PaginationButton = function (
+    sPageNumber
+    , nPageNumber
+    , sUrlPart)
+{
+    //감싸는 li
+    var domLi = null;
+    domLi = $('<li class="page-item"></li>');
+    domLi.addClass("BoardComm_Paginate");
+
+    //링크 a
+    var domA = $('<a class="page-link">' + sPageNumber + '</a>');
+    domA.attr("href", sUrlPart + BoardCA.UrlQ.PageNumber + "=" + nPageNumber + "&")
+    domLi.append(domA);
+
+    return domLi;
+};
 
 
 //◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
