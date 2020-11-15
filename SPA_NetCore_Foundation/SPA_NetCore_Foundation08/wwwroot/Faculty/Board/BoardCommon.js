@@ -1100,6 +1100,9 @@ BoardCommon.prototype.PostViewBind = function (jsonData)
         jsonData.DeleteAuthClass = "v-hidden";
     }
 
+    //목록 주소 만들기
+    jsonData.UrlListView = objThis.UrlHash;
+
 
     //컨탠츠 그리기
     var sHtml
@@ -1537,7 +1540,8 @@ BoardCommon.prototype.PostCreateShow = function ()
                                     TitlePost: "",
                                     PostCategoryHtml: bpc.InputHtml(idBoardTemp, jsonData),
                                     BoardPostStateHtml: bps.InputHtml(idBoardTemp, jsonData),
-                                    EditorLengthTitle: "글자수 : "
+                                    EditorLengthTitle: "글자수 : ",
+                                    UrlListView: objThis.UrlHash
                                 })
                                 .ResultString;
 
@@ -2252,8 +2256,9 @@ BoardCommon.prototype.CKEditorNew = function (objThis, jsonData)
 
     //CKEDITOR.editorConfig = function (config)
     //{
-    //    config.language = "ko";
-    //    config.removeButtons = 'Image';
+    //    //config.language = "ko";
+    //    //config.removeButtons = 'Image';
+    //    config.height = 500;
     //};
 
     if (objThis.Editor)
@@ -2271,6 +2276,8 @@ BoardCommon.prototype.CKEditorNew = function (objThis, jsonData)
     CKEDITOR.replace("divEditor",
         {
             language: "ko",
+            height: 500,
+
             removeButtons: 'Image',
             //https://ckeditor.com/docs/ckeditor4/latest/guide/dev_allowed_content_rules.html
             allowedContent: 'img(left,right)[!src,alt,width,height,ideditordivision];',

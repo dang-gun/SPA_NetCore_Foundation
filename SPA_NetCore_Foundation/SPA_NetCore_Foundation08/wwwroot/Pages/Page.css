@@ -155,19 +155,19 @@ body{
     padding-bottom: 10px;
 }
 
-.BoardComm_PostView > .PostView_PostContent {
-    padding-bottom:10px;
+.BoardComm_PostView > .PostViewContent {
+    padding-bottom: 10px;
 }
 
 
-.BoardComm_PostView > .PostView_PostTools {
+.BoardComm_PostView > .PostViewTools {
     max-width: 100%;
     padding-bottom: 10px;
 }
-    .BoardComm_PostView > .PostView_PostTools .PostTools_Left {
+    .BoardComm_PostView > .PostViewTools .Left {
     }
 
-    .BoardComm_PostView > .PostView_PostTools .PostTools_Right {
+    .BoardComm_PostView > .PostViewTools .Right {
         text-align: right;
     }
 
@@ -179,17 +179,18 @@ body{
     min-height:500px;
 }
 
-.Board_PostCreate_EditorWrap2 {
-    width: 100%;
-    min-height: 500px;
+.BoardComm_PostView > .CreateTools {
+    max-width: 100%;
+    margin-top: 10px;
 }
 
-.BoardComm_CreateTools > .BoardComm_CreateTools_Center {
-    text-align:center;
-}
-.BoardComm_CreateTools > .BoardComm_PostTools_Right {
-    text-align:right;
-}
+    .BoardComm_PostView > .CreateTools .Center {
+        text-align: center;
+    }
+    .BoardComm_PostView > .CreateTools .Right {
+        text-align: right;
+    }
+
 /* ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
     BoardMgt - List  
 ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇ */

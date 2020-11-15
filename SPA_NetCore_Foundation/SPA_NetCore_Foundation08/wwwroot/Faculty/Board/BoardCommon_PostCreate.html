@@ -22,20 +22,20 @@
     {{EditorLengthTitle}}<label id="labLength">0</label>/<label id="labLengthMax">0</label>
 </div>
 
-<div id="divBoard_PostCreate_Editor" class="Board_PostCreate_EditorWrap input-group mb-3">
-    <div id="divEditor" class="Board_PostCreate_EditorWrap2"></div>
+<div id="divBoard_PostCreate_Editor" class="Board_PostCreate_EditorWrap">
+    <div id="divEditor" ></div>
 </div>
 
-<div class="BoardComm_CreateTools container">
+<div class="CreateTools container">
     <div class="row">
-        <div class="BoardComm_CreateTools_Left col">
+        <div class="Left col">
             {{BoardPostStateHtml}}
         </div>
-        <div class="BoardComm_CreateTools_Center col-5">
+        <div class="Center col-5">
             <button onclick="BoardCA.PostCreate()" class="btn btn-primary">작성완료</button>
             <a class="btn btn-outline-dark" href="{{UrlListView}}">취소</a>
         </div>
-        <div class="BoardComm_PostTools_Right col">
+        <div class="Right col">
             <a class="btn btn-primary" href="{{UrlListView}}">목록</a>
         </div>
     </div>

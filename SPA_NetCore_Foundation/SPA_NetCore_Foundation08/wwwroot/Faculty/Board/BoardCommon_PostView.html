@@ -17,18 +17,18 @@
     </div>
 </div>
 
-<div class="PostView_PostContent">
+<div class="PostViewContent">
     <div id="divViewer"></div>
 </div>
 
-<div class="PostView_PostTools container">
+<div class="PostViewTools container">
     <div class="row">
-        <div class="PostTools_Left col">
+        <div class="Left col">
             <button class="btn btn-primary" onclick="BoardCA.PostCreateShow()">글쓰기</button>
             <button class="btn btn-outline-primary" onclick="BoardCA.PostEditShow({{idBoardPost}});">수정</button>
             <button class="btn btn-outline-dark" onclick="BoardCA.PostDeleteShow({{idBoardPost}});">삭제</button>
         </div>
-        <div class="PostTools_Right col">
+        <div class="Right col">
             <a class="btn btn-primary" href="{{UrlListView}}">목록</a>
         </div>
     </div>
