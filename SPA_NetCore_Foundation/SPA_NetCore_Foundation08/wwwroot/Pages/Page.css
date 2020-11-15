@@ -19,16 +19,6 @@ body{
 }
 
 /* ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
-    Footer
-◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇ */
-#divFooter {
-    margin-top: 10px;
-    padding: 5px 0;
-    border-top: 1px solid #888;
-
-    text-align:center;
-}
-/* ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
     Page  
 ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇ */
 #divPage {
@@ -68,6 +58,16 @@ body{
 
 
 #divMainMenu {
+}
+
+/* ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+    Footer
+◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇ */
+#divFooter {
+    margin-top: 10px;
+    padding: 5px 0;
+    border-top: 1px solid #888;
+    text-align: center;
 }
 
 
