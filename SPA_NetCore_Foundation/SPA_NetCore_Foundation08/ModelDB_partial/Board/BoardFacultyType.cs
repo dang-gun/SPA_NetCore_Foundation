@@ -33,11 +33,6 @@ namespace ModelDB
         MyList = 1 << 2,
 
         /// <summary>
-        /// 즐겨찾기 기능 허용 여부
-        /// </summary>
-        Favorites = 1 << 3,
-
-        /// <summary>
         /// 전체 권한
         /// </summary>
         All = int.MaxValue

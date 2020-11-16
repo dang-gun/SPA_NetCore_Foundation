@@ -2,11 +2,10 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ModelDB;
 
-namespace SPA_NetCore_Foundation06.Migrations
+namespace SPA_NetCore_Foundation07.Migrations
 {
     [DbContext(typeof(SpaNetCoreFoundationContext))]
     partial class SpaNetCoreFoundationContextModelSnapshot : ModelSnapshot
@@ -15,22 +14,19 @@ namespace SPA_NetCore_Foundation06.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.4")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "3.1.4");
 
             modelBuilder.Entity("ModelDB.User", b =>
                 {
                     b.Property<long>("idUser")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("SignEmail")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("idUser");
 
@@ -51,24 +47,53 @@ namespace SPA_NetCore_Foundation06.Migrations
                         });
                 });
 
+            modelBuilder.Entity("ModelDB.UserInfo", b =>
+                {
+                    b.Property<long>("idUserInfo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PlatformInfo")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("RefreshDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("SignInDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("SignUpDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ViewName")
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(16);
+
+                    b.Property<long>("idUser")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("idUserInfo");
+
+                    b.ToTable("UserInfo");
+                });
+
             modelBuilder.Entity("ModelDB.UserSignIn", b =>
                 {
                     b.Property<long>("idUserSignIn")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("RefreshDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("RefreshToken")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("SignInDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<long>("idUser")
-                        .HasColumnType("bigint");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("idUserSignIn");
 

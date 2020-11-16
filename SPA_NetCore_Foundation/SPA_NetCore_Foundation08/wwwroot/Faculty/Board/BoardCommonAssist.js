@@ -16,24 +16,23 @@ BoardCA.FileUrl = {};
 
 BoardCA.FileUrl.BoardInfoJson = "/Faculty/Board/BoardInfo.json";
 
-BoardCA.FileUrl.Body = "/Faculty/Board/BoardCommon_Body.html"
-BoardCA.FileUrl.Body_Div = "/Faculty/Board/BoardCommon_Body_Div.html"
-BoardCA.FileUrl.Body_DivAd = "/Faculty/Board/BoardCommon_Body_DivAd.html"
-BoardCA.FileUrl.ListItem = "/Faculty/Board/BoardCommon_ListItem.html"
-BoardCA.FileUrl.ListItem_BigThumbnail = "/Faculty/Board/BoardCommon_ListItem_BigThumbnail.html"
-BoardCA.FileUrl.PostCreate = "/Faculty/Board/BoardCommon_PostCreate.html"
-BoardCA.FileUrl.PostEdit = "/Faculty/Board/BoardCommon_PostEdit.html"
-BoardCA.FileUrl.PostReply_ListItem = "/Faculty/Board/BoardCommon_PostReply_ListItem.html"
-BoardCA.FileUrl.PostView = "/Faculty/Board/BoardCommon_PostView.html"
-BoardCA.FileUrl.PostView_SummaryList = "/Faculty/Board/BoardCommon_PostView_SummaryList.html"
-BoardCA.FileUrl.Title = "/Faculty/Board/BoardCommon_Title.html"
-BoardCA.FileUrl.Title_Empty = "/Faculty/Board/BoardCommon_Title_Empty.html"
-BoardCA.FileUrl.VideoInsert = "/Faculty/Board/BoardCommon_VideoInsert.html"
+BoardCA.FileUrl.Body = "/Faculty/Board/BoardCommon_Body.html";
+BoardCA.FileUrl.Body_Div = "/Faculty/Board/BoardCommon_Body_Div.html";
+BoardCA.FileUrl.Body_DivAd = "/Faculty/Board/BoardCommon_Body_DivAd.html";
+BoardCA.FileUrl.ListItem = "/Faculty/Board/BoardCommon_ListItem.html";
+BoardCA.FileUrl.ListItem_BigThumbnail = "/Faculty/Board/BoardCommon_ListItem_BigThumbnail.html";
+BoardCA.FileUrl.PostCreate = "/Faculty/Board/BoardCommon_PostCreate.html";
+BoardCA.FileUrl.PostEdit = "/Faculty/Board/BoardCommon_PostEdit.html";
+BoardCA.FileUrl.PostReply_ListItem = "/Faculty/Board/BoardCommon_PostReply_ListItem.html";
+BoardCA.FileUrl.PostView = "/Faculty/Board/BoardCommon_PostView.html";
+BoardCA.FileUrl.Title = "/Faculty/Board/BoardCommon_Title.html";
+BoardCA.FileUrl.Title_Empty = "/Faculty/Board/BoardCommon_Title_Empty.html";
+BoardCA.FileUrl.VideoInsert = "/Faculty/Board/BoardCommon_VideoInsert.html";
 
-BoardCA.FileUrl.Summary_ListItem = "/Faculty/Board/BoardSummary_ListItem.html"
-BoardCA.FileUrl.Summary_ListItem_BigThumbnail = "/Faculty/Board/BoardSummary_ListItem_BigThumbnail.html"
-BoardCA.FileUrl.Summary_ListItem_BigThumbnail_Favorites = "/Faculty/Board/BoardSummary_ListItem_BigThumbnail_Favorites.html"
-BoardCA.FileUrl.Summary_NoThumbnailListItem = "/Faculty/Board/BoardSummary_NoThumbnailListItem.html"
+BoardCA.FileUrl.Summary_ListItem = "/Faculty/Board/BoardSummary_ListItem.html";
+BoardCA.FileUrl.Summary_ListItem_BigThumbnail = "/Faculty/Board/BoardSummary_ListItem_BigThumbnail.html";
+BoardCA.FileUrl.Summary_ListItem_BigThumbnail_Favorites = "/Faculty/Board/BoardSummary_ListItem_BigThumbnail_Favorites.html";
+BoardCA.FileUrl.Summary_NoThumbnailListItem = "/Faculty/Board/BoardSummary_NoThumbnailListItem.html";
 
 /* ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
  * 게시판에 사용될 데이터
@@ -65,23 +64,6 @@ BoardCA.ModeType = {
     InfiniteScroll: 1,
 
 };
-
-/** 게시판 즐겨찾기 타입 */
-BoardCA.BoardFavoritesType = {
-    /** 
-     * 표시안함
-     * */
-    None: 0,
-
-    /** 
-     * 추가되있음
-     */
-    Add: 1,
-
-    /** 없다 */
-    Nothing: 2,
-};
-
 
 
 /* ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
@@ -388,111 +370,6 @@ BoardCA.Action = function (bItem)
         BoardCA.Reset_List(jsonQuery["pn"], bItemTemp);
     }
 
-};
-
-
-//◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
-// 즐겨찾기 관련
-//◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
-
-/** 즐겨찾기 제목 */
-BoardCA.FavoritesTitle = "즐겨찾기";
-
-/**
- * 즐겨찾기 추가
- * @param {any} domBtn
- * @param {any} idBoardPost
- */
-BoardCA.FavoritesAdd = function (domBtn, idBoardPost)
-{
-    var domBtnTemp = $(domBtn);
-
-    AA.post(AA.TokenRelayType.HeadAdd,
-        {
-            url: FS_Api.BoardFavorites_Add
-            , data: { idBoardPost: idBoardPost }
-            , success: function (jsonData)
-            {
-                if ("0" === jsonData.InfoCode)
-                {//에러 없음
-                    GlobalStatic.MessageBox_Info(BoardCA.FavoritesTitle
-                        , "즐겨찾기에 추가되었습니다.");
-
-                    //css 수정
-                    domBtnTemp.addClass("BoardFavorites_Add");
-                    domBtnTemp.removeClass("BoardFavorites_Nothing");
-                }
-                else
-                {//에러 있음
-                    GlobalStatic.MessageBox_Error(
-                        BoardCA.FavoritesTitle
-                        , jsonData.Message);
-                }
-            }
-            , error: function (error)
-            {
-                console.log(error);
-            }
-        });
-};
-
-/**
- * 즐겨찾기 제거
- * @param {any} domBtn
- * @param {any} idBoardPost
- */
-BoardCA.FavoritesDelete = function (domBtn, idBoardPost)
-{
-    var domBtnTemp = $(domBtn);
-
-    AA.delete(AA.TokenRelayType.HeadAdd,
-        {
-            url: FS_Api.BoardFavorites_Delete
-            , data: { idBoardPost: idBoardPost }
-            , success: function (jsonData)
-            {
-                if ("0" === jsonData.InfoCode)
-                {//에러 없음
-                    GlobalStatic.MessageBox_Info(
-                        BoardCA.FavoritesTitle
-                        , "즐겨찾기에서 제외됐습니다.");
-
-                    //css 수정
-                    domBtnTemp.removeClass("BoardFavorites_Add");
-                    domBtnTemp.addClass("BoardFavorites_Nothing");
-
-                }
-                else
-                {//에러 있음
-                    GlobalStatic.MessageBox_Error(
-                        BoardCA.FavoritesTitle
-                        , jsonData.Message);
-                }
-            }
-            , error: function (error)
-            {
-                console.log(error);
-            }
-        });
-};
-
-BoardCA.FavoritesAuto = function (domBtnThis, event, idBoardPost)
-{
-    var domBtn = $(domBtnThis);
-    var nBP = dgIsObject.IsIntValue(idBoardPost);
-
-
-    if (true === domBtn.hasClass("BoardFavorites_Add"))
-    {//추가되있는 항목이다.
-        //제외시킨다.
-        BoardCA.FavoritesDelete(domBtn, nBP);
-    }
-    else
-    {//제외된 항목이다.
-        //추가 시킨다.
-        BoardCA.FavoritesAdd(domBtn, nBP);
-    }
-    
 };
 
 
@@ -831,24 +708,6 @@ BoardCA.Summary.BindItem_Items = function (
         {//썸네일이 없다.
             jsonItemData.ThumbnailUrl = "";
             jsonItemData.ThumbnailStyle = "visibility:hidden";
-        }
-
-        //즐겨찾기 여부
-        switch (jsonItemData.FavoritesType)
-        {
-            case BoardCA.BoardFavoritesType.None:
-                jsonItemData.FavoritesCss = "d-none";
-                break;
-            case BoardCA.BoardFavoritesType.Add:
-                jsonItemData.FavoritesCss = " BoardFavorites_Add";
-                break;
-            case BoardCA.BoardFavoritesType.Nothing:
-                jsonItemData.FavoritesCss = " BoardFavorites_Nothing";
-                break;
-
-            default:
-                jsonItemData.FavoritesCss = "";
-                break;
         }
 
         sHtmlTemp

@@ -112,7 +112,7 @@ namespace SPA_NetCore_Foundation08.Migrations
                             AuthorityDefault = 0,
                             BoardFaculty = 0,
                             BoardState = 1,
-                            CreateDate = new DateTime(2020, 10, 10, 5, 4, 31, 706, DateTimeKind.Local).AddTicks(8425),
+                            CreateDate = new DateTime(2020, 11, 17, 5, 20, 50, 962, DateTimeKind.Local).AddTicks(4518),
                             Memo = "테스트용 게시판",
                             ShowCount = (short)0,
                             Title = "Test",
@@ -306,9 +306,6 @@ namespace SPA_NetCore_Foundation08.Migrations
                     b.Property<long>("idUser")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("idUser_Forwarding")
-                        .HasColumnType("bigint");
-
                     b.HasKey("idBoardPost");
 
                     b.ToTable("BoardPost");
@@ -324,11 +321,10 @@ namespace SPA_NetCore_Foundation08.Migrations
                             Title = "DB 생성후 테스트용 자동생성 게시물입니다.",
                             ViewCount = 0L,
                             ViewCountNone = 0L,
-                            WriteDate = new DateTime(2020, 10, 10, 5, 4, 31, 708, DateTimeKind.Local).AddTicks(164),
+                            WriteDate = new DateTime(2020, 11, 17, 5, 20, 50, 963, DateTimeKind.Local).AddTicks(6284),
                             idBoard = 1L,
                             idBoardCategory = 0L,
-                            idUser = 1L,
-                            idUser_Forwarding = 0L
+                            idUser = 1L
                         });
                 });
 

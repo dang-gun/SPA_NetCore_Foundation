@@ -145,13 +145,6 @@ BoardCommon.prototype.jsonOption_Defult = {
     /** 포스트보기에 게시물 리스트 보일지 여부 */
     PostView_List: false,
 
-    /** 게시물 보기시 요약 리스트 표시 여부 
-     * 이것만 가지고 표시되는건 아니고 FileUrl_PostView에 
-     * '<div id="divSummaryList">'영역이 있어야 된다.
-     */
-    PostView_SummaryList: false,
-    /** 게시물 보기시 요약 리스트 표시할때 사용할 url */
-    PostView_SummaryList_Url: "",
 
     /** 
      * 게시판 모드
@@ -189,6 +182,8 @@ BoardCommon.prototype.DataBind = new DG_JsDataBind();
 
 /** html로드가 끝났는지 여부 */
 BoardCommon.prototype.HtmlLoadComplete = true;
+/** 바디로 사용할 html */
+BoardCommon.prototype.BoardCommon_BodyHtml = "";
 /** 타이틀로 사용할 html */
 BoardCommon.prototype.BoardCommon_TitleHtml = "";
 /** 리스트 아이템 html */
@@ -209,6 +204,8 @@ BoardCommon.prototype.BoardCommon_VideoInsertHtml = "";
 /** 테이블 타겟 오브젝트 */
 BoardCommon.prototype.TableArea = null;
 
+/** 로딩 표시 영역 */
+BoardCommon.prototype.BoardComm_Loading = null;
 /** 포스트 표시 영역 */
 BoardCommon.prototype.BoardComm_PostView = null;
 /** 리플 영역 */
@@ -393,8 +390,10 @@ BoardCommon.prototype.Reset = function ()
         }
     }
 
+    //게시판 css 추가
+    objThis.TableArea.addClass("BoardComm");
+
     //게시판 바디  만들기
-    //objThis.TableArea.html(objThis.BoardCommon_BodyHtml);
     objThis.TableArea.html(
         objThis.DataBind.DataBind_All(
             objThis.BoardCommon_BodyHtml
@@ -402,6 +401,8 @@ BoardCommon.prototype.Reset = function ()
             .ResultString);
 
     //자주쓰는 영역 찾기
+    objThis.BoardComm_Loading = objThis.TableArea.find(".BoardComm_Loading");
+
     objThis.BoardComm_PostView = objThis.TableArea.find(".BoardComm_PostView");
 
     objThis.BoardComm_List = objThis.TableArea.find(".BoardComm_List");
@@ -416,6 +417,7 @@ BoardCommon.prototype.Reset = function ()
     objThis.BoardComm_Reply = objThis.TableArea.find(".BoardComm_Reply");
     objThis.BoardComm_Reply_List = objThis.TableArea.find(".BoardComm_Reply_List");
     objThis.BoardComm_Reply_Write = objThis.TableArea.find(".BoardComm_Reply_Write");
+
 };
 
 /**
@@ -449,6 +451,25 @@ BoardCommon.prototype.Parent_OnScroll = function (objThis, domParentArea, domLis
         }
     }
 };
+
+/**
+ * 게시판 로딩 표시
+ * @param {any} bShow
+ */
+BoardCommon.prototype.Loading = function (bShow)
+{
+    var objThis = this;
+
+    if (true === bShow)
+    {//로딩 표시
+        objThis.BoardComm_Loading.removeClass("d-none");
+    }
+    else
+    {//로딩 제거
+        objThis.BoardComm_Loading.addClass("d-none");
+    }
+};
+
 
 /**
  * 포스트 뷰 표시/지우기
@@ -558,7 +579,7 @@ BoardCommon.prototype.BindTitle = function (
     var jsonQuery = getParamsSPA();
     //포스트뷰 대상이 있는지 확인
     var pvid = dgIsObject.IsIntValue(jsonQuery["pvid"]);
-    
+    //아이템 바인딩 여부
     var bItemTemp = bItem;
 
     var jsonTitle = {
@@ -568,6 +589,9 @@ BoardCommon.prototype.BindTitle = function (
         , ViewCount: "조회"
         , WriteDate: "작성일"
     };
+
+    //게시판 로딩 표시
+    objThis.Loading(true);
 
     //포스트 지우기 여부
     if (0 < pvid)
@@ -609,6 +633,9 @@ BoardCommon.prototype.BindTitle = function (
         {
             callback();
         }
+
+        //게시판 로딩 표시
+        objThis.Loading(false);
     }
 };
 
@@ -629,6 +656,9 @@ BoardCommon.prototype.BindItem = function (
 
     //아이템이 바인딩 중임을 알린다.
     objThis.BindItemLoading = true;
+
+    //게시판 로딩 표시
+    objThis.Loading(true);
 
     AA.get(AA.TokenRelayType.CaseByCase
         , {
@@ -775,16 +805,8 @@ BoardCommon.prototype.BindItem_Items = function (arrJsonData)
         jsonItemData.ViewCount = jsonItemData.ViewCount + jsonItemData.ViewCountNone;
 
         //포워딩 받은 글은 글쓴이에 포워딩 유저를 표시한다.
-        if (0 < jsonItemData.idUser_Forwarding)
-        {//포워딩 유저가 있다.
-            jsonItemData.ViewUserName = jsonItemData.UserName_Forwarding;
-            jsonItemData.ViewUserId = jsonItemData.idUser_Forwarding;
-        }
-        else
-        {//없다.
-            jsonItemData.ViewUserName = jsonItemData.UserName;
-            jsonItemData.ViewUserId = jsonItemData.idUser;
-        }
+        jsonItemData.ViewUserName = jsonItemData.UserName;
+        jsonItemData.ViewUserId = jsonItemData.idUser;
         
         sHtmlTemp
             += objThis.DataBind.DataBind_All(
@@ -792,6 +814,9 @@ BoardCommon.prototype.BindItem_Items = function (arrJsonData)
                 , jsonItemData)
                 .ResultString;
 
+
+        //게시판 로딩 제거
+        objThis.Loading(false);
     }
 
     //대상에 추가
@@ -1068,18 +1093,9 @@ BoardCommon.prototype.PostViewBind = function (jsonData)
     //조회수 계산
     jsonData.ViewCount = jsonData.ViewCount + jsonData.ViewCountNone;
 
+    //카테고리 텍스트
+    jsonData.PostCategoryText = "";
 
-    //포워딩 받은 글은 글쓴이에 포워딩 유저를 표시한다.
-    if (0 < jsonData.idUser_Forwarding)
-    {//포워딩 유저가 있다.
-        jsonData.ViewUserName = jsonData.UserName_Forwarding;
-        jsonData.ViewUserId = jsonData.idUser_Forwarding;
-    }
-    else
-    {//없다.
-        jsonData.ViewUserName = jsonData.UserName;
-        jsonData.ViewUserId = jsonData.idUser;
-    }
 
     //수정 권한 확인
     if (true === jsonData.EditAuth)
@@ -1129,26 +1145,18 @@ BoardCommon.prototype.PostViewBind = function (jsonData)
     $("#divViewer").html(jsonData.Content);
 
 
+    //게시판 로딩 제거
+    objThis.Loading(false);
+
+
+
+
     //리플 표시.
     if (true === jsonData.ReplyList)
     {
         objThis.PostReplyList(nBoardIDTemp, idBoardPostTemp);
     }
 
-    //요약 리스트 표시 여부
-    if (true === objThis.BoardOption.PostView_SummaryList)
-    {
-        $(document).ready(function ()
-        {
-            BoardCA.Summary.BindItem_Count({
-                domDiv: $("#divSummaryList"),
-                arrBoardId: [nBoardIDTemp],
-                sUrl: objThis.BoardOption.PostView_SummaryList_Url,
-                ItemHtml: BoardCA.Summary.BoardSummary_ListItem_BigThumbnailHtml,
-                nShowCount: 10
-            });
-        });
-    }
 };
 
 BoardCommon.prototype.PostReplyList = function (idBoardPost)
@@ -1720,7 +1728,7 @@ BoardCommon.prototype.PostCreate = function ()
     var sMessage = "";
 
     //게시판 아이디
-    var idBoard = dgIsObject.IsIntValue($("#tableBoard_PostCreate").attr("idBoard")); 
+    var idBoard = objThis.BoardID;
 
     //카테고리 처리 클래스
     var bps = new BoardPostState();

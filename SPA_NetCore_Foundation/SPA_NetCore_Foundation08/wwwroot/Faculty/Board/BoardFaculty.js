@@ -28,10 +28,6 @@ BoardFaculty.prototype.BoardFacultyType =
     */
     MyList: 1 << 2,
 
-    /**
-    즐겨찾기 기능 허용 여부
-    */
-    Favorites : 1 << 3
 };
 
 
@@ -43,7 +39,6 @@ BoardFaculty.prototype.BoardFacultyTypeName = {
     ReplyList: "리플 리스트를 표시할지 여부",
 
     MyList: "자신의 리스트만 표시할지 여부",
-    Favorites: "즐겨찾기 기능 허용 여부"
 };
 
 /** 체크 박스 생성에 사용할 Html */

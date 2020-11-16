@@ -479,31 +479,40 @@
             <param name="builder"></param>
             <returns></returns>
         </member>
-        <member name="T:SPA_NetCore_Foundation06.Migrations.Initialize">
-            <summary>
-            
-            </summary>
+        <member name="T:SPA_NetCore_Foundation07.Migrations.Initialize">
             <summary>
             
             </summary>
         </member>
-        <member name="M:SPA_NetCore_Foundation06.Migrations.Initialize.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:SPA_NetCore_Foundation07.Migrations.Initialize.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <summary>
             
             </summary>
             <param name="migrationBuilder"></param>
         </member>
-        <member name="M:SPA_NetCore_Foundation06.Migrations.Initialize.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:SPA_NetCore_Foundation07.Migrations.Initialize.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <summary>
             
             </summary>
             <param name="migrationBuilder"></param>
         </member>
-        <member name="M:SPA_NetCore_Foundation06.Migrations.Initialize.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="T:SPA_NetCore_Foundation07.Program">
             <summary>
             
             </summary>
-            <param name="modelBuilder"></param>
+        </member>
+        <member name="M:SPA_NetCore_Foundation07.Program.Main(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:SPA_NetCore_Foundation07.Program.CreateWebHostBuilder(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
         </member>
         <member name="T:ModelDB.SpaNetCoreFoundationContext">
             <summary>
@@ -917,24 +926,6 @@
             유저 정보 저장
             </summary>
             <param name="user"></param>
-        </member>
-        <member name="T:SPA_NetCore_Foundation07.Program">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:SPA_NetCore_Foundation07.Program.Main(System.String[])">
-            <summary>
-            
-            </summary>
-            <param name="args"></param>
-        </member>
-        <member name="M:SPA_NetCore_Foundation07.Program.CreateWebHostBuilder(System.String[])">
-            <summary>
-            
-            </summary>
-            <param name="args"></param>
-            <returns></returns>
         </member>
     </members>
 </doc>

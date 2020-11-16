@@ -183,11 +183,8 @@ namespace SPA_NetCore_Foundation.Controllers
                             = (from bp in db1.BoardPost
                                from ui in db1.UserInfo
                                               .Where(a => a.idUser == bp.idUser)
-                               from ui_f in db1.UserInfo
-                                              .Where(a => a.idUser == bp.idUser_Forwarding)
-                                              .DefaultIfEmpty()
                                where bp.PostState == BoardPostStateType.Notice_All
-                               select new BoardPostListModel(bp, ui, ui_f, BoardItemType.NoticeAll))
+                               select new BoardPostListModel(bp, ui, BoardItemType.NoticeAll))
                             .ToArray();
                         listReturn.AddRange(bplNotice_All);
 
@@ -197,12 +194,9 @@ namespace SPA_NetCore_Foundation.Controllers
                             = (from bp in db1.BoardPost
                                from ui in db1.UserInfo
                                               .Where(a => a.idUser == bp.idUser)
-                               from ui_f in db1.UserInfo
-                                              .Where(a => a.idUser == bp.idUser_Forwarding)
-                                              .DefaultIfEmpty()
                                where bp.idBoard == idBoard
                                     && bp.PostState == BoardPostStateType.Notice_Board
-                               select new BoardPostListModel(bp, ui, ui_f, BoardItemType.NoticeBoard))
+                               select new BoardPostListModel(bp, ui, BoardItemType.NoticeBoard))
                             .ToArray();
                         //전체 공지 추가
                         listReturn.AddRange(bplNotice_Board);
@@ -245,10 +239,7 @@ namespace SPA_NetCore_Foundation.Controllers
                             (from bp in iqBP
                              from ui in db1.UserInfo
                                             .Where(a => a.idUser == bp.idUser)
-                             from ui_f in db1.UserInfo
-                                            .Where(a => a.idUser == bp.idUser_Forwarding)
-                                            .DefaultIfEmpty()
-                             select new BoardPostListModel(bp, ui, ui_f, BoardItemType.None))
+                             select new BoardPostListModel(bp, ui, BoardItemType.None))
                               .Skip(armResult.ShowCount * (armResult.PageNumber - 1))
                               .Take(armResult.ShowCount)
                               .ToArray()
@@ -568,16 +559,6 @@ namespace SPA_NetCore_Foundation.Controllers
                                     .Where(m => m.idUser == findBP.idUser)
                                     .FirstOrDefault();
 
-                            //포워딩 작성자 정보 검색
-                            UserInfo findUI_Forwarding = null;
-                            if (0 < findBP.idUser_Forwarding)
-                            {//포워딩 정보가 있다.
-                                findUI_Forwarding
-                                    = db1.UserInfo
-                                    .Where(m => m.idUser == findBP.idUser_Forwarding)
-                                    .FirstOrDefault();
-                            }
-
                             //내가 작성자인지 확인
                             if (cm.id_int == findBP.idUser)
                             {//내가 작성자다.
@@ -615,7 +596,6 @@ namespace SPA_NetCore_Foundation.Controllers
                             rmResult.Reset(
                                 findBP
                                 , findUI
-                                , findUI_Forwarding
                                 , findBC);
                         }
 
@@ -1373,7 +1353,6 @@ namespace SPA_NetCore_Foundation.Controllers
         /// <param name="nBoardCategory"></param>
         /// <param name="sContent"></param>
         /// <param name="listFileInfo"></param>
-        /// <param name="idUserTarget">전달 대상 유저</param>
         /// <returns></returns>
         [HttpPost]
         [Authorize]
@@ -1384,8 +1363,7 @@ namespace SPA_NetCore_Foundation.Controllers
             , [FromForm] BoardPostStateType typeBoardState
             , [FromForm] int nBoardCategory
             , [FromForm] string sContent
-            , [FromForm] FileInfoModel[] listFileInfo
-            , [FromForm] long idUserTarget)
+            , [FromForm] FileInfoModel[] listFileInfo)
         {
 
             return this.PostCreate(
@@ -1394,8 +1372,7 @@ namespace SPA_NetCore_Foundation.Controllers
                     , typeBoardState
                     , nBoardCategory
                     , sContent
-                    , listFileInfo
-                    , idUserTarget);
+                    , listFileInfo);
         }
 
 
@@ -1408,7 +1385,6 @@ namespace SPA_NetCore_Foundation.Controllers
         /// <param name="nBoardCategory"></param>
         /// <param name="sContent"></param>
         /// <param name="listFileInfo"></param>
-        /// <param name="idUserTarget">전달 대상 유저</param>
         /// <returns></returns>
         [HttpPost]
         [DisableRequestSizeLimit]
@@ -1419,8 +1395,7 @@ namespace SPA_NetCore_Foundation.Controllers
             , [FromForm] BoardPostStateType typeBoardState
             , [FromForm] int nBoardCategory
             , [FromForm] string sContent
-            , [FromForm] FileInfoModel[] listFileInfo
-            , [FromForm] long idUserTarget)
+            , [FromForm] FileInfoModel[] listFileInfo)
         {
             //유저 정보 추출
             ClaimModel cm = new ClaimModel(((ClaimsIdentity)User.Identity).Claims);
@@ -1432,8 +1407,7 @@ namespace SPA_NetCore_Foundation.Controllers
                 , typeBoardState
                 , nBoardCategory
                 , sContent
-                , listFileInfo
-                , idUserTarget);
+                , listFileInfo);
         }
 
         /// <summary>
@@ -1446,7 +1420,6 @@ namespace SPA_NetCore_Foundation.Controllers
         /// <param name="nBoardCategory"></param>
         /// <param name="sContent"></param>
         /// <param name="listFileInfo"></param>
-        /// <param name="idUserTarget"></param>
         /// <returns></returns>
         private ActionResult<BoardPostCreateResultModel> PostCreateProcess(
             long idUser
@@ -1455,8 +1428,7 @@ namespace SPA_NetCore_Foundation.Controllers
             , BoardPostStateType typeBoardState
             , int nBoardCategory
             , string sContent
-            , FileInfoModel[] listFileInfo
-            , long idUserTarget)
+            , FileInfoModel[] listFileInfo)
         {
             ApiResultReady armResult = new ApiResultReady(this);
             BoardPostCreateResultModel rmReturn = new BoardPostCreateResultModel();
@@ -1520,19 +1492,8 @@ namespace SPA_NetCore_Foundation.Controllers
                         BoardPost newBP = new BoardPost();
                         newBP.idBoard = idBoard;
                         newBP.idBoardCategory = nBoardCategory;
-
-                        if (0 >= idUserTarget)
-                        {//전달 대상이 없다
-                            //내글이다.
-                            newBP.idUser = idUser;
-                        }
-                        else
-                        {
-                            //전달 대상을 작성자로 해준다.
-                            newBP.idUser = idUserTarget;
-                            //포워딩 정보에 나를 넣는다.
-                            newBP.idUser_Forwarding = idUser;
-                        }
+                        newBP.idUser = idUser;
+                        
 
                         newBP.Title = sTitle.WithMaxLength(GlobalStatic.BoardTitleMexLength);
                         newBP.WriteDate = dtNow;
@@ -1775,8 +1736,7 @@ namespace SPA_NetCore_Foundation.Controllers
                     , BoardPostStateType.Normal
                     , 0
                     , sContent
-                    , listFileInfo
-                    , 0);
+                    , listFileInfo);
             }
             else
             {
@@ -2357,20 +2317,6 @@ namespace SPA_NetCore_Foundation.Controllers
                         armResult.InfoCode = "-3";
                         armResult.Message = "다른 사람글은 삭제할 수 없습니다.";
                     }
-                    else if ((cm.id_int == findBP.idUser)
-                        && (0 != findBP.idUser_Forwarding))
-                    {//내글인데 다른살람이 전달한 글이다.
-                        //다른사람 글 수정권한이 없다.
-                        armResult.InfoCode = "-4";
-                        armResult.Message = "다른 사람이 전달한 글은 삭제 할 수 없습니다.";
-                    }
-                    else if ((cm.id_int != findBP.idUser)
-                        && (cm.id_int != findBP.idUser_Forwarding))
-                    {//내글이 아닌데.
-                        //내가 전달한 글이 아니다.
-                        armResult.InfoCode = "-5";
-                        armResult.Message = "다른 사람이 전달한 글은 삭제 할 수 없습니다.";
-                    }
                     else
                     {
                         //포스트*******************************
@@ -2482,8 +2428,7 @@ namespace SPA_NetCore_Foundation.Controllers
                         rmReturn.List
                             = (from bp in iqBP
                                from ui in db1.UserInfo.Where(a => a.idUser == bp.idUser)
-                               from ui_f in db1.UserInfo.Where(a => a.idUser == bp.idUser_Forwarding).DefaultIfEmpty()
-                               select new BoardPostListModel(bp, ui, ui_f, BoardItemType.None))
+                               select new BoardPostListModel(bp, ui, BoardItemType.None))
                                .Distinct()
                               .Take(nShowCountTemp)
                               .ToList();

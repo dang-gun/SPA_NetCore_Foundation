@@ -1,24 +1,28 @@
-﻿<div class="PostHeaderArea">
-    <div class="TitleArea">
-        <div class="TitleText">{{Title}}</div>
+﻿<div class="">
+    <!-- Post title -->
+    <div class="card-title Title">
+        <span class="CategoryText">{{PostCategoryText}}</span>{{Title}}
     </div>
-    <div class="PostInfoArea">
-        <div class="Step1">
-            <div class="UserInfoArea">
-                <a id="aUserName{{ViewUserId}}" href="javascript:void(0);" class="UserName">{{ViewUserName}}</a>
-            </div>
-            <div class="PostInfo">
-                <span class="ViewCount">조회 : {{ViewCount}}</span>
-            </div>
-        </div>
-        <div class="Step2">
-            <span class="CreateDate">{{WriteDate:DateTime}}</span>
-        </div>
-    </div>
-</div>
+    <hr>
 
-<div class="PostViewContent">
+    <!-- Post Info -->
+    <div class="PostViewInfo">
+        <div class="Left">
+            <a id="aUserName{{ViewUserId}}" href="javascript:void(0);" class="UserName">{{UserName}}</a>
+        </div>
+        <div class="Right">
+            <span class="ViewCount">조회&nbsp;&nbsp;{{ViewCount}}</span>
+            <span class="TextBar"> | </span>
+            <span class="WriteDate">작성&nbsp;&nbsp;{{WriteDate:DateTime}}</span>
+        </div>
+    </div>
+    <hr>
+
+    <!-- Post Content -->
     <div id="divViewer"></div>
+
+    <hr>
+
 </div>
 
 <div class="PostViewTools container">

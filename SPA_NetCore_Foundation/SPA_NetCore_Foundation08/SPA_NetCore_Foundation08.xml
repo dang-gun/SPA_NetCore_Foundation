@@ -159,7 +159,7 @@
             <param name="idBoard"></param>
             <returns></returns>
         </member>
-        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostCreate_Auth(System.Int32,System.String,ModelDB.BoardPostStateType,System.Int32,System.String,FileListModel.FileInfoModel[],System.Int64)">
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostCreate_Auth(System.Int32,System.String,ModelDB.BoardPostStateType,System.Int32,System.String,FileListModel.FileInfoModel[])">
             <summary>
             포스트 작성 - 권한 전달 필수
             </summary>
@@ -169,10 +169,9 @@
             <param name="nBoardCategory"></param>
             <param name="sContent"></param>
             <param name="listFileInfo"></param>
-            <param name="idUserTarget">전달 대상 유저</param>
             <returns></returns>
         </member>
-        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostCreate(System.Int64,System.String,ModelDB.BoardPostStateType,System.Int32,System.String,FileListModel.FileInfoModel[],System.Int64)">
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostCreate(System.Int64,System.String,ModelDB.BoardPostStateType,System.Int32,System.String,FileListModel.FileInfoModel[])">
             <summary>
             포스트 작성
             </summary>
@@ -182,10 +181,9 @@
             <param name="nBoardCategory"></param>
             <param name="sContent"></param>
             <param name="listFileInfo"></param>
-            <param name="idUserTarget">전달 대상 유저</param>
             <returns></returns>
         </member>
-        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostCreateProcess(System.Int64,System.Int64,System.String,ModelDB.BoardPostStateType,System.Int32,System.String,FileListModel.FileInfoModel[],System.Int64)">
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostCreateProcess(System.Int64,System.Int64,System.String,ModelDB.BoardPostStateType,System.Int32,System.String,FileListModel.FileInfoModel[])">
             <summary>
             
             </summary>
@@ -196,7 +194,6 @@
             <param name="nBoardCategory"></param>
             <param name="sContent"></param>
             <param name="listFileInfo"></param>
-            <param name="idUserTarget"></param>
             <returns></returns>
         </member>
         <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostCreate_Api(System.String,System.Int64,System.String,System.String,FileListModel.FileInfoModel[])">
@@ -1098,6 +1095,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:SPA_NetCore_Foundation08.Migrations.Initialize.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <summary>
@@ -1110,6 +1110,38 @@
             
             </summary>
             <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.Initialize.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+        <member name="T:SPA_NetCore_Foundation08.Migrations.BoardPost_ForwardingDelete">
+            <summary>
+            
+            </summary>
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.BoardPost_ForwardingDelete.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.BoardPost_ForwardingDelete.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.BoardPost_ForwardingDelete.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="modelBuilder"></param>
         </member>
         <member name="T:ModelDB.ApiLog">
             <summary>
@@ -1359,13 +1391,6 @@
         <member name="P:ModelDB.BoardPost.idUser">
             <summary>
             소유 유저
-            </summary>
-        </member>
-        <member name="P:ModelDB.BoardPost.idUser_Forwarding">
-            <summary>
-            전달한 유저.
-            이 글을 다른 사람이 작성해서 소유 유저에게 전달한다.
-            0이거나 없으면 소유자가 작성한 글이다.
             </summary>
         </member>
         <member name="P:ModelDB.BoardPost.ViewCount">
@@ -1953,11 +1978,6 @@
         <member name="F:ModelDB.BoardFacultyType.MyList">
             <summary>
             자기리스트만 보이는 게시판인지 여부
-            </summary>
-        </member>
-        <member name="F:ModelDB.BoardFacultyType.Favorites">
-            <summary>
-            즐겨찾기 기능 허용 여부
             </summary>
         </member>
         <member name="F:ModelDB.BoardFacultyType.All">
@@ -2793,13 +2813,6 @@
             소유 유저
             </summary>
         </member>
-        <member name="P:BoardModel.BoardPostListModel.idUser_Forwarding">
-            <summary>
-            전달한 유저.
-            이 글을 다른 사람이 작성해서 소유 유저에게 전달한다.
-            0이거나 없으면 소유자가 작성한 글이다.
-            </summary>
-        </member>
         <member name="P:BoardModel.BoardPostListModel.ViewCount">
             <summary>
             조회수
@@ -2835,11 +2848,6 @@
             작성자 이름
             </summary>
         </member>
-        <member name="P:BoardModel.BoardPostListModel.UserName_Forwarding">
-            <summary>
-            포워딩 전달
-            </summary>
-        </member>
         <member name="P:BoardModel.BoardPostListModel.PostState">
             <summary>
             포스트 상태
@@ -2855,22 +2863,20 @@
             
             </summary>
         </member>
-        <member name="M:BoardModel.BoardPostListModel.#ctor(ModelDB.BoardPost,ModelDB.UserInfo,ModelDB.UserInfo,BoardModel.BoardItemType)">
+        <member name="M:BoardModel.BoardPostListModel.#ctor(ModelDB.BoardPost,ModelDB.UserInfo,BoardModel.BoardItemType)">
             <summary>
             
             </summary>
             <param name="bpData"></param>
             <param name="uiData"></param>
-            <param name="uiData_Forwarding"></param>
             <param name="typeBoardItem"></param>
         </member>
-        <member name="M:BoardModel.BoardPostListModel.Reset(ModelDB.BoardPost,ModelDB.UserInfo,ModelDB.UserInfo,BoardModel.BoardItemType)">
+        <member name="M:BoardModel.BoardPostListModel.Reset(ModelDB.BoardPost,ModelDB.UserInfo,BoardModel.BoardItemType)">
             <summary>
             
             </summary>
             <param name="bpData"></param>
             <param name="uiData"></param>
-            <param name="uiData_Forwarding"></param>
             <param name="typeBoardItem"></param>
         </member>
         <member name="T:BoardModel.BoardPostReplyCreateResultModel">
@@ -3042,13 +3048,6 @@
             소유 유저
             </summary>
         </member>
-        <member name="P:BoardModel.BoardPostViewResultModel.idUser_Forwarding">
-            <summary>
-            전달한 유저.
-            이 글을 다른 사람이 작성해서 소유 유저에게 전달한다.
-            0이거나 없으면 소유자가 작성한 글이다.
-            </summary>
-        </member>
         <member name="P:BoardModel.BoardPostViewResultModel.ViewCount">
             <summary>
             조회수
@@ -3072,11 +3071,6 @@
         <member name="P:BoardModel.BoardPostViewResultModel.UserName">
             <summary>
             유저 이름
-            </summary>
-        </member>
-        <member name="P:BoardModel.BoardPostViewResultModel.UserName_Forwarding">
-            <summary>
-            포워딩 유저 이름
             </summary>
         </member>
         <member name="P:BoardModel.BoardPostViewResultModel.Content">
@@ -3109,22 +3103,20 @@
             
             </summary>
         </member>
-        <member name="M:BoardModel.BoardPostViewResultModel.#ctor(ModelDB.BoardPost,ModelDB.UserInfo,ModelDB.UserInfo,ModelDB.BoardContent)">
+        <member name="M:BoardModel.BoardPostViewResultModel.#ctor(ModelDB.BoardPost,ModelDB.UserInfo,ModelDB.BoardContent)">
             <summary>
             
             </summary>
             <param name="bpData"></param>
             <param name="uiData"></param>
-            <param name="uiData_Forwarding"></param>
             <param name="bcData"></param>
         </member>
-        <member name="M:BoardModel.BoardPostViewResultModel.Reset(ModelDB.BoardPost,ModelDB.UserInfo,ModelDB.UserInfo,ModelDB.BoardContent)">
+        <member name="M:BoardModel.BoardPostViewResultModel.Reset(ModelDB.BoardPost,ModelDB.UserInfo,ModelDB.BoardContent)">
             <summary>
             
             </summary>
             <param name="bpData"></param>
             <param name="uiData"></param>
-            <param name="uiData_Forwarding"></param>
             <param name="bcData"></param>
         </member>
         <member name="T:FileListModel.FileInfoModel">

@@ -39,13 +39,6 @@ namespace ModelDB
         public long idUser { get; set; }
 
         /// <summary>
-        /// 전달한 유저.
-        /// 이 글을 다른 사람이 작성해서 소유 유저에게 전달한다.
-        /// 0이거나 없으면 소유자가 작성한 글이다.
-        /// </summary>
-        public long idUser_Forwarding { get; set; }
-
-        /// <summary>
         /// 조회수
         /// </summary>
         public long ViewCount { get; set; }

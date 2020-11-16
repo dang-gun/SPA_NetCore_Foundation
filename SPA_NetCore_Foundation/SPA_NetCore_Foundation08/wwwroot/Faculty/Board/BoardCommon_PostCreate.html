@@ -1,30 +1,43 @@
-﻿<div class="input-group mb-3">
-    <div class="input-group-prepend">
-        <span class="input-group-text" >제목</span>
+﻿<div class="card Board_PostCreate">
+    <div class="card-header card-header-primary">
+        <h4 class="card-title"><i class="fas fa-square"></i> 글쓰기</h4>
+        <p class="card-catagory"></p>
     </div>
-    <input type="text" id="txtBoard_PostCreate_Title" class="form-control Board_PostCreate_TitleInput" value="{{TitlePost}}">
-</div>
-
-<div id="divBoard_PostCreate_Category" class="input-group mb-3">
-    <div class="input-group-prepend">
-        <span class="input-group-text">구분</span>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table">
+                <tbody>
+                    <tr style="line-height:32px;">
+                        <td>제목</td>
+                        <td>
+                            <input type="text" id="txtBoard_PostCreate_Title" class="form-control Board_PostCreate_TitleInput" value="{{TitlePost}}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>구분</td>
+                        <td>
+                            <div >
+                                {{PostCategoryHtml}}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>첨부 파일</td>
+                        <td>
+                            <div id="divFileList"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" id="divBoard_PostCreate_Editor" class="Board_PostCreate_EditorWrap">
+                            <div id="divEditor"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="form-control">
-        {{PostCategoryHtml}}
-    </div>
 </div>
 
-<div>
-    <div id="divFileList"></div>
-</div>
-
-<div>
-    {{EditorLengthTitle}}<label id="labLength">0</label>/<label id="labLengthMax">0</label>
-</div>
-
-<div id="divBoard_PostCreate_Editor" class="Board_PostCreate_EditorWrap">
-    <div id="divEditor" ></div>
-</div>
 
 <div class="CreateTools container">
     <div class="row">

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace SPA_NetCore_Foundation06.Migrations
+namespace SPA_NetCore_Foundation07.Migrations
 {
     /// <summary>
     /// 
@@ -19,7 +19,7 @@ namespace SPA_NetCore_Foundation06.Migrations
                 columns: table => new
                 {
                     idUser = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     SignEmail = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true)
                 },
@@ -29,11 +29,29 @@ namespace SPA_NetCore_Foundation06.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserInfo",
+                columns: table => new
+                {
+                    idUserInfo = table.Column<long>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    idUser = table.Column<long>(nullable: false),
+                    ViewName = table.Column<string>(maxLength: 16, nullable: true),
+                    SignUpDate = table.Column<DateTime>(nullable: false),
+                    SignInDate = table.Column<DateTime>(nullable: false),
+                    RefreshDate = table.Column<DateTime>(nullable: false),
+                    PlatformInfo = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserInfo", x => x.idUserInfo);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserSignIn",
                 columns: table => new
                 {
                     idUserSignIn = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     idUser = table.Column<long>(nullable: false),
                     RefreshToken = table.Column<string>(nullable: true),
                     SignInDate = table.Column<DateTime>(nullable: false),
@@ -63,6 +81,9 @@ namespace SPA_NetCore_Foundation06.Migrations
         {
             migrationBuilder.DropTable(
                 name: "User");
+
+            migrationBuilder.DropTable(
+                name: "UserInfo");
 
             migrationBuilder.DropTable(
                 name: "UserSignIn");

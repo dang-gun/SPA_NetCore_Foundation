@@ -37,12 +37,7 @@ namespace BoardModel
         /// 소유 유저
         /// </summary>
         public long idUser { get; set; }
-        /// <summary>
-        /// 전달한 유저.
-        /// 이 글을 다른 사람이 작성해서 소유 유저에게 전달한다.
-        /// 0이거나 없으면 소유자가 작성한 글이다.
-        /// </summary>
-        public long idUser_Forwarding { get; set; }
+
 
         /// <summary>
         /// 조회수
@@ -76,10 +71,7 @@ namespace BoardModel
         /// 작성자 이름
         /// </summary>
         public string UserName { get; set; }
-        /// <summary>
-        /// 포워딩 전달
-        /// </summary>
-        public string UserName_Forwarding { get; set; }
+
 
         /// <summary>
         /// 포스트 상태
@@ -104,16 +96,13 @@ namespace BoardModel
         /// </summary>
         /// <param name="bpData"></param>
         /// <param name="uiData"></param>
-        /// <param name="uiData_Forwarding"></param>
         /// <param name="typeBoardItem"></param>
         public BoardPostListModel(BoardPost bpData
             , UserInfo uiData
-            , UserInfo uiData_Forwarding
             , BoardItemType typeBoardItem)
         {
             this.Reset(bpData
                 , uiData
-                , uiData_Forwarding
                 , typeBoardItem);
         }
 
@@ -123,11 +112,9 @@ namespace BoardModel
         /// </summary>
         /// <param name="bpData"></param>
         /// <param name="uiData"></param>
-        /// <param name="uiData_Forwarding"></param>
         /// <param name="typeBoardItem"></param>
         public void Reset(BoardPost bpData
             , UserInfo uiData
-            , UserInfo uiData_Forwarding
             , BoardItemType typeBoardItem)
         {
             this.idBoardPost = bpData.idBoardPost;
@@ -135,7 +122,6 @@ namespace BoardModel
             this.idBoardCategory = bpData.idBoardCategory;
             this.Title = bpData.Title;
             this.idUser = bpData.idUser;
-            this.idUser_Forwarding = bpData.idUser_Forwarding;
             this.ViewCount = bpData.ViewCount;
             this.ViewCountNone = bpData.ViewCountNone;
             this.ReplyCount = bpData.ReplyCount;
@@ -145,10 +131,6 @@ namespace BoardModel
             this.EditDate = bpData.EditDate;
 
             this.UserName = uiData.ViewName;
-            if (null != uiData_Forwarding)
-            {
-                this.UserName_Forwarding = uiData_Forwarding.ViewName;
-            }
 
             this.ItemType = typeBoardItem;
         }
