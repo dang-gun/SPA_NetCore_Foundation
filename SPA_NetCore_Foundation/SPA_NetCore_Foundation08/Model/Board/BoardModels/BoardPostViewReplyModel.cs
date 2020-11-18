@@ -44,20 +44,6 @@ namespace BoardModel
         /// </summary>
         /// <param name="uiData"></param>
         /// <param name="bcData"></param>
-        /// <param name="bType"></param>
-        public BoardPostViewReplyModel(
-            UserInfo uiData
-            , BoardPostReply bcData
-            , bool bType)
-        {
-            this.Reset(uiData, bcData);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="uiData"></param>
-        /// <param name="bcData"></param>
         public void Reset(
             UserInfo uiData
             , BoardPostReply bcData)
@@ -70,6 +56,16 @@ namespace BoardModel
 
             base.Title = bcData.Title;
             base.idUser = bcData.idUser;
+            if (null != uiData)
+            {
+                this.UserName = uiData.ViewName;
+            }
+            else
+            {
+                this.UserName = string.Empty;
+            }
+
+            base.NonMember_ViewName = bcData.NonMember_ViewName;
 
             base.ReplyState = bcData.ReplyState;
 
@@ -78,7 +74,6 @@ namespace BoardModel
 
             base.ReReplyCount = bcData.ReReplyCount;
 
-            this.UserName = uiData.ViewName;
 
 
             base.Content = bcData.Content;
@@ -117,7 +112,16 @@ namespace BoardModel
 
             base.ReReplyCount = bcData.ReReplyCount;
             base.idUser = bcData.idUser;
-            this.UserName = uiData.ViewName;
+            if (null != uiData)
+            {
+                this.UserName = uiData.ViewName;
+            }
+            else
+            {
+                this.UserName = string.Empty;
+            }
+
+            base.NonMember_ViewName = bcData.NonMember_ViewName;
 
             base.WriteDate = bcData.WriteDate;
             base.EditDate = bcData.EditDate;

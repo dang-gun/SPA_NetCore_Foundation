@@ -144,7 +144,10 @@ BoardCommon.prototype.jsonOption_Defult = {
 
     /** 포스트보기에 게시물 리스트 보일지 여부 */
     PostView_List: false,
-
+    /** 포스트보기에 댓글 리스트를 자동으로 열지 여부 */
+    PostView_ReplyOepn: true,
+    /** 포스트보기에 대댓글 리스트를 자동으로 열지 여부 */
+    PostView_ReReplyOepn: true,
 
     /** 
      * 게시판 모드
@@ -208,10 +211,14 @@ BoardCommon.prototype.TableArea = null;
 BoardCommon.prototype.BoardComm_Loading = null;
 /** 포스트 표시 영역 */
 BoardCommon.prototype.BoardComm_PostView = null;
-/** 리플 영역 */
+/** 댓글 영역 */
 BoardCommon.prototype.BoardComm_Reply = null;
 BoardCommon.prototype.BoardComm_Reply_List = null;
-BoardCommon.prototype.BoardComm_Reply_Write = null;
+BoardCommon.prototype.BoardComm_Reply_Create = null;
+/** 대댓글 영역 */
+BoardCommon.prototype.BoardComm_ReReplyCreateArea = null;
+/** 대댓글 작성 UI를 감싼 영역 */
+BoardCommon.prototype.BoardComm_ReReplyCreateWrap = null;
 
 BoardCommon.prototype.BoardComm_List = null;
 BoardCommon.prototype.BoardComm_Head = null;
@@ -238,8 +245,6 @@ BoardCommon.prototype.ImageType = [".bmp", ".dib", ".jpg", ".jpeg", ".jpe", ".gi
 BoardCommon.prototype.labLength = null;
 /** 뷰어 개체 */
 BoardCommon.prototype.Viewer = null;
-/** 대댓글 쓰기 영역 */
-BoardCommon.prototype.divReReplyCreate = null;
 
 /** 이미지에서 데이터 부분을 제거하기 위한 정규식 */
 BoardCommon.prototype.RegExr_ImageDataCut = /(?=\(data:image).*?(?=\))/g;
@@ -258,6 +263,12 @@ BoardCommon.prototype.PageTotal = 0;
 /** 지금 보고 있는 페이지 번호 */
 BoardCommon.prototype.PageNumber = 0;
 
+/** 
+ *  지금 보고 있는 게시물의 번호
+ *  백업용으로 리스트에서도 값이 있을 수 있다.
+ * */
+BoardCommon.prototype.PostViewID = -1;
+
 
 /** 포스트 작성이나 수정중에 본문에 포함된 이미지의 크기 */
 BoardCommon.prototype.PostImageSize = 0;
@@ -267,6 +278,16 @@ BoardCommon.prototype.BindItemLoading = false;
 
 /** 스크롤 이벤트를 연속 판단을 막으려고 사용하는 타이머의 아이디 */
 BoardCommon.prototype.ScrollTimerId = -1;
+
+/** 보기시 댓글 리스트 표시여부를 서버에서 받은 정보 */
+BoardCommon.prototype.ReplyListShow = false;
+
+
+/** 
+ *  리플 리스트를 처음 한번 열렸는지 여부 
+ *  두번째는 리플리스트를 강제 갱신외에는 갱신하지 않는다.
+ */
+BoardCommon.prototype.ReplyListFirstOpen = false;
 
 /**
  * 지정한 대상에 초기화 해줍니다.
@@ -324,6 +345,21 @@ BoardCommon.prototype.Initialize = function (
             , ":DateTime": function (sOriData, sMatchString, sValue, jsonValue)
             {
                 return GlobalStatic.DataBind.ReplaceAll(sOriData, sMatchString, moment(sValue).format("YYYY-MM-DD hh:mm"));
+            }
+            , ":UserNameView": function (sOriData, sMatchString, sValue, jsonValue)
+            {
+                var sReturn = "";
+
+                if (0 < jsonValue.idUser)
+                {//회원이 썼다.
+                    sReturn = jsonValue.UserName;
+                }
+                else
+                {//비회원이 작성했다.
+                    //비회원 정보를 쓴다.
+                    sReturn = jsonValue.NonMember_ViewName;
+                }
+                return GlobalStatic.DataBind.ReplaceAll(sOriData, sMatchString, sReturn);
             }
         });
 
@@ -414,10 +450,6 @@ BoardCommon.prototype.Reset = function ()
     objThis.BoardComm_Tools = objThis.TableArea.find(".BoardComm_Tools");
     objThis.spanBoardComm_Tools_PostCount = objThis.TableArea.find(".spanBoardComm_Tools_PostCount");
 
-    objThis.BoardComm_Reply = objThis.TableArea.find(".BoardComm_Reply");
-    objThis.BoardComm_Reply_List = objThis.TableArea.find(".BoardComm_Reply_List");
-    objThis.BoardComm_Reply_Write = objThis.TableArea.find(".BoardComm_Reply_Write");
-
 };
 
 /**
@@ -474,7 +506,6 @@ BoardCommon.prototype.Loading = function (bShow)
 /**
  * 포스트 뷰 표시/지우기
  * @param {bool} bShow 포스트 뷰 표시 여부
- * @param {bool} bReply 리플 표시 여부
  */
 BoardCommon.prototype.PostViewDisplay = function (
     bShow
@@ -496,16 +527,21 @@ BoardCommon.prototype.PostViewDisplay = function (
         objThis.BoardComm_PostView.addClass("d-none");
     }
 
-    if (true === bReply)
-    {
-        objThis.BoardComm_Reply.removeClass("d-none");
-    }
-    else
-    {
-        objThis.BoardComm_Reply_List.empty();
+    if ((undefined !== objThis.BoardComm_Reply)
+        && (null !== objThis.BoardComm_Reply))
+    {//대상이 있다.
+        if (true === bReply)
+        {
+            objThis.BoardComm_Reply.removeClass("d-none");
+        }
+        else
+        {
+            objThis.BoardComm_Reply_List.empty();
 
-        objThis.BoardComm_Reply.addClass("d-none");
+            objThis.BoardComm_Reply.addClass("d-none");
+        }
     }
+    
 };
 
 /**
@@ -596,7 +632,7 @@ BoardCommon.prototype.BindTitle = function (
     //포스트 지우기 여부
     if (0 < pvid)
     {//포스트 보기다.
-        objThis.PostViewDisplay(true, false);
+        objThis.PostViewDisplay(true, objThis.ReplyListShow);
     }
     else
     {//포스트 뷰가 아니다.
@@ -1087,8 +1123,8 @@ BoardCommon.prototype.PostViewBind = function (jsonData)
 {
     var objThis = this;
 
-    var nBoardIDTemp = jsonData.idBoard;
-    var idBoardPostTemp = jsonData.idBoardPost;
+    //보고있는 게시물 번호 백업
+    objThis.PostViewID = jsonData.idBoardPost;
 
     //조회수 계산
     jsonData.ViewCount = jsonData.ViewCount + jsonData.ViewCountNone;
@@ -1127,21 +1163,34 @@ BoardCommon.prototype.PostViewBind = function (jsonData)
             , jsonData)
             .ResultString;
 
-    //창표시****************
+    //뷰영역 표시
+    objThis.BoardComm_PostView.html(sHtml);
+
+    //댓글 영역 찾아놓기 *************************
+    objThis.BoardComm_Reply = objThis.TableArea.find(".BoardComm_Reply");
+    objThis.BoardComm_Reply_List = objThis.TableArea.find(".BoardComm_Reply_List");
+    objThis.BoardComm_Reply_Create = objThis.TableArea.find(".BoardComm_Reply_Create");
+    //대댓글 영역
+    objThis.BoardComm_ReReplyCreateArea
+        = objThis.TableArea.find(".BoardComm_ReReplyCreateArea");
+    //대댓글 UI를 감싼 영역
+    objThis.BoardComm_ReReplyCreateWrap
+        = objThis.TableArea.find(".BoardComm_ReReplyCreateWrap.ReReplyCreateWrap_" + objThis.PostViewID);
+
+    //창표시 ****************
+    //서버에서 받은 리플 리스트 표시여부 백업
+    objThis.ReplyListShow = jsonData.ReplyList;
     //포스트 표시
-    objThis.PostViewDisplay(true, jsonData.ReplyList);
+    objThis.PostViewDisplay(true, objThis.ReplyListShow);
     //리스트 표시 여부
     objThis.ListDisplay(objThis.BoardOption.PostView_List);
     if (true === objThis.BoardOption.PostView_List)
     {//리스트 표시
         BoardCA.ListShowBind();
     }
-    //컨탠츠 표시
-    objThis.BoardComm_PostView.html(sHtml);
-    //대댓글 영역 백업
-    objThis.divReReplyCreate = $("#divReReplyCreate_" + jsonData.idBoardPost);
 
-    //뷰어 생성
+    
+    //뷰어 생성후 컨탠츠 바인딩 *******************
     $("#divViewer").html(jsonData.Content);
 
 
@@ -1149,16 +1198,74 @@ BoardCommon.prototype.PostViewBind = function (jsonData)
     objThis.Loading(false);
 
 
-
-
     //리플 표시.
-    if (true === jsonData.ReplyList)
+    if ((true === jsonData.ReplyList)
+        || (true === objThis.BoardOption.PostView_ReplyOepn))
     {
-        objThis.PostReplyList(nBoardIDTemp, idBoardPostTemp);
+        objThis.PostReplyListView(true);
+    }
+    else
+    {
+        objThis.PostReplyListView(false);
     }
 
 };
 
+
+//◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+// 댓글 리스트
+//◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+
+/** 댓글 리스트가 보기 상태인지 값 */
+BoardCommon.prototype.PostReplyListShow = false;
+
+/**
+ * 댓글 보기/가리기를 자동으로 처리한다.
+ */
+BoardCommon.prototype.PostReplyListShowHide_Auto = function ()
+{
+    var objThis = this;
+
+    objThis.PostReplyListView(!objThis.PostReplyListShow);
+};
+
+/**
+ * 리플 리스트 표시/가리기.
+ * 리스트 표시인 경우 바인딩된 내용이 없으면 바인딩을 요청한다.
+ * @param {any} bView
+ */
+BoardCommon.prototype.PostReplyListView = function (bView)
+{
+    var objThis = this;
+    var domOpenListButtonOpenText
+        = objThis.BoardComm_Reply.find(".OpenListButtonOpenText");
+
+    if (true === bView)
+    {//표시
+        objThis.PostReplyListShow = true;
+        objThis.BoardComm_Reply_List.removeClass("d-none");
+        objThis.BoardComm_Reply_Create.removeClass("d-none");
+        domOpenListButtonOpenText.html("닫기");
+
+        if (false === objThis.ReplyListFirstOpen)
+        {//댓글 리스트가 첫바인딩 되지 않았다.
+            //리플 리스트 새로 그린다.
+            objThis.PostReplyList(objThis.PostViewID);
+        }
+    }
+    else
+    {//숨기기
+        objThis.PostReplyListShow = false;
+        objThis.BoardComm_Reply_List.addClass("d-none");
+        objThis.BoardComm_Reply_Create.addClass("d-none");
+        domOpenListButtonOpenText.html("열기");
+    }
+};
+
+/**
+ * 리플 리스트를 바인딩 한다.
+ * @param {any} idBoardPost 볼 게시물 번호
+ */
 BoardCommon.prototype.PostReplyList = function (idBoardPost)
 {
     var objThis = this;
@@ -1178,18 +1285,27 @@ BoardCommon.prototype.PostReplyList = function (idBoardPost)
             {
                 if ("0" === jsonData.InfoCode)
                 {//에러 없음
+                    //첫 바인딩 성공
+                    objThis.ReplyListFirstOpen = true;
+
                     //리플 작성 권한
                     if (true === jsonData.WriteReply)
                     {
-                        objThis.BoardComm_Reply_Write.removeClass("d-none");
+                        objThis.BoardComm_Reply_Create.removeClass("d-none");
                     }
                     else
                     {
-                        objThis.BoardComm_Reply_Write.addClass("d-none")
+                        objThis.BoardComm_Reply_Create.addClass("d-none")
                     }
 
+                    //비회원 댓글 작성기능 활성화 여부 처리
+                    objThis.PostReplyCreate_NonMember(jsonData.ReplyNonMember);
+
                     //리플 리스트
-                    objThis.PostReplyListBind(jsonData.List);
+                    objThis.PostReplyListBind(
+                        jsonData.ReReplyDiv
+                        , jsonData.List
+                        , jsonData.ReReplyList);
                 }
                 else
                 {//에러 있음
@@ -1207,9 +1323,14 @@ BoardCommon.prototype.PostReplyList = function (idBoardPost)
 
 /**
  * 리플 리스트 바인딩
- * @param {any} jsonList "BoardPostViewReplyModel"참고
+ * @param {boolean} bReReplyDiv 대댓글 분리기능 사용여부
+ * @param {any} jsonList "BoardPostViewReplyModel"참고. 댓글 리스트
+ * @param {any} jsonReReplyList "BoardPostViewReplyModel"참고. 대댓글 리스트
  */
-BoardCommon.prototype.PostReplyListBind = function (jsonList)
+BoardCommon.prototype.PostReplyListBind = function (
+    bReReplyDiv
+    , jsonList
+    , jsonReReplyList)
 {
     var objThis = this;
     var sOutHtml = "";
@@ -1217,30 +1338,346 @@ BoardCommon.prototype.PostReplyListBind = function (jsonList)
     //댓글 개수 표시
     $("#BoardComm_Reply_Count").html(jsonList.length);
 
+    //기존 리스트 제거
     objThis.BoardComm_Reply_List.empty();
 
+    //댓글 바인딩
     for (var i = 0; i < jsonList.length; ++i)
     {
         var item = jsonList[i];
-
-        if (0 >= item.ReReplyCount)
-        {
-            item.ReReplyCss = "d-none";
-        }
-        else
-        {
-            item.ReReplyCss = "";
-        }
-
-        sOutHtml 
-            += objThis.DataBind.DataBind_All(
-                objThis.BoardCommon_PostReply_ListItemHtml
-                , item)
-                .ResultString;
+        //아이템을 html로 변환한다.
+        //변환한걸 html로 작성
+        sOutHtml += objThis.PostReplyListItemHtml(bReReplyDiv, item);
     }
 
+    //리플을 출력한다.
     objThis.BoardComm_Reply_List.html(sOutHtml);
+
+    //대댓글 바인딩
+    if (0 < jsonReReplyList.length)
+    {
+        objThis.PostReReplyListFullBind(jsonReReplyList);
+    }
+    
 };
+
+
+/**
+ * 댓글 아이템 Html을 만든다.
+ * @param {any} bReReplyDiv 대댓글 분리 기능 사용여부
+ * @param {any} jsonItme
+ */
+BoardCommon.prototype.PostReplyListItemHtml = function (
+    bReReplyDiv
+    , jsonItme)
+{
+    var objThis = this;
+    var sReturn = "";
+
+    //댓글 유저 이미지 *****
+    if ((undefined === jsonItme.UserFaceUrl)
+        || ("" === jsonItme.UserFaceUrl))
+    {//이미지 정보가 없다.
+        //비어있는 값으로 세팅
+        jsonItme.UserFaceUrl = "";
+        //가려준다.
+        jsonItme.UserFaceVisibility = "v-hidden";
+    }
+
+    //대댓글 분리 여부 ****
+    if (true === bReReplyDiv)
+    {//분리기능 사용
+        jsonItme.ReReplyCss = "";
+        jsonItme.ReReplyCreateOpenCss = "d-none";
+    }
+    else
+    {//분리기능 사용하지 않음
+        //분리기능을 사용하지 않을때는 대댓글의 숫자와 목록 펼치기 기능을 사용하지 않는다.
+        jsonItme.ReReplyCss = "d-none";
+        jsonItme.ReReplyCreateOpenCss = "";
+    }
+
+    sReturn
+        = objThis.DataBind.DataBind_All(
+            objThis.BoardCommon_PostReply_ListItemHtml
+            , jsonItme)
+            .ResultString;
+
+    return sReturn;
+};
+
+
+//◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+// 댓글 기능
+//◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+
+/**
+ * 비회원 댓글 작성 UI 표시/숨기기
+ * @param {any} bNonMember 비회원 작성 가능여부
+ */
+BoardCommon.prototype.PostReplyCreate_NonMember = function (bNonMember)
+{
+    var txtNonMember_ReName = $("#txtNonMember_ReName");
+    var txtNonMember_RePw = $("#txtNonMember_RePw");
+
+    var txtNonMember_ReReName = $("#txtNonMember_ReReName");
+    var txtNonMember_ReRePw = $("#txtNonMember_ReRePw");
+
+
+
+    if ((true === bNonMember)
+        && (false === GlobalSign.SignIn))
+    {//비회원 작성 허용 인데
+        //로그인이 되있지 않다.
+        //UI표시
+        txtNonMember_ReName.removeClass("d-none");
+        txtNonMember_RePw.removeClass("d-none");
+        txtNonMember_ReReName.removeClass("d-none");
+        txtNonMember_ReRePw.removeClass("d-none");
+    }
+    else
+    {
+        //UI제거
+        txtNonMember_ReName.addClass("d-none");
+        txtNonMember_RePw.addClass("d-none");
+        txtNonMember_ReReName.addClass("d-none");
+        txtNonMember_ReRePw.addClass("d-none");
+    }
+};
+
+/** 댓글/대댓글 비우기 */
+BoardCommon.prototype.PostReplyCreate_Empty = function ()
+{
+    var txtBoardComm_Reply_Create = $("#txtBoardComm_Reply_Create");
+    var txtBoardComm_ReReply_Create = $("#txtBoardComm_ReReply_Create");
+
+    txtBoardComm_Reply_Create.val("");
+    txtBoardComm_ReReply_Create.val("");
+};
+
+
+/**
+ * 리플 작성.
+ * 대댓글 포함
+ * @param {any} bReReply 대댓글인지 여부
+ */
+BoardCommon.prototype.PostReplyCreate = function (bReReply)
+{
+    var objThis = this;
+    var bReturn = true;
+    var sMessage = "";
+
+    var nPostView = objThis.PostViewID;
+    var idBoardReply_Target = objThis.idBoardPostReply_LastTarget;
+
+    //대상값 확인
+    idBoardReply_Target = dgIsObject.IsIntValue(idBoardReply_Target);
+
+
+    var jsonData = {
+        idBoard: objThis.BoardID,
+        idBoardPost: nPostView,
+        idBoardReply_Target: dgIsObject.IsIntValue(idBoardReply_Target),
+        typeReplyState: 0,
+        sTitle: "",
+        sContent: "",
+
+        sNonMember_ViewName: "",
+        sNonMember_Password: "",
+    };
+
+    //내용 확인
+    if (true === bReReply)
+    {//대댓글이다.
+        jsonData.sContent
+            = dgIsObject.IsStringValue($("#txtBoardComm_ReReply_Create").val());
+
+        jsonData.sNonMember_ViewName 
+            = dgIsObject.IsStringValue($("#txtNonMember_ReReName").val());
+        jsonData.sNonMember_Password
+            = dgIsObject.IsStringValue($("#txtNonMember_ReRePw").val());
+    }
+    else
+    {//대댓글이 아니다. == 일반 댓글
+        jsonData.sContent = $("#txtBoardComm_Reply_Create").val();
+
+        jsonData.sNonMember_ViewName
+            = dgIsObject.IsStringValue($("#txtNonMember_ReName").val());
+        jsonData.sNonMember_Password
+            = dgIsObject.IsStringValue($("#txtNonMember_RePw").val());
+    }
+
+    if (0 >= nPostView)
+    {
+        bReturn = false;
+        sMessage = "게시물을 선택하지 않았습니다."
+    }
+    else if ("" === jsonData.sContent)
+    {
+        bReturn = false;
+        sMessage = "내용을 넣어주세요"
+    }
+    else if (false === GlobalSign.SignIn)
+    {//비회원
+        if (("" === jsonData.sNonMember_ViewName)
+            || ("" === jsonData.sNonMember_Password))
+        {
+            bReturn = false;
+            sMessage = "이름, 비밀번호를 넣어야 합니다."
+        }
+    }
+
+
+    if (true === bReturn)
+    {
+        AA.post(AA.TokenRelayType.CaseByCase
+            , {
+                url: FS_Api.Board_PostReplyCreate
+                , url_Auth: FS_Api.Board_PostReplyCreate_Auth
+                , data: jsonData
+                , success: function (jsonResult)
+                {
+                    if ("0" === jsonResult.InfoCode)
+                    {//에러 없음
+                        //입력창 초기화
+                        objThis.PostReplyCreate_Empty();
+
+                        if (0 < jsonResult.NewItem.idBoardPostReply_ReParent)
+                        {//대댓글 갱신
+                            objThis.PostReReplyList(
+                                jsonResult.NewItem.idBoardPost
+                                , jsonResult.NewItem.idBoardPostReply_ReParent
+                                , true);
+                        }
+                        else
+                        {//일반 댓글
+                            //리스트 갱신
+                            objThis.PostReplyList(jsonResult.NewItem.idBoardPost);
+                        }
+
+                    }
+                    else
+                    {//에러 있음
+                        GlobalStatic.MessageBox_Error(objThis.MessageTitle, jsonResult.Message);
+                    }
+                }
+                , error: function (error)
+                {
+                    console.log(error);
+                }
+            });
+    }
+    else
+    {
+        GlobalStatic.MessageBox_Error(objThis.MessageTitle, sMessage);
+    }
+};
+
+
+
+
+//◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+// 대댓글 기능
+//◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+
+/** 마지막으로 선택한 댓글 아이디 */
+BoardCommon.prototype.idBoardPostReply_LastTarget = 0;
+
+/**
+ * 대댓글 작성창 표시/가리기 자동
+ * @param {any} idBoardPost
+ * @param {any} idBoardPostReply_Target
+ */
+BoardCommon.prototype.PostReReplyCreateShowHide_Toggle = function (
+    idBoardPost
+    , idBoardPostReply_Target)
+{
+    var objThis = this;
+
+    //선택된 댓글 아이디 백업
+    //objThis.idBoardPostReply_LastTarget = idBoardPostReply_Target;
+
+    //대댓글 작성창 표시 대상 찾기
+    var domTarget = $("#divReReplyCreateAreaTarget_" + idBoardPostReply_Target);
+
+    //대상이 열려있는지 확인
+    var bOpen = false;
+    bOpen = dgIsObject.IsBoolValue(domTarget.attr("openCreateArea"));
+
+    //요청(대상의 상태와 반대로 요청함)
+    objThis.PostReReplyCreateShowHide(idBoardPost, idBoardPostReply_Target, !bOpen);
+};
+
+BoardCommon.prototype.PostReReplyCreateShowHide = function (
+    idBoardPost
+    , idBoardPostReply_Target
+    , bShow)
+{
+    var objThis = this;
+
+    //선택된 댓글 아이디 백업
+    objThis.idBoardPostReply_LastTarget = idBoardPostReply_Target;
+
+    //대댓글 작성창 표시 대상 찾기
+    var domTarget = $("#divReReplyCreateAreaTarget_" + idBoardPostReply_Target);
+
+    if (false === bShow)
+    {//대댓글 창 가리기
+        //대댓글 창은 가리는 것이 아니라 원래 있던 영역으로 옮기는 작업을 한다.
+        domTarget.attr("openCreateArea", "false");
+
+        //안보이는 원래 영역으로 이동
+        objThis.BoardComm_ReReplyCreateArea.append(
+            objThis.BoardComm_ReReplyCreateWrap);
+    }
+    else
+    {//대상에 대댓글 창 표시
+
+        //기존에 열려있는 대댓글작성창 찾기다고 표시
+        var domOpenCreateArea = $(".BoardComm_Reply_List div[openCreateArea=true]");
+        domOpenCreateArea.attr("openCreateArea", "false");
+
+        //대댓글 작성창 보이기
+        domTarget.removeClass("d-none");
+        //대댓글 작성창 옮기기
+        domTarget.append(objThis.BoardComm_ReReplyCreateWrap);
+        //열렸다고 표시
+        domTarget.attr("openCreateArea", "true");
+    }
+
+};
+
+
+
+//◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+// 대댓글 리스트
+//◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+
+/**
+ * 대댓글 전체 한번에 바인딩
+ * @param {any} arrReReply
+ */
+BoardCommon.prototype.PostReReplyListFullBind = function (
+    arrReReply)
+{
+    var objThis = this;
+
+    //댓글
+    for (var i = 0; i < arrReReply.length; ++i)
+    {
+        var item = arrReReply[i];
+
+        //대상(부모)을 찾는다
+        var domReParent = $( "#divPostReplyItem_" + item.idBoardPostReply_ReParent + "_ReReply");
+        //화면에 표시
+        domReParent.removeClass("d-none");
+
+        //아이템을 html로 변환한다.
+        //변환한걸 html로 작성
+        //대댓글은 대댓글 분리기능을 제외해놔야한다.
+        domReParent.append(objThis.PostReplyListItemHtml(false, item));
+    }
+}
 
 /**
  * 대댓글 리스트 바인딩
@@ -1258,18 +1695,19 @@ BoardCommon.prototype.PostReReplyList = function (
     var idBoardReply_Target_Temp = idBoardReply_Target;
 
     //댓글 열림 버튼 찾기
-    var btnOpen = $("#btnPostReplyItem_" + idBoardReply_Target_Temp + "_ReReply");
+    var divOpenReReplyList
+        = $("#divPostReplyItem_" + idBoardReply_Target_Temp + "_ReReply");
 
     //속성의 값 받기
-    var bOpen = dgIsObject.IsIntValue(btnOpen.attr("myListOpen"));
+    var bOpen = dgIsObject.IsBoolValue(divOpenReReplyList.attr("openReReplyList"));
 
-    if (0 === bOpen || true === dgIsObject.IsBoolValue(bCompulsion))
+    if (false === bOpen || true === dgIsObject.IsBoolValue(bCompulsion))
     {//리스트가 닫쳐 있다.
         //강제 열기 동작이다.
 
         //열림 동작
-        btnOpen.attr("myListOpen", "1");
-        btnOpen.html("댓글 숨기기");
+        divOpenReReplyList.attr("openReReplyList", "true");
+        
 
         //리스트 호출
         AA.get(AA.TokenRelayType.CaseByCase
@@ -1287,7 +1725,9 @@ BoardCommon.prototype.PostReReplyList = function (
                     {//에러 없음
 
                         //리플 리스트
-                        objThis.PostReReplyListBind(idBoardReply_Target_Temp, jsonData.List);
+                        objThis.PostReReplyListBind(
+                            idBoardReply_Target_Temp
+                            , jsonData.List);
                     }
                     else
                     {//에러 있음
@@ -1305,19 +1745,15 @@ BoardCommon.prototype.PostReReplyList = function (
     else
     {
         //닫침 동작
-        btnOpen.attr("myListOpen", "0");
-        btnOpen.html("댓글 보기");
+        btnOpen.attr("openReReplyList", "false");
 
         //대댓글 리스트
         objThis.PostReReplyListBind(idBoardReply_Target_Temp, []);
     }
-
-    
 };
 
-
 /**
- * 대댓글 바인드
+ * 지정한 대댓글의 리스트 바인드
  * @param {any} idBoardReply_Target
  * @param {any} arrReReply
  */
@@ -1342,11 +1778,17 @@ BoardCommon.prototype.PostReReplyListBind = function (
 
         item.ReReplyCss = "d-none";
 
-        sOutHtml
-            += objThis.DataBind.DataBind_All(
-                objThis.BoardCommon_PostReply_ListItemHtml
-                , item)
-                .ResultString;
+        //sOutHtml
+        //    += objThis.DataBind.DataBind_All(
+        //        objThis.BoardCommon_PostReply_ListItemHtml
+        //        , item)
+        //        .ResultString;
+
+        //아이템을 html로 변환한다.
+        //변환한걸 html로 작성
+        //대댓글은 대댓글 분리기능을 제외해놔야한다.
+        sOutHtml += objThis.PostReplyListItemHtml(false, item);
+
     }
 
 
@@ -1358,126 +1800,6 @@ BoardCommon.prototype.PostReReplyListBind = function (
 //◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
 
 /**
- * 리플 작성
- * @param {any} nPostView
- * @param {any} idBoardReply_Target
- */
-BoardCommon.prototype.PostReplyCreate = function (
-    nPostView
-    , idBoardReply_Target)
-{
-    var objThis = this;
-    var bReturn = true;
-    var sMessage = "";
-
-    //대상값 확인
-    idBoardReply_Target = dgIsObject.IsIntValue(idBoardReply_Target);
-    
-
-    var jsonData = {
-        idBoard: objThis.BoardID,
-        idBoardPost: nPostView,
-        idBoardReply_Target: dgIsObject.IsIntValue(idBoardReply_Target),
-        typeReplyState: 0,
-        sTitle: "",
-        sContent: ""
-    };
-
-    //내용 확인
-    if (0 >= idBoardReply_Target)
-    {//대댓글이 아니다.
-        jsonData.sContent = $("#txtBoardComm_Reply_Write").val()
-    }
-    else
-    {//대댓글이다.
-        jsonData.sContent = $("#txtBoardComm_ReReply_Write").val()
-    }
-
-    if (0 >= nPostView)
-    {
-        bReturn = false;
-        sMessage = "게시물을 선택하지 않았습니다."
-    }
-    else if ("" === jsonData.sContent)
-    {
-        bReturn = false;
-        sMessage = "내용을 넣어주세요"
-    }
-
-
-    if (true === bReturn)
-    {
-        AA.post(AA.TokenRelayType.CaseByCase
-            , {
-                url: FS_Api.Board_PostReplyCreate
-                , url_Auth: FS_Api.Board_PostReplyCreate_Auth
-                , data: jsonData
-                , success: function (jsonResult)
-                {
-                    if ("0" === jsonResult.InfoCode)
-                    {//에러 없음
-                        //입력창 초기화
-                        $("#txtBoardComm_Reply_Write").val("");
-                        $("#txtBoardComm_ReReply_Write").val("");
-
-                        if (0 < jsonResult.NewItem.idBoardPostReply_ReParent)
-                        {//대댓글 갱신
-                            objThis.PostReReplyList(
-                                jsonResult.NewItem.idBoard
-                                , jsonResult.NewItem.idBoardPost
-                                , jsonResult.NewItem.idBoardPostReply_ReParent
-                                , true);
-                        }
-                        else
-                        {//일반 댓글
-                            //리스트 갱신
-                            objThis.PostReplyList(jsonResult.NewItem.idBoard
-                                , jsonResult.NewItem.idBoardPost);
-                        }
-                        
-                    }
-                    else
-                    {//에러 있음
-                        GlobalStatic.MessageBox_Error(objThis.MessageTitle, jsonResult.Message);
-                    }
-                }
-                , error: function (error)
-                {
-                    console.log(error);
-                }
-            });
-    }
-    else
-    {
-        GlobalStatic.MessageBox_Error(objThis.MessageTitle, sMessage);
-    }
-};
-
-/**
- * 대댓글 작성창 표시
- * @param {any} idBoardPost
- * @param {any} idBoardPostReply_Target
- */
-BoardCommon.prototype.PostReReplyCreateShow = function (
-    idBoardPost
-    , idBoardPostReply_Target)
-{
-    var objThis = this;
-
-
-    //대댓글 쓰기 표시 영역
-    var domTarget = $("#divPostReplyItem_" + idBoardPostReply_Target + "_ReReplyCreate");
-    //선택된 댓글 아이디
-    //domTarget.attr("idBoardReply", idBoardPostReply_Target);
-
-    var btnTemp = objThis.divReReplyCreate.find("button");
-    btnTemp.attr("idBoardPost", idBoardPost);
-    btnTemp.attr("idBoardReply", idBoardPostReply_Target);
-    
-    domTarget.append(objThis.divReReplyCreate);
-};
-
-/**
  * 대댓글 작성창 취소
  */
 BoardCommon.prototype.PostReReplyCreateCancel = function ()
@@ -1485,7 +1807,7 @@ BoardCommon.prototype.PostReReplyCreateCancel = function ()
     var objThis = this;
 
     //글쓰기 창 비우기
-    $("#txtBoardComm_Reply_Write").val("");
+    $("#txtBoardComm_Reply_Create").val("");
 
     //대댓글 창 찾기
     var divReReplyCreateWrap = $("#divReReplyCreateWrap");
@@ -2354,14 +2676,14 @@ BoardCommon.prototype.FileSelectorNew = function (arrFileList)
  * 댓글 보기/가리기
  * @param {any} bShow 보기여부
  */
-BoardCommon.prototype.PostReplayShowHide = function (bShow)
+BoardCommon.prototype.PostReplyShowHide = function (bShow)
 {
     //타이틀
     var divBoardComm_ReplyTitle = $("#divBoardComm_ReplyTitle");
 
     //대상 찾기
     var domBoardComm_Reply_List = $(".BoardComm_Reply_List");
-    var domBoardComm_Reply_Write = $(".BoardComm_Reply_Write");
+    var domBoardComm_Reply_Create = $(".BoardComm_Reply_Create");
 
 
     if (false === bShow)
@@ -2370,7 +2692,7 @@ BoardCommon.prototype.PostReplayShowHide = function (bShow)
         divBoardComm_ReplyTitle.addClass("BoardComm_ReplyTitle_Hidden");
 
         domBoardComm_Reply_List.addClass("v-hidden");
-        domBoardComm_Reply_Write.addClass("v-hidden");
+        domBoardComm_Reply_Create.addClass("v-hidden");
     }
     else
     {//보기
@@ -2378,7 +2700,7 @@ BoardCommon.prototype.PostReplayShowHide = function (bShow)
         divBoardComm_ReplyTitle.removeClass("BoardComm_ReplyTitle_Hidden");
 
         domBoardComm_Reply_List.removeClass("v-hidden");
-        domBoardComm_Reply_Write.removeClass("v-hidden");
+        domBoardComm_Reply_Create.removeClass("v-hidden");
     }
 };
 

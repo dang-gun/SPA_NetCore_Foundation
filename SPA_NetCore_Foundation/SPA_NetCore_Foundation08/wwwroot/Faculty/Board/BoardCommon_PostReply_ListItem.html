@@ -1,33 +1,22 @@
 ﻿<!-- Single Comment -->
-<div class="media mb-4">
-    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-    <div class="media-body">
-        <h5 class="mt-0">Commenter Name</h5>
-        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+<div id="divPostReplyItem_{{idBoardPostReply}}" idBoardPostReply="{{idBoardPostReply}}">
+    <div class="media mb-1">
+        <img class="d-flex mr-1 rounded-circle UserFaceImg {{UserFaceVisibility}}" src="{{UserFaceUrl}}" alt="">
+        <div class="media-body">
+            <div>
+                <span class="mt-0 UserNameText">{{UserName:UserNameView}}</span>&nbsp;&nbsp;<span class="WriteDate">{{WriteDate:DateTime}}</span>
+            </div>
+            <div class="PostReplyItem_ContentArea mb-2">
+                {{Content}}
+                <button id="btnPostReplyItem_{{idBoardPostReply}}_ReReplyCreateShow" class="btn btn-sm btn-outline-dark {{ReReplyCreateOpenCss}} ReReplyCreateOpenCss" onclick="BoardCA.PostReReplyCreateToggle({{idBoardPost}}, {{idBoardPostReply}})">↘ 답글</button>
+                <div id="divReReplyCreateAreaTarget_{{idBoardPostReply}}" class="mt-2" openCreateArea="false">
+                </div>
+            </div>
+            <div>
+                <button id="btnPostReplyItem_{{idBoardPostReply}}_ReReply" class="btn btn-sm {{ReReplyCss}}" myListOpen="Open" onclick="BoardCA.ReRePlayList({{idBoardPost}}, {{idBoardPostReply}})">댓글 {{ReReplyCount}}개 보기</button>
+            </div>
+            <div id="divPostReplyItem_{{idBoardPostReply}}_ReReply" class="{{ReReplyCss}}" openReReplyList="false">
+            </div>            
+        </div>
     </div>
 </div>
-
-
-<li id="divPostReplyItem_{{idBoardPostReply}}" idBoardPostReply="{{idBoardPostReply}}" class="reply_List">
-    <div class="initial">
-        <img src="{{idUser:UserFaceUrl}}">
-    </div>
-    <div class="reply_user_info">
-        <div class="reply_Name">
-            <!--<em class="nick_level">
-                <img src="/Pages/img/icon/ico_class20.gif" class="icon_level">
-            </em>-->
-            {{UserName}}
-        </div>
-        <div class="reply_Date">{{WriteDate:DateTime}}</div>
-        <div class="reply_btn_add">
-            <button id="btnPostReplyItem_{{idBoardPostReply}}_ReReply" class="{{ReReplyCss}} reply_show" myListOpen="Open" onclick="BoardCA.ReRePlayList({{idBoardPost}}, {{idBoardPostReply}})">댓글 {{ReReplyCount}}개 보기</button>
-            <button onclick="BoardCA.PostReReplayCreateShow({{idBoardPost}}, {{idBoardPostReply}})">댓글 작성</button>
-        </div>
-        <div class="reply_Cont"><span class="text_comment">{{Content}}</span></div>
-    </div>
-    <div id="divPostReplyItem_{{idBoardPostReply}}_ReReplyCreate">
-
-    </div>
-    <div id="divPostReplyItem_{{idBoardPostReply}}_ReReply" class="{{ReReplyCss}}"></div>
-</li>

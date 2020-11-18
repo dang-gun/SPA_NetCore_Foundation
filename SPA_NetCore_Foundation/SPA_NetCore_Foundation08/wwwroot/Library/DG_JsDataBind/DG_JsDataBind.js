@@ -18,10 +18,10 @@ var DG_JsDataBind_MatchType = {
 function DG_JsDataBind()
 {
     var objThis = this;
-    this.MatchPatternListAdd("defult"
+    objThis.MatchPatternListAdd("defult"
         , {
-            "": function (sOriData, sMatchString, sValue) { return objThis.ReplaceAll(sOriData, sMatchString, sValue); }
-            , ":money": function (sOriData, sMatchString, sValue) { return objThis.ReplaceAll(sOriData, sMatchString, sValue+":돈이다"); }
+            "": function (sOriData, sMatchString, sValue, jsonValue) { return objThis.ReplaceAll(sOriData, sMatchString, sValue); }
+            , ":money": function (sOriData, sMatchString, sValue, jsonValue) { return "\\" + objThis.ReplaceAll(sOriData, sMatchString, sValue); }
         });
 }
 
@@ -182,7 +182,7 @@ DG_JsDataBind.prototype.DataBind_TypeItme = function (
             jsonReturn.Match = true;
 
             //연결된 함수 실행
-            sOriDataTemp = funMatchPatternData(sOriDataTemp, sMatchString, sValue);
+            sOriDataTemp = funMatchPatternData(sOriDataTemp, sMatchString, sValue, jsonValue);
 
             if (nMatchType === DG_JsDataBind_MatchType.First)
             {//처음 한개 매치 옵션 사용중

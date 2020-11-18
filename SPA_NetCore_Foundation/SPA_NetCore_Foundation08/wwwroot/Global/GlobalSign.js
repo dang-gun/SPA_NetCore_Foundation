@@ -291,7 +291,16 @@ GlobalSign.AccessTokenToInfo = function (callback)
 
 
                         //UI 갱신
-                        SignInInfo.UserInfo_Load();
+                        try
+                        {
+                            SignInInfo.UserInfo_Load();
+                        }
+                        catch (ex)
+                        {
+                            console.log(ex);
+                            debugger;
+                        }
+                        
 
                         if (typeof callback === "function")
                         {

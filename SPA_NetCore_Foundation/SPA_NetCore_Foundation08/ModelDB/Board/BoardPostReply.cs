@@ -50,6 +50,20 @@ namespace ModelDB
         /// </summary>
         public long idUser { get; set; }
 
+        #region 비회원 추가 정보
+        /// <summary>
+        /// 비회원 - 표시 이름
+        /// </summary>
+        [MaxLength(32)]
+        public string NonMember_ViewName { get; set; }
+        /// <summary>
+        /// 비회원 - 비밀번호
+        /// </summary>
+        [MaxLength(64)]
+        public string NonMember_Password { get; set; }
+        #endregion
+
+
         /// <summary>
         /// 리플 상태
         /// </summary>

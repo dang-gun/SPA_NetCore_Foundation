@@ -146,18 +146,6 @@ namespace SPA_NetCore_Foundation.Controllers
                                 .FirstOrDefault();
 
 
-
-
-                        //받은 정보 입력******************************************
-                        //자기 리스트만 보일지 여부
-                        bool bMyList = findBoard.BoardFaculty.HasFlag(BoardFacultyType.MyList);
-                        if (true == bAdminMode)
-                        {//어드민 모드이다.
-                            //어드민 모드일때 자기리스트만 보이는 기능은
-                            //전체리스트 보기로 바꿔준다.
-                            bMyList = false;
-                        }
-
                         //한화면 컨탠츠 수
                         if (true == findBoard.BoardFaculty.HasFlag(BoardFacultyType.ShowCount_Server))
                         {//서버 설정 사용
@@ -211,11 +199,6 @@ namespace SPA_NetCore_Foundation.Controllers
                                             && m.PostState != BoardPostStateType.Block))
                                  .OrderByDescending(m => m.idBoardPost);
 
-                        if (true == bMyList)
-                        {//내 리스트만 표시기능 활성화
-                            //내가 작성한 리스트 표시
-                            iqBP = iqBP.Where(m => m.idUser == cm.id_int);
-                        }
 
                         //검색어 체크*********************************
                         if (false == string.IsNullOrEmpty(sSearchWord))
@@ -682,6 +665,13 @@ namespace SPA_NetCore_Foundation.Controllers
                 {
                     using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext())
                     {
+                        //비회원 리플 작성 허용인지 확인
+                        if (true == typeBoardAuth.HasFlag(BoardAuthorityType.WriteReplyNonMember))
+                        {//비회원 댓글 작성 허용
+                            rmResult.ReplyNonMember = true;
+                        }
+                        
+
                         //대상 검색
                         BoardPost findBP
                          = db1.BoardPost
@@ -711,15 +701,50 @@ namespace SPA_NetCore_Foundation.Controllers
                                 IQueryable<BoardPostReply> iqReply
                                     = db1.BoardPostReply
                                         .Where(m => m.idBoardPost == findBP.idBoardPost
-                                                && m.idBoardPostReply_Re == 0)
-                                        .OrderBy(ob => ob.WriteDate);
+                                                && m.idBoardPostReply_Re == 0
+                                                && m.ReplyState == BoardPostReplyStateType.Normal);
+
+                                if (true == board.BoardFaculty.HasFlag(BoardFacultyType.ReReplyDiv))
+                                {//대댓글 분리기능 사용
+                                    //대댓글 분리 기능 사용
+                                    rmResult.ReReplyDiv = true;
+                                }
+                                else
+                                {//대댓글 분리 기능 사용안함
+                                    //전체리스트
+                                    rmResult.ReReplyDiv = false;
+
+                                    //대댓글만 검색
+                                    IQueryable<BoardPostReply> iqReReply
+                                        = db1.BoardPostReply
+                                            .Where(m => m.idBoardPost == findBP.idBoardPost
+                                                    && m.idBoardPostReply_Re != 0
+                                                    && m.ReplyState == BoardPostReplyStateType.Normal)
+                                            //부모 아이디 기준으로 정렬한다.
+                                            .OrderBy(ob => ob.idBoardPostReply_ReParent);
+
+                                    //대댓글 입력
+                                    rmResult.ReReplyList
+                                        = (from rereply in iqReReply
+                                           from ui in db1.UserInfo
+                                                    .Where(qui => qui.idUser == rereply.idUser)
+                                                    .DefaultIfEmpty()
+                                           select new BoardPostViewReplyModel(
+                                               ui, rereply))
+                                        .ToList();
+                                }
+
+                                //정렬
+                                iqReply = iqReply.OrderBy(ob => ob.WriteDate);
+
 
                                 rmResult.List
                                     = (from reply in iqReply
-                                       join ui in db1.UserInfo
-                                           on reply.idUser equals ui.idUser
+                                       from ui in db1.UserInfo
+                                                    .Where(qui => qui.idUser == reply.idUser)
+                                                    .DefaultIfEmpty()
                                        select new BoardPostViewReplyModel(
-                                           ui, reply, true))
+                                           ui, reply))
                                         .ToList();
                             }
                             else
@@ -834,16 +859,18 @@ namespace SPA_NetCore_Foundation.Controllers
                             if (true == board.BoardFaculty.HasFlag(BoardFacultyType.ReplyList))
                             {
                                 //대댓글 리스트
-                                IQueryable<BoardPostReply> iqReply
+                                IQueryable<BoardPostReply> iqReReply
                                     = db1.BoardPostReply
-                                        .Where(m => m.idBoardPostReply_ReParent == idBoardReply);
+                                        .Where(m => m.idBoardPostReply_ReParent == idBoardReply)
+                                        .OrderBy(ob => ob.idBoardPostReply);
 
                                 rmReturn.List
-                                    = (from reply in iqReply
-                                       join ui in db1.UserInfo
-                                           on reply.idUser equals ui.idUser
+                                    = (from rereply in iqReReply
+                                       from ui in db1.UserInfo
+                                                    .Where(qui => qui.idUser == rereply.idUser)
+                                                    .DefaultIfEmpty()
                                        select new BoardPostViewReplyModel(
-                                           ui, reply, true))
+                                           ui, rereply))
                                         .ToList();
                             }
                             else
@@ -873,22 +900,28 @@ namespace SPA_NetCore_Foundation.Controllers
         /// <param name="idBoardReply_Target">대댓글인경우 대상 없으면 0</param>
         /// <param name="sTitle"></param>
         /// <param name="sContent"></param>
+        /// <param name="sNonMember_ViewName">비회원 - 표시 이름</param>
+        /// <param name="sNonMember_Password">비회원 - 비밀번호</param>
         /// <returns></returns>
         [HttpPost]
         [Authorize]
         public ActionResult<BoardPostReplyCreateResultModel> PostReplyCreate_Auth(
             [FromForm] long idBoard
-           , [FromForm] long idBoardPost
-           , [FromForm] long idBoardReply_Target
-           , [FromForm] string sTitle
-           , [FromForm] string sContent)
+            , [FromForm] long idBoardPost
+            , [FromForm] long idBoardReply_Target
+            , [FromForm] string sTitle
+            , [FromForm] string sContent
+            , [FromForm] string sNonMember_ViewName
+            , [FromForm] string sNonMember_Password)
         {
             return this.PostReplyCreate(
                 idBoard
                 , idBoardPost
                 , idBoardReply_Target
                 , sTitle
-                , sContent);
+                , sContent
+                , sNonMember_ViewName
+                , sNonMember_Password);
         }
 
         /// <summary>
@@ -899,14 +932,18 @@ namespace SPA_NetCore_Foundation.Controllers
         /// <param name="idBoardReply_Target">대댓글인경우 대상 없으면 0</param>
         /// <param name="sTitle"></param>
         /// <param name="sContent"></param>
+        /// <param name="sNonMember_ViewName">비회원 - 표시 이름</param>
+        /// <param name="sNonMember_Password">비회원 - 비밀번호</param>
         /// <returns></returns>
         [HttpPost]
         public ActionResult<BoardPostReplyCreateResultModel> PostReplyCreate(
             [FromForm] long idBoard
-           , [FromForm] long idBoardPost
-           , [FromForm] long idBoardReply_Target
-           , [FromForm] string sTitle
-           , [FromForm] string sContent)
+            , [FromForm] long idBoardPost
+            , [FromForm] long idBoardReply_Target
+            , [FromForm] string sTitle
+            , [FromForm] string sContent
+            , [FromForm] string sNonMember_ViewName
+            , [FromForm] string sNonMember_Password)
         {
             ApiResultReady rrResult = new ApiResultReady(this);
             BoardPostReplyCreateResultModel rmResult = new BoardPostReplyCreateResultModel();
@@ -942,15 +979,24 @@ namespace SPA_NetCore_Foundation.Controllers
                         && (false == typeBoardAuth.HasFlag(BoardAuthorityType.WriteReplyNonMember)))
                     {//비회원인데
                      //리스트 보기(비회원) 권한이 없다.
-                        rmResult.InfoCode = "-2";
+                        rmResult.InfoCode = "-11";
                         rmResult.Message = "로그인해야 작성할 수 있습니다.";
                     }
                     else if ((0 < cm.id_int)
                         && (false == typeBoardAuth.HasFlag(BoardAuthorityType.WriteReply)))
                     {//회원인데
                      //리스트 보기 권한이 없다.
-                        rmResult.InfoCode = "-3";
+                        rmResult.InfoCode = "-12";
                         rmResult.Message = "리플을 작성할 수 없는 게시판입니다.";
+                    }
+                    else if ((0 >= cm.id_int)
+                            && ((string.Empty == sNonMember_ViewName)
+                                || (string.Empty == sNonMember_Password)))
+                    {//비회원인데
+                        //이름이나
+                        //비밀번호가 없다.
+                        rmResult.InfoCode = "-13";
+                        rmResult.Message = "이름과 비밀번호를 입력해 주세요.";
                     }
                 }
 
@@ -1024,7 +1070,7 @@ namespace SPA_NetCore_Foundation.Controllers
                                 List<BoardPostReplyRelationTreeModel> listReturn
                                     = db1.BoardPostReplyRelationTreeModels
                                         .FromSqlRaw("SELECT * FROM dbo.Reply_GetBottomUp({0})"
-                                                , newBPR.idBoardPostReply_ReParent)
+                                                , idBoardReply_Target)
                                         .OrderBy(m => m.Depth)
                                         .ToList();
 
@@ -1054,6 +1100,14 @@ namespace SPA_NetCore_Foundation.Controllers
                             newBPR.Content = sContent;
 
                             newBPR.WriteDate = dtNow;
+
+                            //비회원 확인 ******
+                            if(0 >= cm.id_int)
+                            {//비회원이다.
+                                //비회원 정보 입력
+                                newBPR.NonMember_ViewName = sNonMember_ViewName;
+                                newBPR.NonMember_Password = sNonMember_Password;
+                            }
 
                             //db에 추가한다.
                             db1.BoardPostReply.Add(newBPR);

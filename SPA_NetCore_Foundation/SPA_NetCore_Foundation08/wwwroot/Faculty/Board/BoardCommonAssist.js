@@ -384,17 +384,6 @@ BoardCA.PostView = function (idBoardPost)
     GlobalStatic.Page_Now.BoardComm.PostView(nPV);
 };
 
-/** 댓글 작성 요청 */
-BoardCA.PostReplyCreate = function ()
-{
-    //쿼리가 있는지 확인
-    var jsonQuery = getParamsSPA();
-
-    GlobalStatic.Page_Now.BoardComm.PostReplyCreate(
-        dgIsObject.IsIntValue(jsonQuery["pvid"]));
-};
-
-
 
 /** 포스트 수정 표시 */
 BoardCA.PostEditShow = function (idBoardPost)
@@ -446,92 +435,45 @@ BoardCA.PageMoveNext = function ()
     
 };
 
-/**
- * 주소줄을 갱신하면서 다음 지정한 페이지로 이동한다.
- * @param {int} nPageNum 이동할 페이지 번호. -2100:맨앞으로, -1100:맨뒤로
- */
-BoardCA.PageMoveLink = function (nPageNum)
-{
-    var nTagertPageNum = 0;
 
-    if (-2100 === nPageNum)
-    {
-        //맨앞으로
-        nTagertPageNum = 1;
-    }
-    else if (-1100 === nPageNum)
-    {
-        //맨 뒤로
-        nTagertPageNum = GlobalStatic.Page_Now.BoardComm.PageTotal;
-    }
-    else
-    {
-        nTagertPageNum = nPageNum;
-    }
-
-    //완성된 페이지 번호
-    var nPN = dgIsObject.IsIntValue(nTagertPageNum);
-
-    //쿼리가 있으면 제거
-    var sCutHash = location.hash.split("?")[0];
-
-    //주소 완성하기
-    location.href = sCutHash + "?pn=" + nPN;
-};
+/* ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+ * 게시판 - 댓글
+ * ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇*/
 
 /**
  * 댓글 보기/가리기를
  * 자동으로 처리한다.
  */
-BoardCA.PostReplayShowHide_Auto = function ()
+BoardCA.PostReplyShowHide_Auto = function ()
 {
-    //대상 찾기
-    var domBoardComm_Reply_List = $(".BoardComm_Reply_List");
+    GlobalStatic.Page_Now.BoardComm.PostReplyListShowHide_Auto();
+};
 
-    //대상에 가리기 클래스가 있는지 확인
-    var bShow = domBoardComm_Reply_List.hasClass("v-hidden");
 
-    if (true === bShow)
-    {//가리기 상태다
-        //보기 상태로 변경한다.
-        GlobalStatic.Page_Now.BoardComm.PostReplayShowHide(true);
-    }
-    else
-    {//보기 상태다
-        //가리가 상태로 변경
-        GlobalStatic.Page_Now.BoardComm.PostReplayShowHide(false);
-    }
-
+/** 댓글 작성 요청 */
+BoardCA.PostReplyCreate = function ()
+{
+    GlobalStatic.Page_Now.BoardComm.PostReplyCreate(false);
 };
 
 /**
- * 대댓글 작성
+ * 대댓글 작성 작성창 표시
  * @param {any} idBoardPost
- * @param {any} idBoardReply_Target
+ * @param {any} idBoardPostReply_Target
  */
-BoardCA.PostReReplayCreateShow = function (
+BoardCA.PostReReplyCreateToggle = function (
     idBoardPost
-    , idBoardReply_Target)
+    , idBoardPostReply_Target)
 {
-    GlobalStatic.Page_Now.BoardComm.PostReReplyCreateShow(
+    GlobalStatic.Page_Now.BoardComm.PostReReplyCreateShowHide_Toggle(
         idBoardPost
-        , idBoardReply_Target);
+        , idBoardPostReply_Target);
 };
 
-BoardCA.PostReReplyCreate = function (btnThis)
+/** 대댓글 작성 요청 */
+BoardCA.PostReReplyCreate = function ()
 {
-    //쿼리가 있는지 확인
-    var jsonQuery = getParamsSPA();
-
-    var btn = $(btnThis);
-
-    //대상 받기
-    //var idBoardPost = $(btnThis).attr("idBoardPost");
-    var idBoardReply_Target = dgIsObject.IsIntValue(btn.attr("idBoardReply"));
-
-    GlobalStatic.Page_Now.BoardComm.PostReplyCreate(
-        dgIsObject.IsIntValue(jsonQuery["pvid"])
-        , idBoardReply_Target);
+    GlobalStatic.Page_Now.BoardComm.PostReplyCreate(true);
 };
 
 

@@ -38,6 +38,9 @@ namespace ModelDB
         /// </summary>
         public long idUser { get; set; }
 
+
+        
+
         /// <summary>
         /// 조회수
         /// </summary>

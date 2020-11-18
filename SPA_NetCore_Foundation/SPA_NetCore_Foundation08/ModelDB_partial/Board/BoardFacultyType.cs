@@ -23,14 +23,16 @@ namespace ModelDB
         ShowCount_Server = 1 << 0,
 
         /// <summary>
-        /// 리플 리스트를 표시할지 여부
+        /// 리플 기능 사용여부
         /// </summary>
         ReplyList = 1 << 1,
-
         /// <summary>
-        /// 자기리스트만 보이는 게시판인지 여부
+        /// 대댓글 분리 기능 사용여부
+        /// 이것을 사용하지 않으면 댓글리스트를 불러올때 전체를 불러오게 됩니다.
+        /// 대댓글을 분리하면 댓글별로 대댓글을 별도로 호출해야합니다.
         /// </summary>
-        MyList = 1 << 2,
+        ReReplyDiv = 1 << 2,
+
 
         /// <summary>
         /// 전체 권한

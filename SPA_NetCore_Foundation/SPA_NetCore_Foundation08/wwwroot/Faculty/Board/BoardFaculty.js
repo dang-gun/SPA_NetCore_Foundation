@@ -19,15 +19,13 @@ BoardFaculty.prototype.BoardFacultyType =
     */
     ShowCount_Server: 1 << 0,
     /**
-    리플 리스트를 표시할지 여부
+    리플 기능 사용여부
     */
     ReplyList: 1 << 1,
-
     /**
-    자기리스트만 보이는 게시판인지 여부
+    대댓글 분리 기능 사용여부
     */
-    MyList: 1 << 2,
-
+    ReReplyDiv: 1 << 2,
 };
 
 
@@ -36,9 +34,9 @@ BoardFaculty.prototype.BoardFacultyTypeName = {
     None: "없음",
 
     ShowCount_Server: "한페이지 컨탠츠 수(서버 데이터 사용)",
-    ReplyList: "리플 리스트를 표시할지 여부",
 
-    MyList: "자신의 리스트만 표시할지 여부",
+    ReplyList: "리플 리스트를 표시",
+    ReReplyDiv: "대댓글 분리 기능",
 };
 
 /** 체크 박스 생성에 사용할 Html */

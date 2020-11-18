@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ModelDB;
 
 namespace SPA_NetCore_Foundation08.Migrations
 {
     [DbContext(typeof(SpaNetCoreFoundationContext))]
-    partial class SpaNetCoreFoundationContextModelSnapshot : ModelSnapshot
+    [Migration("20201118080323_BoardPostReply_Edit_NonMembers")]
+    partial class BoardPostReply_Edit_NonMembers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,7 +114,7 @@ namespace SPA_NetCore_Foundation08.Migrations
                             AuthorityDefault = 0,
                             BoardFaculty = 0,
                             BoardState = 1,
-                            CreateDate = new DateTime(2020, 11, 18, 21, 13, 34, 677, DateTimeKind.Local).AddTicks(3684),
+                            CreateDate = new DateTime(2020, 11, 18, 17, 3, 21, 981, DateTimeKind.Local).AddTicks(7868),
                             Memo = "테스트용 게시판",
                             ShowCount = (short)0,
                             Title = "Test",
@@ -321,7 +323,7 @@ namespace SPA_NetCore_Foundation08.Migrations
                             Title = "DB 생성후 테스트용 자동생성 게시물입니다.",
                             ViewCount = 0L,
                             ViewCountNone = 0L,
-                            WriteDate = new DateTime(2020, 11, 18, 21, 13, 34, 678, DateTimeKind.Local).AddTicks(6871),
+                            WriteDate = new DateTime(2020, 11, 18, 17, 3, 21, 983, DateTimeKind.Local).AddTicks(132),
                             idBoard = 1L,
                             idBoardCategory = 0L,
                             idUser = 1L
@@ -348,11 +350,11 @@ namespace SPA_NetCore_Foundation08.Migrations
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
-                    b.Property<string>("NonMember_Password")
+                    b.Property<string>("NonMembers_Password")
                         .HasColumnType("nvarchar(64)")
                         .HasMaxLength(64);
 
-                    b.Property<string>("NonMember_ViewName")
+                    b.Property<string>("NonMembers_ViewName")
                         .HasColumnType("nvarchar(32)")
                         .HasMaxLength(32);
 

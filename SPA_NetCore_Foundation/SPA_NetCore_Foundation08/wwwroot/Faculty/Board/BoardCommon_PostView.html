@@ -1,4 +1,4 @@
-﻿<div class="">
+﻿<div class="" idBoardPost="{{idBoardPost}}">
     <!-- Post title -->
     <div class="card-title Title">
         <span class="CategoryText">{{PostCategoryText}}</span>{{Title}}
@@ -35,5 +35,52 @@
         <div class="Right col">
             <a class="btn btn-primary" href="{{UrlListView}}">목록</a>
         </div>
+    </div>
+</div>
+
+
+<div class="BoardComm_Reply">
+    <hr />
+    <div class="ReplyCountTitleWrap">
+        <div class="ReplyCountTitle">
+            댓글 <span id="BoardComm_Reply_Count" class="ReplyCountText">0</span><span class="ReplyCountText">개</span>
+            <button id="btnOpenButton" class="btn OpenListButton" onclick="BoardCA.PostReplyShowHide_Auto();">
+                댓글 목록 <span class="OpenListButtonOpenText">닫기</span>
+            </button>
+        </div>
+        <div class="BoardComm_Reply_List">
+
+        </div>
+    </div>
+
+
+    <!-- Reply Form -->
+    <div class="card my-4 BoardComm_Reply_CreateArea">
+        <div class="card-body">
+            <div class="form-group">
+                <textarea id="txtBoardComm_Reply_Create" class="form-control" rows="3"></textarea>
+            </div>
+            <div>
+                <input type="text" id="txtNonMember_ReName" class="form-control NonMember_Input" placeholder="이름">
+                <input type="password" id="txtNonMember_RePw" class="form-control NonMember_Input" placeholder="비밀번호">
+                <button class="btn btn-primary" onclick="BoardCA.PostReplyCreate()">댓글쓰기</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ReReply Form -->
+<div class="d-none BoardComm_ReReplyCreateArea" >
+    <div class="container BoardComm_ReReplyCreateWrap ReReplyCreateWrap_{{idBoardPost}}">
+        <div class="mb-2">
+            <textarea id="txtBoardComm_ReReply_Create" class="form-control" rows="3"></textarea>
+        </div>
+        <div>
+            <input type="text" id="txtNonMember_ReReName" class="form-control NonMember_Input" placeholder="이름">
+            <input type="password" id="txtNonMember_ReRePw" class="form-control NonMember_Input" placeholder="비밀번호">
+            <button class="btn btn-primary" onclick="BoardCA.PostReReplyCreate()">댓글 작성</button>
+        </div>
+
     </div>
 </div>

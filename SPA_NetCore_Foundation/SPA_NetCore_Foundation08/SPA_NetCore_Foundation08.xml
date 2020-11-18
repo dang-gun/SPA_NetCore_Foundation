@@ -101,7 +101,7 @@
             <param name="idBoardReply">이 댓글을 부모로 하고 있는 댓글을 검색함</param>
             <returns></returns>
         </member>
-        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostReplyCreate_Auth(System.Int64,System.Int64,System.Int64,System.String,System.String)">
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostReplyCreate_Auth(System.Int64,System.Int64,System.Int64,System.String,System.String,System.String,System.String)">
             <summary>
             리플 작성 - 권한 전달 필수
             </summary>
@@ -110,9 +110,11 @@
             <param name="idBoardReply_Target">대댓글인경우 대상 없으면 0</param>
             <param name="sTitle"></param>
             <param name="sContent"></param>
+            <param name="sNonMember_ViewName">비회원 - 표시 이름</param>
+            <param name="sNonMember_Password">비회원 - 비밀번호</param>
             <returns></returns>
         </member>
-        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostReplyCreate(System.Int64,System.Int64,System.Int64,System.String,System.String)">
+        <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostReplyCreate(System.Int64,System.Int64,System.Int64,System.String,System.String,System.String,System.String)">
             <summary>
             리플 작성
             </summary>
@@ -121,6 +123,8 @@
             <param name="idBoardReply_Target">대댓글인경우 대상 없으면 0</param>
             <param name="sTitle"></param>
             <param name="sContent"></param>
+            <param name="sNonMember_ViewName">비회원 - 표시 이름</param>
+            <param name="sNonMember_Password">비회원 - 비밀번호</param>
             <returns></returns>
         </member>
         <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostReplyDelete_Auth(System.Int64,System.Int64,System.Int64,ModelDB.BoardPostReplyStateType)">
@@ -1143,6 +1147,40 @@
             </summary>
             <param name="modelBuilder"></param>
         </member>
+        <member name="T:SPA_NetCore_Foundation08.Migrations.BoardPostReply_Edit_NonMembers">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.BoardPostReply_Edit_NonMembers.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.BoardPostReply_Edit_NonMembers.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="T:SPA_NetCore_Foundation08.Migrations.BoardPostReply_Edit_NonMember">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.BoardPostReply_Edit_NonMember.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.BoardPostReply_Edit_NonMember.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
         <member name="T:ModelDB.ApiLog">
             <summary>
             API 요청 로그
@@ -1484,6 +1522,16 @@
         <member name="P:ModelDB.BoardPostReply.idUser">
             <summary>
             작성자 아이디
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPostReply.NonMember_ViewName">
+            <summary>
+            비회원 - 표시 이름
+            </summary>
+        </member>
+        <member name="P:ModelDB.BoardPostReply.NonMember_Password">
+            <summary>
+            비회원 - 비밀번호
             </summary>
         </member>
         <member name="P:ModelDB.BoardPostReply.ReplyState">
@@ -1972,12 +2020,14 @@
         </member>
         <member name="F:ModelDB.BoardFacultyType.ReplyList">
             <summary>
-            리플 리스트를 표시할지 여부
+            리플 기능 사용여부
             </summary>
         </member>
-        <member name="F:ModelDB.BoardFacultyType.MyList">
+        <member name="F:ModelDB.BoardFacultyType.ReReplyDiv">
             <summary>
-            자기리스트만 보이는 게시판인지 여부
+            대댓글 분리 기능 사용여부
+            이것을 사용하지 않으면 댓글리스트를 불러올때 전체를 불러오게 됩니다.
+            대댓글을 분리하면 댓글별로 대댓글을 별도로 호출해야합니다.
             </summary>
         </member>
         <member name="F:ModelDB.BoardFacultyType.All">
@@ -2981,14 +3031,6 @@
             <param name="uiData"></param>
             <param name="bcData"></param>
         </member>
-        <member name="M:BoardModel.BoardPostViewReplyModel.#ctor(ModelDB.UserInfo,ModelDB.BoardPostReply,System.Boolean)">
-            <summary>
-            
-            </summary>
-            <param name="uiData"></param>
-            <param name="bcData"></param>
-            <param name="bType"></param>
-        </member>
         <member name="M:BoardModel.BoardPostViewReplyModel.Reset(ModelDB.UserInfo,ModelDB.BoardPostReply)">
             <summary>
             
@@ -3013,9 +3055,24 @@
             리플 리스트
             </summary>
         </member>
+        <member name="P:BoardModel.BoardPostViewReplyResultModel.ReReplyList">
+            <summary>
+            리플 리스트
+            </summary>
+        </member>
         <member name="P:BoardModel.BoardPostViewReplyResultModel.WriteReply">
             <summary>
             리플 작성 권한이 있는지 여부
+            </summary>
+        </member>
+        <member name="P:BoardModel.BoardPostViewReplyResultModel.ReReplyDiv">
+            <summary>
+            댓글 분리 기능 사용여부
+            </summary>
+        </member>
+        <member name="P:BoardModel.BoardPostViewReplyResultModel.ReplyNonMember">
+            <summary>
+            댓글 비회원 작성기능 사용여부 
             </summary>
         </member>
         <member name="T:BoardModel.BoardPostViewResultModel">
