@@ -729,16 +729,18 @@ BoardCommon.prototype.BindItem = function (
                     GlobalStatic.MessageBox_Error(
                         objThis.MessageTitle
                         , "아래 이유로 볼 수 없습니다. <br />" + jsonResult.Message);
-                }
 
-                //로딩이 끝났음을 알린다.
-                objThis.BindItemLoading = false;
+                    //게시판 로딩 표시
+                    objThis.Loading(false);
+                }
             }
             , error: function (error)
             {
                 console.log(error);
                 //로딩이 끝났음을 알린다.
                 objThis.BindItemLoading = false;
+                //게시판 로딩 표시
+                objThis.Loading(false);
             }
         });
 };
@@ -791,7 +793,7 @@ BoardCommon.prototype.BindItem_Items = function (arrJsonData)
         {//페이지 번호가 있다.
             //있을때만 페이지 번호를 넣는다.
             jsonItemData.PostViewUrl
-                = BoardCA.UrlQ.PageNumber + "=" + pn + "&";
+                += BoardCA.UrlQ.PageNumber + "=" + pn + "&";
         }
                 
 
@@ -1332,33 +1334,38 @@ BoardCommon.prototype.PostReplyListBind = function (
     , jsonList
     , jsonReReplyList)
 {
-    var objThis = this;
-    var sOutHtml = "";
-
-    //댓글 개수 표시
-    $("#BoardComm_Reply_Count").html(jsonList.length);
-
-    //기존 리스트 제거
-    objThis.BoardComm_Reply_List.empty();
-
-    //댓글 바인딩
-    for (var i = 0; i < jsonList.length; ++i)
+    if (null !== jsonList)
     {
-        var item = jsonList[i];
-        //아이템을 html로 변환한다.
-        //변환한걸 html로 작성
-        sOutHtml += objThis.PostReplyListItemHtml(bReReplyDiv, item);
-    }
+        var objThis = this;
+        var sOutHtml = "";
 
-    //리플을 출력한다.
-    objThis.BoardComm_Reply_List.html(sOutHtml);
 
-    //대댓글 바인딩
-    if (0 < jsonReReplyList.length)
-    {
-        objThis.PostReReplyListFullBind(jsonReReplyList);
-    }
-    
+
+        //댓글 개수 표시
+        $("#BoardComm_Reply_Count").html(jsonList.length);
+
+        //기존 리스트 제거
+        objThis.BoardComm_Reply_List.empty();
+
+        //댓글 바인딩
+        for (var i = 0; i < jsonList.length; ++i)
+        {
+            var item = jsonList[i];
+            //아이템을 html로 변환한다.
+            //변환한걸 html로 작성
+            sOutHtml += objThis.PostReplyListItemHtml(bReReplyDiv, item);
+        }
+
+        //리플을 출력한다.
+        objThis.BoardComm_Reply_List.html(sOutHtml);
+
+        //대댓글 바인딩
+        if ((null !== jsonReReplyList)
+            && (0 < jsonReReplyList.length))
+        {
+            objThis.PostReReplyListFullBind(jsonReReplyList);
+        }
+    }//end if if (null !== jsonList)  
 };
 
 

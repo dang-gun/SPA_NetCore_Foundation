@@ -204,7 +204,16 @@ namespace ModelDB
                 Title = "Test",
                 BoardState = BoardStateType.Use,
                 CreateDate = DateTime.Now,
-                AuthorityDefault = BoardAuthorityType.None,
+                AuthorityDefault
+                    = BoardAuthorityType.None
+                        | BoardAuthorityType.ReadList
+                        | BoardAuthorityType.Read
+                        | BoardAuthorityType.Write
+                        | BoardAuthorityType.WriteReply
+                        | BoardAuthorityType.Delete
+                        | BoardAuthorityType.Edit,
+                BoardFaculty = BoardFacultyType.ShowCount_Server,
+                ShowCount = 10,
                 Memo = "테스트용 게시판"
             });
             //기본 게시물 입력*********************************

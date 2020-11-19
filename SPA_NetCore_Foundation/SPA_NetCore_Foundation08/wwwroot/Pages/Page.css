@@ -141,6 +141,16 @@ body{
     text-align: center;
 }
 
+.BoardComm_ListItem .BoardComm_TrItem:last-child {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.BoardComm_Foot .BoardComm_Paginate.BoardComm_PageNow {
+    font-weight: bold;
+}
+    .BoardComm_Foot .BoardComm_Paginate.BoardComm_PageNow a {
+        background-color: #c0f9ff;
+    }
 
 .BoardComm_Tools {
     max-width: 100%;
@@ -216,7 +226,7 @@ body{
     padding: .15rem .20rem;
     font-size: 0.8rem;
     font-weight: 500;
-    color: #757575;
+    color: #bbbbbb;
 }
 
 

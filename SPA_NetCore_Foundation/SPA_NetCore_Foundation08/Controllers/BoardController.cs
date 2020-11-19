@@ -1813,7 +1813,17 @@ namespace SPA_NetCore_Foundation.Controllers
             int idBoard
             , int idBoardPost)
         {
-            return this.PostEditView(idBoard, idBoardPost);
+            //유저 정보 추출
+            ClaimModel cm = new ClaimModel(((ClaimsIdentity)User.Identity).Claims);
+
+            if (0 >= cm.id_int)
+            {
+                return StatusCode(StatusCodes.Status403Forbidden);
+            }
+            else
+            {
+                return this.PostEditView(idBoard, idBoardPost);
+            }
         }
 
         /// <summary>

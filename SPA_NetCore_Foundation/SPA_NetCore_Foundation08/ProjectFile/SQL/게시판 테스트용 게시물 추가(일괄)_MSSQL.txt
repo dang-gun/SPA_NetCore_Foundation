@@ -1,0 +1,61 @@
+﻿
+--게시판 번호
+DECLARE @idBoard int
+SET @idBoard = 1
+--포스트 시작 인덱스db에서 확인하고 넣어준다.
+DECLARE @nPostIndex int
+SET @nPostIndex = 10309 + 1
+
+ 
+
+DECLARE @i int
+SET @i = 1
+
+WHILE(@i < 300)
+ BEGIN
+	
+	--포스트 추가
+	insert into BoardPost(
+		idBoard
+		, idBoardCategory
+		, Title
+		, idUser
+		, ViewCount
+		, ViewCountNone
+		, ReplyCount
+		, PostState
+		, WriteDate
+		, EditDate
+		, DeleteDate)
+	values(
+		@idBoard
+		, 0
+		, CONCAT( @i, ' - DB 자동생성 게시물')
+		, 1
+		, 0
+		, 0
+		, 0
+		, 1
+		, GETDATE()
+		, '2000-01-01 00:00:00'
+		, '2000-01-01 00:00:00')
+
+	--포스트 내용 추가
+	insert into BoardContent(
+		idBoard
+		, idBoardPost
+		, Content)
+	values(
+		@idBoard
+		, @nPostIndex
+		, CONCAT(@i, ' - ')
+			+ '자동으로 생성된 게시물입니다'
+			+ CONCAT('<br/>게시판 : ', @idBoard)
+			+ CONCAT('<br/>게시물 : ', @nPostIndex)
+			+ CONCAT('<br/>자동 인덱스 : ', @i))
+
+ 
+ SET @i = @i + 1
+ set @nPostIndex = @nPostIndex + 1
+
+END
