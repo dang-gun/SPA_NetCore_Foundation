@@ -155,7 +155,6 @@ GlobalSign.Move_SignIn_Remove = function (bMessage, sMessage)
                     {//없으면 홈으로 보낸다.
                         Page.Move_Home();
                     }
-                    
                 }
                 break;
             case 1://관리자타입

@@ -141,7 +141,14 @@ GlobalSign.Move_SignIn_Remove = function (bMessage, sMessage)
                 else
                 {//주소가 있다.
                     //UI 갱신
-                    SignInInfo.UserInfo_Load();
+                    if (null !== SignInInfo.divSignInInfo)
+                    {//ui대상이 있으면 갱신
+                        SignInInfo.UserInfo_Load();
+                    }
+                    else
+                    {//없으면 홈으로 보낸다.
+                        Page.Move_Home();
+                    }
                 }
                 break;
             case 1://관리자타입
