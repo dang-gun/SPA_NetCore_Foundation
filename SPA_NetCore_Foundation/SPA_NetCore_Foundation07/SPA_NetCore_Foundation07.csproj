@@ -156,6 +156,7 @@
     <None Remove="wwwroot_Home\Pages\SignInInfo\SignInInfo.js" />
     <None Remove="wwwroot_Home\Pages\SignInInfo\SignInInfo_SignIn.html" />
     <None Remove="wwwroot_Home\Pages\SignInInfo\SignInInfo_SignOut.html" />
+    <None Remove="wwwroot_Home\Pages\SignInInfo\SignInInfo_SignOutInfo.html" />
     <None Remove="wwwroot_Home\Pages\SignIn\SignIn.html" />
     <None Remove="wwwroot_Home\Pages\SignIn\SignIn.js" />
     <None Remove="wwwroot_Home\Pages\SignIn\SignInAssist.js" />
@@ -720,6 +721,10 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Content Include="wwwroot_Home\Pages\SignInInfo\SignInInfo_SignOutInfo.html">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="wwwroot_Home\Pages\SignInInfo\SignInInfo_SignOut.html">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
@@ -1020,6 +1025,9 @@
 
   <ItemGroup>
     <None Update="SPA_NetCore_Foundation07.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="wwwroot_Admin\Utility\DG_MessageBox\DG_MessageBox.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

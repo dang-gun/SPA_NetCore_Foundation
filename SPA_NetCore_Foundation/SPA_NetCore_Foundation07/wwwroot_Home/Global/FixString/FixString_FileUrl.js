@@ -11,6 +11,7 @@ FS_FUrl.Page_Page_Menu = FS_FUrl.Pages + "Page_Menu.html";
 FS_FUrl.SignInInfo = FS_FUrl.Pages + "SignInInfo/";
 FS_FUrl.SignInInfo_SignInHtml = FS_FUrl.SignInInfo + "SignInInfo_SignIn.html";
 FS_FUrl.SignInInfo_SignOutHtml = FS_FUrl.SignInInfo + "SignInInfo_SignOut.html";
+FS_FUrl.SignInInfo_SignOutInfoHtml = FS_FUrl.SignInInfo + "SignInInfo_SignOutInfo.html";
 
 /* error page */
 FS_FUrl.Error = FS_FUrl.Pages + "Error/";

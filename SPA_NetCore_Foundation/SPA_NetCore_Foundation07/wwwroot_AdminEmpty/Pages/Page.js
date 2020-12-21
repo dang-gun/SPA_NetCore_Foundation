@@ -60,10 +60,10 @@ Page.Load = function (jsonOption, callbackFun)
 
                         //메뉴 활성화 시도
                         Page.MenuActive();
-                    });
 
-                //사인인 정보 로드
-                SignInInfo.Load();
+                        //사인인 정보 로드
+                        SignInInfo.Load();
+                    });
 
                 callbackFun_Backup();
             });

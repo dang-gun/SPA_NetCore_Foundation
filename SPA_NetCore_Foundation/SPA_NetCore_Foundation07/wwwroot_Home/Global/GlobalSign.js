@@ -150,7 +150,15 @@ GlobalSign.Move_SignIn_Remove = function (bMessage, sMessage)
                     }
                     else
                     {//없으면 홈으로 보낸다.
-                        Page.Move_Home();
+                        if (FS_Url.Home === location.hash)
+                        {//이미 홈이다.
+                            setTimeout(function () { location.href = "/"; }, 0);
+                        }
+                        else
+                        {
+                            Page.Move_Home();
+                        }
+                        
                     }
                 }
                 break;
@@ -290,7 +298,7 @@ GlobalSign.AccessTokenToInfo = function (callback)
                         GlobalSign.SignIn_ID = jsonData.id;
                         GlobalSign.SignIn_Email = jsonData.email;
 
-                        GlobalSign.SignIn_ViewName = jsonResult.ViewName;
+                        GlobalSign.SignIn_ViewName = jsonData.ViewName;
 
                         //UI 갱신
                         SignInInfo.UserInfo_Load();

@@ -6,10 +6,13 @@ var SignInInfo = {};
 
 /** 사인인 인포 영역 */
 SignInInfo.divSignInInfo = null;
+/** 사인아웃 인포 영역 */
+SignInInfo.divDropdownContents = null;
 
 SignInInfo.Load = function ()
 {
     SignInInfo.divSignInInfo = Page.divPage.find("#divSignInInfo");
+    SignInInfo.divDropdownContents = Page.divPage.find("#divDropdownContents");
 
     //유저 정보 요청
     SignInInfo.UserInfo_Load();
@@ -28,8 +31,17 @@ SignInInfo.UserInfo_Load = function ()
             SignInInfo.divSignInInfo.load(FS_FUrl.SignInInfo_SignOutHtml
                 , function ()
                 {
-                    $("#aMyPage").attr("href", FS_Url.MyPage);
-                    $("#spanEMail").html(GlobalSign.SignIn_ID);
+                    
+                    $("#spanEMail").html(GlobalSign.SignIn_ViewName);
+
+                    SignInInfo.divDropdownContents
+                        .load(FS_FUrl.SignInInfo_SignOutInfoHtml
+                            , function ()
+                            {
+                                $("#SignInInfo_MyPage").attr("href", FS_Url.MyPage);
+                            });
+
+                    
                 });
         }
         else
