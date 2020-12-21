@@ -1,0 +1,23 @@
+﻿<tr id="div{{idBoard}}" class="TrItem">
+    <td class="TdId">
+        <input type="text" value="{{idBoard}}" />
+    </td>
+    <td class="TdTitle">
+        <input type="text" value="{{Title}}" />
+    </td>
+    <td class="TdState">
+        <input type="text" value="{{BoardState}}" />
+    </td>
+    <td class="TdBoardAuth">
+        <button class="form-control btn-outline" onclick="Page.Move_Page(FS_Url.Admin_BoardMgtAuth + '/' + {{idBoard}})">개별권한</button>
+    </td>
+    <td class="TdCreateDate">
+        <input type="text" value="{{CreateDate:Date}}" />
+    </td>
+    <td class="TdMemo">
+        <input type="text" value="{{Memo}}" />
+    </td>
+    <td class="TdEdit">
+        <button class="form-control btn-outline" onclick="GlobalStatic.Page_Now.BoardEidtShow({{idBoard}})">수정</button>
+    </td>
+</tr>

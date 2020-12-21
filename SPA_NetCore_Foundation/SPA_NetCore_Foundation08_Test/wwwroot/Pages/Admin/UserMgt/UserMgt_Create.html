@@ -1,0 +1,36 @@
+﻿<div class="DG_PopupTitle DG_MessageBoxTitle">
+    {{Title}}
+</div>
+
+<table style="width: 700px;">
+    <colgroup>
+        <col style="width: 20%;" />
+        <col style="width: 80%;" />
+    </colgroup>
+    <tr>
+        <th>아이디</th>
+        <td><input type="text" id="txtEMail" /><button class="form-control btn-outline" onclick="GlobalStatic.Page_Now.OnClick_SignEmailCheck()">중복확인</button></td>
+    </tr>
+    <tr>
+        <th>닉네임</th>
+        <td><input type="text" id="txtNickName" /><button class="form-control btn-outline" onclick="GlobalStatic.Page_Now.OnClick_SignNameCheck()">중복확인</button></td>
+    </tr>
+    <tr>
+        <th>비밀번호</th>
+        <td><input type="text" id="pwPassword" /></td>
+    </tr>
+    <tr>
+        <th>이메일</th>
+        <td><input type="text" id="txtEMail2" /></td>
+    </tr>
+    <tr>
+        <th>전화번호</th>
+        <td><input type="text" id="txtPhone" /></td>
+    </tr>
+
+</table>
+
+<div class="btn_wrap">
+    <button class="btn_type btn_confirm" onclick="GlobalStatic.Page_Now.UserCreate()">생성</button>
+    <button class="btn_type btn_cancel" onclick="DG_Popup.Close()">취소</button>
+</div>

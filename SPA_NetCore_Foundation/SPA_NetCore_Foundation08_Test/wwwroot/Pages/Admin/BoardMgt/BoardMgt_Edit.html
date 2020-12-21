@@ -1,0 +1,63 @@
+﻿<div class="DG_PopupTitle DG_MessageBoxTitle">
+    {{Title}}
+</div>
+
+<table style="width: 700px;">
+    <colgroup>
+        <col style="width: 20%;" />
+        <col style="width: 80%;" />
+    </colgroup>
+    <tr>
+        <th>번호</th>
+        <td><input type="text" id="txtBoardMgt_Edit_idBoard" readonly value="{{idBoard}}" /></td>
+    </tr>
+    <tr>
+        <th>제목</th>
+        <td><input type="text" id="txtBoardMgt_Edit_Title" value="{{TitleBoard}}" /></td>
+    </tr>
+    <tr>
+        <th>상태</th>
+        <td>
+            <select id="selectBoardMgt_Edit_State">
+                <option {{State_Use}} value="1">사용</option>
+                <option {{State_NotUse}} value="2">사용하지 않음</option>
+            </select>
+        </td>
+    </tr>
+
+    <tr>
+        <th>개시물 수</th>
+        <td>
+            <input type="text" id="txtBoardMgt_Edit_ShowCount" value="{{ShowCount}}" />
+        </td>
+    </tr>
+
+
+    <tr>
+        <th>기능</th>
+        <td>
+            <div class="check_wrap">
+                {{BoardFacultyHtml}}
+            </div>
+        </td>
+    </tr>
+
+    <tr>
+        <th>기본 권한</th>
+        <td>
+            <div class="check_wrap">
+                {{BoardAuthHtml}}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th>메모</th>
+        <td><input type="text" id="txtBoardMgt_Edit_Memo" value="{{Memo}}" /></td>
+    </tr>
+
+</table>
+
+<div class="btn_wrap">
+    <button class="btn_confirm" onclick="GlobalStatic.Page_Now.BoardEidt()">수정</button>
+    <button class="btn_cancel" onclick="DG_Popup.Close()">취소</button>
+</div>

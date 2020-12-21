@@ -1,0 +1,22 @@
+﻿<!-- Single Comment -->
+<div id="divPostReplyItem_{{idBoardPostReply}}" idBoardPostReply="{{idBoardPostReply}}">
+    <div class="media mb-1">
+        <img class="d-flex mr-1 rounded-circle UserFaceImg {{UserFaceVisibility}}" src="{{UserFaceUrl}}" alt="">
+        <div class="media-body">
+            <div>
+                <span class="mt-0 UserNameText">{{UserName:UserNameView}}</span>&nbsp;&nbsp;<span class="WriteDate">{{WriteDate:DateTime}}</span>
+            </div>
+            <div class="PostReplyItem_ContentArea mb-2">
+                {{Content}}
+                <button id="btnPostReplyItem_{{idBoardPostReply}}_ReReplyCreateShow" class="btn btn-sm btn-outline-light {{ReReplyCreateOpenCss}} ReReplyCreateOpenCss" onclick="BoardCA.PostReReplyCreateToggle({{idBoardPost}}, {{idBoardPostReply}})">↘ 답글</button>
+                <div id="divReReplyCreateAreaTarget_{{idBoardPostReply}}" class="mt-2" openCreateArea="false">
+                </div>
+            </div>
+            <div>
+                <button id="btnPostReplyItem_{{idBoardPostReply}}_ReReply" class="btn btn-sm {{ReReplyCss}}" myListOpen="Open" onclick="BoardCA.ReRePlayList({{idBoardPost}}, {{idBoardPostReply}})">댓글 {{ReReplyCount}}개 보기</button>
+            </div>
+            <div id="divPostReplyItem_{{idBoardPostReply}}_ReReply" class="{{ReReplyCss}}" openReReplyList="false">
+            </div>            
+        </div>
+    </div>
+</div>

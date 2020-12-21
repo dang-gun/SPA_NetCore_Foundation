@@ -1,0 +1,38 @@
+﻿
+<div id="divFileList"></div>
+
+<table id="tableBoard_PostCreate" idBoard="{{idBoard}}">
+    <colgroup>
+        <col style="width: 80px;" />
+        <col style="width: auto;" />
+    </colgroup>
+    <tr>
+        <th>제목</th>
+        <td><input type="text" id="txtBoard_PostCreate_Title" value="{{TitlePost}}" /></td>
+    </tr>
+    <tr>
+        <th>게시판</th>
+        <td>
+            {{PostCategoryHtml}}{{BoardPostStateHtml}}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <div>
+                {{EditorLengthTitle}}<label id="labLength">0</label>/<label id="labLengthMax">0</label>
+            </div>
+            <!--<div id="divEditor">
+            </div>-->
+            <textarea id="divEditor"></textarea>
+        </td>
+    </tr>
+
+</table>
+
+<div class="clfix">
+    <div class="btn_edit_wrap">
+        <button onclick="BoardCA.PostEdit({{idBoardPost}})" class="form-control btn-outline">작성완료</button>
+        <button onclick="BoardCA.PostViewLink({{idBoardPost}});" class="form-control btn-outline">취소</button>
+        <button onclick="BoardCA.ListLink();" class="form-control btn-outline">목록</button>
+    </div>
+</div>

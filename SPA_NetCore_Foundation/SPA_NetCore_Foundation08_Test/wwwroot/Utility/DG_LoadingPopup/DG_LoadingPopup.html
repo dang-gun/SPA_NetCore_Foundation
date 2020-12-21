@@ -1,0 +1,162 @@
+﻿<!doctype html>
+
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <style>
+
+        /** 기본 css */
+        .divDG_LoadingPopup 
+        {
+            border-radius: 3px;
+        }
+
+
+    </style>
+
+    <!-- jquery 3.4.1 -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+    <script src="DG_LoadingPopup.js"></script>
+</head>
+
+<body>
+    <h3>DG Loading Popup</h3>
+    <br />
+    <br />
+    <div>
+        <button onclick="Show(3)">Show Loading 3sec</button>
+    </div>
+    <div>
+        <button onclick="Show(5)">Show Loading 5sec</button>
+    </div>
+    <div>
+        <button onclick="Show(10)">Show Loading 10sec</button>
+    </div>
+    <div>
+        <button onclick="Show(20)">Show Loading 20sec</button>
+    </div>
+    <div>
+        <button onclick="Show(30)">Show Loading 30sec</button>
+    </div>
+
+    <br />
+    <br />
+    <div id="divOutput">
+
+    </div>
+    <br />
+    <br /><br />
+    <br /><br />
+    <br /><br />
+    <br />
+    <br />
+    <br /><br />
+    <br /><br />
+    <br /><br />
+    <br /><br />
+    <br /><br />
+    <br /><br />
+    <br /><br />
+    <br /><br />
+    <br /><br />
+    <br />
+    <br /><br />
+    <br /><br />
+    <br />    <br /><br />
+    <br /><br />
+    <br />    <br /><br />
+    <br /><br />
+    <br />    <br /><br />
+    <br /><br />
+    <br />    <br /><br />
+    <br /><br />
+    <br />    <br /><br />
+    <br /><br />
+    <br />    <br /><br />
+    <br /><br />
+    <br />    <br /><br />
+    <br /><br />
+    <br />    <br /><br />
+    <br /><br />
+    <br />    <br /><br />
+    <br /><br />
+    <br />    <br /><br />
+    <br /><br />
+    <br />    <br /><br />
+    <br /><br />
+    <br />    <br /><br />
+    <br /><br />
+    <br />    <br /><br />
+    <br /><br />
+    <br />    <br /><br />
+    <br /><br />
+    <br />    <br /><br />
+    <br /><br />
+    <br />    <br /><br />
+    <br /><br />
+    <br />    <br /><br />
+    <br /><br />
+    <br />    <br /><br />
+    <br /><br />
+    <br />    <br /><br />
+    <br /><br />
+    <br />    <br /><br />
+    <br /><br />
+    <br />    <br /><br />
+    <br /><br />
+    <br />    <br /><br />
+    <br /><br />
+    <br />    <br /><br />
+    <br /><br />
+    <br />    <br /><br />
+    <br /><br />
+    <br />    <br /><br />
+    <br /><br />
+    
+    <br />
+    ㅇㅁㄴㄴㅇㅁㄴㅇㄹ
+    <br /><br />
+    <br /><br />
+    <br />
+    
+    <script>
+        //팝업 셈플 01
+        var dgLoadingPopup01 = new DG_LoadingPopup(
+            {
+                LoadingPopupHtml: ""
+                    + "<div>"
+                    + "<img class='DG_LoadingPopupImage' src='' /><br />"
+                    + "<span class='DG_LoadingPopupMessage'></span>"
+                    + "<button onclick='ShowMessage(\"메시지 변경~\")'>메시지 변경</button>"
+                    + "</div>"
+            });
+
+        /**
+         * 로딩 열기
+         * @param nShowTime 열리는 시간(초)
+         */
+        function Show(nShowTime)
+        {
+            dgLoadingPopup01.Show();
+
+            setTimeout(function ()
+            {
+                dgLoadingPopup01.Close();
+            }, nShowTime * 1000);
+        }
+
+        function ShowMessage(sMessage)
+        {
+            dgLoadingPopup01.ShowMessage(sMessage);
+        }
+
+    </script>
+
+</body>
+
+</html>

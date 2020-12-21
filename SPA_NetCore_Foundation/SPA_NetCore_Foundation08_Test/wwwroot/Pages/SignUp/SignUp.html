@@ -1,0 +1,21 @@
+﻿<div class="login_wrap signup">
+    <div class="login_tit">회원 가입</div>
+    <div class="login_input">
+        <div class="input_box input_id">
+            <label for="txtEMail">Sign In Email :</label><input type="text" id="txtEMail" placeholder="아이디를 입력하세요" autocomplete="off">
+            <button onclick="GlobalStatic.Page_Now.OnClick_SignEmailCheck()">중복 확인</button>
+        </div>
+        <div class="input_box input_nickName">
+            <label for="txtEMail">View Name :</label><input type="text" id="txtViewName" placeholder="닉네임을 입력하세요" autocomplete="off">
+            <button onclick="GlobalStatic.Page_Now.OnClick_SignNameCheck()">중복 확인</button>
+        </div>
+        <div class="input_box">
+            <label for="txtEMail">password :</label><input type="password" id="pwPassword" placeholder="비밀번호를 입력하세요" autocomplete="off">
+        </div>
+        <div class="input_box">
+            <label for="txtEMail">Re password :</label><input type="password" id="pwPasswordRe" placeholder="비밀번호를 재입력하세요" autocomplete="off">
+        </div>
+        
+        <button class="signup_confirm" onclick="GlobalStatic.Page_Now.OnClick_SingUp()">회원 가입</button>
+    </div>
+</div>

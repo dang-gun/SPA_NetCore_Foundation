@@ -1,0 +1,48 @@
+﻿USE [SpaNetCoreFoundation08]
+GO
+/****** Object:  UserDefinedFunction [dbo].[Reply_GetBottomUp]    Script Date: 2020-11-18 오후 8:23:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date, ,>
+-- Description:	https://spaghetti-code.tistory.com/21
+--				해당 댓글의 상위 연결된 댓글을 찾아 리턴한다.
+--              SELECT * FROM dbo.Reply_GetBottomUp(5)
+-- =============================================
+CREATE FUNCTION [dbo].[Reply_GetBottomUp]
+(
+	@idBoardPostReply bigint
+)
+
+RETURNS 
+ @rTable TABLE (
+	[idBoardPostReply] bigint,
+	[idBoardPostReply_Re] bigint,
+	[Depth] int
+) 
+AS
+BEGIN
+	
+
+	WITH OrgTree(idManager, idBoardPostReply_Re, Depth) AS (   
+        SELECT idBoardPostReply, idBoardPostReply_Re, 0 AS Depth
+        FROM BoardPostReply
+        WHERE idBoardPostReply = @idBoardPostReply
+
+        UNION ALL
+
+        SELECT COM.idBoardPostReply, COM.idBoardPostReply_Re, ORG.Depth + 1
+        FROM BoardPostReply AS COM 
+	INNER JOIN OrgTree AS ORG 
+	    ON COM.idBoardPostReply = ORG.idBoardPostReply_Re
+    )       
+    INSERT @rTable
+    SELECT idManager, idBoardPostReply_Re, Depth
+    FROM OrgTree 
+    OPTION (MAXRECURSION 100);  
+	
+	RETURN 
+END

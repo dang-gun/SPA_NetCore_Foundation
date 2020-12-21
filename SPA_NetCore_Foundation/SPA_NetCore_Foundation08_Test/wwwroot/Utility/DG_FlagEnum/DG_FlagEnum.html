@@ -1,0 +1,149 @@
+﻿<!doctype html>
+
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <style>
+        #txtOri, #txtOutput {
+            width:500px;
+            height:500px;
+        }
+    </style>
+
+    <!-- jquery 3.4.1 -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+    <script src="DG_FlagEnum.js"></script>
+</head>
+
+<body>
+    <h3>DG FlagEnum</h3>
+    <br />
+    열거형 유틸<br />
+    <br />
+    <p>콘솔 확인</p>
+    <br />
+    <br />
+    <p><button onclick="ToHtml(false)">html 생성</button><button onclick="ToHtml(true)">html 생성(기존값 복원)</button><button onclick="GetCheck()">데이터 받기</button></p>
+    <br />
+    <div id="divOutput">
+    </div>
+
+    <script>
+        var Auth3Type = {
+            None: 0,
+            Opt0: 1 << 0,
+            Opt1: 1 << 1,
+            Opt2: 1 << 2,
+            Opt3: 1 << 3,
+            Opt4: 1 << 4,
+            Opt5: 1 << 5,
+            Opt6: 1 << 6
+        };
+
+        var Auth3TypeName = {
+            None: 0,
+            Opt0: "옵션0",
+            Opt1: "옵션1",
+            Opt2: "옵션2",
+            Opt3: "옵션3",
+            Opt4: "옵션4",
+            Opt5: "옵션5",
+            Opt6: "옵션6"
+        };
+
+        var typeAuth3 = Auth3Type.None;
+
+        console.log("//모든 값 빼기");
+        typeAuth3 = Auth3Type.None;
+        console.log("typeAuth3 = Auth3Type.None; ====> : " + typeAuth3);
+        console.log("typeAuth3.HasFlag(Auth3Type.Opt1) ====> : " + DG_FlagEnum.HasFlag(Auth3Type.Opt1));
+        console.log("typeAuth3.HasFlag(Auth3Type.Opt2) ====> : " + DG_FlagEnum.HasFlag(Auth3Type.Opt2));
+        console.log("  ");
+
+
+        console.log("//값 넣기");
+        typeAuth3 = Auth3Type.Opt1 | Auth3Type.Opt3;
+
+        console.log("typeAuth3 = Auth3Type.Opt1 | Auth3Type.Opt3; ====> : " + typeAuth3);
+        console.log("  ");
+
+
+        console.log("//기존 값에 추가하기");
+        //typeAuth3 |= Auth3Type.Opt5 | Auth3Type.Opt6;
+        typeAuth3 = DG_FlagEnum.Add(typeAuth3, Auth3Type.Opt5 | Auth3Type.Opt6);
+        console.log("typeAuth3 |= Auth3Type.Opt5 | Auth3Type.Opt6; ====> : " + typeAuth3);
+        console.log("  ");
+
+
+        console.log("//값 빼기");
+        //typeAuth3 &= ~Auth3Type.Opt5;
+        typeAuth3 = DG_FlagEnum.Delete(typeAuth3, Auth3Type.Opt5);
+        console.log("typeAuth3 &= ~Auth3Type.Opt5; ====> : " + typeAuth3);
+        console.log("  ");
+
+
+        console.log("//값 반전(있으면 빠지고 없으면 추가됨)");
+        //typeAuth3 ^= Auth3Type.Opt6;
+        typeAuth3 = DG_FlagEnum.Toggle(typeAuth3, Auth3Type.Opt5);
+        console.log("typeAuth3 ^= Auth3Type.Opt6; ====> : " + typeAuth3);
+        //typeAuth3 ^= Auth3Type.Opt6;
+        typeAuth3 = DG_FlagEnum.Toggle(typeAuth3, Auth3Type.Opt5);
+        console.log("typeAuth3 ^= Auth3Type.Opt6; ====> : " + typeAuth3);
+        console.log("  ");
+
+
+        console.log("//값 특정값이 있는지 확인");
+        //!!(typeAuth3 & Auth3Type.Opt1)
+        console.log("DG_FlagEnum.HasFlag(typeAuth3, Auth3Type.Opt1) ====> : " + DG_FlagEnum.HasFlag(typeAuth3, Auth3Type.Opt1));
+        console.log("DG_FlagEnum.HasFlag(typeAuth3, Auth3Type.Opt2) ====> : " + DG_FlagEnum.HasFlag(typeAuth3, Auth3Type.Opt2));
+        console.log("  ");
+
+
+
+        //테스트 - 체크박스 그룹이름
+        var sGroupName = "Auth3TypeGroup";
+        //테스트 - 체크박스생성에 사용할 Html
+        var sCheckHtml = '<label>'
+            + '<input type="checkbox" name="{{GroupName}}" value="{{value}}" {{checked}} />'
+            + '<span>{{Name}}</span>'
+            + '</label>';
+
+        //선택값 임시 저장
+        var nValue = 0;
+
+        function ToHtml(bData)
+        {
+            //그룹 정보를 넣는다.
+            var sCheckHtmlTemp = sCheckHtml.replace(/{{GroupName}}/g, sGroupName);
+
+            var nData = 0;
+            if (true === bData)
+            {
+                nData = nValue;
+            }
+
+            var sHtml
+                = DG_FlagEnum.ToHtml(
+                    sCheckHtmlTemp
+                    , Auth3Type
+                    , Auth3TypeName
+                    , nData
+                );
+
+            $("#divOutput").html(sHtml);
+        }
+
+        function GetCheck()
+        {
+            nValue = DG_FlagEnum.GetCheckBoxData(sGroupName);
+            alert(nValue);
+        }
+    </script>
+</body>
+
+</html>

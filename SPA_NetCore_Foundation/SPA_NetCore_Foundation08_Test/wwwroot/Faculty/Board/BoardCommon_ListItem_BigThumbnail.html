@@ -1,0 +1,18 @@
+﻿
+<div id="divBoardItem_{{idBoardPost}}" class="divBoardItem {{ItemTypeCss}} {{ItemNow}} cont_item">
+    <div class="video-info-box">
+        <a id="video-title-link" href="javascript:void(0);" onclick="BoardCA.PostViewLink('{{idBoardPost}}')">
+            <div class="img_box" style="background: url({{ThumbnailFullUrl}}) no-repeat top center;background-size: cover;background-color:#fff;"></div>
+            <div class="video-tit">{{Title}} {{ReplyCount:ReplyCount}} </div>
+            <div id="video-meta-block" class="video-meta-block sublist">
+                <div><div class="initial"><img id="imgUserFace" src="{{idUser:UserFaceUrl}}"></div></div>
+                <div id="video-meta-tit" class="video-meta-tit">{{ViewUserName}}</div>
+                <div id="metadata-line" class="video-meta">
+                    <span>{{ViewCount}}</span>
+                    <span>{{WriteDate:DateOrTime}}</span>
+                </div>
+            </div>
+        </a>
+        <button class="{{FavoritesCss}}" onclick="BoardCA.FavoritesAdd(this, '{{idBoardPost}}')">F</button>
+    </div>
+</div>

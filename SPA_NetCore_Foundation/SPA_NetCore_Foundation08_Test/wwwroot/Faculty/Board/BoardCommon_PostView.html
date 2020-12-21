@@ -1,0 +1,86 @@
+﻿<div class="" idBoardPost="{{idBoardPost}}">
+    <!-- Post title -->
+    <div class="card-title Title">
+        <span class="CategoryText">{{PostCategoryText}}</span>{{Title}}
+    </div>
+    <hr>
+
+    <!-- Post Info -->
+    <div class="PostViewInfo">
+        <div class="Left">
+            <a id="aUserName{{ViewUserId}}" href="javascript:void(0);" class="UserName">{{UserName}}</a>
+        </div>
+        <div class="Right">
+            <span class="ViewCount">조회&nbsp;&nbsp;{{ViewCount}}</span>
+            <span class="TextBar"> | </span>
+            <span class="WriteDate">작성&nbsp;&nbsp;{{WriteDate:DateTime}}</span>
+        </div>
+    </div>
+    <hr>
+
+    <!-- Post Content -->
+    <div id="divViewer"></div>
+
+    <hr>
+
+</div>
+
+<div class="PostViewTools container">
+    <div class="row">
+        <div class="Left col">
+            <button class="btn btn-primary" onclick="BoardCA.PostCreateShow()">글쓰기</button>
+            <button class="btn btn-outline-primary" onclick="BoardCA.PostEditShow({{idBoardPost}});">수정</button>
+            <button class="btn btn-outline-dark" onclick="BoardCA.PostDeleteShow({{idBoardPost}});">삭제</button>
+        </div>
+        <div class="Right col">
+            <a class="btn btn-primary" href="{{UrlListView}}">목록</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="BoardComm_Reply">
+    <hr />
+    <div class="ReplyCountTitleWrap">
+        <div class="ReplyCountTitle">
+            댓글 <span id="BoardComm_Reply_Count" class="ReplyCountText">0</span><span class="ReplyCountText">개</span>
+            <button id="btnOpenButton" class="btn OpenListButton" onclick="BoardCA.PostReplyShowHide_Auto();">
+                댓글 목록 <span class="OpenListButtonOpenText">닫기</span>
+            </button>
+        </div>
+        <div class="BoardComm_Reply_List">
+
+        </div>
+    </div>
+
+
+    <!-- Reply Form -->
+    <div class="card my-4 BoardComm_Reply_CreateArea">
+        <div class="card-body">
+            <div class="form-group">
+                <textarea id="txtBoardComm_Reply_Create" class="form-control" rows="3"></textarea>
+            </div>
+            <div>
+                <input type="text" id="txtNonMember_ReName" class="form-control NonMember_Input" placeholder="이름">
+                <input type="password" id="txtNonMember_RePw" class="form-control NonMember_Input" placeholder="비밀번호">
+                <button class="btn btn-primary" onclick="BoardCA.PostReplyCreate()">댓글쓰기</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ReReply Form -->
+<div class="d-none BoardComm_ReReplyCreateArea" >
+    <div class="container BoardComm_ReReplyCreateWrap ReReplyCreateWrap_{{idBoardPost}}">
+        <div class="mb-2">
+            <textarea id="txtBoardComm_ReReply_Create" class="form-control" rows="3"></textarea>
+        </div>
+        <div>
+            <input type="text" id="txtNonMember_ReReName" class="form-control NonMember_Input" placeholder="이름">
+            <input type="password" id="txtNonMember_ReRePw" class="form-control NonMember_Input" placeholder="비밀번호">
+            <button class="btn btn-primary" onclick="BoardCA.PostReReplyCreate()">댓글 작성</button>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,34 @@
+﻿
+    <div id="divBoardInfo" class="admin_set">
+        <h3>유저 관리</h3><br />
+        <div id="divAdmin_Menu">
+        </div>
+
+        <div id="divFind" class="mt30">
+            <select class="form-control">
+                <option value="12">아이디</option>
+                <option value="13">닉네임</option>
+                <option value="11">고유번호</option>
+            </select>
+            <input name="findBox" type="text" class="form-control" placeholder="입력하세요." />
+            <button name="findBt" class="form-control btn-outline" ">검색</button>
+        </div>
+        <button onclick="GlobalStatic.Page_Now.UserCreateShow()" class="form-control btn-outline mt30">유저 생성</button>
+        <table id="divList" class="BoardComm_List admin_board_ctrl">
+        </table>
+        <table id="divList" class="BoardComm_List admin_board_info">
+            <colgroup>
+                <col style="width:5%;">
+                <col style="width:12%;">
+                <col style="width:8%;">
+                <col style="width:auto;">
+                <col style="width:12%;">
+                <col style="width:10%;">
+                <col style="width:8%;">
+                <col style="width:8%;">
+                <col style="width:8%;">
+                <col style="width:10%;">
+                <col style="width:6%;">
+            </colgroup>
+        </table>
+    </div>

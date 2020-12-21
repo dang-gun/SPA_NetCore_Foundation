@@ -1,0 +1,374 @@
+﻿h1, h2, h3, h4, h5 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+body{
+    padding:0 10px;
+}
+
+/* ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+    부트스트랩 4 수정
+◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇ */
+.d-none {
+    display: none;
+}
+
+.v-hidden {
+    visibility:hidden;
+}
+
+.btn {
+    margin: 0 3px;
+}
+
+/* ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+    Page  
+◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇ */
+#divPage {
+}
+
+#divTop, #divMainMenu {
+    border-bottom: 1px solid #b6b6b6;
+    min-height: 30px;
+    margin-bottom: 10px;
+}
+
+#divTop {
+}
+
+    #divTop:after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    #divTop > .TopLogo {
+        float: left;
+        margin-top: 1px;
+    }
+
+
+    #divTop > #divSignInInfo {
+        float: right;
+        margin-top: 1px;
+    }
+
+#divPage #divMainMenu div {
+    float: left;
+    margin-right: 10px;
+}
+
+
+
+#divMainMenu {
+}
+
+/* ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+    Footer
+◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇ */
+#divFooter {
+    margin-top: 10px;
+    padding: 5px 0;
+    border-top: 1px solid #b6b6b6;
+    text-align: center;
+}
+
+/* ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+    BoardCommon
+◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇ */
+.BoardComm {
+    position: relative;
+    padding: 0 0 5px 0;
+}
+    .BoardComm > .BoardComm_Loading {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #cccccc80;
+        z-index: 10;
+    }
+        .BoardComm > .BoardComm_Loading > img {
+            position: absolute;
+            top: calc(50% - 20px);
+            left: calc(50% - 64px);
+        }
+
+/* ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+    BoardCommon - List  
+◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇ */
+.BoardComm_List {
+}
+    .BoardComm_List > .BoardComm_TableWrap {
+        min-height: 540px;
+    }
+.BoardComm_Table {
+    width: 100%;
+    
+}
+    .BoardComm_Table .BoardComm_TrTitle {
+        text-align:center;
+    }
+.BoardComm_List .TdId {
+        width: 56px;
+    }
+.BoardComm_List .TdTitle {
+    width: auto;
+}
+.BoardComm_List .TdName {
+    width: 150px;
+}
+.BoardComm_List .TdCount {
+    width: 56px;
+}
+.BoardComm_List .TdDate {
+    width: 106px;
+}
+
+.BoardComm_Body .BoardComm_TrItem td:not(:last-child) {
+    box-sizing: border-box;
+}
+.BoardComm_Body .TdId {
+    text-align: center;
+}
+.BoardComm_Body .TdName {
+    text-align: center;
+}
+.BoardComm_Body .TdCount {
+    text-align: center;
+}
+.BoardComm_Body .TdDate {
+    text-align: center;
+}
+
+.BoardComm_ListItem .BoardComm_TrItem:last-child {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.BoardComm_Foot .BoardComm_Paginate.BoardComm_PageNow {
+    font-weight: bold;
+}
+    .BoardComm_Foot .BoardComm_Paginate.BoardComm_PageNow a {
+        background-color: #c0f9ff;
+    }
+
+.BoardComm_Tools {
+    max-width: 100%;
+}
+    .BoardComm_Tools .BoardComm_Tools_Left {
+    }
+    .BoardComm_Tools .BoardComm_Tools_Right {
+        text-align: right;
+    }
+
+/* ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+    BoardCommon - PostView  
+◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇ */
+.BoardComm_PostView .Title {
+}
+    .BoardComm_PostView .Title .CategoryText {
+        font-size:18px;
+    }
+
+.BoardComm_PostView .PostViewInfo {
+    overflow: hidden;
+}
+    
+.BoardComm_PostView .PostViewInfo .Left {
+    float: left;
+    
+}
+.BoardComm_PostView .PostViewInfo .Right {
+    float: right;
+}
+    .BoardComm_PostView .PostViewInfo .Right > .TextBar {
+        color: rgba(0, 0, 0, 0.1);
+    }
+
+.BoardComm_Reply .ReplyCountTitle {
+    font-size: 1.2rem;
+}
+    .BoardComm_Reply .ReplyCountTitle > .TextBar {
+        color: rgba(0, 0, 0, 0.1);
+    }
+    .BoardComm_Reply .ReplyCountTitle > .OpenListButton {
+        font-size: 0.9rem;
+        color: #757575;
+    }
+
+.BoardComm_Reply_List .UserFaceImg {
+    width: 50px;
+    height: 50px;
+}
+.BoardComm_Reply_List .UserNameText {
+    font-size: 1.2rem;
+}
+.BoardComm_Reply_List .WriteDate {
+    font-size: 0.8rem;
+    color:#8f8f8f;
+}
+
+.BoardComm_Reply_List .ReReply_CreateTextArea {
+
+}
+
+.BoardComm_Reply_List .NonMember_Input
+, .BoardComm_Reply_CreateArea .NonMember_Input {
+    width: 150px;
+    float: left;
+    margin-right: 8px;
+}
+
+
+
+
+.BoardComm_Reply_List .ReReplyCreateOpenCss {
+    padding: .15rem .20rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #bbbbbb;
+}
+
+
+.BoardComm_PostView > .PostViewTools {
+    max-width: 100%;
+    padding-bottom: 10px;
+}
+    .BoardComm_PostView > .PostViewTools .Left {
+    }
+
+    .BoardComm_PostView > .PostViewTools .Right {
+        text-align: right;
+    }
+
+/* ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+    BoardCommon - PostCreate
+◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇ */
+.Board_PostCreate .table {
+    margin-bottom: 0;
+}
+
+.Board_PostCreate_EditorWrap {
+    width: 100%;
+    min-height: 500px;
+}
+
+.BoardComm_PostView > .CreateTools {
+    max-width: 100%;
+    margin-top: 10px;
+}
+
+    .BoardComm_PostView > .CreateTools .Center {
+        text-align: center;
+    }
+    .BoardComm_PostView > .CreateTools .Right {
+        text-align: right;
+    }
+
+/* ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+    BoardMgt - List  
+◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇ */
+.BoardMgtList {
+    width: 100%;
+}
+.BoardMgtList .TrItem {
+}
+    .BoardMgtList .TrItem td {
+        padding: 16px 2px;
+    }
+
+    .BoardMgtList .TrItem input[type=text] {
+        width: calc(100% - 4px);
+        text-align: center;
+        border: 0 none;
+    }
+    .BoardMgtList .TrItem .TdId {
+        width: 30px;
+    }
+
+    .BoardMgtList .TrItem .TdTitle {
+        width: auto;
+    }
+    .BoardMgtList .TrItem td.TdTitle input {
+        text-align: left;
+    }
+
+    .BoardMgtList .TrItem .TdState {
+        width: 80px;
+    }
+
+    .BoardMgtList .TrItem .TdBoardAuth {
+        width: 70px;
+    }
+
+    .BoardMgtList .TrItem .TdCreateDate {
+        width: 80px;
+    }
+
+    .BoardMgtList .TrItem .TdMemo {
+        width: auto;
+    }
+    .BoardMgtList .TrItem td.TdMemo input {
+        text-align: left;
+    }
+
+    .BoardMgtList .TrItem .TdEdit {
+        width: 50px;
+    }
+
+
+/* ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+    BoardMgtAuth - List  
+◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇ */
+.BoardMgtAuthList {
+    width: 100%;
+}
+    .BoardMgtAuthList .TrItem.tr div {
+        text-align: center;
+    }
+
+    .BoardMgtAuthList .TrItem.tr {
+        display: table;
+        width: 100%;
+    }
+
+
+    .BoardMgtAuthList .TrItem .td
+    , .BoardMgtAuthList .TrItem .th {
+        display: table-cell;
+        padding: 16px 2px;
+    }
+    .BoardMgtAuthList .TrItem input[type=text] {
+        width: calc(100% - 4px);
+        text-align: center;
+        border: 0 none;
+    }
+
+    .BoardMgtAuthList .TrItem .TdUserName {
+        width: 150px;
+    }
+
+    .BoardMgtAuthList .TrItem .TdBoardAuthHtml {
+        width: auto;
+    }
+        .BoardMgtAuthList .TrItem .TdBoardAuthHtml div {
+            text-align: left;
+        }
+        .BoardMgtAuthList .TrItem .TdBoardAuthHtml div label {
+            display: inline-block;
+            margin: 0 10px;
+            line-height: 24px;
+            text-align: center;
+        }
+
+    .BoardMgtAuthList .TrItem .TdEditDate {
+        width: 90px;
+    }
+    
+
+    .BoardMgtAuthList .TrItem .TdMemo {
+        width: 150px;
+    }
+    .BoardMgtAuthList .TrItem .TdEdit {
+        width: 80px;
+    }

@@ -1,0 +1,55 @@
+﻿<div class="card Board_PostCreate">
+    <div class="card-header card-header-primary">
+        <h4 class="card-title"><i class="fas fa-square"></i> 글쓰기</h4>
+        <p class="card-catagory"></p>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table">
+                <tbody>
+                    <tr style="line-height:32px;">
+                        <td>제목</td>
+                        <td>
+                            <input type="text" id="txtBoard_PostCreate_Title" class="form-control Board_PostCreate_TitleInput" value="{{TitlePost}}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>구분</td>
+                        <td>
+                            <div >
+                                {{PostCategoryHtml}}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>첨부 파일</td>
+                        <td>
+                            <div id="divFileList"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" id="divBoard_PostCreate_Editor" class="Board_PostCreate_EditorWrap">
+                            <div id="divEditor"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="CreateTools container">
+    <div class="row">
+        <div class="Left col">
+            {{BoardPostStateHtml}}
+        </div>
+        <div class="Center col-5">
+            <button onclick="BoardCA.PostCreate()" class="btn btn-primary">작성완료</button>
+            <a class="btn btn-outline-dark" href="{{UrlListView}}">취소</a>
+        </div>
+        <div class="Right col">
+            <a class="btn btn-primary" href="{{UrlListView}}">목록</a>
+        </div>
+    </div>
+</div>

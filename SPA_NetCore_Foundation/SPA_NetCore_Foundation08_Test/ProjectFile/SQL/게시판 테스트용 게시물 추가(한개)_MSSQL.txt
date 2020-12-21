@@ -1,0 +1,53 @@
+﻿--먼저 이걸 실행해서 BoardPost의 인덱스를 확인해준다.
+--확인한 인덱스를 +1을 해서 @nPostIndex에 넣는다.
+
+--게시판 번호
+DECLARE @idBoard int
+SET @idBoard = 1
+--포스트 시작 인덱스db에서 확인하고 넣어준다.
+DECLARE @nPostIndex int
+SET @nPostIndex = 10009
+
+
+
+DECLARE @i int
+SET @i = 1
+
+--포스트 추가
+insert into BoardPost(
+	idBoard
+	, idBoardCategory
+	, Title
+	, idUser
+	, ViewCount
+	, ViewCountNone
+	, ReplyCount
+	, PostState
+	, WriteDate
+	, EditDate
+	, DeleteDate)
+values(
+	@idBoard
+	, 0
+	, CONCAT('DB생성 게시물',  @i)
+	, 1
+	, 0
+	, 0
+	, 0
+	, 1
+	, GETDATE()
+	, '2000-01-01 00:00:00'
+	, '2000-01-01 00:00:00')
+
+--포스트 내용 추가
+insert into BoardContent(
+	idBoard
+	, idBoardPost
+	, Content)
+values(
+	@idBoard
+	, @nPostIndex
+	, 'DB생성 게시물입니다'
+		+ CONCAT('<br/>게시판 : ', @idBoard)
+		+ CONCAT('<br/>게시물 : ', @nPostIndex)
+		+ CONCAT('<br/>자동 인덱스 : ', @i))
