@@ -49,10 +49,10 @@ Page.Load = function (jsonOption, callbackFun)
                                 .ResultString;
 
                         Page.divMainMenu.html(sHtml);
-                    });
 
-                //사인인 정보 로드
-                SignInInfo.Load();
+                        //사인인 정보 로드
+                        SignInInfo.Load();
+                    });
 
                 callbackFun_Backup();
             });

@@ -43,10 +43,12 @@ Page.Load = function (jsonOption, callbackFun)
                         //메뉴 바인딩
                         $("#aMoveHome").attr("href", FS_Url.Home);
                         $("#aMoveTest01").attr("href", FS_Url.Test01);
+
+                        //사인인 정보 로드
+                        SignInInfo.Load();
                     });
 
-                //사인인 정보 로드
-                SignInInfo.Load();
+                
 
                 callbackFun_Backup();
             });
