@@ -103,6 +103,15 @@ namespace ApiModel
             this.InfoCode = sInfoCode;
             this.Message = sMessage;
         }
+        /// <summary>
+        /// Api 결과 정보 저장
+        /// </summary>
+        /// <param name="typeInfoCode"></param>
+        /// <param name="sMessage"></param>
+        public void ApiResultInfoSet(ApiResultType typeInfoCode, string sMessage)
+        {
+            this.ApiResultInfoSet(typeInfoCode.ToString(), sMessage);
+        }
 
         /// <summary>
         /// InfoCode값이 성공값인지 여부

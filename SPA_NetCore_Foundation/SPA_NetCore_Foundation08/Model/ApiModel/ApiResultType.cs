@@ -20,6 +20,10 @@ namespace ApiModel
         /// 권한 체크중 오류 발생
         /// </summary>
         PermissionCheckError = 1000,
+        /// <summary>
+        /// 로그인 필요
+        /// </summary>
+        LoginNecessaryError = 1100,
 
         /// <summary>
         /// 대상을 찾지 못했다.

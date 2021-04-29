@@ -1465,7 +1465,7 @@ namespace SPA_NetCore_Foundation.Controllers
         }
 
         /// <summary>
-        /// 
+        /// 포스트 작성
         /// </summary>
         /// <param name="idUser"></param>
         /// <param name="idBoard"></param>
@@ -1489,6 +1489,8 @@ namespace SPA_NetCore_Foundation.Controllers
 
             //요청 날짜
             DateTime dtNow = DateTime.Now;
+            //ip 정보
+            string sIP = Request.HttpContext.Connection.RemoteIpAddress.ToString();
 
             //찾은 게시판 권한
             BoardAuthorityType TypeBoardAuth;
@@ -1553,6 +1555,7 @@ namespace SPA_NetCore_Foundation.Controllers
                         newBP.WriteDate = dtNow;
                         newBP.ViewCount = 0;
                         newBP.PostState = typeBoardState;
+                        newBP.WriteIP = sIP;
 
                         db1.BoardPost.Add(newBP);
                         db1.SaveChanges();
@@ -2041,6 +2044,8 @@ namespace SPA_NetCore_Foundation.Controllers
 
             //요청 날짜
             DateTime dtNow = DateTime.Now;
+            //ip 정보
+            string sIP = Request.HttpContext.Connection.RemoteIpAddress.ToString();
 
             //유저 정보 추출
             ClaimModel cm = new ClaimModel(((ClaimsIdentity)User.Identity).Claims);
@@ -2090,6 +2095,7 @@ namespace SPA_NetCore_Foundation.Controllers
                         findBP.EditDate = dtNow;
                         findBP.PostState = typeBoardState;
                         findBP.idBoardCategory = nBoardCategory;
+                        findBP.EditIP = sIP;
 
                         //컨탠츠 임시 저장
                         string sContentTemp = sContent;

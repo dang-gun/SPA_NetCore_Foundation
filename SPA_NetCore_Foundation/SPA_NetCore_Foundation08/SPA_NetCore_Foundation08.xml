@@ -189,7 +189,7 @@
         </member>
         <member name="M:SPA_NetCore_Foundation.Controllers.BoardController.PostCreateProcess(System.Int64,System.Int64,System.String,ModelDB.BoardPostStateType,System.Int32,System.String,FileListModel.FileInfoModel[])">
             <summary>
-            
+            포스트 작성
             </summary>
             <param name="idUser"></param>
             <param name="idBoard"></param>
@@ -2394,6 +2394,13 @@
             <param name="sInfoCode"></param>
             <param name="sMessage"></param>
         </member>
+        <member name="M:ApiModel.ApiResultReady.ApiResultInfoSet(ApiModel.ApiResultType,System.String)">
+            <summary>
+            Api 결과 정보 저장
+            </summary>
+            <param name="typeInfoCode"></param>
+            <param name="sMessage"></param>
+        </member>
         <member name="M:ApiModel.ApiResultReady.IsSuccess">
             <summary>
             InfoCode값이 성공값인지 여부
@@ -2428,6 +2435,11 @@
         <member name="F:ApiModel.ApiResultType.PermissionCheckError">
             <summary>
             권한 체크중 오류 발생
+            </summary>
+        </member>
+        <member name="F:ApiModel.ApiResultType.LoginNecessaryError">
+            <summary>
+            로그인 필요
             </summary>
         </member>
         <member name="F:ApiModel.ApiResultType.TargetFindError">

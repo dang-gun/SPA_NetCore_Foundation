@@ -3,15 +3,21 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ModelDB;
 
 namespace SPA_NetCore_Foundation06.Migrations
 {
     [DbContext(typeof(SpaNetCoreFoundationContext))]
-    partial class SpaNetCoreFoundationContextModelSnapshot : ModelSnapshot
+    [Migration("20210429205059_UserSignLog_Add")]
+    partial class UserSignLog_Add
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="modelBuilder"></param>
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

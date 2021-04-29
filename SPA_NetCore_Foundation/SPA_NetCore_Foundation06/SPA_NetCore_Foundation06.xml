@@ -63,6 +63,20 @@
             <param name="nData"></param>
             <returns></returns>
         </member>
+        <member name="T:SPA_NetCore_Foundation.Global.GlobalSign">
+            <summary>
+            사인 관련
+            </summary>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Global.GlobalSign.LogAdd_DB(System.Int32,ModelDB.UserSignLogType,System.Int64,System.String)">
+            <summary>
+            DB에 로그 남기기
+            </summary>
+            <param name="nLogLevel">로그 수준</param>
+            <param name="typeSignLog"></param>
+            <param name="idUser"></param>
+            <param name="sMessage"></param>
+        </member>
         <member name="T:SPA_NetCore_Foundation.Global.GlobalStatic">
             <summary>
             전역변수 모음
@@ -81,6 +95,11 @@
         <member name="F:SPA_NetCore_Foundation.Global.GlobalStatic.DBString">
             <summary>
             DB 컨낵션 스트링 저장
+            </summary>
+        </member>
+        <member name="F:SPA_NetCore_Foundation.Global.GlobalStatic.SignLogLevel">
+            <summary>
+            사인 로그 표시 래벨
             </summary>
         </member>
         <member name="T:SPA_NetCore_Foundation.Model.TestModel01">
@@ -505,6 +524,29 @@
             </summary>
             <param name="modelBuilder"></param>
         </member>
+        <member name="T:SPA_NetCore_Foundation06.Migrations.UserSignLog_Add">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SPA_NetCore_Foundation06.Migrations.UserSignLog_Add.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:SPA_NetCore_Foundation06.Migrations.UserSignLog_Add.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:SPA_NetCore_Foundation06.Migrations.UserSignLog_Add.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
         <member name="T:SPA_NetCore_Foundation06.Program">
             <summary>
             
@@ -542,6 +584,11 @@
         <member name="P:ModelDB.SpaNetCoreFoundationContext.UserSignIn">
             <summary>
             사용자 사인인 리스트
+            </summary>
+        </member>
+        <member name="P:ModelDB.SpaNetCoreFoundationContext.UserSignLog">
+            <summary>
+            사인 관련 로그
             </summary>
         </member>
         <member name="M:ModelDB.SpaNetCoreFoundationContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
@@ -599,6 +646,82 @@
         <member name="P:ModelDB.UserSignIn.RefreshDate">
             <summary>
             토큰 갱신 시간
+            </summary>
+        </member>
+        <member name="T:ModelDB.UserSignLog">
+            <summary>
+            사인 관련 로그
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserSignLog.idUserSignLog">
+            <summary>
+            고유키
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserSignLog.AddDate">
+            <summary>
+            작성일
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserSignLog.Level">
+            <summary>
+            로그 레벨
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserSignLog.SignLogType">
+            <summary>
+            사인 로그 타입
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserSignLog.idUser">
+            <summary>
+            대상 유저.
+            없으면 0
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserSignLog.Contents">
+            <summary>
+            내용
+            </summary>
+        </member>
+        <member name="T:ModelDB.UserSignLogType">
+            <summary>
+            유저 사인 타입
+            </summary>
+        </member>
+        <member name="F:ModelDB.UserSignLogType.None">
+            <summary>
+            없음
+            </summary>
+        </member>
+        <member name="F:ModelDB.UserSignLogType.RequestToken">
+            <summary>
+            인증서버에 인증 요청
+            </summary>
+        </member>
+        <member name="F:ModelDB.UserSignLogType.RefreshToken">
+            <summary>
+            액세스 토큰 갱신
+            </summary>
+        </member>
+        <member name="F:ModelDB.UserSignLogType.RevocationToken">
+            <summary>
+            지정된 토큰 제거
+            </summary>
+        </member>
+        <member name="F:ModelDB.UserSignLogType.UserInfo">
+            <summary>
+            엑세스토큰을 이용하여 유저 정보를 받는다.
+            </summary>
+        </member>
+        <member name="F:ModelDB.UserSignLogType.SignIn">
+            <summary>
+            직접 사인인 시도
+            </summary>
+        </member>
+        <member name="F:ModelDB.UserSignLogType.SignOut">
+            <summary>
+            직접 사인아웃 시도
             </summary>
         </member>
         <member name="T:ApiModel.ApiResultBaseModel">
