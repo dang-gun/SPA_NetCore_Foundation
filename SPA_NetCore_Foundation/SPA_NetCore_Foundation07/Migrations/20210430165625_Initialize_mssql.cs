@@ -6,7 +6,7 @@ namespace SPA_NetCore_Foundation07.Migrations
     /// <summary>
     /// 
     /// </summary>
-    public partial class Initialize : Migration
+    public partial class Initialize_mssql : Migration
     {
         /// <summary>
         /// 
@@ -19,7 +19,7 @@ namespace SPA_NetCore_Foundation07.Migrations
                 columns: table => new
                 {
                     idUser = table.Column<long>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     SignEmail = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true)
                 },
@@ -33,7 +33,7 @@ namespace SPA_NetCore_Foundation07.Migrations
                 columns: table => new
                 {
                     idUserInfo = table.Column<long>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     idUser = table.Column<long>(nullable: false),
                     ViewName = table.Column<string>(maxLength: 16, nullable: true),
                     SignUpDate = table.Column<DateTime>(nullable: false),
@@ -51,7 +51,7 @@ namespace SPA_NetCore_Foundation07.Migrations
                 columns: table => new
                 {
                     idUserSignIn = table.Column<long>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     idUser = table.Column<long>(nullable: false),
                     RefreshToken = table.Column<string>(nullable: true),
                     SignInDate = table.Column<DateTime>(nullable: false),
@@ -60,6 +60,23 @@ namespace SPA_NetCore_Foundation07.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserSignIn", x => x.idUserSignIn);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserSignLog",
+                columns: table => new
+                {
+                    idUserSignLog = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AddDate = table.Column<DateTime>(nullable: false),
+                    Level = table.Column<int>(nullable: false),
+                    SignLogType = table.Column<int>(nullable: false),
+                    idUser = table.Column<long>(nullable: false),
+                    Contents = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserSignLog", x => x.idUserSignLog);
                 });
 
             migrationBuilder.InsertData(
@@ -87,6 +104,9 @@ namespace SPA_NetCore_Foundation07.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserSignIn");
+
+            migrationBuilder.DropTable(
+                name: "UserSignLog");
         }
     }
 }

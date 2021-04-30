@@ -1,6 +1,11 @@
 ﻿https://code-maze.com/net-core-web-api-ef-core-code-first/
 https://stackoverflow.com/questions/16035333/how-to-delete-and-recreate-from-scratch-an-existing-ef-code-first-database
 
+
+각 DB엔진 별로 마이그레이션을 새로 생성해야 한다.
+(가능하면 별도의 프로젝트를 만들고 거기서 마이그레이션을 생성하는 것이 좋다.)
+
+
 마이그레이션 코드 생성
 띄어쓰기 특수문자 안됨. 네임스페이스 생성 규칙과 같다.
 Add-Migration [마이그레이션 이름]

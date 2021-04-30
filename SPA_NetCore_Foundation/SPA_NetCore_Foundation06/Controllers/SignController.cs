@@ -54,6 +54,7 @@ namespace SPA_NetCore_Foundation.Controllers
                 , 0
                 , string.Format("SignIn 시도 - {0}, {1}", sEmail, sPW));
 
+
             //검색된 유저
             User findUser = null;
 
@@ -122,7 +123,6 @@ namespace SPA_NetCore_Foundation.Controllers
                             , findUser.idUser
                             , string.Format("SignIn 성공 - {0}", sEmail));
                     }//end using db1
-
                 }
             }
             else

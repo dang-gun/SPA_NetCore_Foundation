@@ -25,5 +25,10 @@ namespace SPA_NetCore_Foundation.Global
         /// </summary>
         public static string DBString = "";
 
+        /// <summary>
+        /// 사인 로그 표시 래벨
+        /// </summary>
+        public static int SignLogLevel = 2;
+
     }
 }

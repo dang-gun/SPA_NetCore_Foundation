@@ -33,6 +33,7 @@ namespace ModelDB
             }
         }
 
+        #region User
         /// <summary>
         /// 유저 사인인 정보
         /// </summary>
@@ -45,6 +46,12 @@ namespace ModelDB
         /// 사용자 사인인 리스트
         /// </summary>
         public DbSet<UserSignIn> UserSignIn { get; set; }
+
+        /// <summary>
+        /// 사인 관련 로그
+        /// </summary>
+        public DbSet<UserSignLog> UserSignLog { get; set; }
+        #endregion
 
         /// <summary>
         /// 
