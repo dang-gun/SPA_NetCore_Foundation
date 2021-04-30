@@ -33,6 +33,13 @@ DG_Popup.List = [];
 
 /** 창열기 기본 옵션 */
 DG_Popup.ShowOptionDefault = {
+    /** 
+     *  인덱스 지정.
+     *  0이하의 값을 지정하면 자동으로 인덱스가 지정된다.
+     *  인덱스가 중복되면 창을 생성하지 않고 기존 창을 찾아 연다.
+     * */
+    PopupIndex: 0,
+
     /** 시작위치 - Y */
     top: 0,
     /** 시작위치 - X */
@@ -133,6 +140,17 @@ DG_Popup.Show = function (jsonOption)
 
     //고유키 증가;
     var nPopupIndex = ++DG_Popup.PopupIndex;
+
+    //고유키 확인
+    if (0 < jsonOpt.PopupIndex)
+    {//지정한 인덱스가 있다.
+        nPopupIndex = jsonOpt.PopupIndex;
+    }
+    else
+    {//지정한 인덱스가 없다.
+        nPopupIndex = ++DG_Popup.PopupIndex;
+        jsonOpt.PopupIndex = nPopupIndex;
+    }
 
     //사용할 z인덱스 계산
     var nZIdx = DG_Popup.ZindexStart + (DG_Popup.ZindexAdd * DG_Popup.List.length);

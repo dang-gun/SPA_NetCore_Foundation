@@ -37,7 +37,6 @@
     float: left;
     margin-right: 10px;
     margin-top: -3px;
-
     left: 3px;
     width: 50px;
     height: 50px;
@@ -51,9 +50,11 @@
     -moz-border-radius: 50px;
     border-radius: 50px;
     text-indent: 0px;
+    box-sizing: content-box;
 }
     .DG_MessageBoxBigIcon_info:before {
         content: "i";
+        box-sizing: content-box;
     }
 
 /** 큰 아이콘 - 경고 */
@@ -63,6 +64,7 @@
     margin-top: -3px;
     width: 50px;
     height: 50px;
+    box-sizing: content-box;
 }
     .DG_MessageBoxBigIcon_Warning:before {
         content: "";
@@ -71,6 +73,7 @@
         border-color: #F8D201 transparent;
         background: transparent;
         position: absolute;
+        box-sizing: content-box;
     }
     .DG_MessageBoxBigIcon_Warning:after {
         content: "!";
@@ -82,6 +85,7 @@
         position: absolute;
         text-indent: 5px;
         line-height: 52px;
+        box-sizing: content-box;
     }
 
 /** 큰 아이콘 - 에러 */
@@ -91,6 +95,7 @@
     margin-top: -3px;
     width: 50px;
     height: 50px;
+    box-sizing: content-box;
 }
     .DG_MessageBoxBigIcon_Error:before {
         content: "";
@@ -103,6 +108,7 @@
         -moz-border-radius: 40px;
         border-radius: 40px;
         position: absolute;
+        box-sizing: content-box;
     }
     .DG_MessageBoxBigIcon_Error:after {
         content: "";
@@ -117,6 +123,7 @@
         -o-transform: rotate(-45deg);
         transform: rotate(-45deg);
         position: absolute;
+        box-sizing: content-box;
     }
 
 /** 큰 아이콘 - 질문 */
@@ -137,9 +144,11 @@
     -moz-border-radius: 50px;
     border-radius: 50px;
     text-indent: 2px;
+    box-sizing: content-box;
 }
     .DG_MessageBoxBigIcon_Question:before {
         content: "?";
+        box-sizing: content-box;
     }
 
 /** 큰 아이콘 - 성공 */
@@ -149,6 +158,7 @@
     margin-top: -3px;
     width: 50px;
     height: 50px;
+    box-sizing: content-box;
 }
     .DG_MessageBoxBigIcon_Success:before {
         content: "";
@@ -165,6 +175,7 @@
         -ms-transform: rotate(45deg);
         -o-transform: rotate(45deg);
         transform: rotate(45deg);
+        box-sizing: content-box;
     }
 
 /** 큰 아이콘 - 도움 */
@@ -185,10 +196,12 @@
     -moz-border-radius: 50px;
     border-radius: 50px;
     text-indent: 2px;
+    box-sizing: content-box;
 }
 
     .DG_MessageBoxBigIcon_Help:before {
         content: "?";
+        box-sizing: content-box;
     }
 
 
