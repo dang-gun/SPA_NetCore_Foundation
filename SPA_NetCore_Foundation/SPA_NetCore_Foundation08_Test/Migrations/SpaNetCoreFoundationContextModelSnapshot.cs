@@ -15,7 +15,7 @@ namespace SPA_NetCore_Foundation08.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.8")
+                .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -109,12 +109,12 @@ namespace SPA_NetCore_Foundation08.Migrations
                         new
                         {
                             idBoard = 1L,
-                            AuthorityDefault = 0,
-                            BoardFaculty = 0,
+                            AuthorityDefault = 1333,
+                            BoardFaculty = 1,
                             BoardState = 1,
-                            CreateDate = new DateTime(2020, 11, 18, 21, 13, 34, 677, DateTimeKind.Local).AddTicks(3684),
+                            CreateDate = new DateTime(2021, 5, 1, 6, 28, 28, 373, DateTimeKind.Local).AddTicks(2953),
                             Memo = "테스트용 게시판",
-                            ShowCount = (short)0,
+                            ShowCount = (short)10,
                             Title = "Test",
                             idBoardGroup = 0L
                         });
@@ -321,7 +321,7 @@ namespace SPA_NetCore_Foundation08.Migrations
                             Title = "DB 생성후 테스트용 자동생성 게시물입니다.",
                             ViewCount = 0L,
                             ViewCountNone = 0L,
-                            WriteDate = new DateTime(2020, 11, 18, 21, 13, 34, 678, DateTimeKind.Local).AddTicks(6871),
+                            WriteDate = new DateTime(2021, 5, 1, 6, 28, 28, 374, DateTimeKind.Local).AddTicks(5196),
                             idBoard = 1L,
                             idBoardCategory = 0L,
                             idUser = 1L
@@ -662,6 +662,33 @@ namespace SPA_NetCore_Foundation08.Migrations
                     b.HasKey("idUserSignIn");
 
                     b.ToTable("UserSignIn");
+                });
+
+            modelBuilder.Entity("ModelDB.UserSignLog", b =>
+                {
+                    b.Property<long>("idUserSignLog")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("AddDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Contents")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SignLogType")
+                        .HasColumnType("int");
+
+                    b.Property<long>("idUser")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("idUserSignLog");
+
+                    b.ToTable("UserSignLog");
                 });
 #pragma warning restore 612, 618
         }

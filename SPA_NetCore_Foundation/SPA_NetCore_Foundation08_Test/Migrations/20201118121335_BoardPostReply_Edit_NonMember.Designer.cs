@@ -13,6 +13,10 @@ namespace SPA_NetCore_Foundation08.Migrations
     [Migration("20201118121335_BoardPostReply_Edit_NonMember")]
     partial class BoardPostReply_Edit_NonMember
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618

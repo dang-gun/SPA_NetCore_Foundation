@@ -13,6 +13,10 @@ namespace SPA_NetCore_Foundation08.Migrations
     [Migration("20210430175735_UserSignLog_Edit003")]
     partial class UserSignLog_Edit003
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618

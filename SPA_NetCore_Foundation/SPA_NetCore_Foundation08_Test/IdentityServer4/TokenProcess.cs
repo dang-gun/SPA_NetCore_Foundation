@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using IdentityModel.Client;
+using SPA_NetCore_Foundation.Global;
 
 namespace IdentityServer4_Custom.IdentityServer4
 {
@@ -58,6 +59,15 @@ namespace IdentityServer4_Custom.IdentityServer4
                             Password = sPassword
                         });
 
+            GlobalSign.LogAdd_DB(
+                2
+                , ModelDB.UserSignLogType.RequestToken
+                , 0
+                , string.Format("RequestTokenAsync = {2} : {0}, {1}"
+                                , sID
+                                , sPassword
+                                , trRequestToken.HttpErrorReason));
+
             return trRequestToken;
         }
 
@@ -80,6 +90,14 @@ namespace IdentityServer4_Custom.IdentityServer4
 
                             RefreshToken = sRefreshToken
                         });
+
+            GlobalSign.LogAdd_DB(
+                2
+                , ModelDB.UserSignLogType.RefreshToken
+                , 0
+                , string.Format("RefreshTokenAsync = {0} : {1}"
+                                , trRequestToken.HttpErrorReason
+                                , sRefreshToken));
 
             return trRequestToken;
         }
@@ -106,6 +124,13 @@ namespace IdentityServer4_Custom.IdentityServer4
                             TokenTypeHint = "refresh_token"
                         });
 
+            GlobalSign.LogAdd_DB(
+                2
+                , ModelDB.UserSignLogType.RevocationToken
+                , 0
+                , string.Format("RevocationTokenAsync = {0} : "
+                                , trRequestToken.HttpErrorReason));
+
             return trRequestToken;
         }
 
@@ -125,6 +150,27 @@ namespace IdentityServer4_Custom.IdentityServer4
                             ,
                             Token = sAccessToken,
                         });
+
+            if (3 < uirUser.Claims.Count())
+            {
+                GlobalSign.LogAdd_DB(
+                2
+                , ModelDB.UserSignLogType.UserInfo
+                , 0
+                , string.Format("UserInfoAsync  = {0} : {1}"
+                                , uirUser.HttpErrorReason
+                                , uirUser.Claims.ToArray()[2].Value));
+            }
+            else
+            {
+                GlobalSign.LogAdd_DB(
+                2
+                , ModelDB.UserSignLogType.UserInfo
+                , 0
+                , string.Format("UserInfoAsync  = {0} : {1}"
+                                , uirUser.HttpErrorReason
+                                , "실패"));
+            }
 
             return uirUser;
         }

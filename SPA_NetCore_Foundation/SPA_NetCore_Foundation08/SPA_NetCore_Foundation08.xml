@@ -1216,6 +1216,12 @@
             </summary>
             <param name="migrationBuilder"></param>
         </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.BoardPostReply_Edit_NonMember.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
         <member name="T:SPA_NetCore_Foundation08.Migrations.UserSignLog_Edit002">
             <summary>
             
@@ -1233,6 +1239,12 @@
             </summary>
             <param name="migrationBuilder"></param>
         </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.UserSignLog_Edit002.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
         <member name="T:SPA_NetCore_Foundation08.Migrations.UserSignLog_Edit003">
             <summary>
             
@@ -1249,6 +1261,12 @@
             
             </summary>
             <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.UserSignLog_Edit003.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="modelBuilder"></param>
         </member>
         <member name="T:ModelDB.ApiLog">
             <summary>

@@ -10,8 +10,8 @@ using ModelDB;
 namespace SPA_NetCore_Foundation08.Migrations
 {
     [DbContext(typeof(SpaNetCoreFoundationContext))]
-    [Migration("20210430175128_UserSignLog_Edit002")]
-    partial class UserSignLog_Edit002
+    [Migration("20210430212830_UserSignLog_Edit003")]
+    partial class UserSignLog_Edit003
     {
         /// <summary>
         /// 
@@ -21,7 +21,7 @@ namespace SPA_NetCore_Foundation08.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.8")
+                .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -118,7 +118,7 @@ namespace SPA_NetCore_Foundation08.Migrations
                             AuthorityDefault = 1333,
                             BoardFaculty = 1,
                             BoardState = 1,
-                            CreateDate = new DateTime(2021, 5, 1, 2, 51, 27, 675, DateTimeKind.Local).AddTicks(6716),
+                            CreateDate = new DateTime(2021, 5, 1, 6, 28, 28, 373, DateTimeKind.Local).AddTicks(2953),
                             Memo = "테스트용 게시판",
                             ShowCount = (short)10,
                             Title = "Test",
@@ -327,7 +327,7 @@ namespace SPA_NetCore_Foundation08.Migrations
                             Title = "DB 생성후 테스트용 자동생성 게시물입니다.",
                             ViewCount = 0L,
                             ViewCountNone = 0L,
-                            WriteDate = new DateTime(2021, 5, 1, 2, 51, 27, 676, DateTimeKind.Local).AddTicks(9979),
+                            WriteDate = new DateTime(2021, 5, 1, 6, 28, 28, 374, DateTimeKind.Local).AddTicks(5196),
                             idBoard = 1L,
                             idBoardCategory = 0L,
                             idUser = 1L
@@ -473,9 +473,6 @@ namespace SPA_NetCore_Foundation08.Migrations
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
-                    b.Property<int>("OpenType")
-                        .HasColumnType("int");
-
                     b.Property<string>("ValueData")
                         .HasColumnType("nvarchar(max)");
 
@@ -490,17 +487,7 @@ namespace SPA_NetCore_Foundation08.Migrations
                             Description = "프로그램 전체에 표시될 이름",
                             Name = "Title",
                             Number = 1,
-                            OpenType = 11,
                             ValueData = "ASP.NET Core SPA Foundation 08"
-                        },
-                        new
-                        {
-                            idSetting_Data = 2L,
-                            Description = "사인 관련 로그를 어떻게 남기는 레벨.(높을수록 많은 정보를 남긴다.== DB부하가 심해짐)",
-                            Name = "SignLog",
-                            Number = 2,
-                            OpenType = 21,
-                            ValueData = "0"
                         });
                 });
 
