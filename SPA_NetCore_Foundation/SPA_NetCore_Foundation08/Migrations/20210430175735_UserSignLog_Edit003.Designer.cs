@@ -10,13 +10,9 @@ using ModelDB;
 namespace SPA_NetCore_Foundation08.Migrations
 {
     [DbContext(typeof(SpaNetCoreFoundationContext))]
-    [Migration("20201118080323_BoardPostReply_Edit_NonMembers")]
-    partial class BoardPostReply_Edit_NonMembers
+    [Migration("20210430175735_UserSignLog_Edit003")]
+    partial class UserSignLog_Edit003
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="modelBuilder"></param>
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
@@ -115,12 +111,12 @@ namespace SPA_NetCore_Foundation08.Migrations
                         new
                         {
                             idBoard = 1L,
-                            AuthorityDefault = 0,
-                            BoardFaculty = 0,
+                            AuthorityDefault = 1333,
+                            BoardFaculty = 1,
                             BoardState = 1,
-                            CreateDate = new DateTime(2020, 11, 18, 17, 3, 21, 981, DateTimeKind.Local).AddTicks(7868),
+                            CreateDate = new DateTime(2021, 5, 1, 2, 57, 34, 961, DateTimeKind.Local).AddTicks(8648),
                             Memo = "테스트용 게시판",
-                            ShowCount = (short)0,
+                            ShowCount = (short)10,
                             Title = "Test",
                             idBoardGroup = 0L
                         });
@@ -327,7 +323,7 @@ namespace SPA_NetCore_Foundation08.Migrations
                             Title = "DB 생성후 테스트용 자동생성 게시물입니다.",
                             ViewCount = 0L,
                             ViewCountNone = 0L,
-                            WriteDate = new DateTime(2020, 11, 18, 17, 3, 21, 983, DateTimeKind.Local).AddTicks(132),
+                            WriteDate = new DateTime(2021, 5, 1, 2, 57, 34, 963, DateTimeKind.Local).AddTicks(290),
                             idBoard = 1L,
                             idBoardCategory = 0L,
                             idUser = 1L
@@ -354,11 +350,11 @@ namespace SPA_NetCore_Foundation08.Migrations
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
-                    b.Property<string>("NonMembers_Password")
+                    b.Property<string>("NonMember_Password")
                         .HasColumnType("nvarchar(64)")
                         .HasMaxLength(64);
 
-                    b.Property<string>("NonMembers_ViewName")
+                    b.Property<string>("NonMember_ViewName")
                         .HasColumnType("nvarchar(32)")
                         .HasMaxLength(32);
 
@@ -473,6 +469,9 @@ namespace SPA_NetCore_Foundation08.Migrations
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
+                    b.Property<int>("OpenType")
+                        .HasColumnType("int");
+
                     b.Property<string>("ValueData")
                         .HasColumnType("nvarchar(max)");
 
@@ -487,7 +486,17 @@ namespace SPA_NetCore_Foundation08.Migrations
                             Description = "프로그램 전체에 표시될 이름",
                             Name = "Title",
                             Number = 1,
+                            OpenType = 11,
                             ValueData = "ASP.NET Core SPA Foundation 08"
+                        },
+                        new
+                        {
+                            idSetting_Data = 2L,
+                            Description = "사인 관련 로그를 어떻게 남기는 레벨.(높을수록 많은 정보를 남긴다.== DB부하가 심해짐)",
+                            Name = "SignLog",
+                            Number = 2,
+                            OpenType = 21,
+                            ValueData = "0"
                         });
                 });
 
@@ -668,6 +677,33 @@ namespace SPA_NetCore_Foundation08.Migrations
                     b.HasKey("idUserSignIn");
 
                     b.ToTable("UserSignIn");
+                });
+
+            modelBuilder.Entity("ModelDB.UserSignLog", b =>
+                {
+                    b.Property<long>("idUserSignLog")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("AddDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Contents")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SignLogType")
+                        .HasColumnType("int");
+
+                    b.Property<long>("idUser")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("idUserSignLog");
+
+                    b.ToTable("UserSignLog");
                 });
 #pragma warning restore 612, 618
         }

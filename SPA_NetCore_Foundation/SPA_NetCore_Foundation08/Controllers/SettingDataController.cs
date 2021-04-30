@@ -161,6 +161,7 @@ namespace SPA_NetCore_Foundation.Controllers
                         //데이터 수정
                         s_dSelect.Number = s_dTossData.Number;
                         s_dSelect.Name = s_dTossData.Name;
+                        s_dSelect.OpenType = s_dTossData.OpenType;
                         s_dSelect.ValueData = s_dTossData.ValueData;
                         s_dSelect.Description = s_dTossData.Description;
 

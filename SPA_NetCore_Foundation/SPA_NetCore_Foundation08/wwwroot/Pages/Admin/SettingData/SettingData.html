@@ -1,4 +1,34 @@
-﻿<div id="divAdmin_Menu"></div>
+﻿<style>
+    #divList {
+        width: 100%;
+    }
+
+    .SettingItem > .SettingItem_Number {
+        width: 45px;
+    }
+    .SettingItem > .SettingItem_Name {
+        width: 150px;
+    }
+    .SettingItem > .SettingItem_OpenType {
+        width: 45px;
+    }
+    .SettingItem > .SettingItem_ValueData {
+        width: 100px;
+    }
+    .SettingItem > .SettingItem_Description {
+        /*width: 100%;*/
+    }
+    .SettingItem > .SettingItem_Edit {
+        width: 100px;
+    }
+
+    tr.SettingItem > td > input {
+        width: 100%;
+    }
+    
+</style>
+
+<div id="divAdmin_Menu"></div>
 Setting Data
 
 <div>
@@ -7,12 +37,5 @@ Setting Data
     <button class="form-control btn-outline mt30" onclick="GlobalStatic.Page_Now.SettingLoad()">세팅 적용</button>
 </div>
 
-<table id="divList" class="BoardComm_List admin_board_info">
-    <colgroup>
-        <col class="board_Info ViewName" style="width:10%;">
-        <col class="board_Info idUserSignIn" style="width:auto;">
-        <col class="board_Info RefreshDate" style="width:15%;">
-        <col class="board_Info IpSignIn" style="width:20%;">
-        <col class="board_Info IpRefresh" style="width:15%;">
-    </colgroup>
+<table id="divList" class="BoardComm_List">
 </table>

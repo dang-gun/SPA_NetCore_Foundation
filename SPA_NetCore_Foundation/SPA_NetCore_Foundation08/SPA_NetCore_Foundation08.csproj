@@ -17,6 +17,8 @@
     <Compile Remove="Migrations\20201002203034_Initialize.Designer.cs" />
     <Compile Remove="Migrations\20201009200319_Initialize.cs" />
     <Compile Remove="Migrations\20201009200319_Initialize.Designer.cs" />
+    <Compile Remove="Migrations\20210430175602_UserSignLog_Edit003.cs" />
+    <Compile Remove="Migrations\20210430175602_UserSignLog_Edit003.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

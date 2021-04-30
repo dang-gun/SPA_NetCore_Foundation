@@ -572,6 +572,20 @@
             <param name="sName"></param>
             <returns></returns>
         </member>
+        <member name="T:SPA_NetCore_Foundation.Global.GlobalSign">
+            <summary>
+            사인 관련
+            </summary>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Global.GlobalSign.LogAdd_DB(System.Int32,ModelDB.UserSignLogType,System.Int64,System.String)">
+            <summary>
+            DB에 로그 남기기
+            </summary>
+            <param name="nLogLevel">로그 수준</param>
+            <param name="typeSignLog"></param>
+            <param name="idUser"></param>
+            <param name="sMessage"></param>
+        </member>
         <member name="T:SPA_NetCore_Foundation.Global.GlobalStatic">
             <summary>
             전역변수 모음
@@ -784,6 +798,21 @@
             <param name="value"></param>
             <param name="maxLength"></param>
             <returns></returns>
+        </member>
+        <member name="T:PBAuto.Global.FixString_Setting">
+            <summary>
+            세팅 문자열
+            </summary>
+        </member>
+        <member name="F:PBAuto.Global.FixString_Setting.Title">
+            <summary>
+            표시 제목
+            </summary>
+        </member>
+        <member name="F:PBAuto.Global.FixString_Setting.SignLog">
+            <summary>
+            사인 로그
+            </summary>
         </member>
         <member name="T:IdentityServer4_Custom.IdentityServer4.AuthRequest.MyExtensionGrantValidator">
             <summary>
@@ -1164,6 +1193,12 @@
             </summary>
             <param name="migrationBuilder"></param>
         </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.BoardPostReply_Edit_NonMembers.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
         <member name="T:SPA_NetCore_Foundation08.Migrations.BoardPostReply_Edit_NonMember">
             <summary>
             
@@ -1176,6 +1211,40 @@
             <param name="migrationBuilder"></param>
         </member>
         <member name="M:SPA_NetCore_Foundation08.Migrations.BoardPostReply_Edit_NonMember.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="T:SPA_NetCore_Foundation08.Migrations.UserSignLog_Edit002">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.UserSignLog_Edit002.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.UserSignLog_Edit002.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="T:SPA_NetCore_Foundation08.Migrations.UserSignLog_Edit003">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.UserSignLog_Edit003.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.UserSignLog_Edit003.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <summary>
             
             </summary>
@@ -1646,6 +1715,11 @@
             구분용 고유 이름
             </summary>
         </member>
+        <member name="P:ModelDB.Setting_Data.OpenType">
+            <summary>
+            공개 타입
+            </summary>
+        </member>
         <member name="P:ModelDB.Setting_Data.ValueData">
             <summary>
             설정값
@@ -1725,6 +1799,11 @@
         <member name="P:ModelDB.SpaNetCoreFoundationContext.UserSignIn">
             <summary>
             사용자 사인인 리스트
+            </summary>
+        </member>
+        <member name="P:ModelDB.SpaNetCoreFoundationContext.UserSignLog">
+            <summary>
+            사인 관련 로그
             </summary>
         </member>
         <member name="P:ModelDB.SpaNetCoreFoundationContext.ApiLog">
@@ -1885,6 +1964,42 @@
         <member name="P:ModelDB.UserSignIn.RefreshDate">
             <summary>
             토큰 갱신 시간
+            </summary>
+        </member>
+        <member name="T:ModelDB.UserSignLog">
+            <summary>
+            사인 관련 로그
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserSignLog.idUserSignLog">
+            <summary>
+            고유키
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserSignLog.AddDate">
+            <summary>
+            작성일
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserSignLog.Level">
+            <summary>
+            로그 레벨
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserSignLog.SignLogType">
+            <summary>
+            사인 로그 타입
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserSignLog.idUser">
+            <summary>
+            대상 유저.
+            없으면 0
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserSignLog.Contents">
+            <summary>
+            내용
             </summary>
         </member>
         <member name="T:ModelDB.BoardAuthorityStateType">
@@ -2157,6 +2272,27 @@
             동작은 Normal과 같으나 상태값을 다시 확인할때 'Normal'로 변경한다.
             </summary>
         </member>
+        <member name="T:ModelDB.Setting_DataOpenType">
+            <summary>
+            Setting_Data의 공개 타입
+            </summary>
+        </member>
+        <member name="F:ModelDB.Setting_DataOpenType.None">
+            <summary>
+            선택 없음.
+            
+            </summary>
+        </member>
+        <member name="F:ModelDB.Setting_DataOpenType.Public">
+            <summary>
+            공개
+            </summary>
+        </member>
+        <member name="F:ModelDB.Setting_DataOpenType.Private">
+            <summary>
+            비공개
+            </summary>
+        </member>
         <member name="T:ModelDB.ManagementClassType">
             <summary>
             관리 권한 타입
@@ -2236,6 +2372,46 @@
         <member name="F:ModelDB.UserApiStateType.Expiration">
             <summary>
             기간 만료
+            </summary>
+        </member>
+        <member name="T:ModelDB.UserSignLogType">
+            <summary>
+            유저 사인 타입
+            </summary>
+        </member>
+        <member name="F:ModelDB.UserSignLogType.None">
+            <summary>
+            없음
+            </summary>
+        </member>
+        <member name="F:ModelDB.UserSignLogType.RequestToken">
+            <summary>
+            인증서버에 인증 요청
+            </summary>
+        </member>
+        <member name="F:ModelDB.UserSignLogType.RefreshToken">
+            <summary>
+            액세스 토큰 갱신
+            </summary>
+        </member>
+        <member name="F:ModelDB.UserSignLogType.RevocationToken">
+            <summary>
+            지정된 토큰 제거
+            </summary>
+        </member>
+        <member name="F:ModelDB.UserSignLogType.UserInfo">
+            <summary>
+            엑세스토큰을 이용하여 유저 정보를 받는다.
+            </summary>
+        </member>
+        <member name="F:ModelDB.UserSignLogType.SignIn">
+            <summary>
+            직접 사인인 시도
+            </summary>
+        </member>
+        <member name="F:ModelDB.UserSignLogType.SignOut">
+            <summary>
+            직접 사인아웃 시도
             </summary>
         </member>
         <member name="T:ApiModel.ApiResultBaseModel">

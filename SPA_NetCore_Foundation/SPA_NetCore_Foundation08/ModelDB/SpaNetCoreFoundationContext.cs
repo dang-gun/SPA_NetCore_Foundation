@@ -89,9 +89,14 @@ namespace ModelDB
         /// 사용자 사인인 리스트
         /// </summary>
         public DbSet<UserSignIn> UserSignIn { get; set; }
+
+        /// <summary>
+        /// 사인 관련 로그
+        /// </summary>
+        public DbSet<UserSignLog> UserSignLog { get; set; }
         #endregion
 
-        
+
         /// <summary>
         /// api 호출 로그
         /// </summary>
@@ -122,8 +127,18 @@ namespace ModelDB
                     idSetting_Data = 1,
                     Number = 1,
                     Name = "Title",
+                    OpenType = Setting_DataOpenType.Public,
                     ValueData = "ASP.NET Core SPA Foundation 08",
                     Description = "프로그램 전체에 표시될 이름",
+                }
+                , new Setting_Data
+                {
+                    idSetting_Data = 2,
+                    Number = 2,
+                    Name = "SignLog",
+                    OpenType = Setting_DataOpenType.Private,
+                    ValueData = "0",
+                    Description = "사인 관련 로그를 어떻게 남기는 레벨.(높을수록 많은 정보를 남긴다.== DB부하가 심해짐)",
                 });
 
             #region 유저 정보

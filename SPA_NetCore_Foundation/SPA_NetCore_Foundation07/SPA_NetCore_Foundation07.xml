@@ -515,6 +515,12 @@
             </summary>
             <param name="migrationBuilder"></param>
         </member>
+        <member name="M:SPA_NetCore_Foundation07.Migrations.Initialize_mssql.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
         <member name="T:SPA_NetCore_Foundation07.Program">
             <summary>
             

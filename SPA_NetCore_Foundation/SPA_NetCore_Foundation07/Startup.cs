@@ -46,8 +46,8 @@ namespace SPA_NetCore_Foundation
 
 
             //DB 커낵션 스트링 받아오기
-            //string sConnectStringSelect = "SpaNetCoreFoundation_sqlite";
-            string sConnectStringSelect = "SpaNetCoreFoundation_mssql";
+            string sConnectStringSelect = "SpaNetCoreFoundation_sqlite";
+            //string sConnectStringSelect = "SpaNetCoreFoundation_mssql";
             GlobalStatic.DBType = Configuration[sConnectStringSelect + ":DBType"];
             GlobalStatic.DBString = Configuration[sConnectStringSelect + ":ConnectionString"];
 

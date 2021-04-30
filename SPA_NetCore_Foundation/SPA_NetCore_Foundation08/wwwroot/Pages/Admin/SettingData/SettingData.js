@@ -92,6 +92,7 @@ SettingData.prototype.Reset_ListTitle = function (bItem)
         idSetting_Data: -1
         , Number: "순서"
         , Name: "이름"
+        , OpenType: "공개"
         , ValueData: "값"
         , Description: "설명"
     };
@@ -157,12 +158,15 @@ SettingData.prototype.BindItem_View = function (arrJsonData)
  */
 SettingData.prototype.SettingSet = function (nidSetting_Data)
 {
+    var objThis = this;
+
     //내 개체 찾기
     var divMe = $("#div" + nidSetting_Data);
 
     //데이터 읽기
     var sNumber = divMe.find(".SettingItem_Number > input").val();
     var sName = divMe.find(".SettingItem_Name > input").val();
+    var sOpenType = divMe.find(".SettingItem_OpenType > input").val();
     var sValueData = divMe.find(".SettingItem_ValueData > input").val();
     var sDescription = divMe.find(".SettingItem_Description > input").val();
 
@@ -173,6 +177,7 @@ SettingData.prototype.SettingSet = function (nidSetting_Data)
                 idSetting_Data: nidSetting_Data
                 , Number: Number(sNumber)
                 , Name: sName
+                , OpenType: Number(sOpenType)
                 , ValueData: sValueData
                 , Description: sDescription
             }

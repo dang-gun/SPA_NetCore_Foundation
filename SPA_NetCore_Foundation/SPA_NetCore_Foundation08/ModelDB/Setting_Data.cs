@@ -31,6 +31,11 @@ namespace ModelDB
         public string Name { get; set; }
 
         /// <summary>
+        /// 공개 타입
+        /// </summary>
+        public Setting_DataOpenType OpenType { get; set; }
+
+        /// <summary>
         /// 설정값
         /// </summary>
         public string ValueData { get; set; }

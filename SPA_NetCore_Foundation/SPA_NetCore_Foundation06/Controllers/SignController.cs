@@ -160,6 +160,7 @@ namespace SPA_NetCore_Foundation.Controllers
                 , cm.id_int
                 , string.Format("SignOut 시도 : {0}", cm.email));
 
+
             using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext())
             {
                 //기존 로그인한 유저 검색
@@ -324,7 +325,7 @@ namespace SPA_NetCore_Foundation.Controllers
                             , cm.id_int
                             , string.Format("RefreshToAccess 성공 : {0}", rmResult.Email));
                     }
-                }   
+                }//end using db1 
             }
 
             return rrResult.ToResult(rmResult);
