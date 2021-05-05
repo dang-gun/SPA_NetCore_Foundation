@@ -177,6 +177,22 @@ app_Assist.MoveNewPage = function (objTarget, bNew, bCallAction)
 // 라우트 어플리케이션 생성
 var app = Sammy(function ()
 {
+    //어플리케이션 로드시 불러올 데이터 ******************
+
+    //
+    AA.HtmlFileLoad(FS_FUrl.Faculty_Setting_Data
+        , function (sJson)
+        {
+            GlobalStatic.Setting_Data = JSON.parse(sJson)[0];
+
+            //제목 출력
+            GlobalStatic.Title = GlobalStatic.Setting_Data.Title;
+        }
+        , {}
+    );
+
+
+    //사인 정보 ********************************
     if (false === dgIsObject.IsBoolValue(GlobalSign.SignIn))
     {//사인인 정보가 없다.
         //엑세스토큰 확인

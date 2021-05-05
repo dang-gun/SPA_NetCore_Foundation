@@ -15,8 +15,11 @@ namespace ListToWwwFile
         /// <summary>
         /// 사용할 줄바꿈 문자
         /// </summary>
+#if DEBUG
         private string sNewLine = Environment.NewLine;
-
+#else
+        private string sNewLine = string.Empty;;
+#endif
         /// <summary>
         /// 
         /// </summary>
@@ -26,34 +29,40 @@ namespace ListToWwwFile
 
         /// <summary>
         /// 리스트를 Json파일 문자열로 바꾼다.
+        /// json은 주석이 없으므로 주석은 무시한다.
         /// </summary>
         /// <param name="listData"></param>
         /// <returns></returns>
-        public string ToJsonString(List<ListToJavascriptModel> listData)
+        public string ToJsonString(
+            List<ListToJavascriptModel> listData)
         {
             StringBuilder sbReturn = new StringBuilder();
 
             //배열 시작 
             sbReturn.Append("[" + this.sNewLine);
 
-            foreach(ListToJavascriptModel itemLTJ in listData)
+            for(int i = 0; i < listData.Count; ++i )
             {
-                sbReturn.Append("{" + this.sNewLine);
+                ListToJavascriptModel itemLTJ = listData[i];
 
-                if (string.Empty != itemLTJ.Summary)
-                {//주석이 있다.
-                    sbReturn.Append("//" + itemLTJ.Summary + this.sNewLine);
+                if(0 != i)
+                {
+                    sbReturn.Append("{" + this.sNewLine);
                 }
+
+                sbReturn.Append("{" + this.sNewLine);
 
                 //이름
                 sbReturn.Append("\"" + itemLTJ.Name + "\": ");
 
+                //마지막 데이터는 콤마를 넣지 말아야 한다.
                 //값
-                sbReturn.Append("\"" + itemLTJ.Value + "\",");
+                sbReturn.Append("\"" + itemLTJ.Value + "\"");
 
+                sbReturn.Append(this.sNewLine);
+                sbReturn.Append("}" + this.sNewLine);
+            }//end for i
 
-                sbReturn.Append("}," + this.sNewLine);
-            }//end foreach itemLTJ
 
             //배열 끝
             sbReturn.Append("]" + this.sNewLine);

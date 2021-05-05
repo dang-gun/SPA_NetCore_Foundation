@@ -17,6 +17,13 @@ FS_FUrl.Error = FS_FUrl.Pages + "Error/";
 FS_FUrl.Error_Home = FS_FUrl.Error + "Error.html";
 FS_FUrl.Error_404 = FS_FUrl.Error + "404.html";
 
+/* 세팅 - 데이터 */
+FS_FUrl.Faculty = "/Faculty/";
+
+FS_FUrl.Faculty_Setting_Data = FS_FUrl.Faculty + "Setting_Data.json";
+
+
+
 FS_FUrl.Admin = FS_FUrl.Pages + "Admin/";
 FS_FUrl.Admin_Admin_MenuHtml = FS_FUrl.Admin + "Admin_Menu.html";
 

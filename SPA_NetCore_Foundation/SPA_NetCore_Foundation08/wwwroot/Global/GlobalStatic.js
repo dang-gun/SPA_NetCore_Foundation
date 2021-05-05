@@ -3,6 +3,9 @@
  */
 var GlobalStatic = {};
 
+/** 서버에서 받은 세팅 데이터 */
+GlobalStatic.Setting_Data = [];
+
 /** 프로젝트 제목 */
 GlobalStatic.Title = "SPA NetCore Foundation 08";
 

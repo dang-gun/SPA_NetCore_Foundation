@@ -1,5 +1,6 @@
 ﻿using ApiModel;
 using IdentityServer4.UserServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ModelDB;
@@ -19,6 +20,7 @@ namespace SPA_NetCore_Foundation.Controllers
     /// </summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]//OAuth2 인증 설정
     public class SettingDataController : ControllerBase
     {
         /// <summary>
