@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>SPA_NetCore_Foundation06.xml</DocumentationFile>
+    <DocumentationFile>SPA_NetCore_Foundation.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -96,9 +96,6 @@
 
   <ItemGroup>
     <None Update="ProjectFile\SPAFoundation.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="SPA_NetCore_Foundation06.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
