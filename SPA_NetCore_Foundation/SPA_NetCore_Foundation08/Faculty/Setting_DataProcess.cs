@@ -1,7 +1,10 @@
-﻿using ModelDB;
+﻿using ListToWwwFile;
+using ModelDB;
+using SPA_NetCore_Foundation.Global;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace SPA_NetCore_Foundation.Faculty
@@ -24,9 +27,38 @@ namespace SPA_NetCore_Foundation.Faculty
         {
             using (SpaNetCoreFoundationContext db1 = new SpaNetCoreFoundationContext())
             {
-                Setting_Data
+                //대상 로드
+                this.Setting_Data
                     = db1.Setting_Data
                         .ToList();
+
+                
+                //json 파일로 출력***********
+                //json으로 출력할 데이터리스트만 추린다.
+                List<Setting_Data> listS_D
+                    = this.Setting_Data
+                        .Where(w => w.OpenType == Setting_DataOpenType.Public)
+                        .ToList();
+
+                //변환용 모델로 변환
+                List<ListToJavascriptModel> listLTJ
+                    = listS_D
+                        .Select(s => new ListToJavascriptModel
+                        {
+                            Summary = s.Description,
+                            Name = s.Name,
+                            Value = s.ValueData
+                        })
+                        .ToList();
+
+                //json문자열로 변환
+                string sJson = GlobalStatic.JsProc.ToJsonString(listLTJ);
+
+                //파일 출력
+                GlobalStatic.FileProc
+                    .WWW_FileSave(
+                        @"Faculty\Setting_Data.json"
+                        , sJson);
             }
         }
 

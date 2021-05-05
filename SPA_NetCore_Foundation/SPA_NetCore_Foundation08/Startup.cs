@@ -23,6 +23,7 @@ using IdentityServer4_Custom.IdentityServer4.AuthRequest;
 using ModelDB;
 using SPA_NetCore_Foundation.Global;
 using SwaggerAssist;
+using EnumToClass;
 
 namespace SPA_NetCore_Foundation
 {
@@ -35,6 +36,14 @@ namespace SPA_NetCore_Foundation
         /// 인증서버 주소
         /// </summary>
         private string AuthUrl = "";
+
+        /// <summary>
+        /// 프로젝트 Xml 파일 경로.
+        /// 프로젝트 세팅에 xml 파일 출력경로와 일치시켜준다.
+        /// </summary>
+        private string ProjectXmlDir
+            = string.Format(@"{0}\SPA_NetCore_Foundation.xml"
+                            , System.AppDomain.CurrentDomain.BaseDirectory);
 
         /// <summary>
         /// 
@@ -61,6 +70,12 @@ namespace SPA_NetCore_Foundation
 
             //세팅 로드
             GlobalStatic.Setting_DataProc.Setting_Load();
+
+
+            //프로젝트 고유 출력 파일*************
+            EnumXml exml = new EnumXml(this.ProjectXmlDir);
+            string sTemp = string.Empty;
+            EnumToModel etmBP_Temp = null;
         }
 
         /// <summary>

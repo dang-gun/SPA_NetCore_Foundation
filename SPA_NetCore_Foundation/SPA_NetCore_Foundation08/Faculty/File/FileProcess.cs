@@ -25,6 +25,25 @@ namespace Faculty.File
     public class FileProcess
     {
         /// <summary>
+        /// wwwroot로 사용할 경로
+        /// </summary>
+        public string Dir_wwwroot 
+        { 
+            get
+            {
+                return this.Dir_wwwroot;
+            }
+            set
+            {
+                this.Dir_wwwroot = value;
+            }
+        }
+        /// <summary>
+        /// wwwroot로 사용할 경로(원본)
+        /// </summary>
+        private string m_Dir_wwwroot = "wwwroot";
+
+        /// <summary>
         /// base64 바이너리 정보를 바이트배열로 변환한다.
         /// </summary>
         /// <param name="base64String"></param>
@@ -212,6 +231,22 @@ namespace Faculty.File
         }//end FileInDb
 
 
+        /// <summary>
+        /// wwwroot 폴더에 파일을 저장한다.
+        /// </summary>
+        /// <param name="sDir"></param>
+        /// <param name="sContents">파일에 기록할 내용</param>
+        public void WWW_FileSave(string sDir, string sContents)
+        {
+            string sFileDir = GlobalStatic.Dir_LocalRoot + @"\"+this.m_Dir_wwwroot + @"\" + sDir;
+
+            using (StreamWriter stream = new(sFileDir, false, Encoding.UTF8))
+            {
+                //파일 저장
+                stream.Write(sContents);
+            }//end using stream
+        }
+
 
         /// <summary>
         /// wwwroot 내보내는 json파일 처리
@@ -223,16 +258,7 @@ namespace Faculty.File
             //리스트를 Json으로 변환
             string sJsonList = JsonConvert.SerializeObject(objList);
 
-            string sFileDir = GlobalStatic.Dir_LocalRoot + @"\wwwroot\" + sDir;
-
-            using (StreamWriter stream = new StreamWriter(sFileDir, false, Encoding.UTF8))
-            {
-                //파일 저장
-                stream.Write(sJsonList);
-                //stream.BaseStream.Write(byteJsonList);
-            }//end using stream
-
-
+            this.WWW_FileSave(sDir, sJsonList);
         }//end WWW_Json
 
 

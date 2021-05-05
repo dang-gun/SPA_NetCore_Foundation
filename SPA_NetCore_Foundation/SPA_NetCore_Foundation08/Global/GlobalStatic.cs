@@ -1,5 +1,6 @@
 ﻿using Faculty.File;
 using IdentityServer4_Custom.IdentityServer4;
+using ListToWwwFile;
 using SPA_NetCore_Foundation.Faculty;
 using System;
 using System.Collections.Generic;
@@ -63,6 +64,9 @@ namespace SPA_NetCore_Foundation.Global
         /// 파일 처리 유틸
         /// </summary>
         public static FileProcess FileProc = new FileProcess();
-
+        /// <summary>
+        /// 리스트를 자바스크립트 용으로 변환하는 유틸
+        /// </summary>
+        public static ListToJavascript JsProc = new ListToJavascript();
     }
 }

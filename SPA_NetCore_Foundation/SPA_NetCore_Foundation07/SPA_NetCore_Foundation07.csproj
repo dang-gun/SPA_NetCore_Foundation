@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>SPA_NetCore_Foundation07.xml</DocumentationFile>
+    <DocumentationFile>SPA_NetCore_Foundation.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -1028,9 +1028,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="SPA_NetCore_Foundation07.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="wwwroot_Admin\Utility\DG_MessageBox\DG_MessageBox.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>SPA_NetCore_Foundation08.xml</DocumentationFile>
+    <DocumentationFile>SPA_NetCore_Foundation.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -463,9 +463,6 @@
 
   <ItemGroup>
     <None Update="ProjectFile\SPAFoundation.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="SPA_NetCore_Foundation08.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
