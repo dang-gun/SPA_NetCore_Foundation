@@ -90,6 +90,20 @@ namespace SPA_NetCore_Foundation.Controllers
                                 .Where(m => m.idUser == findUser.idUser)
                                 .ToArray();
 
+                        //기존 로그인 토큰 제거
+                        foreach (UserSignIn itemUSI in arrSL)
+                        {
+                            //리플레시 토큰 제거
+                            if ((null != itemUSI.RefreshToken)
+                                && (string.Empty != itemUSI.RefreshToken))
+                            {
+                                TokenRevocationResponse trr
+                                    = GlobalStatic.TokenProc
+                                        .RevocationTokenAsync(itemUSI.RefreshToken)
+                                        .Result;
+                            }
+                        }//end foreach itemUSI
+
                         //기존 로그인한 유저 정보 제거
                         db1.UserSignIn.RemoveRange(arrSL);
                         //db 적용
