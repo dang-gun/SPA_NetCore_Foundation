@@ -71,9 +71,9 @@ namespace SPA_NetCore_Foundation.Controllers
                 else
                 {//에러가 없다.
                     //로그인 되어있는 유저정보 저장
-                    GlobalStatic.SignInList.Add(user.ID, tr.RefreshToken);
+                    GlobalStatic.SignInList.Add(user.idUserSignInfo, tr.RefreshToken);
 
-                    armResult.id = user.ID;
+                    armResult.idUserSignInfo = user.idUserSignInfo;
                     armResult.email = user.Email;
 
                     armResult.lv = 0;
@@ -135,8 +135,12 @@ namespace SPA_NetCore_Foundation.Controllers
             //결과용
             ApiResultReady rrResult = new ApiResultReady(this);
             //엑세스 토큰 갱신용 모델
-            SignInResultModel armResult = new SignInResultModel();
-            rrResult.ResultObject = armResult;
+            SignInResultModel rmResult = new SignInResultModel();
+            rrResult.ResultObject = rmResult;
+
+            //API 호출 시간
+            DateTime dtNow = DateTime.Now;
+
 
             //토큰 갱신 요청
             TokenResponse tr = GlobalStatic.TokenProc.RefreshTokenAsync(sRefreshToken).Result;
@@ -160,14 +164,14 @@ namespace SPA_NetCore_Foundation.Controllers
 
 
                 //모델에 입력
-                armResult.id = cm.id_int;
-                armResult.email = cm.email;
+                rmResult.idUserSignInfo = cm.id_int;
+                rmResult.email = cm.email;
 
-                armResult.access_token = tr.AccessToken;
-                armResult.refresh_token = tr.RefreshToken;
+                rmResult.access_token = tr.AccessToken;
+                rmResult.refresh_token = tr.RefreshToken;
             }
 
-            return rrResult.ToResult(armResult);
+            return rrResult.ToResult(rmResult);
         }
 
         /// <summary>
@@ -190,11 +194,11 @@ namespace SPA_NetCore_Foundation.Controllers
             UserSignInfoModel user
                     = GlobalStatic.UserList.List
                         .FirstOrDefault(m =>
-                            m.ID == cm.id_int);
+                            m.idUserSignInfo == cm.id_int);
 
             if (null != user)
             {//유저 정보가 있다.
-                tmResult.id = user.ID;
+                tmResult.idUserSignInfo = user.idUserSignInfo;
                 tmResult.email = user.Email;
             }
             else

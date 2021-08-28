@@ -36,7 +36,7 @@ namespace SPA_NetCore_Foundation.Global
             //메모리에는 없는데 리플레시토큰을 있을 수 있기 때문.
             SignInItemModel sim
                 = this.SignInItemList
-                    .Where(m => m.ID == nID
+                    .Where(m => m.idUserSignInfo == nID
                         || m.RefreshToken == sRefreshToken)
                     .FirstOrDefault();
 
@@ -49,7 +49,7 @@ namespace SPA_NetCore_Foundation.Global
             {//정보가 없다.
              //추가한다.
                 sim = new SignInItemModel { 
-                    ID = nID
+                    idUserSignInfo = nID
                     , RefreshToken = sRefreshToken
                 };
             }
@@ -62,7 +62,7 @@ namespace SPA_NetCore_Foundation.Global
             //메모리에는 없는데 리플레시토큰을 있을 수 있기 때문.
             SignInItemModel sim
                 = this.SignInItemList
-                    .Where(m => m.ID == nID
+                    .Where(m => m.idUserSignInfo == nID
                         || m.RefreshToken == sRefreshToken)
                     .FirstOrDefault();
 

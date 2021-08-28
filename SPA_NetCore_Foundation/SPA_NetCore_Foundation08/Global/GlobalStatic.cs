@@ -1,6 +1,8 @@
 ﻿using Faculty.File;
 using IdentityServer4_Custom.IdentityServer4;
 using ListToWwwFile;
+using ModelDB;
+using PBAuto.Global;
 using SPA_NetCore_Foundation.Faculty;
 using System;
 using System.Collections.Generic;
@@ -51,6 +53,13 @@ namespace SPA_NetCore_Foundation.Global
         /// </summary>
         public static Setting_DataProcess Setting_DataProc
             = new Setting_DataProcess();
+        #region 자주사용하는 세팅정보 별도 저장
+        /// <summary>
+        /// 멀티 사인을 어떻게 허용할지 여부
+        /// </summary>
+        public static UserSignMultiType Setting_SignMultiType 
+            = UserSignMultiType.None;
+        #endregion
 
 
 
@@ -68,5 +77,24 @@ namespace SPA_NetCore_Foundation.Global
         /// 리스트를 자바스크립트 용으로 변환하는 유틸
         /// </summary>
         public static ListToJavascript JsProc = new ListToJavascript();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        static GlobalStatic()
+        {
+            Setting_DataProc.OnSettingLoad += Setting_DataProc_OnSettingLoad;
+        }
+
+        /// <summary>
+        /// 세팅 데이터를 읽어들이면 처리할 내용
+        /// </summary>
+        private static void Setting_DataProc_OnSettingLoad()
+        {
+            GlobalStatic.Setting_SignMultiType
+                = (UserSignMultiType)GlobalStatic
+                    .Setting_DataProc
+                    .GetValueInt(FixString_Setting.MultiSignType);
+        }
     }
 }

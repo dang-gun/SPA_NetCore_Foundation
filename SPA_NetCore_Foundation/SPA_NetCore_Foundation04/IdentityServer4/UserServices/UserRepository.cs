@@ -38,7 +38,7 @@ namespace IdentityServer4_Custom.UserServices
         public UserSignInfoModel FindById(int nID)
         {
             return GlobalStatic.UserList
-                    .List.FirstOrDefault(x => x.ID == nID);
+                    .List.FirstOrDefault(x => x.idUserSignInfo == nID);
         }
 
         /// <summary>

@@ -412,7 +412,7 @@
             사인 관련(인,아웃,조인)
             </summary>
         </member>
-        <member name="M:SPA_NetCore_Foundation.Controllers.SignController.SignIn(System.String,System.String)">
+        <member name="M:SPA_NetCore_Foundation.Controllers.SignController.SignIn(System.String,System.String,ModelDB.PlatformType,System.String,System.String)">
             <summary>
             사인인 시도
             </summary>
@@ -462,6 +462,15 @@
             <param name="sViewName"></param>
             <param name="sPassword"></param>
             <returns></returns>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Controllers.SignController.RemoveExistingRefreshToken(System.Int64,System.String,System.DateTime)">
+            <summary>
+            기존 토큰 제거.
+            로그인 옵션에 따라서 제거한다.
+            </summary>
+            <param name="idUser"></param>
+            <param name="sRefreshToken"></param>
+            <param name="dtNow"></param>
         </member>
         <member name="T:SPA_NetCore_Foundation.Controllers.TestController">
             <summary>
@@ -545,6 +554,23 @@
         <member name="T:SPA_NetCore_Foundation.Faculty.Setting_DataProcess">
             <summary>
             세팅 데이터를 처리한다.
+            자주읽어야 하는 데이터가 있다면 이 클래스를 베이스로 사용해서 별도의 클래스를 만들어
+            별도 변수에 저장하여 사용한다.
+            </summary>
+        </member>
+        <member name="T:SPA_NetCore_Foundation.Faculty.Setting_DataProcess.SettingLoadEvntDelegate">
+            <summary>
+            세팅 로드 이벤트 델리게이트
+            </summary>
+        </member>
+        <member name="E:SPA_NetCore_Foundation.Faculty.Setting_DataProcess.OnSettingLoad">
+            <summary>
+            세팅 로드가 완료되면 발생하는 이벤트
+            </summary>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Faculty.Setting_DataProcess.SettingLoad">
+            <summary>
+            세팅 로드 이벤트 발생기
             </summary>
         </member>
         <member name="F:SPA_NetCore_Foundation.Faculty.Setting_DataProcess.Setting_Data">
@@ -628,6 +654,11 @@
             메모리에 올라온 세팅정보
             </summary>
         </member>
+        <member name="F:SPA_NetCore_Foundation.Global.GlobalStatic.Setting_SignMultiType">
+            <summary>
+            멀티 사인을 어떻게 허용할지 여부
+            </summary>
+        </member>
         <member name="F:SPA_NetCore_Foundation.Global.GlobalStatic.Rand">
             <summary>
             전역에서 사용할 랜덤 함수
@@ -641,6 +672,16 @@
         <member name="F:SPA_NetCore_Foundation.Global.GlobalStatic.JsProc">
             <summary>
             리스트를 자바스크립트 용으로 변환하는 유틸
+            </summary>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Global.GlobalStatic.#cctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SPA_NetCore_Foundation.Global.GlobalStatic.Setting_DataProc_OnSettingLoad">
+            <summary>
+            세팅 데이터를 읽어들이면 처리할 내용
             </summary>
         </member>
         <member name="T:SPA_NetCore_Foundation.Model.TestModel01">
@@ -840,6 +881,11 @@
         <member name="F:PBAuto.Global.FixString_Setting.SignLog">
             <summary>
             사인 로그
+            </summary>
+        </member>
+        <member name="F:PBAuto.Global.FixString_Setting.MultiSignType">
+            <summary>
+            멀티 사인을 어떻게 허용할지 여부
             </summary>
         </member>
         <member name="T:IdentityServer4_Custom.IdentityServer4.AuthRequest.MyExtensionGrantValidator">
@@ -1291,6 +1337,29 @@
             <param name="migrationBuilder"></param>
         </member>
         <member name="M:SPA_NetCore_Foundation08.Migrations.UserSignLog_Edit003.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+        <member name="T:SPA_NetCore_Foundation08.Migrations.UserSignInTokenLog_Add">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.UserSignInTokenLog_Add.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.UserSignInTokenLog_Add.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:SPA_NetCore_Foundation08.Migrations.UserSignInTokenLog_Add.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>
             
             </summary>
@@ -1847,6 +1916,11 @@
             사용자 사인인 리스트
             </summary>
         </member>
+        <member name="P:ModelDB.SpaNetCoreFoundationContext.UserSignInTokenLog">
+            <summary>
+            말료된 리플레시토큰을 저장해 둔다.
+            </summary>
+        </member>
         <member name="P:ModelDB.SpaNetCoreFoundationContext.UserSignLog">
             <summary>
             사인 관련 로그
@@ -2002,6 +2076,21 @@
             리플레시 토큰
             </summary>
         </member>
+        <member name="P:ModelDB.UserSignIn.PlatformType">
+            <summary>
+            접속 플랫폼
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserSignIn.IP">
+            <summary>
+            ip, IPv6 대비하여 150칸 지정
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserSignIn.GUID">
+            <summary>
+            브라우저에서 생성한 고유값
+            </summary>
+        </member>
         <member name="P:ModelDB.UserSignIn.SignInDate">
             <summary>
             직접 로그인한 시간
@@ -2010,6 +2099,59 @@
         <member name="P:ModelDB.UserSignIn.RefreshDate">
             <summary>
             토큰 갱신 시간
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserSignIn.LastUpdateDate">
+            <summary>
+            마지막 업데이트 시간
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserSignIn.RowVersion">
+            <summary>
+            동시성 관리
+            https://docs.microsoft.com/ko-kr/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application
+            </summary>
+        </member>
+        <member name="T:ModelDB.UserSignInTokenLog">
+            <summary>
+            말료된 리플레시토큰을 저장해 둔다.
+            'UserSignIn'와 분리한 이유는 만료되지 않은 토큰을 빠르게 검색하기 위함이다.
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserSignInTokenLog.idUserSignInTokenLog">
+            <summary>
+            고유키
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserSignInTokenLog.idUser">
+            <summary>
+            연결된 User.idUser
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserSignInTokenLog.RefreshToken">
+            <summary>
+            리플레시 토큰
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserSignInTokenLog.PlatformType">
+            <summary>
+            만료 당시 플랫폼
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserSignInTokenLog.IP">
+            <summary>
+            만료 당시 ip
+            IPv6 대비하여 150칸 지정
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserSignInTokenLog.GUID">
+            <summary>
+            브라우저에서 생성한 고유값
+            </summary>
+        </member>
+        <member name="P:ModelDB.UserSignInTokenLog.EndDate">
+            <summary>
+            만료 시간
             </summary>
         </member>
         <member name="T:ModelDB.UserSignLog">
@@ -2390,6 +2532,31 @@
             테스트 유저
             </summary>
         </member>
+        <member name="T:ModelDB.PlatformType">
+            <summary>
+            플랫폼 타입
+            </summary>
+        </member>
+        <member name="F:ModelDB.PlatformType.None">
+            <summary>
+            없음
+            </summary>
+        </member>
+        <member name="F:ModelDB.PlatformType.PC">
+            <summary>
+            pc
+            </summary>
+        </member>
+        <member name="F:ModelDB.PlatformType.Mobile">
+            <summary>
+            모바일
+            </summary>
+        </member>
+        <member name="F:ModelDB.PlatformType.NotKnow">
+            <summary>
+            모름
+            </summary>
+        </member>
         <member name="T:ModelDB.UserApiStateType">
             <summary>
             유저 api 상태값
@@ -2458,6 +2625,44 @@
         <member name="F:ModelDB.UserSignLogType.SignOut">
             <summary>
             직접 사인아웃 시도
+            </summary>
+        </member>
+        <member name="T:ModelDB.UserSignMultiType">
+            <summary>
+            멀티 사인을 어떻게 허용할지 여부
+            </summary>
+        </member>
+        <member name="F:ModelDB.UserSignMultiType.None">
+            <summary>
+            없음.
+            절대 사용하면 안된다.
+            </summary>
+        </member>
+        <member name="F:ModelDB.UserSignMultiType.OnlyOne">
+            <summary>
+            무조건 하나만 허용함.
+            쿠키가 공유되는(같은 브라우저) 경우 여러창이 허용된다.
+            그외에는 플랫폼이나 브라우저와 상관없이 모두 하나의 토큰만 허용되므로
+            다른 브라우저에서 토큰을 갱신하면 기존토큰은 제거된다.
+            </summary>
+        </member>
+        <member name="F:ModelDB.UserSignMultiType.Platform">
+            <summary>
+            플랫폼당 하나씩 허용.
+            PC, 모바일 하나씩만 허용함.
+            </summary>
+        </member>
+        <member name="F:ModelDB.UserSignMultiType.PerBrowser">
+            <summary>
+            브라우저당 하나씩 허용.
+            프론트엔드에서 최초 접속시 GUID를 생성하여 쿠키에 저장하고
+            이것을 기준으로 토큰을 관리한다.
+            </summary>
+        </member>
+        <member name="F:ModelDB.UserSignMultiType.IP">
+            <summary>
+            IP 하나당 하나씩 허용.
+            모바일의 경우 빈번하게 IP가 변경되기 때문에 
             </summary>
         </member>
         <member name="T:ApiModel.ApiResultBaseModel">
@@ -3542,6 +3747,11 @@
         <member name="P:WebApiAuth.Model.Sign.SignInResultModel.refresh_token">
             <summary>
             리플레시 토큰
+            </summary>
+        </member>
+        <member name="P:WebApiAuth.Model.Sign.SignInResultModel.expires_in">
+            <summary>
+            엑세스 토큰 수명
             </summary>
         </member>
         <member name="M:WebApiAuth.Model.Sign.SignInResultModel.#ctor">

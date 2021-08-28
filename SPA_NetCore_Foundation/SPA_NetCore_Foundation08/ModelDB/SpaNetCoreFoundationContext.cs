@@ -1,6 +1,7 @@
 ﻿using System;
 using BoardModel;
 using Microsoft.EntityFrameworkCore;
+using PBAuto.Global;
 using SPA_NetCore_Foundation.Global;
 
 namespace ModelDB
@@ -89,6 +90,10 @@ namespace ModelDB
         /// 사용자 사인인 리스트
         /// </summary>
         public DbSet<UserSignIn> UserSignIn { get; set; }
+        /// <summary>
+        /// 말료된 리플레시토큰을 저장해 둔다.
+        /// </summary>
+        public DbSet<UserSignInTokenLog> UserSignInTokenLog { get; set; }
 
         /// <summary>
         /// 사인 관련 로그
@@ -126,7 +131,7 @@ namespace ModelDB
                 {
                     idSetting_Data = 1,
                     Number = 1,
-                    Name = "Title",
+                    Name = FixString_Setting.Title,
                     OpenType = Setting_DataOpenType.Public,
                     ValueData = "ASP.NET Core SPA Foundation 08",
                     Description = "프로그램 전체에 표시될 이름",
@@ -135,10 +140,19 @@ namespace ModelDB
                 {
                     idSetting_Data = 2,
                     Number = 2,
-                    Name = "SignLog",
+                    Name = FixString_Setting.SignLog,
                     OpenType = Setting_DataOpenType.Private,
                     ValueData = "0",
                     Description = "사인 관련 로그를 어떻게 남기는 레벨.(높을수록 많은 정보를 남긴다.== DB부하가 심해짐)",
+                }
+                , new Setting_Data
+                {
+                    idSetting_Data = 3,
+                    Number = 3,
+                    Name = FixString_Setting.MultiSignType,
+                    OpenType = Setting_DataOpenType.Private,
+                    ValueData = UserSignMultiType.OnlyOne.GetHashCode().ToString(),
+                    Description = "멀티 사인을 어떻게 허용할지 여부",
                 });
 
             #region 유저 정보

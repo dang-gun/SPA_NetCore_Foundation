@@ -14,7 +14,7 @@ namespace WebApiAuth.Model.Sign
         /// <summary>
         /// 유저의 고유 아이디
         /// </summary>
-        public long id { get; set; }
+        public long idUserSignInfo { get; set; }
         /// <summary>
         /// 이메일
         /// </summary>
@@ -29,7 +29,7 @@ namespace WebApiAuth.Model.Sign
         public SignInSimpleResultModel()
             : base()
         {
-            this.id = 0;
+            this.idUserSignInfo = 0;
             this.email = string.Empty;
 
             this.lv = 0;

@@ -11,9 +11,32 @@ namespace SPA_NetCore_Foundation.Faculty
 {
     /// <summary>
     /// 세팅 데이터를 처리한다.
+    /// 자주읽어야 하는 데이터가 있다면 이 클래스를 베이스로 사용해서 별도의 클래스를 만들어
+    /// 별도 변수에 저장하여 사용한다.
     /// </summary>
     public class Setting_DataProcess
     {
+        #region 세팅 로드 이벤트
+        /// <summary>
+        /// 세팅 로드 이벤트 델리게이트
+        /// </summary>
+        public delegate void SettingLoadEvntDelegate();
+        /// <summary>
+        /// 세팅 로드가 완료되면 발생하는 이벤트
+        /// </summary>
+        public event SettingLoadEvntDelegate OnSettingLoad;
+
+        /// <summary>
+        /// 세팅 로드 이벤트 발생기
+        /// </summary>
+        private void SettingLoad()
+        {
+            OnSettingLoad();
+        }
+
+        #endregion
+
+
         /// <summary>
         /// 메모리에 올라온 세팅정보
         /// </summary>
@@ -32,7 +55,10 @@ namespace SPA_NetCore_Foundation.Faculty
                     = db1.Setting_Data
                         .ToList();
 
-                
+                //설정을 읽고나서 추가로 처리할 내용
+                this.SettingLoad();
+
+
                 //json 파일로 출력***********
                 //json으로 출력할 데이터리스트만 추린다.
                 List<Setting_Data> listS_D

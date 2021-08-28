@@ -39,7 +39,7 @@ namespace IdentityServer4_Custom.UserServices
 
                 //권한 부여 유형을 지정한다.
                 context.Result 
-                    = new GrantValidationResult(user.ID.ToString()
+                    = new GrantValidationResult(user.idUserSignInfo.ToString()
                         , OidcConstants.AuthenticationMethods.Password);
             }
             else

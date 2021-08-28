@@ -128,6 +128,7 @@ GlobalSign.Move_SignIn_Remove = function (bMessage, sMessage)
     var sMsg = sMessage;
 
     GlobalSign.SignIn = false;
+    AA.RefreshToAccess_CallBool = false;
 
     GlobalSign.AccessToken_Set("");
     GlobalSign.RefreshToken_Set("", CA.SaveType.Default);

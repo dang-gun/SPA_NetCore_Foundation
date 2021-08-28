@@ -18,7 +18,12 @@ namespace PBAuto.Global
         /// <summary>
         /// 사인 로그
         /// </summary>
-        public static readonly string SignLog = "SignLog";
+        public static readonly string SignLog = "Sign Log";
+
+        /// <summary>
+        /// 멀티 사인을 어떻게 허용할지 여부
+        /// </summary>
+        public static readonly string MultiSignType = "Multi Sign Type";
 
     }
 }

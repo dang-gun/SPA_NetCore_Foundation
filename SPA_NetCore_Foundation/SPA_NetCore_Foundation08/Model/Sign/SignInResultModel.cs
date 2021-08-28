@@ -40,8 +40,13 @@ namespace WebApiAuth.Model.Sign
         /// 리플레시 토큰
         /// </summary>
         public string refresh_token { get; set; }
-
         
+        /// <summary>
+        /// 엑세스 토큰 수명
+        /// </summary>
+        public int expires_in { get; set; }
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -57,6 +62,7 @@ namespace WebApiAuth.Model.Sign
 
             this.access_token = string.Empty;
             this.refresh_token = string.Empty;
+            this.expires_in = 0;
         }
     }
 }

@@ -4,11 +4,12 @@
 
 var CA = {};
 
-/** 아작스 요청 타입 */
+/** 저장 타입 - 저장할 기간 */
 CA.SaveType = {
     Default : 0
     , Month1 : 1
-    , Year1 : 2
+    , Year1: 2
+    , Infinite: 9999
 };
 
 /**
@@ -38,6 +39,7 @@ CA.Get = function (sName)
  */
 CA.Set = function (sName, sValue, nType)
 {
+    //기간 일수
     var nExpires = 0;
 
     switch (nType)
@@ -47,6 +49,10 @@ CA.Set = function (sName, sValue, nType)
             break;
         case CA.SaveType.Year1:
             nExpires = 365;
+            break;
+
+        case CA.SaveType.Infinite:
+            nExpires = 3650;
             break;
 
         case CA.SaveType.Default:

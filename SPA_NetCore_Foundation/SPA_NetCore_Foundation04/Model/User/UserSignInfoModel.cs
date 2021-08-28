@@ -15,7 +15,7 @@ namespace SPA_NetCore_Foundation.Model.User
         /// <summary>
         /// 유저 고유 ID
         /// </summary>
-        public int ID { get; set; }
+        public int idUserSignInfo { get; set; }
         /// <summary>
         /// 이메일
         /// </summary>

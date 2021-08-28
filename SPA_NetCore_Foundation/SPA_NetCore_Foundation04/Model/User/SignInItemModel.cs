@@ -10,7 +10,7 @@ namespace SPA_NetCore_Foundation.Model.User
         /// <summary>
         /// 유저 고유 ID
         /// </summary>
-        public long ID { get; set; }
+        public long idUserSignInfo { get; set; }
         /// <summary>
         /// 리플레시 토큰
         /// </summary>

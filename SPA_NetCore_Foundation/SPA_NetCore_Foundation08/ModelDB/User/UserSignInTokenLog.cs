@@ -5,16 +5,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ModelDB
 {
     /// <summary>
-    /// 유저 사인인 한 유저의 정보.
+    /// 말료된 리플레시토큰을 저장해 둔다.
+    /// 'UserSignIn'와 분리한 이유는 만료되지 않은 토큰을 빠르게 검색하기 위함이다.
     /// </summary>
-    public class UserSignIn
+    public class UserSignInTokenLog
     {
         /// <summary>
         /// 고유키
         /// </summary>
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long idUserSignIn { get; set; }
+        public long idUserSignInTokenLog { get; set; }
 
         /// <summary>
         /// 연결된 User.idUser
@@ -29,11 +30,12 @@ namespace ModelDB
 
 
         /// <summary>
-        /// 접속 플랫폼
+        /// 만료 당시 플랫폼
         /// </summary>
         public PlatformType PlatformType { get; set; }
         /// <summary>
-        /// ip, IPv6 대비하여 150칸 지정
+        /// 만료 당시 ip
+        /// IPv6 대비하여 150칸 지정
         /// </summary>
         [MaxLength(150)]
         public string IP { get; set; }
@@ -44,27 +46,10 @@ namespace ModelDB
         public string GUID { get; set; }
 
 
-
         /// <summary>
-        /// 직접 로그인한 시간
+        /// 만료 시간
         /// </summary>
-        public DateTime SignInDate { get; set; }
-        /// <summary>
-        /// 토큰 갱신 시간
-        /// </summary>
-        public DateTime RefreshDate { get; set; }
+        public DateTime EndDate { get; set; }
 
-        /// <summary>
-        /// 마지막 업데이트 시간
-        /// </summary>
-        public DateTime LastUpdateDate { get; set; }
-
-
-        /// <summary>
-        /// 동시성 관리
-        /// https://docs.microsoft.com/ko-kr/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application
-        /// </summary>
-        [Timestamp]
-        public byte[] RowVersion { get; set; }
     }
 }

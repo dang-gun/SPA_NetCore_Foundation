@@ -76,6 +76,14 @@ namespace SPA_NetCore_Foundation
             EnumXml exml = new EnumXml(this.ProjectXmlDir);
             string sTemp = string.Empty;
             EnumToModel etmBP_Temp = null;
+
+            //게임 오토 관련
+            etmBP_Temp
+                = new EnumToModel(new PlatformType(), exml);
+            sTemp = etmBP_Temp.ToJavaScriptVarString();
+            GlobalStatic.FileProc
+                .WWW_FileSave(@"Faculty\Platform\PlatformType.js"
+                            , sTemp);
         }
 
         /// <summary>

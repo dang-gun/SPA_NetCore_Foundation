@@ -63,7 +63,7 @@ namespace IdentityServer4_Custom.UserServices
             {
                 new Claim("role", "dataEventRecords.admin"),
                 new Claim("role", "dataEventRecords.user"),
-                new Claim("id", user.ID.ToString()),
+                new Claim("id", user.idUserSignInfo.ToString()),
                 new Claim("email", user.Email)
             };
 
