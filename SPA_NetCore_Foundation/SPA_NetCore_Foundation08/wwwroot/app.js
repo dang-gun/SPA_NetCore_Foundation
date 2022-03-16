@@ -215,13 +215,29 @@ var app = Sammy(function ()
 
     this.get("/", function ()
     {
-        app_Assist.RouteCheck(false, this,
-            function (jsonOpt)
-            {
-                //this.RouteCheck에서 로그인 체크를 해준다.
-                //그러니 여기서는 홈으로만 이동하면 된다.
-                location.href = FS_Url.Home;
-            });
+        switch (GlobalStatic.SiteType)
+        {
+            case 1://어드민 타입
+                if (true === GlobalSign.SignIn)
+                {//사인이 되어있음
+                    Page.Move_Home();
+                }
+                else
+                {
+                    //어드민타입은 사인인으로 보낸다.
+                    GlobalSign.Move_SignIn();
+                }
+                break;
+
+            case 0://기본 타입
+            default:
+                {
+                    //그러니 여기서는 홈으로만 이동하면 된다.
+                    //location.href = FS_Url.Home;
+                    Page.Move_Home();
+                }
+                break;
+        }
     });
 
     this.get(FS_Url.Error + "/:code", function ()
