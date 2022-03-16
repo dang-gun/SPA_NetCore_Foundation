@@ -110,7 +110,7 @@ namespace ApiModel
         /// <param name="sMessage"></param>
         public void ApiResultInfoSet(ApiResultType typeInfoCode, string sMessage)
         {
-            this.ApiResultInfoSet(typeInfoCode.ToString(), sMessage);
+            this.ApiResultInfoSet(typeInfoCode.GetHashCode().ToString(), sMessage);
         }
 
         /// <summary>
